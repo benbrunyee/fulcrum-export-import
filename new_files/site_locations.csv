@@ -1,0 +1,77 @@
+client,client_name,job_id,site_address_sub_thoroughfare,site_address_thoroughfare,site_address_locality,site_address_sub_admin_area,site_address_admin_area,site_address_postal_code,site_address_country,site_address_full,property_type,account_status
+140a7ce5-0006-4411-841a-843534886ac2,Lythe Hill Park Ltd,Q11921,,Lythe Hill Park,Haslemere,,,GU27 3TF,,Lythe Hill Park Haslemere GU27 3TF,"Private Residential,Flat / Apartment / Maisonette",Not instructed
+e1381bc6-ca89-4b27-83a6-0e48dc755a00,Vipul Modha,Q12052, 8,Longmead Road,London,,,SW17 8PN,, 8 Longmead Road London SW17 8PN,"Private Residential,House,Semi","Instructed, ongoing, scheduled Treatment"
+bc1647f4-fe76-49a4-be2d-3afab59300c2,Jade Hargreaves,Q12108,7,Avenue Road,Christchurch,,,BH23 2BU,,7 Avenue Road Christchurch BH23 2BU,"Private Residential,House,Detached",
+7c56cdaa-117c-437b-b3e8-9298139939ff,Clive Bath,Q12085,Seatown House,Sea Hill Lane,Seatown,,, DT6 6JU,,Seatown House Sea Hill Lane Seatown  DT6 6JU,"Private Residential,House,Detached",Not instructed
+8927ceae-a6cb-46b3-882d-df535b6a74a5,Simon Barnes,Q12121,56,Sea Road,New Milton,Hampshire,,BH25 7NG,,56 Sea Road New Milton Hampshire BH25 7NG,"Private Residential,House,Detached",Not instructed
+2291f850-d2bb-4c2a-9450-c29ddaa13e5f,John Macadam,Q12149,54,Sea Road,New Milton,Hampshire,,BH25 7NG,,54 Sea Road New Milton Hampshire BH25 7NG,"Private Residential,House,Detached",Not instructed
+4f5b3133-70cb-49b0-b685-48497318f555,Havant Borough Council,Q12109,,Park Avenue,Waterlooville,Hampshire,,PO7 5EY,,Park Avenue Waterlooville Hampshire PO7 5EY,"Council,Open Space,Public","Instructed, ongoing, scheduled Treatment"
+4f5b3133-70cb-49b0-b685-48497318f555,Havant Borough Council,Q12110,,"Public open space, Widley Gardens ",Waterlooville,,,PO7 5JN,,"Public open space, Widley Gardens  Widley Waterlooville PO7 5JN","Council,Open Space,Woodland",Not instructed
+4f5b3133-70cb-49b0-b685-48497318f555,Havant Borough Council,Q12101,,,Hayling Island,Hampshire,,PO11,,Hayling Island Hampshire PO11,,
+406bf7da-197d-45ec-99a3-5b41463b8312,"Rachel Hunt, executor of the estate of John Littler",Q12144,76,South Hill Park,London,,,NW3 2SN,,76 South Hill Park London NW3 2SN,"Private Residential,House,Terrace",Not instructed
+b83a7360-90a0-49fe-aa27-3be8485c2221,Sovereign Housing,Q12129,Land adjacent to 48,Charlton Road,Andover,Hampshire,,SP10 3JL,,Land adjacent to 48 Charlton Road Andover Hampshire SP10 3JL,Housing Association,"Instructed, ongoing, scheduled Treatment"
+1039ee86-3aca-4c22-914c-90ea4023e8f0,Cody Slater,Q12191,171,Ray Street,Heanor,Derbyshire,,DE75 7GL,,171 Ray Street Heanor Derbyshire DE75 7GL,"Private Residential,House,Terrace",Not instructed
+fa97f97b-7221-4b18-a40b-992faf1ecc66,Jenny Freeman ,Q12186,76,Avon St,Warwick,,,CV34 4PX,,76 Avon St Warwick CV34 4PX,"Private Residential,House,Detached",
+567bff36-ac44-4daa-9841-0e4cd429bc15,London Borough of Waltham Forest,Q12137,47 - 49,Church Lane,London,,,E17 9RR,,47 - 49 Church Lane London E17 9RR,"Private Residential,Flat / Apartment / Maisonette",
+567bff36-ac44-4daa-9841-0e4cd429bc15,London Borough of Waltham Forest,Q12524,55,Leslie Road,London,,,E11 4HG,,55 Leslie Road London E11 4HG,"Housing Association,House,semi-detached",
+504ee8df-8dc4-4d10-8d4d-ad085efa23f4,Christoph Brinkmann,Q12195,13c,King Edward's Road,London,London,England,E9 7SF,GB,13c King Edward's Road London London England E9 7SF GB,"Private Residential,Flat / Apartment / Maisonette",
+f13843dc-76f6-463f-bb2c-913ee20386de,Surrey County Council,Q12169,78,Oxenden Road,Tongham,Surrey,,GU10 1AJ,,78 Oxenden Road Tongham Surrey GU10 1AJ,"Private Residential,House,Detached",
+3562e005-98fb-4c63-94be-f3ec0fcd405d,W&S Recycling ,Q11758,,Ling Road,Poole,,,BH12,,Ling Road Poole BH12,"Commercial,Other",
+0bead319-ad67-4e30-9c21-3e6b515dff9e,Michael Tyrell,Q12241,,,,,,,,"161 Billet Road, London E17 5HG","Housing Association,House,semi-detached","Instructed, ongoing, scheduled Treatment"
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,7,Dupre Crescent,Beaconsfield,,,HP9 2RW,,7 Dupre Crescent Beaconsfield HP9 2RW,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,Open Space adjacent to 7,Dupre Crescent,Beaconsfield,,,HP9 2RW,,Open Space adjacent to 7 Dupre Crescent Beaconsfield HP9 2RW,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,9,Dupre Crescent,Beaconsfield,,,HP9 2RW,,9 Dupre Crescent Beaconsfield HP9 2RW,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,11,Dupre Crescent,Beaconsfield,,,HP9 2RW,,11 Dupre Crescent Beaconsfield HP9 2RW,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,13,Dupre Crescent,Beaconsfield,,,HP9 2RW,,13 Dupre Crescent Beaconsfield HP9 2RW,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,34,Dupre Crescent,Beaconsfield,Buckinghamshire,,HP9 2RW,,34 Dupre Crescent Beaconsfield Buckinghamshire HP9 2RW,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,32,Dupre Crescent,Beaconsfield,Buckinghamshire,,HP9 2RW,,32 Dupre Crescent Beaconsfield Buckinghamshire HP9 2RW,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,30,Dupre Crescent,Beaconsfield,Buckinghamshire,,HP9 2RW,,30 Dupre Crescent Beaconsfield Buckinghamshire HP9 2RW,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,1,Berwick Close,Beaconsfield,Buckinghamshire,,HP9 ,,1 Berwick Close Beaconsfield Buckinghamshire HP9 ,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,7,Berwick Close ,Beaconsfield,Buckinghamshire,,HP9,,7 Berwick Close  Beaconsfield Buckinghamshire HP9,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,5,Berwick Close ,Beaconsfield,Buckinghamshire,,HP9 ,,5 Berwick Close  Beaconsfield Buckinghamshire HP9 ,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,3,Berwick Close ,Beaconsfield,Buckinghamshire,,HP9 ,,3 Berwick Close  Beaconsfield Buckinghamshire HP9 ,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,3,Baldwin Road,Beaconsfield,Buckinghamshire,,HP9 2RD,,3 Baldwin Road Beaconsfield Buckinghamshire HP9 2RD,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,1,Baldwin Road,Beaconsfield,Buckinghamshire,,HP9 2RD,,1 Baldwin Road Beaconsfield Buckinghamshire HP9 2RD,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,10,Baldwin Road ,Beaconsfield,Buckinghamshire,,HP9 ,,10 Baldwin Road  Beaconsfield Buckinghamshire HP9 ,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,12,Baldwin Road ,Beaconsfield,Buckinghamshire,,HP9 ,,12 Baldwin Road  Beaconsfield Buckinghamshire HP9 ,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,14,Baldwin Road ,Beaconsfield,Buckinghamshire,,HP9 ,,14 Baldwin Road  Beaconsfield Buckinghamshire HP9 ,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,16,Baldwin Road ,Beaconsfield,Buckinghamshire,,HP9 2RD,,16 Baldwin Road  Beaconsfield Buckinghamshire HP9 2RD,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,8,Baldwin Road ,Beaconsfield,Buckinghamshire,,HP9 ,,8 Baldwin Road  Beaconsfield Buckinghamshire HP9 ,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,6,Baldwin Road ,Beaconsfield,Buckinghamshire,,HP9 ,,6 Baldwin Road  Beaconsfield Buckinghamshire HP9 ,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,4,Baldwin Road ,Beaconsfield,Buckinghamshire,,HP9 ,,4 Baldwin Road  Beaconsfield Buckinghamshire HP9 ,"Private Residential,House,Semi",
+7a9bea86-1757-47bd-867a-085242b897fe,Inland Homes,Q12227,2,Baldwin Road ,Beaconsfield,Buckinghamshire,,HP9 ,,2 Baldwin Road  Beaconsfield Buckinghamshire HP9 ,"Private Residential,House,Semi",
+da5339df-9aff-48b6-a5f6-04d82c872cf3,Pinnacle ,Q12231,49a,High Street,Colliers Wood,London,England,SW19 2JK,GB,49a High Street Colliers Wood London England SW19 2JK GB,"Housing Association,House,semi-detached",Not instructed
+da5339df-9aff-48b6-a5f6-04d82c872cf3,Pinnacle ,Q583.81,1 ,Swain Road,London,,,SW16 6QE,,1  Swain Road London SW16 6QE,"Housing Association,House,semi-detached",
+daa74b1a-4690-4c5c-b0f1-4269925f4699,Beale Halai Ltd,Q12426,28,Dupre Crescent,Beaconsfield,,,HP9 2RW,,28 Dupre Crescent Beaconsfield HP9 2RW,"Private Residential,House,Detached",Not instructed
+0c84d103-29ab-46a4-a11e-e88bc023488d,Beale Halai Ltd ,Q12575,26,Dupre Crescent,Beaconsfield,,,HP9 2RW,,26 Dupre Crescent Beaconsfield HP9 2RW,"Private Residential,House,Semi",Not instructed
+e219b64e-44d4-4403-867c-e651ef34c79b,Sophie Ashworth c/o Leo Estates,Q1983,25,Longley Road,London,,,SW17 9LA,,25 Longley Road London SW17 9LA,"Private Residential,House,Detached",
+9a89ee61-4256-4b93-80c6-9c49f9db9910,Wheeler David ,Q11535,37,Belgrave Road,Halesowen,West Midlands,England,B62 9EY,GB,37 Belgrave Road Halesowen West Midlands England B62 9EY GB,"Private Residential,House,Terrace",
+7634ed0d-4af1-4c50-a179-4be19fc277d8,Miami Court Management Ltd,Q11813,"Patio Flat, ","27A Surrey Road,",Bournemouth,,,BH4 9HW,,"Patio Flat,  27A Surrey Road, Bournemouth BH4 9HW","Private Residential,Flat / Apartment / Maisonette",Not instructed
+7634ed0d-4af1-4c50-a179-4be19fc277d8,Miami Court Management Ltd,Q12407,"Garden Flat, ","27A Surrey Road,",Bournemouth,,,BH4 9HW,,"Garden Flat,  27A Surrey Road, Bournemouth BH4 9HW","Private Residential,Flat / Apartment / Maisonette",Not instructed
+7634ed0d-4af1-4c50-a179-4be19fc277d8,Miami Court Management Ltd,Q12408,"Communal Land,","27A Surrey Road,",Bournemouth,,,BH4 9HW,,"Communal Land, 27A Surrey Road, Bournemouth BH4 9HW","Private Residential,Flat / Apartment / Maisonette",Not instructed
+7e1d6132-3c1e-4f5f-aa63-8995adfec4f7,Gary Groomridge,Q12193,Flat 2,9 Westbourne Close,Bournemouth,,,BH4 9BW,,Flat 2 9 Westbourne Close Bournemouth BH4 9BW,"Private Residential,Flat / Apartment / Maisonette",
+55a778df-afcd-4753-b977-e52d7fab4540,LB Waltham Forest,Q12219,"49, 51 and 53",St Mary Road,London,,,E17 9RF,,"49, 51 and 53 St Mary Road London E17 9RF","Housing Association,House,terrace",Not instructed
+55a778df-afcd-4753-b977-e52d7fab4540,LB Waltham Forest,Q12291,101,Forest Road ,London,London,England,E17 6HF,GB,101 Forest Road  London London England E17 6HF GB,"Council,House,Terrace",
+3782fc34-d97c-4f5a-abd4-1b32e2559c93,Anna Fowler,Q12216,Green Hayes,Malvern Road,Liss,Hampshire,,GU33 7PZ,,Green Hayes Malvern Road Liss Hampshire GU33 7PZ,"Private Residential,House,Detached",
+8f97c0e0-c25e-4389-934b-2fa98a26b639,Sovereign Housing Association,Q12283,73,Pinkerton Road,Basingstoke,Hampshire,,RG22 6RG,,73 Pinkerton Road Basingstoke Hampshire RG22 6RG,"Housing Association,Flat / Apartment / Maisonette",
+17dc0970-f2c9-4a2c-a69b-885f5bc060c6,Mears Ltd (Notting Hill/Genesis),Q12282,33A,St Stephen's Ave,London,London,England,W12 8JB,GB,33A St Stephen's Ave London London England W12 8JB GB,"Housing Association,House,semi-detached",
+ce69f181-8718-4c84-ab58-886903194dd5,Barnden,Q11684,Lyewood Cottage,Petersfield Road,Alresford,Hampshire,,SO24 0ET,,Lyewood Cottage Petersfield Road Alresford Hampshire SO24 0ET,"Private Residential,House,Detached",
+e70bf471-fa1d-4010-9089-ac8ad7ddf4ce,Trudi Green,Q12343,Glynda,,,,,SP7 8BS,,Glynda Salisbury Road SP7 8BS,"Private Residential,House,Detached",
+f6a14415-fc7b-4d2c-b77b-c5a67f0a489f,Elinor Richardson,Q12346,10,Norwood Road,London,London,England,SE24 9BH,GB,10 Norwood Road Flat 2 London London England SE24 9BH GB,"Private Residential,Flat / Apartment / Maisonette",
+55e9399b-c55b-42a7-a9c8-548623e7c329,BCP Council,Q12444,29,Verney Close,Bournemouth,,,BH11 8DD,,29 Verney Close Bournemouth BH11 8DD,"Council,Flat(s) / Apartment / Maisonette",Not instructed
+7bb60d62-1ebc-482b-b840-0fc91aec1ba1,Siobhan McDade,Q12455,60b,Palmerston Road,London,,,E17 6PG,,60b Palmerston Road London E17 6PG,"Private Residential,Flat / Apartment / Maisonette",
+ac167cf9-f028-4b3f-9232-d3156fd98f0f,Rob Jenkins,Q5250,,,Carmarthen,,Wales,SA31 3RN,,Llanllwch Mill Carmarthen Wales SA31 3RN,"Private Residential,House,Detached",
+72d35036-6fbe-419d-9f83-759dabdf348e,Elinor Richardson ,Q1454,"Flat 2, 10 Norwood Road",Norwood Road,London,,,SE24 9BH,,"Flat 2, 10 Norwood Road Norwood Road London SE24 9BH","Commercial,Residential,Flat / Apartment / Maisonette",
+b4ec9fe2-e78f-46c2-b9c2-3ce8abe0324d,Southworth Mika-John ,Q11605,16,St Peters Street ,Winchester ,,,SO23 8AZ,,16 St Peters Street  Winchester  SO23 8AZ,"Private Residential,Flat / Apartment / Maisonette",
+9341af67-d30f-49ff-8cab-fd2235d93c6f,Nigel Dick,Q12463,22,Beauclerk Green,Hook,,,RG27 8BF,,22 Beauclerk Green Hook RG27 8BF,"Private Residential,House,Semi",
+ba231720-6b73-47d1-8daf-befad26cd348,Parry and Drewett,Q12439,31 and 31A,Acacia Grove,New Malden,,,KT3 3BJ,,31 and 31A Acacia Grove New Malden KT3 3BJ,"Private Residential,Flat / Apartment / Maisonette",
+ca90e091-9e65-4f30-855b-1aad98de501f,Antonio Cosco,Q12518,383,Lordship Lane,London,,,N17 6AE,,383 Lordship Lane London N17 6AE,"Private Residential,House,Terrace",Not instructed
+a27f3734-ab29-4c83-b245-87a437ac740d,Ilan Eshkeri,Q12430,6,Rochester Ter,London,London,England,NW1 9JN,GB,6 Rochester Ter London London England NW1 9JN GB,"Private Residential,House,Semi",
+1e750ab4-1eaa-4908-9c8b-9258ac14c18d,Wandle Housing,Q583.37,41,Pelham Road,London,,,SW19 1SU,,41 Pelham Road London SW19 1SU,"Housing Association,Flat / Apartment / Maisonette",
+e809ba06-3b4a-4b38-9de0-f624a0f59cae,"Sangha, Paramjit",Q12521,55,Sudbourne Road,London,London,England,SW2 5AE,GB,55 Sudbourne Road London London England SW2 5AE GB,"Private Residential,House,Terrace",
+d808adc1-cea1-4966-95a9-6e662c691499,Beale Halai,Q12552,Brent Cottage Site,Brent Park Road,London,,,NW9 7AJ,,Brent Cottage Site Brent Park Road London NW9 7AJ,"Commercial,Development",
+1f42c3a2-dd32-4f89-805d-c25f04f0ac59,WBRC (c/o Taylor Wimpey),Q12532,,Land adjacent to BOSC,Bordon,Hampshire,,GU35,,Land adjacent to BOSC (Land within proposed offsite drainage redline boundary) Bordon Hampshire GU35,,
+efbf5602-d01d-4411-ae86-c7ad58951d79,Roger Orme,Q12491,Land At 265/269, West Hendon Broadway,London,,,NW9 7DJ,,Land At 265/269  West Hendon Broadway London NW9 7DJ,"Commercial,Development",
+71f58bb9-a9f5-4c3d-92d6-21e366e1fd89,Brent Council,Q656.73,13,St Margaret's Road,London,,,NW10 5PY,,13 St Margaret's Road London NW10 5PY,"Council,House,Terrace",Not instructed
+76fd67c8-6b43-4be2-a89d-044c5195375f,Kings Meadow Homes Reading Ltd,Q12609,1,Fox Talbot Close,Reading,,,RG1 7XX,,1 Fox Talbot Close Reading RG1 7XX,"Private Residential,House,Terrace","Instructed, ongoing, scheduled Treatment"
+dc32a19c-0a27-4fec-92ca-586a913cd94d,Bill Cooper,Q12740,Hobgoblins,Hob Lane,Balsall Common,West Midlands,,CV7 7GX,,Hobgoblins Hob Lane Balsall Common West Midlands CV7 7GX,,

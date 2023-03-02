@@ -1,0 +1,9 @@
+# Ignore everything
+*
+
+# Except
+!.gitignore
+!/*.py
+!README.md
+!new_files
+!new_files/*
