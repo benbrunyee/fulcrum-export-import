@@ -11,9 +11,9 @@ This document outlines the steps required to transform data and import it into v
 1.  Import the new CSV file into Clientele app.
 1.  Export Clientele app with the new records.
 1.  Update the path to the Clientele export in `create_site_locations.py` and run it to create a CSV file for the Site Locations app.
-1.  Delete the mappings JSON file found under `new_files` (if it exists) if you don't want to use historical mappings.
+1.  (Optional) Delete the mappings JSON file found under `new_files` (if it exists) if you don't want to use historical mappings.
 1.  Run `find_differences.py` to map mismatches to new columns.
-1.  Import the new CSV file into Site Locations with the new records.
+1.  Import the new `site_locations.csv` file into Site Locations app.
 1.  Export Site Locations app with the new records.
 1.  Update the path to the Site Locations export in `transform.py` and run it to create a CSV file for the SURVEY app.
 1.  Import the new records found in `NEW_RECORDS.csv` into the destination app.
