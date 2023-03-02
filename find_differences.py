@@ -158,7 +158,7 @@ with open(MAPPINGS_FILE, "w") as f:
     json.dump(mappings, f, indent=2)
 
 # Write unmatched columns to file
-with open("new_files\\missing_cols.csv", "w", newline="") as f:
+with open("new_files\\unmatched_columns.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["Missing Columns"])
     writer.writerows([[f] for f in unmatched])

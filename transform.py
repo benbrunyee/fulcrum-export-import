@@ -19,7 +19,7 @@ cols = [f["Column"] for f in diff]
 data = read_csv(
     "knotweed_survey_and_management_plan\\knotweed_survey_and_management_plan.csv")
 
-missing_cols = [f["Missing Columns"] for f in read_csv("new_files\\missing_cols.csv")]
+unmatched_columns = [f["Missing Columns"] for f in read_csv("new_files\\unmatched_columns.csv")]
 
 print(cols)
 
@@ -69,7 +69,7 @@ for i, row in enumerate(data):
 
 # Set every row "record_type" column to "Management Plan"
 for i, row in enumerate(data):
-    for col in missing_cols:
+    for col in unmatched_columns:
         data[i][col] = ""
 
     data[i]["record_type"] = "Management Plan"
@@ -77,7 +77,7 @@ for i, row in enumerate(data):
     data[i]["plant_type"] = "Japanese Knotweed"
     data[i]["job_type"] = ""
 
-for col in missing_cols:
+for col in unmatched_columns:
     new_cols.append(col)
 
 with open("new_files\\NEW_RECORDS.csv", "w", newline="") as f:
