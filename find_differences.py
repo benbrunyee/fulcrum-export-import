@@ -22,6 +22,8 @@ from tabulate import tabulate
 parser = argparse.ArgumentParser(
     description="Find differences between 2 csv files")
 
+parser.add_argument("--parent-dir", type=str,
+                    help="Parent directory", required=True)
 parser.add_argument("--base_dir", type=str,
                     help="Base directory", required=True)
 parser.add_argument("--base_prefix", type=str,
@@ -35,7 +37,9 @@ args = parser.parse_args()
 
 # Constants
 
-MAPPINGS_FILE = "new_files\\mappings.json"
+PARENT_DIR = args.parent_dir
+
+BASE_PARENT_DIR = f"new_files\\{PARENT_DIR}"
 
 BASE_DIR = args.base_dir
 BASE_PREFIX = args.base_prefix
@@ -66,12 +70,12 @@ def create_table(rows):
 
 
 def delete_mismatch_file():
-    if os.path.exists("new_files\\repeatable_mismatches.txt"):
-        os.remove("new_files\\repeatable_mismatches.txt")
+    if os.path.exists(f"{BASE_PARENT_DIR}\\repeatable_mismatches.txt"):
+        os.remove(f"{BASE_PARENT_DIR}\\repeatable_mismatches.txt")
 
 
 def write_file_no_match(filepath):
-    with open("new_files\\repeatable_mismatches.txt", "a") as f:
+    with open(f"{BASE_PARENT_DIR}\\repeatable_mismatches.txt", "a") as f:
         f.write(filepath + "\n")
 
 
@@ -132,7 +136,7 @@ def find_and_write_diffs(base, target, prefix):
     # Print empty line
     print()
 
-    dest_dir = f"new_files\\{prefix}"
+    dest_dir = f"{BASE_PARENT_DIR}\\differences\\{prefix}"
     clear_and_create_dir(dest_dir)
 
     diff_file_dest = f"{dest_dir}\\differences.csv"
@@ -143,12 +147,19 @@ def find_and_write_diffs(base, target, prefix):
 
     # Read mappings from file
     mappings = {}
-    mappingsExist = False
+    mappings_exist = False
 
-    if os.path.exists(MAPPINGS_FILE):
-        with open(MAPPINGS_FILE, "r") as f:
+    mappings_dir = f"{BASE_PARENT_DIR}\\mappings\\{prefix}"
+
+    if not os.path.exists(mappings_dir):
+        os.makedirs(mappings_dir)
+
+    mappings_file = f"{mappings_dir}\\mappings.json"
+
+    if os.path.exists(mappings_file):
+        with open(mappings_file, "r") as f:
             mappings = json.load(f)
-            mappingsExist = True
+            mappings_exist = True
 
     for i, row in enumerate(rows):
         # Save table to file
@@ -163,7 +174,7 @@ def find_and_write_diffs(base, target, prefix):
                 if (mappings[row[0]] in unmatched):
                     unmatched.remove(mappings[row[0]])
                 continue
-            elif mappingsExist:
+            elif mappings_exist:
                 print(f"Skipping: '{row[0]}'")
                 continue
 
@@ -203,8 +214,12 @@ def find_and_write_diffs(base, target, prefix):
             print(f"No match found for '{row[0]}'")
         print()
 
+    # Final write
+    with open(diff_file_dest, "w") as f:
+        csv.writer(f).writerows(create_table(rows))
+
     # Write mappings to file
-    with open(MAPPINGS_FILE, "w") as f:
+    with open(mappings_file, "w") as f:
         json.dump(mappings, f, indent=2)
 
     unmatched_file_dest = f"{dest_dir}\\unmatched_columns.csv"
@@ -218,8 +233,8 @@ def find_and_write_diffs(base, target, prefix):
 
 # Main
 
-if not os.path.exists("new_files"):
-    os.makedirs("new_files")
+if not os.path.exists(f"{BASE_PARENT_DIR}"):
+    os.makedirs(f"{BASE_PARENT_DIR}")
 
 delete_mismatch_file()
 

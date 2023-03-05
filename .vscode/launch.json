@@ -13,21 +13,43 @@
       "justMyCode": true
     },
     {
-      "name": "Find Differences",
+      "name": "Find Differences (JKMR)",
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}/find_differences.py",
       "console": "integratedTerminal",
       "justMyCode": true,
       "args": [
+        "--parent-dir",
+        "JKMR",
         "--base_dir",
-        "export survey app - 1 record\\bb_survey_app_do_not_use",
+        "bb_sa_import",
         "--base_prefix",
-        "bb_survey_app_do_not_use",
+        "bb_sa_import",
         "--target_dir",
         "japanese_knotweed_management_record",
         "--target_prefix",
         "japanese_knotweed_management_record"
+      ]
+    },
+    {
+      "name": "Find Differences (KSMP)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/find_differences.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent-dir",
+        "KSMP",
+        "--base_dir",
+        "bb_sa_import",
+        "--base_prefix",
+        "bb_sa_import",
+        "--target_dir",
+        "knotweed_survey_and_management_plan",
+        "--target_prefix",
+        "knotweed_survey_and_management_plan"
       ]
     }
   ]
