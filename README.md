@@ -1,4 +1,3 @@
-
 # How to use the Data Transformation Process
 
 This document outlines the steps required to transform data and import it into various apps. The process includes exporting KMP records (with photos) and using several Python scripts to transform and import the data into Clientele, Site Locations, and SURVEY apps.
@@ -6,7 +5,8 @@ This document outlines the steps required to transform data and import it into v
 ## Process Steps
 
 1.  Export KMP records (including photos) and SURVEY app data.
-1.  Update the file paths in `create_clientele.py`, `create_site_locations.py`, `find_differences.py`, and `transform.py`.
+1.  Update the file paths in `create_clientele.py`, `create_site_locations.py` and `transform.py`.
+1.  Ensure that the arguments passed into `find_differences.py` is correct in the `launch.json` file.
 1.  Run `create_clientele.py` to create a CSV file for the Clientele app.
 1.  Import the new CSV file into Clientele app.
 1.  Export Clientele app with the new records.
@@ -16,6 +16,7 @@ This document outlines the steps required to transform data and import it into v
 1.  Import the new `site_locations.csv` file into Site Locations app.
 1.  Export Site Locations app with the new records.
 1.  Update the path to the Site Locations export in `transform.py` and run it to create a CSV file for the SURVEY app.
+1.  Move the `NEW_RECORDS.csv` file into the directory of the original export (where the photos are located).
 1.  Import the new records found in `NEW_RECORDS.csv` into the destination app.
 
 ## Import/Export Order

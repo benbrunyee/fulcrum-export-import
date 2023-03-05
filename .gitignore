@@ -5,3 +5,5 @@
 !.gitignore
 !/*.py
 !README.md
+!.vscode
+!.vscode/*

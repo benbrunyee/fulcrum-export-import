@@ -1,0 +1,34 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Find Differences",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/find_differences.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--base_dir",
+        "export survey app - 1 record\\bb_survey_app_do_not_use",
+        "--base_prefix",
+        "bb_survey_app_do_not_use",
+        "--target_dir",
+        "japanese_knotweed_management_record",
+        "--target_prefix",
+        "japanese_knotweed_management_record"
+      ]
+    }
+  ]
+}

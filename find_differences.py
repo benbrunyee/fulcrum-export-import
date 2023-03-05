@@ -8,19 +8,43 @@
 # If they respond with "n" then we skip and check the next column
 # If they respond with anything else, we take that value, assign it to the column and save the updated csv file to the new location
 
+import argparse
 import csv
 import difflib
 import json
 import os
 import re
+import shutil
 
 from tabulate import tabulate
 
+# Arguments
+parser = argparse.ArgumentParser(
+    description="Find differences between 2 csv files")
+
+parser.add_argument("--base_dir", type=str,
+                    help="Base directory", required=True)
+parser.add_argument("--base_prefix", type=str,
+                    help="Base prefix", required=True)
+parser.add_argument("--target_dir", type=str,
+                    help="Target directory", required=True)
+parser.add_argument("--target_prefix", type=str,
+                    help="Target prefix", required=True)
+
+args = parser.parse_args()
+
+# Constants
+
 MAPPINGS_FILE = "new_files\\mappings.json"
 
-if not os.path.exists("new_files"):
-    os.makedirs("new_files")
+BASE_DIR = args.base_dir
+BASE_PREFIX = args.base_prefix
 
+TARGET_DIR = args.target_dir
+TARGET_PREFIX = args.target_prefix
+
+
+# Functions
 
 def read_csv_columns(file_path):
     """Read a csv file and return a list of rows"""
@@ -29,8 +53,9 @@ def read_csv_columns(file_path):
     with open(file_path, "r") as f:
         reader = csv.DictReader(f)
         for line in reader:
-            cols = line.keys()
+            cols = list(line.keys())
             return cols
+        return cols
 
 
 def create_table(rows):
@@ -38,6 +63,16 @@ def create_table(rows):
         ["Column", "Closest Match", "Updated"],
         *rows
     ]
+
+
+def delete_mismatch_file():
+    if os.path.exists("new_files\\repeatable_mismatches.txt"):
+        os.remove("new_files\\repeatable_mismatches.txt")
+
+
+def write_file_no_match(filepath):
+    with open("new_files\\repeatable_mismatches.txt", "a") as f:
+        f.write(filepath + "\n")
 
 
 def custom_rules(row):
@@ -56,109 +91,178 @@ def custom_rules(row):
     return new_val != row, new_val
 
 
-base = read_csv_columns(
-    "export survey app - 1 record\\bb_survey_app_do_not_use\\bb_survey_app_do_not_use.csv")
-array_2 = read_csv_columns(
-    "knotweed_survey_and_management_plan\\knotweed_survey_and_management_plan.csv")
-
-# Find differences
-diff = [f for f in array_2 if f not in base]
-
-# Find matches
-matches = [f for f in array_2 if f in base]
-
-# Find unmatched
-unmatched = [f for f in base if f not in array_2]
-
-# Find closest matches
-closest_matches = [difflib.get_close_matches(
-    f, unmatched, n=1, cutoff=0) for f in diff]
-
-rows = list(zip(diff, ["N/A" if not f else f[0]
-            for f in closest_matches], ["" for f in closest_matches]))
+def get_files(dir, prefix):
+    return [f for f in os.listdir(dir) if os.path.isfile(
+        os.path.join(dir, f)) and f.startswith(prefix) and f.endswith(".csv")]
 
 
-# Create table
-table = create_table(rows)
+def does_file_exist(filepath):
+    return os.path.isfile(filepath)
 
-# Print table
-print(tabulate(table, headers="firstrow", tablefmt="fancy_grid"))
 
-# Print empty line
-print()
+def clear_and_create_dir(dir):
+    if os.path.exists(dir):
+        shutil.rmtree(dir)
+    os.makedirs(dir)
 
-# Save table to file
-with open("new_files\\differences.csv", "w") as f:
-    csv.writer(f).writerows(table)
 
-# Read mappings from file
-mappings = {}
-mappingsExist = False
+def find_and_write_diffs(base, target, prefix):
+    # Find differences
+    diff = [f for f in target if f not in base]
 
-if os.path.exists(MAPPINGS_FILE):
-    with open(MAPPINGS_FILE, "r") as f:
-        mappings = json.load(f)
-        mappingsExist = True
+    # Find matches
+    # matches = [f for f in target if f in base]
 
-for i, row in enumerate(rows):
-    # Save table to file
-    with open("new_files\\differences.csv", "w") as f:
-        csv.writer(f).writerows(create_table(rows))
+    # Find unmatched
+    unmatched = [f for f in base if f not in target]
 
-    if row[1] != "N/A":
-        # Check if mapping exists
-        if row[0] in mappings:
-            print(f"Replacing: '{row[0]}' with '{mappings[row[0]]}'")
-            rows[i] = [row[0], row[1], mappings[row[0]]]
-            if (mappings[row[0]] in unmatched):
-                unmatched.remove(mappings[row[0]])
-            continue
-        elif mappingsExist:
-            print(f"Skipping: '{row[0]}'")
-            continue
+    # Find closest matches
+    closest_matches = [difflib.get_close_matches(
+        f, unmatched, n=1, cutoff=0) for f in diff]
 
-        changed, new_val = custom_rules(row[0])
+    rows = list(zip(diff, ["N/A" if not f else f[0]
+                for f in closest_matches], ["" for f in closest_matches]))
 
-        if changed:
-            rows[i] = [row[0], row[1], new_val]
-            if (new_val in unmatched):
-                unmatched.remove(new_val)
-            mappings[row[0]] = new_val
-        else:
-            print(
-                f"Replace:\n{row[0]}\n{row[1]}? (y/n/type your own column name)")
-            response = input()
-            response = response.lower().strip()
+    # Create table
+    table = create_table(rows)
 
-            if response == "y" or response == "":
-                # Replace column
-                print(f"Replacing: '{row[0]}' with '{row[1]}'")
-                rows[i] = [row[0], row[1], row[1]]
-                if (row[1] in unmatched):
-                    unmatched.remove(row[1])
-                mappings[row[0]] = row[1]
-            elif response == "n":
-                print(f"Skipping: '{row[0]}'")
-                continue
-            else:
-                if (response not in unmatched):
-                    print(f"Invalid column: '{response}'")
-                    continue
-                print(f"Replacing: '{row[0]}' with '{response}'")
-                rows[i] = [row[0], row[1], response]
-                if (response in unmatched):
-                    unmatched.remove(response)
-                mappings[row[0]] = response
-    else:
-        print(f"No match found for '{row[0]}'")
+    # Print table
+    print(tabulate(table, headers="firstrow", tablefmt="fancy_grid"))
+
+    # Print empty line
     print()
 
-# Write mappings to file
-with open(MAPPINGS_FILE, "w") as f:
-    json.dump(mappings, f, indent=2)
+    dest_dir = f"new_files\\{prefix}"
+    clear_and_create_dir(dest_dir)
 
-# Write unmatched columns to file
-with open("new_files\\unmatched_columns.csv", "w", newline="") as f:
-    writer = csv.writer(f)
-    writer.writerow(["Missing Columns"])
-    writer.writerows([[f] for f in unmatched])
+    diff_file_dest = f"{dest_dir}\\differences.csv"
+
+    # Save table to file
+    with open(diff_file_dest, "w") as f:
+        csv.writer(f).writerows(table)
+
+    # Read mappings from file
+    mappings = {}
+    mappingsExist = False
+
+    if os.path.exists(MAPPINGS_FILE):
+        with open(MAPPINGS_FILE, "r") as f:
+            mappings = json.load(f)
+            mappingsExist = True
+
+    for i, row in enumerate(rows):
+        # Save table to file
+        with open(diff_file_dest, "w") as f:
+            csv.writer(f).writerows(create_table(rows))
+
+        if row[1] != "N/A":
+            # Check if mapping exists
+            if row[0] in mappings:
+                print(f"Replacing: '{row[0]}' with '{mappings[row[0]]}'")
+                rows[i] = [row[0], row[1], mappings[row[0]]]
+                if (mappings[row[0]] in unmatched):
+                    unmatched.remove(mappings[row[0]])
+                continue
+            elif mappingsExist:
+                print(f"Skipping: '{row[0]}'")
+                continue
+
+            changed, new_val = custom_rules(row[0])
+
+            if changed:
+                rows[i] = [row[0], row[1], new_val]
+                if (new_val in unmatched):
+                    unmatched.remove(new_val)
+                mappings[row[0]] = new_val
+            else:
+                print(
+                    f"Replace:\n{row[0]}\n{row[1]}? (y/n/type your own column name)")
+                response = input()
+                response = response.lower().strip()
+
+                if response == "y" or response == "":
+                    # Replace column
+                    print(f"Replacing: '{row[0]}' with '{row[1]}'")
+                    rows[i] = [row[0], row[1], row[1]]
+                    if (row[1] in unmatched):
+                        unmatched.remove(row[1])
+                    mappings[row[0]] = row[1]
+                elif response == "n":
+                    print(f"Skipping: '{row[0]}'")
+                    continue
+                else:
+                    if (response not in unmatched):
+                        print(f"Invalid column: '{response}'")
+                        continue
+                    print(f"Replacing: '{row[0]}' with '{response}'")
+                    rows[i] = [row[0], row[1], response]
+                    if (response in unmatched):
+                        unmatched.remove(response)
+                    mappings[row[0]] = response
+        else:
+            print(f"No match found for '{row[0]}'")
+        print()
+
+    # Write mappings to file
+    with open(MAPPINGS_FILE, "w") as f:
+        json.dump(mappings, f, indent=2)
+
+    unmatched_file_dest = f"{dest_dir}\\unmatched_columns.csv"
+
+    # Write unmatched columns to file
+    with open(unmatched_file_dest, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Missing Columns"])
+        writer.writerows([[f] for f in unmatched])
+
+
+# Main
+
+if not os.path.exists("new_files"):
+    os.makedirs("new_files")
+
+delete_mismatch_file()
+
+# Read all the files in the base & target directory
+base_files = get_files(BASE_DIR, BASE_PREFIX)
+target_files = get_files(TARGET_DIR, TARGET_PREFIX)
+
+for f in target_files:
+    # If the file is the prefix then this is the parent file
+    if f == f"{TARGET_PREFIX}.csv":
+        base_filepath = os.path.join(BASE_DIR, f"{BASE_PREFIX}.csv")
+
+        # If the base file doesn't exist then raise an exception
+        if not does_file_exist(base_filepath):
+            write_file_no_match(base_filepath)
+            continue
+
+        # Read the files
+        base_rows = read_csv_columns(
+            base_filepath
+        )
+        target_rows = read_csv_columns(os.path.join(TARGET_DIR, f))
+
+        # Find and write differences
+        find_and_write_diffs(base_rows, target_rows, "BASE")
+    else:
+        # These are the child repeatables
+        # Grab the postfix
+        postfix = f.replace(f"{TARGET_PREFIX}_", "").replace(".csv", "")
+
+        # Base filepath
+        base_filepath = os.path.join(BASE_DIR, f"{BASE_PREFIX}_{postfix}.csv")
+
+        # If the base file doesn't exist then raise an exception
+        if not does_file_exist(base_filepath):
+            write_file_no_match(base_filepath)
+            continue
+
+        # Read the files
+        base_rows = read_csv_columns(
+            base_filepath
+        )
+        target_rows = read_csv_columns(os.path.join(TARGET_DIR, f))
+
+        # Find and write differences
+        find_and_write_diffs(base_rows, target_rows, postfix.upper())
