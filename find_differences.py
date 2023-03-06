@@ -109,6 +109,20 @@ def clear_and_create_dir(dir):
     os.makedirs(dir)
 
 
+def get_base_file(postfix=None):
+    if PARENT_DIR == "JKMR" and postfix:
+        if postfix == "site_plans":
+            postfix = "break_before_site_plans"
+        elif postfix == "site_photo_property":
+            postfix = "site_photos_property"
+        elif postfix == "knotweed_survey_knotweed_stand_details":
+            postfix = "knotweed_stand_details"
+        elif postfix == "knotweed_survey_knotweed_stand_details_stand_photos":
+            postfix = "knotweed_stand_details_stand_photos"
+
+    return os.path.join(BASE_DIR, f"{BASE_PREFIX}{('_' + postfix) if postfix else ''}.csv")
+
+
 def find_and_write_diffs(base, target, prefix):
     # Find differences
     diff = [f for f in target if f not in base]
@@ -245,7 +259,7 @@ for f in target_files:
 
     # If the file is the prefix then this is the parent file
     if f == f"{TARGET_PREFIX}.csv":
-        base_filepath = os.path.join(BASE_DIR, f"{BASE_PREFIX}.csv")
+        base_filepath = get_base_file()
 
         does_base_file_exist = does_file_exist(base_filepath)
 
@@ -267,7 +281,7 @@ for f in target_files:
         postfix = f.replace(f"{TARGET_PREFIX}_", "").replace(".csv", "")
 
         # Base filepath
-        base_filepath = os.path.join(BASE_DIR, f"{BASE_PREFIX}_{postfix}.csv")
+        base_filepath = get_base_file(postfix)
 
         does_base_file_exist = does_file_exist(base_filepath)
 
