@@ -53,13 +53,9 @@ TARGET_PREFIX = args.target_prefix
 def read_csv_columns(file_path):
     """Read a csv file and return a list of rows"""
     # Open the file
-    cols = []
     with open(file_path, "r") as f:
         reader = csv.DictReader(f)
-        for line in reader:
-            cols = list(line.keys())
-            return cols
-        return cols
+        return list(reader.fieldnames)
 
 
 def create_table(rows):
@@ -243,19 +239,21 @@ base_files = get_files(BASE_DIR, BASE_PREFIX)
 target_files = get_files(TARGET_DIR, TARGET_PREFIX)
 
 for f in target_files:
+
     # If the file is the prefix then this is the parent file
     if f == f"{TARGET_PREFIX}.csv":
         base_filepath = os.path.join(BASE_DIR, f"{BASE_PREFIX}.csv")
 
+        does_base_file_exist = does_file_exist(base_filepath)
+
         # If the base file doesn't exist then raise an exception
-        if not does_file_exist(base_filepath):
+        if not does_base_file_exist:
             write_file_no_match(base_filepath)
-            continue
 
         # Read the files
         base_rows = read_csv_columns(
             base_filepath
-        )
+        ) if does_base_file_exist else []
         target_rows = read_csv_columns(os.path.join(TARGET_DIR, f))
 
         # Find and write differences
@@ -268,15 +266,16 @@ for f in target_files:
         # Base filepath
         base_filepath = os.path.join(BASE_DIR, f"{BASE_PREFIX}_{postfix}.csv")
 
+        does_base_file_exist = does_file_exist(base_filepath)
+
         # If the base file doesn't exist then raise an exception
-        if not does_file_exist(base_filepath):
+        if not does_base_file_exist:
             write_file_no_match(base_filepath)
-            continue
 
         # Read the files
         base_rows = read_csv_columns(
             base_filepath
-        )
+        ) if does_base_file_exist else []
         target_rows = read_csv_columns(os.path.join(TARGET_DIR, f))
 
         # Find and write differences
