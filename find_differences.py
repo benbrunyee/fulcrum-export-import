@@ -78,15 +78,18 @@ def write_file_no_match(filepath):
 def custom_rules(row):
     new_val = row
 
-    if (re.match(r"^.*?_year_1$", row)):
-        new_val = re.sub(r"^(.*?)_year_1$", "\\1", row)
-        print(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
-    elif (re.match(r"^.*?_year_1_other$", row)):
-        new_val = re.sub(r"^(.*?)_year_1_other$", "\\1_other", row)
-        print(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
-    elif (re.match(r"^.*?(_schedule)?_year_.*$", row)):
-        new_val = re.sub(r"^(.*?)(_schedule)?_year_(.*)$", "\\1_\\3", row)
-        print(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
+    if PARENT_DIR == "KSMP":
+        if re.match(r"^.*?_year_1$", row):
+            new_val = re.sub(r"^(.*?)_year_1$", "\\1", row)
+            print(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
+        elif re.match(r"^.*?_year_1_other$", row):
+            new_val = re.sub(r"^(.*?)_year_1_other$", "\\1_other", row)
+            print(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
+        elif re.match(r"^.*?(_schedule)?_year_.*$", row):
+            new_val = re.sub(r"^(.*?)(_schedule)?_year_(.*)$", "\\1_\\3", row)
+            print(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
+    elif PARENT_DIR == "JKMR":
+        pass
 
     return new_val != row, new_val
 
