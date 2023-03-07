@@ -313,7 +313,7 @@ base_files = get_files(BASE_DIR, BASE_PREFIX)
 target_files = get_files(TARGET_DIR, TARGET_PREFIX)
 
 for f in target_files:
-    if f == f"{TARGET_PREFIX}_base_re_written.csv":
+    if f == f"{TARGET_PREFIX}_base_re_written.csv" or f == f"{TARGET_PREFIX}_knotweed_survey.csv":
         # Skip this re-written file
         continue
 
