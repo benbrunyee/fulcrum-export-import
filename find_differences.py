@@ -110,7 +110,7 @@ def clear_and_create_dir(dir):
 
 
 def get_base_file(postfix=None):
-    if PARENT_DIR == "JKMR" and postfix:
+    if PARENT_DIR == "JKMR":
         if postfix == "site_plans":
             postfix = "break_before_site_plans"
         elif postfix == "site_photo_property":
@@ -120,7 +120,61 @@ def get_base_file(postfix=None):
         elif postfix == "knotweed_survey_knotweed_stand_details_stand_photos":
             postfix = "knotweed_stand_details_stand_photos"
 
-    return os.path.join(BASE_DIR, f"{BASE_PREFIX}{('_' + postfix) if postfix else ''}.csv")
+    return postfix, os.path.join(BASE_DIR, f"{BASE_PREFIX}{('_' + postfix) if postfix else ''}.csv")
+
+
+def transform_knotweed_survey_repeatable_jkmr():
+    # We want to take in a csv file for the knotweed survey repeatable
+    # We then want to identify all parent records and read the data for that parent record ID into a dictionary
+    # For each record within the survey record, we want to create a new record joined with the parent record data
+    # We then want to take these new records and write them to a new csv file
+    parent_record_ids = []
+    parent_record_data = {}
+    child_records_mapping = {}
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_knotweed_survey.csv"), "r") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        # Get all parent records
+        parent_record_ids = [r["fulcrum_parent_id"] for r in rows]
+
+        for r in rows:
+            if r["fulcrum_parent_id"] not in child_records_mapping.keys():
+                child_records_mapping[r["fulcrum_parent_id"]] = []
+            else:
+                child_records_mapping[r["fulcrum_parent_id"]].append(r)
+
+    # Get all the data for each parent record
+
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}.csv")) as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        # Get the data for each parent record
+        for r in rows:
+            if r["fulcrum_id"] in parent_record_data.keys():
+                # We have already seen this record
+                continue
+
+            if r["fulcrum_id"] in parent_record_ids:
+                # This is a parent record, grab the data
+                parent_record_data[r["fulcrum_id"]] = r
+
+    # Join the data together
+    new_rows = []
+    for parent_id, child_records in child_records_mapping.items():
+        for child_record in child_records:
+            child_keys = ["child_" + k for k in child_record.keys()]
+            new_row = {**parent_record_data[parent_id],
+                       **{k: child_record[re.sub(r"^child_", "", k)] for k in child_keys if k != "child_fulcrum_id"},
+                       "fulcrum_id": child_record["fulcrum_id"]}
+            new_rows.append(new_row)
+
+    # Write the new data to a new csv file
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_base_re_written.csv"), "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
+        writer.writeheader()
+        writer.writerows(new_rows)
 
 
 def find_and_write_diffs(base, target, prefix):
@@ -138,7 +192,7 @@ def find_and_write_diffs(base, target, prefix):
         f, unmatched, n=1, cutoff=0) for f in diff]
 
     rows = list(zip(diff, ["N/A" if not f else f[0]
-                for f in closest_matches], ["" for f in closest_matches]))
+                           for f in closest_matches], ["" for f in closest_matches]))
 
     # Create table
     table = create_table(rows)
@@ -155,7 +209,7 @@ def find_and_write_diffs(base, target, prefix):
     diff_file_dest = f"{dest_dir}\\differences.csv"
 
     # Save table to file
-    with open(diff_file_dest, "w") as f:
+    with open(diff_file_dest, "w", newline="") as f:
         csv.writer(f).writerows(table)
 
     # Read mappings from file
@@ -176,7 +230,7 @@ def find_and_write_diffs(base, target, prefix):
 
     for i, row in enumerate(rows):
         # Save table to file
-        with open(diff_file_dest, "w") as f:
+        with open(diff_file_dest, "w", newline="") as f:
             csv.writer(f).writerows(create_table(rows))
 
         if row[1] != "N/A":
@@ -228,7 +282,7 @@ def find_and_write_diffs(base, target, prefix):
         print()
 
     # Final write
-    with open(diff_file_dest, "w") as f:
+    with open(diff_file_dest, "w", newline="") as f:
         csv.writer(f).writerows(create_table(rows))
 
     # Write mappings to file
@@ -251,15 +305,21 @@ if not os.path.exists(f"{BASE_PARENT_DIR}"):
 
 delete_mismatch_file()
 
+if PARENT_DIR == "JKMR":
+    transform_knotweed_survey_repeatable_jkmr()
+
 # Read all the files in the base & target directory
 base_files = get_files(BASE_DIR, BASE_PREFIX)
 target_files = get_files(TARGET_DIR, TARGET_PREFIX)
 
 for f in target_files:
+    if f == f"{TARGET_PREFIX}_base_re_written.csv":
+        # Skip this re-written file
+        continue
 
     # If the file is the prefix then this is the parent file
     if f == f"{TARGET_PREFIX}.csv":
-        base_filepath = get_base_file()
+        new_postfix, base_filepath = get_base_file()
 
         does_base_file_exist = does_file_exist(base_filepath)
 
@@ -271,17 +331,18 @@ for f in target_files:
         base_rows = read_csv_columns(
             base_filepath
         ) if does_base_file_exist else []
-        target_rows = read_csv_columns(os.path.join(TARGET_DIR, f))
+        target_rows = read_csv_columns(os.path.join(TARGET_DIR, f if PARENT_DIR != "JKMR" else f"{TARGET_PREFIX}_base_re_written.csv"))
 
         # Find and write differences
-        find_and_write_diffs(base_rows, target_rows, "BASE")
+        find_and_write_diffs(base_rows, target_rows,
+                             "base" if does_base_file_exist else "NO_MATCH_base")
     else:
         # These are the child repeatables
         # Grab the postfix
         postfix = f.replace(f"{TARGET_PREFIX}_", "").replace(".csv", "")
 
         # Base filepath
-        base_filepath = get_base_file(postfix)
+        new_postfix, base_filepath = get_base_file(postfix)
 
         does_base_file_exist = does_file_exist(base_filepath)
 
@@ -296,4 +357,5 @@ for f in target_files:
         target_rows = read_csv_columns(os.path.join(TARGET_DIR, f))
 
         # Find and write differences
-        find_and_write_diffs(base_rows, target_rows, postfix.upper())
+        find_and_write_diffs(base_rows, target_rows, new_postfix.lower(
+        ) if does_base_file_exist else "NO_MATCH_" + new_postfix.lower())

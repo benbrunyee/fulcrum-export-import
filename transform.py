@@ -81,28 +81,24 @@ property_type_mappings = {
     "Industrial": "Commercial",
 }
 
-additional_cols = {
+default_cols = {
     "record_type": lambda row: "Management Plan",
     "client_type": lambda row: property_type_mappings[[k for k in property_type_mappings.keys() if re.match(k, row["property_type"])][0]] if any([re.match(k, row["property_type"]) for k in property_type_mappings.keys()]) else "",
     "plant_type": lambda row: "Japanese Knotweed",
     "job_type": lambda row: "Treatment",
+    "document_version": lambda row: "1.0",
 }
 
 # Set every row "record_type" column to "Management Plan"
 for i, row in enumerate(data):
-    # for col in unmatched_columns:
-    #     if col not in data[i].keys():
-    #         data[i][col] = ""
-
-    for (col, func) in additional_cols.items():
+    for (col, func) in default_cols.items():
         data[i][col] = func(row)
 
-# print(data[0].keys())
 
 with open("new_files\\NEW_RECORDS.csv", "w", newline="") as f:
     writer = csv.writer(f, strict=True)
     writer.writerow(
-        [*new_cols, "site_location", *additional_cols.keys()])
+        [*new_cols, "site_location", *list(filter(lambda x: x not in new_cols, list(default_cols.keys())))])
 
     rows = [list(f.values()) for f in data]
     writer.writerows(rows)
