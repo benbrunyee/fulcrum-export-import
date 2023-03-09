@@ -53,6 +53,24 @@ TRANSFORMATIONS = {
     }
 }
 
+PROPERTY_TYPE_MAPPINGS = {
+    "Private Residential": "Residential",
+    "Housing Association": "Developer",
+    "Commercial": "Commercial",
+    "Council": "Residential",
+    "Education": "Commercial",
+    "Healthcare": "Commercial",
+    "Industrial": "Commercial",
+}
+
+DEFAULT_BASE_COLS = {
+    "record_type": lambda row: "Management Plan",
+    "client_type": lambda row: PROPERTY_TYPE_MAPPINGS[[k for k in PROPERTY_TYPE_MAPPINGS.keys() if re.match(k, row["property_type"])][0]] if any([re.match(k, row["property_type"]) for k in PROPERTY_TYPE_MAPPINGS.keys()]) else "",
+    "plant_type": lambda row: "Japanese Knotweed",
+    "job_type": lambda row: "Treatment",
+    "document_version": lambda row: "1.0",
+}
+
 
 # Functions
 
@@ -99,7 +117,6 @@ def transform(diff_dir_name, target_csv_name):
     # Update columns
     for i, orig_col in enumerate(new_cols):
         if (orig_col not in cols):
-            print(f"Skipping {orig_col}")
             continue
 
         found_i = cols.index(orig_col)
@@ -138,32 +155,13 @@ def transform(diff_dir_name, target_csv_name):
                 raise Exception(
                     f"Could not find site location: {data[i]['fulcrum_id']}")
 
-    property_type_mappings = {
-        "Private Residential": "Residential",
-        "Housing Association": "Developer",
-        "Commercial": "Commercial",
-        "Council": "Residential",
-        "Education": "Commercial",
-        "Healthcare": "Commercial",
-        "Industrial": "Commercial",
-    }
-
-    default_base_cols = {
-        "record_type": lambda row: "Management Plan",
-        "client_type": lambda row: property_type_mappings[[k for k in property_type_mappings.keys() if re.match(k, row["property_type"])][0]] if any([re.match(k, row["property_type"]) for k in property_type_mappings.keys()]) else "",
-        "plant_type": lambda row: "Japanese Knotweed",
-        "job_type": lambda row: "Treatment",
-        "document_version": lambda row: "1.0",
-    }
-
     # Set every row "record_type" column to "Management Plan"
     for i, row in enumerate(data):
         if diff_dir_name == "base" or (PARENT_DIR == "JKMR" and diff_dir_name == "base_re_written"):
-            for (col, func) in default_base_cols.items():
+            for (col, func) in DEFAULT_BASE_COLS.items():
                 data[i][col] = func(row)
 
         for k, v in row.items():
-
             if (diff_dir_name in TRANSFORMATIONS[PARENT_DIR] and k in TRANSFORMATIONS[PARENT_DIR][diff_dir_name] and v in TRANSFORMATIONS[PARENT_DIR][diff_dir_name][k]):
                 print("Transforming", k, v)
                 data[i][k] = TRANSFORMATIONS[PARENT_DIR][diff_dir_name][k][v]
@@ -171,7 +169,7 @@ def transform(diff_dir_name, target_csv_name):
     with open(f"{BASE_PARENT_DIR}\\new_records\\{diff_dir_name}.csv", "w", newline="") as f:
         writer = csv.writer(f, strict=True)
         writer.writerow(
-            [*new_cols, "site_location", *(list(filter(lambda x: x not in new_cols, list(default_base_cols.keys()))) if diff_dir_name == "base" else [])])
+            [*new_cols, "site_location", *(list(filter(lambda x: x not in new_cols, list(DEFAULT_BASE_COLS.keys()))) if diff_dir_name == "base" else [])])
 
         rows = [list(f.values()) for f in data]
         writer.writerows(rows)
