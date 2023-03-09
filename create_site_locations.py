@@ -85,7 +85,7 @@ with open(CLIENTELE, "r") as f:
 client_details = {}
 
 for row in record_rows:
-    client_name = row[CLIENT_NAME_COL]
+    client_name = row[CLIENT_NAME_COL].strip()
     acc_ref = row[ACC_REF_COL]
     property_type = row[PROPERTY_TYPE_COL]
     account_status = row[ACCOUNT_STATUS_COL]
@@ -142,5 +142,6 @@ with open("new_files\\new_site_locations.csv", "w", newline="") as f:
 
     for client in client_details:
         for job in client_details[client]["jobs"]:
-            writer.writerow([client_details[client]["id"], client, job["job_id"],
+            client_info = client_details[client]
+            writer.writerow([client_info["id"], client, job["job_id"],
                             *[job[site_address_prefix + f] for f in site_address_postfixes], job["property_type"], job["account_status"]])

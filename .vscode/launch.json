@@ -21,7 +21,7 @@
       "justMyCode": true,
       "args": [
         "--existing_clientele",
-        "bb_site_location_import\\bb_site_location_import.csv",
+        "bb_clientele_import\\bb_clientele_import.csv",
         "--target_file",
         "knotweed_survey_and_management_plan\\knotweed_survey_and_management_plan.csv",
         "--ref_col",
@@ -179,7 +179,11 @@
         "--target_prefix",
         "knotweed_survey_and_management_plan",
         "--site_location_file",
-        "bb_site_location_import\\bb_site_location_import.csv"
+        "bb_site_location_import\\bb_site_location_import.csv",
+        "--client_name_col",
+        "client_name",
+        "--acc_ref_col",
+        "account_reference"
       ],
       "presentation": {
         "group": "transform",
@@ -201,7 +205,11 @@
         "--target_prefix",
         "japanese_knotweed_management_record",
         "--site_location_file",
-        "bb_site_location_import\\bb_site_location_import.csv"
+        "bb_site_location_import\\bb_site_location_import.csv",
+        "--client_name_col",
+        "client_names",
+        "--acc_ref_col",
+        "pba_reference"
       ],
       "presentation": {
         "group": "transform",
