@@ -1,26 +1,75 @@
+import argparse
 import csv
 import os
+
+# Arguments
+
+parser = argparse.ArgumentParser(
+    description="Create site locations for import")
+parser.add_argument("--existing_site_locations", type=str,
+                    help="Existing site locations file", required=False)
+parser.add_argument("--clientele_file", type=str,
+                    help="Clientele file", required=True)
+parser.add_argument("--target_file", type=str,
+                    help="Target file for finding site locations", required=True)
+parser.add_argument("--client_name_col", type=str,
+                    help="Client name column name", required=True)
+parser.add_argument("--acc_ref_col", type=str,
+                    help="Account reference column name", required=True)
+parser.add_argument("--property_type_col", type=str,
+                    help="Property type column name", required=True)
+parser.add_argument("--account_status_col", type=str,
+                    help="Account status column name", required=True)
+parser.add_argument("--site_address_prefix", type=str,
+                    help="Site address prefix", required=True)
+
+args = parser.parse_args()
+
+# Read in existing locations
+# If we come across a row within the target file that is listing a location, client reference and client name to one that already exists, then we don't need to add this to the new file
+# We can simply skip. Otherwise, we do add it so that it can be imported
+
+# Constants
 
 if not os.path.exists("new_files"):
     os.makedirs("new_files")
 
-CLIENTELE = "bb_clientele_import\\bb_clientele_import.csv"
-RECORDS = "knotweed_survey_and_management_plan\\knotweed_survey_and_management_plan.csv"
+EXISTING_SITE_LOCATIONS = args.existing_site_locations
 
-id_col = "fulcrum_id"
-client_col = "client_name"
-acc_ref_col = "account_reference"
-property_type_col = "property_type"
-account_status_col = "account_status"
+CLIENTELE = args.clientele_file
+TARGET_FILE = args.target_file
 
-site_address_prefix = "site_address_"
+ID_COL = "fulcrum_id"
+CLIENT_NAME_COL = args.client_name_col
+ACC_REF_COL = args.acc_ref_col
+PROPERTY_TYPE_COL = args.property_type_col
+ACCOUNT_STATUS_COL = args.account_status_col
+
+EXISTING_CLIENT_NAME_COL = "client_name"
+EXISTING_ACC_REF_COL = "job_id"
+EXISTING_SITE_ADDRESS_PREFIX = "site_address_"
+
+site_address_prefix = args.site_address_prefix
 site_address_postfixes = ["sub_thoroughfare", "thoroughfare", "locality",
                           "sub_admin_area", "admin_area", "postal_code", "country", "full"]
+
+site_address_checks = ["postal_code", "thoroughfare",
+                       "sub_thoroughfare", "locality", "admin_area", "country"]
 
 record_rows = []
 clientele_rows = []
 
-with open(RECORDS, "r") as f:
+existing_site_locations = []
+
+# Read the existing site locations file
+if EXISTING_SITE_LOCATIONS and os.path.exists(EXISTING_SITE_LOCATIONS) and os.path.getsize(EXISTING_SITE_LOCATIONS) > 0:
+    with open(EXISTING_SITE_LOCATIONS, "r") as f:
+        reader = csv.DictReader(f)
+
+        for row in reader:
+            existing_site_locations.append(row)
+
+with open(TARGET_FILE, "r") as f:
     record_reader = csv.DictReader(f)
 
     for row in record_reader:
@@ -36,10 +85,10 @@ with open(CLIENTELE, "r") as f:
 client_details = {}
 
 for row in record_rows:
-    client_name = row[client_col]
-    acc_ref = row[acc_ref_col]
-    property_type = row[property_type_col]
-    account_status = row[account_status_col]
+    client_name = row[CLIENT_NAME_COL]
+    acc_ref = row[ACC_REF_COL]
+    property_type = row[PROPERTY_TYPE_COL]
+    account_status = row[ACCOUNT_STATUS_COL]
 
     data = {
         "job_id": acc_ref,
@@ -51,7 +100,26 @@ for row in record_rows:
     site_address = {}
     for postfix in site_address_postfixes:
         site_address[site_address_prefix +
-                     postfix] = row[site_address_prefix + postfix]
+                     postfix] = row[EXISTING_SITE_ADDRESS_PREFIX + postfix]
+
+    found = False
+    for existing_row in existing_site_locations:
+        matches = False
+        for check in site_address_checks:
+            if existing_row[EXISTING_SITE_ADDRESS_PREFIX + check] == site_address[site_address_prefix + check]:
+                matches = True
+            else:
+                matches = False
+                break
+
+        if matches and existing_row[EXISTING_CLIENT_NAME_COL] == client_name and existing_row[EXISTING_ACC_REF_COL] == acc_ref:
+            # We don't need to add this to the new file
+            found = True
+            break
+
+    if found:
+        print(f"Skipping {client_name} - {acc_ref}")
+        continue
 
     data = dict(data, **site_address)
 
@@ -63,11 +131,11 @@ for row in record_rows:
 # Create find the relevant clientele ID for each client
 for client in client_details:
     for row in clientele_rows:
-        if row[client_col] == client:
-            client_details[client]["id"] = row[id_col]
+        if row["client_name"] == client:
+            client_details[client]["id"] = row[ID_COL]
 
 # Write the site location to a file
-with open("new_files\\site_locations.csv", "w", newline="") as f:
+with open("new_files\\new_site_locations.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["client", "client_name", "job_id",
                     *[site_address_prefix + f for f in site_address_postfixes], "property_type", "account_status"])
