@@ -15,7 +15,7 @@ This document outlines the steps required to transform data and import it into v
     - (Optional) Delete the mappings directory found under `new_files\\{parent_directory}` (if it exists) if you don't want to use historical mappings.
 1.  Import the new `site_locations.csv` file into Site Locations app.
 1.  Export Site Locations app with the new records.
-1.  Update the path to the Site Locations export in `transform.py` and run it to create a CSV file for the SURVEY app.
+1.  Update the argument path for the Site Locations export in `transform.py` and run it to create a CSV file for the SURVEY app.
 1.  Move the `NEW_RECORDS.csv` file into the directory of the original export (where the photos are located).
 1.  Import the new records found in `NEW_RECORDS.csv` into the destination app.
 
