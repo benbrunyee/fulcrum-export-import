@@ -177,6 +177,40 @@ def transform_knotweed_survey_repeatable_jkmr():
         writer.writerows(new_rows)
 
 
+def transform_knotweed_survey_stand_details_jkmr():
+    new_rows = []
+
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_knotweed_survey_knotweed_stand_details.csv"), "r") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        for row in rows:
+            old_val = row["stand_location_visibly_impacted_areas"]
+            old_other_val = row["stand_location_visibly_impacted_areas_other"]
+            new_val = row["visibly_impacted_areas_subject_property"]
+            new_other_val = row["visibly_impacted_areas_subject_property_other"]
+
+            if old_val and new_val and old_val != new_val:
+                print(
+                    f"{row['fulcrum_id']}: Both old and new values are populated. Old: '{old_val}', New: '{new_val}'")
+            if old_other_val and new_other_val and old_other_val != new_other_val:
+                print(
+                    f"{row['fulcrum_id']}: Both old and new other values are populated. Old: '{old_other_val}', New: '{new_other_val}'")
+
+            if old_val:
+                row["visibly_impacted_areas_subject_property"] = old_val
+
+            if old_other_val:
+                row["visibly_impacted_areas_subject_property_other"] = old_other_val
+
+        new_rows = rows
+
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_knotweed_survey_knotweed_stand_details_re_written.csv"), "w") as f:
+        writer = csv.DictWriter(f, fieldnames=rows[0].keys())
+        writer.writeheader()
+        writer.writerows(new_rows)
+
+
 def find_and_write_diffs(base, target, prefix):
     # Find differences
     diff = [f for f in target if f not in base]
@@ -196,12 +230,6 @@ def find_and_write_diffs(base, target, prefix):
 
     # Create table
     table = create_table(rows)
-
-    # Print table
-    print(tabulate(table, headers="firstrow", tablefmt="fancy_grid"))
-
-    # Print empty line
-    print()
 
     dest_dir = f"{BASE_PARENT_DIR}\\differences\\{prefix}"
     clear_and_create_dir(dest_dir)
@@ -236,13 +264,13 @@ def find_and_write_diffs(base, target, prefix):
         if row[1] != "N/A":
             # Check if mapping exists
             if row[0] in mappings:
-                print(f"Replacing: '{row[0]}' with '{mappings[row[0]]}'")
+                # print(f"Replacing: '{row[0]}' with '{mappings[row[0]]}'")
                 rows[i] = [row[0], row[1], mappings[row[0]]]
                 if (mappings[row[0]] in unmatched):
                     unmatched.remove(mappings[row[0]])
                 continue
             elif mappings_exist:
-                print(f"Skipping: '{row[0]}'")
+                # print(f"Skipping: '{row[0]}'")
                 continue
 
             changed, new_val = custom_rules(row[0])
@@ -277,9 +305,6 @@ def find_and_write_diffs(base, target, prefix):
                     if (response in unmatched):
                         unmatched.remove(response)
                     mappings[row[0]] = response
-        else:
-            print(f"No match found for '{row[0]}'")
-        print()
 
     # Final write
     with open(diff_file_dest, "w", newline="") as f:
@@ -307,6 +332,7 @@ delete_mismatch_file()
 
 if PARENT_DIR == "JKMR":
     transform_knotweed_survey_repeatable_jkmr()
+    transform_knotweed_survey_stand_details_jkmr()
 
 # Read all the files in the base & target directory
 base_files = get_files(BASE_DIR, BASE_PREFIX)

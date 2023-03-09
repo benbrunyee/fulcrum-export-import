@@ -39,32 +39,9 @@ SITE_LOCATION_FILE = args.site_location_file
 
 TRANSFORMATIONS = {
     "KSMP": {
-        "base": {
-            "property_type":
-                {
-                    "Private Residential": "Residential",
-                    "Housing Association": "Developer",
-                    "Commercial": "Commercial",
-                    "Council": "Residential",
-                    "Education": "Commercial",
-                    "Healthcare": "Commercial",
-                    "Industrial": "Commercial",
-                },
-        }
     },
     "JKMR": {
-        "base": {
-            "property_type": {
-                "Private Residential": "Residential",
-                "Housing Association": "Developer",
-                "Commercial": "Commercial",
-                "Council": "Residential",
-                "Education": "Commercial",
-                "Healthcare": "Commercial",
-                "Industrial": "Commercial",
-            }
-        },
-        "stand_details": {
+        "knotweed_stand_details": {
             "stand_location": {
                 "Within client property only": "Site only",
                 "Within client property and one other property": "Site and one adjacent property",
@@ -181,9 +158,15 @@ def transform(diff_dir_name, target_csv_name):
 
     # Set every row "record_type" column to "Management Plan"
     for i, row in enumerate(data):
-        if (diff_dir_name == "base"):
+        if diff_dir_name == "base" or (PARENT_DIR == "JKMR" and diff_dir_name == "base_re_written"):
             for (col, func) in default_base_cols.items():
                 data[i][col] = func(row)
+
+        for k, v in row.items():
+
+            if (diff_dir_name in TRANSFORMATIONS[PARENT_DIR] and k in TRANSFORMATIONS[PARENT_DIR][diff_dir_name] and v in TRANSFORMATIONS[PARENT_DIR][diff_dir_name][k]):
+                print("Transforming", k, v)
+                data[i][k] = TRANSFORMATIONS[PARENT_DIR][diff_dir_name][k][v]
 
     with open(f"{BASE_PARENT_DIR}\\new_records\\{diff_dir_name}.csv", "w", newline="") as f:
         writer = csv.writer(f, strict=True)
@@ -201,7 +184,7 @@ def get_file_mapping(dir_name):
         elif dir_name == "site_photos_property":
             dir_name = "site_photo_property"
         elif dir_name == "knotweed_stand_details":
-            dir_name = "knotweed_survey_knotweed_stand_details"
+            dir_name = "knotweed_survey_knotweed_stand_details_re_written"
         elif dir_name == "knotweed_stand_details_stand_photos":
             dir_name = "knotweed_survey_knotweed_stand_details_stand_photos"
         elif dir_name == "base":
@@ -209,13 +192,14 @@ def get_file_mapping(dir_name):
 
     return dir_name
 
-# Main
 
+# Main
 
 clear_and_create_dir(f"{BASE_PARENT_DIR}\\new_records")
 
-for dir in get_dirs(f"{BASE_PARENT_DIR}\\differences"):
-    if dir.startswith("NO_MATCH_"):
+for diff_dir_name in get_dirs(f"{BASE_PARENT_DIR}\\differences"):
+    if diff_dir_name.startswith("NO_MATCH_"):
         continue
-    mapped_file = get_file_mapping(dir)
-    transform(dir, mapped_file)
+
+    target_csv_name = get_file_mapping(diff_dir_name)
+    transform(diff_dir_name, target_csv_name)
