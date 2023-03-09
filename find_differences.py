@@ -140,7 +140,7 @@ def transform_knotweed_survey_repeatable_jkmr():
 
         for r in rows:
             if r["fulcrum_parent_id"] not in child_records_mapping.keys():
-                child_records_mapping[r["fulcrum_parent_id"]] = []
+                child_records_mapping[r["fulcrum_parent_id"]] = [r]
             else:
                 child_records_mapping[r["fulcrum_parent_id"]].append(r)
 
@@ -165,9 +165,9 @@ def transform_knotweed_survey_repeatable_jkmr():
     for parent_id, child_records in child_records_mapping.items():
         for child_record in child_records:
             child_keys = ["child_" + k for k in child_record.keys()]
-            new_row = {**parent_record_data[parent_id],
-                       **{k: child_record[re.sub(r"^child_", "", k)] for k in child_keys if k != "child_fulcrum_id"},
-                       "fulcrum_id": child_record["fulcrum_id"]}
+            new_row = {"fulcrum_id": child_record["fulcrum_id"],
+                       **{k: parent_record_data[parent_id][k] for k in parent_record_data[parent_id].keys() if k != "fulcrum_id"},
+                       **{k: child_record[re.sub(r"^child_", "", k)] for k in child_keys if k != "child_fulcrum_id"}}
             new_rows.append(new_row)
 
     # Write the new data to a new csv file
@@ -331,7 +331,8 @@ for f in target_files:
         base_rows = read_csv_columns(
             base_filepath
         ) if does_base_file_exist else []
-        target_rows = read_csv_columns(os.path.join(TARGET_DIR, f if PARENT_DIR != "JKMR" else f"{TARGET_PREFIX}_base_re_written.csv"))
+        target_rows = read_csv_columns(os.path.join(
+            TARGET_DIR, f if PARENT_DIR != "JKMR" else f"{TARGET_PREFIX}_base_re_written.csv"))
 
         # Find and write differences
         find_and_write_diffs(base_rows, target_rows,

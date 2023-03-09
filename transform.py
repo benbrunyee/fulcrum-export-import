@@ -204,6 +204,8 @@ def get_file_mapping(dir_name):
             dir_name = "knotweed_survey_knotweed_stand_details"
         elif dir_name == "knotweed_stand_details_stand_photos":
             dir_name = "knotweed_survey_knotweed_stand_details_stand_photos"
+        elif dir_name == "base":
+            dir_name = "base_re_written"
 
     return dir_name
 
