@@ -7,3 +7,5 @@
 !README.md
 !.vscode
 !.vscode/*
+!saved_mappings
+!saved_mappings/**

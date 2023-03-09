@@ -1,0 +1,11 @@
+{
+  "visibly_impacted_areas_subject_property": "stand_location_site",
+  "visibly_impacted_areas_subject_property_other": "stand_location_site_other",
+  "visibly_impacted_areas_other_property": "stand_location_other_property",
+  "visibly_impacted_areas_other_property_other": "stand_location_other_property_other",
+  "total_number_of_properties_impacted_by_this_stand_estimated": "number_of_properties_impacted_by_this_stand_estimated",
+  "distance_from_subject_property_dwelling_m": "distance_stand_to_dwelling_site_m",
+  "distance_from_subject_property_boundary_nearest_m": "distance_from_stand_to_site_boundary_m",
+  "other_notable_characteristics_describe": "other_notable_characteristics",
+  "distance_from_other_property_dwelling_estimated_m": "distance_stand_to_other_buildingstructure_site_m"
+}
