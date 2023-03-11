@@ -204,14 +204,14 @@ def transform_knotweed_survey_stand_details_jkmr():
                 row["visibly_impacted_areas_subject_property_other"] = old_location_other_val
 
             old_distance_val = row["distance_from_nearest_dwelling_m"]
-            new_distance_val = row["distance_stand_to_dwelling_site_m"]
+            new_distance_val = row["distance_from_subject_property_dwelling_m"]
 
             if old_distance_val and new_distance_val and old_distance_val != new_distance_val:
                 print(
                     f"{row['fulcrum_id']}: Both old and new values are populated. Old: '{old_distance_val}', New: '{new_distance_val}'")
 
-            if old_distance_val:
-                row["distance_stand_to_dwelling_site_m"] = old_distance_val
+            if old_distance_val and not new_distance_val:
+                row["distance_from_subject_property_dwelling_m"] = old_distance_val
 
         new_rows = rows
 
