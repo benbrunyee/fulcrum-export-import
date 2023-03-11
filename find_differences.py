@@ -396,3 +396,5 @@ for f in target_files:
         # Find and write differences
         find_and_write_diffs(base_rows, target_rows, new_postfix.lower(
         ) if does_base_file_exist else "NO_MATCH_" + new_postfix.lower())
+
+print("Success")

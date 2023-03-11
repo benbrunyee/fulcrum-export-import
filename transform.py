@@ -125,7 +125,7 @@ def transform(diff_dir_name, target_csv_name):
         if (val == "" or val == "N/A"):
             continue
 
-        print(f"Replacing {new_cols[i]} with {val}")
+        # print(f"Replacing {new_cols[i]} with {val}")
         new_cols[i] = val
 
     site_address_checks = ["site_address_postal_code", "site_address_thoroughfare",
@@ -163,7 +163,6 @@ def transform(diff_dir_name, target_csv_name):
 
         for k, v in row.items():
             if (diff_dir_name in TRANSFORMATIONS[PARENT_DIR] and k in TRANSFORMATIONS[PARENT_DIR][diff_dir_name] and v in TRANSFORMATIONS[PARENT_DIR][diff_dir_name][k]):
-                print("Transforming", k, v)
                 data[i][k] = TRANSFORMATIONS[PARENT_DIR][diff_dir_name][k][v]
 
     with open(f"{BASE_PARENT_DIR}\\new_records\\{diff_dir_name}.csv", "w", newline="") as f:
@@ -201,3 +200,5 @@ for diff_dir_name in get_dirs(f"{BASE_PARENT_DIR}\\differences"):
 
     target_csv_name = get_file_mapping(diff_dir_name)
     transform(diff_dir_name, target_csv_name)
+
+print("Success")

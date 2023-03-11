@@ -33,5 +33,10 @@
   "child_briefly_describe_the_other_invasive_weed_infestation": "description_of_the_other_invasive_weed_infestation",
   "child_types_of_invasive_weed_identified": "other_invasive_weeds_identified_during_survey",
   "child_types_of_invasive_weed_identified_other": "other_invasive_weeds_identified_during_survey_other",
-  "child_supporting_notes": "notes"
+  "child_supporting_notes": "notes",
+  "child_does_site_to_be_surveyed_meet_generic_rams_criteria": "does_site_to_be_surveyed_meet_generic_rams_criteria",
+  "child_can_the_survey_proceed": "can_the_survey_proceed",
+  "child_site_specific_risk_assessment": "site_specific_risk_assessment",
+  "child_survey_summary_notes": "survey_findings",
+  "child_suggested_control_programme_duration_years": "treatment_programme_duration_years"
 }

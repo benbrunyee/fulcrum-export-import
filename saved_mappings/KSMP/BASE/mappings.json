@@ -212,5 +212,6 @@
   "notes_year_10": "notes_10",
   "was_knotweed_active_previously_on_the_nearby_property": "was_knotweed_present_on_a_nearby_property_previously",
   "was_knotweed_active_previously_on_the_nearby_property_other": "was_knotweed_present_on_a_nearby_property_previously_other",
-  "number_of_additional_properties_where_knotweed_growth_is_evident_best_estimate": "number_of_nearadjacent_knotweed_impacted_properties"
+  "number_of_additional_properties_where_knotweed_growth_is_evident_best_estimate": "number_of_nearadjacent_knotweed_impacted_properties",
+  "survey_findings_summary": "survey_findings_summary"
 }

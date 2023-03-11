@@ -7,5 +7,7 @@
   "distance_from_subject_property_dwelling_m": "distance_stand_to_dwelling_site_m",
   "distance_from_subject_property_boundary_nearest_m": "distance_from_stand_to_site_boundary_m",
   "other_notable_characteristics_describe": "other_notable_characteristics",
-  "distance_from_other_property_dwelling_estimated_m": "distance_stand_to_other_buildingstructure_site_m"
+  "distance_from_other_property_dwelling_estimated_m": "distance_stand_to_other_buildingstructure_site_m",
+  "stand_location": "properties_visibly_impacted_by_this_jk_stand",
+  "stand_location_other": "properties_visibly_impacted_by_this_jk_stand_other"
 }
