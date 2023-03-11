@@ -132,7 +132,7 @@ def transform(diff_dir_name, target_csv_name):
                            "site_address_sub_thoroughfare", "site_address_locality", "site_address_admin_area", "site_address_country"]
 
     # Match on site full address, client name and job id write this to the end file for the "site_location" link
-    if target_csv_name == "base":
+    if diff_dir_name == "base":
         for i, row in enumerate(data):
             found = False
 
@@ -157,7 +157,7 @@ def transform(diff_dir_name, target_csv_name):
 
     # Set every row "record_type" column to "Management Plan"
     for i, row in enumerate(data):
-        if diff_dir_name == "base" or (PARENT_DIR == "JKMR" and diff_dir_name == "base_re_written"):
+        if diff_dir_name == "base":
             for (col, func) in DEFAULT_BASE_COLS.items():
                 data[i][col] = func(row)
 

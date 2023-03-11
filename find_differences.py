@@ -185,23 +185,33 @@ def transform_knotweed_survey_stand_details_jkmr():
         rows = list(reader)
 
         for row in rows:
-            old_val = row["stand_location_visibly_impacted_areas"]
-            old_other_val = row["stand_location_visibly_impacted_areas_other"]
-            new_val = row["visibly_impacted_areas_subject_property"]
-            new_other_val = row["visibly_impacted_areas_subject_property_other"]
+            old_location_val = row["stand_location_visibly_impacted_areas"]
+            old_location_other_val = row["stand_location_visibly_impacted_areas_other"]
+            new_location_val = row["visibly_impacted_areas_subject_property"]
+            new_location_other_val = row["visibly_impacted_areas_subject_property_other"]
 
-            if old_val and new_val and old_val != new_val:
+            if old_location_val and new_location_val and old_location_val != new_location_val:
                 print(
-                    f"{row['fulcrum_id']}: Both old and new values are populated. Old: '{old_val}', New: '{new_val}'")
-            if old_other_val and new_other_val and old_other_val != new_other_val:
+                    f"{row['fulcrum_id']}: Both old and new values are populated. Old: '{old_location_val}', New: '{new_location_val}'")
+            if old_location_other_val and new_location_other_val and old_location_other_val != new_location_other_val:
                 print(
-                    f"{row['fulcrum_id']}: Both old and new other values are populated. Old: '{old_other_val}', New: '{new_other_val}'")
+                    f"{row['fulcrum_id']}: Both old and new other values are populated. Old: '{old_location_other_val}', New: '{new_location_other_val}'")
 
-            if old_val:
-                row["visibly_impacted_areas_subject_property"] = old_val
+            if old_location_val:
+                row["visibly_impacted_areas_subject_property"] = old_location_val
 
-            if old_other_val:
-                row["visibly_impacted_areas_subject_property_other"] = old_other_val
+            if old_location_other_val:
+                row["visibly_impacted_areas_subject_property_other"] = old_location_other_val
+
+            old_distance_val = row["distance_from_nearest_dwelling_m"]
+            new_distance_val = row["distance_stand_to_dwelling_site_m"]
+
+            if old_distance_val and new_distance_val and old_distance_val != new_distance_val:
+                print(
+                    f"{row['fulcrum_id']}: Both old and new values are populated. Old: '{old_distance_val}', New: '{new_distance_val}'")
+
+            if old_distance_val:
+                row["distance_stand_to_dwelling_site_m"] = old_distance_val
 
         new_rows = rows
 
