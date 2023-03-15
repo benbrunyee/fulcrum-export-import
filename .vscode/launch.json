@@ -124,7 +124,7 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "args": [
-        "--parent-dir",
+        "--parent_dir",
         "KSMP",
         "--base_dir",
         "base",
@@ -148,7 +148,7 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "args": [
-        "--parent-dir",
+        "--parent_dir",
         "JKMR",
         "--base_dir",
         "base",
@@ -172,7 +172,7 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "args": [
-        "--parent-dir",
+        "--parent_dir",
         "KSMP",
         "--target_dir",
         "knotweed_survey_and_management_plan",
@@ -198,7 +198,7 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "args": [
-        "--parent-dir",
+        "--parent_dir",
         "JKMR",
         "--target_dir",
         "japanese_knotweed_management_record",

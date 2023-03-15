@@ -8,7 +8,7 @@ import shutil
 parser = argparse.ArgumentParser(
     description="Find differences between 2 csv files")
 
-parser.add_argument("--parent-dir", type=str,
+parser.add_argument("--parent_dir", type=str,
                     help="Parent directory", required=True)
 parser.add_argument("--target_dir", type=str,
                     help="Target directory", required=True)
