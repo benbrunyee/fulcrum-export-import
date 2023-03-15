@@ -55,12 +55,12 @@ TRANSFORMATIONS = {
 
 PROPERTY_TYPE_MAPPINGS = {
     "Private Residential": "Residential",
-    "Housing Association": "Developer",
-    "Commercial": "Commercial",
+    "Housing Association": "Residential",
+    "Commercial": "Residential",
     "Council": "Residential",
-    "Education": "Commercial",
-    "Healthcare": "Commercial",
-    "Industrial": "Commercial",
+    "Education": "Residential",
+    "Healthcare": "Residential",
+    "Industrial": "Residential",
 }
 
 DEFAULT_BASE_COLS = {
