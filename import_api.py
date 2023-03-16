@@ -59,46 +59,46 @@ def get_csv_files(dir):
         os.path.join(dir, f)) and f.endswith(".csv")]
 
 
-def upload_records(obj):
-    record = FULCRUM.records.create(obj)
-    print(record)
-    print(record['record']['id'] + ' created.')
+def upload_records(records):
+    for record in records:
+        res = FULCRUM.records.create(record)
+        print(res)
+        print(res['record']['id'] + ' created.')
 
 
-def create_value_structure(element, value):
-    obj = None
+def create_value_structure(element, row):
     el_type = element["type"]
+    data_name = element["data_name"]
+    value = row[data_name] if data_name in row else None
+    other_value = row[data_name +
+                      "_other"] if data_name + "_other" in row else None
+    caption_value = row[data_name +
+                        "_caption"] if data_name + "_caption" in row else None
 
     skip_types = [
-        "Section"
+        "Section",
+        "Repeatable",
     ]
-
-    object_types = {
-        "ClassificationField": {"other_values": [], "choice_values": [value]},
-        "ChoiceField": {"other_values": [], "choice_values": [value]},
-        "RecordLinkField": [{"record_id": v} for v in value.split(",")],
-        "AddressField": {"sub_thoroughfare": "", "thoroughfare": "", "suite": "", "locality": "", "sub_admin_area": "", "admin_area": "", "postal_code": "", "country": ""},
-        "PhotoField": [{"photo_id": v, "caption": ""} for v in value.split(",")],
-        "AudioField": [{"audio_id": v, "caption": ""} for v in value.split(",")],
-        "VideoField": [{"video_id": v, "caption": ""} for v in value.split(",")],
-        "SignatureField": {"timestamp": "", "signature_id": ""},
-        "Repeatable": {"id": "", "geometry": {"type": "Point", "coordinates": []}, "form_values": {}},
-    }
 
     if el_type in skip_types:
         return None
 
-    if el_type in object_types.keys():
-        obj = object_types[el_type]
-        return obj
+    object_types = {
+        "ClassificationField": {"other_values": other_value.split(",") if other_value else [], "choice_values": value.split(",") if value else []} if el_type == "ClassificationField" else None,
+        "ChoiceField": {"other_values": other_value.split(",") if other_value else [], "choice_values": value.split(",") if value else []} if el_type == "ChoiceField" else None,
+        "RecordLinkField": [{"record_id": v} for v in (value.split(",") if value else [None])] if el_type == "RecordLinkField" else None,
+        "AddressField": {postfix: row[data_name + "_" + postfix] for postfix in ["sub_thoroughfare", "thoroughfare", "suite", "locality", "sub_admin_area", "admin_area", "postal_code", "country"]} if el_type == "AddressField" else None,
+        "PhotoField": [{"photo_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "PhotoField" else None,
+        "AudioField": [{"audio_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "AudioField" else None,
+        "VideoField": [{"video_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "VideoField" else None,
+        # TODO: Handle if we have any of these types
+        "SignatureField": {"timestamp": "", "signature_id": ""} if el_type == "SignatureField" else None,
+    }
+
+    if el_type in object_types:
+        return object_types[el_type]
 
     return value
-
-
-def isCaptionField(el_type):
-    if el_type == "PhotoField" or el_type == "AudioField" or el_type == "VideoField":
-        return True
-    return False
 
 
 def flatten(l):
@@ -108,6 +108,62 @@ def flatten(l):
             yield from flatten(el["elements"])
         else:
             yield el
+
+
+def create_base_record():
+    return {
+        "record": {
+            "form_id": target_form_id,
+            "latitude": 0,
+            "longitude": 0,
+            "form_values": {}
+        }
+    }
+
+
+def create_records(elements, filepath):
+    csv_content = read_csv(os.path.join(SOURCE_DIR, filepath))
+
+    all_records = []
+    new_record = create_base_record()
+
+    for row in csv_content:
+        for element in elements:
+            data_name = element["data_name"]
+            key = element["key"]
+
+            value = row[data_name
+                        ] if data_name in row else None
+
+            value_obj = create_value_structure(
+                element, row)
+
+            if value_obj is not None:
+                new_record["record"]["form_values"][key] = value_obj
+
+        # Delete any null values
+        keys_to_delete = []
+
+        for key, value in new_record["record"]["form_values"].items():
+            if value is None or value == "":
+                keys_to_delete.append(key)
+
+            if isinstance(value, list):
+                if len(value) == 0:
+                    keys_to_delete.append(key)
+
+            if isinstance(value, dict):
+                if "choice_values" in value and "other_values" in value:
+                    if len(value["choice_values"]) == 0 and len(value["other_values"]) == 0:
+                        keys_to_delete.append(key)
+
+        for key in keys_to_delete:
+            del new_record["record"]["form_values"][key]
+
+        all_records.append(new_record)
+        new_record = create_base_record()
+
+    return all_records
 
 
 def main():
@@ -135,14 +191,7 @@ def main():
     # 4. Create an object ({"{data_name}": obj }) for each value in the form, this object will depend on the target_form["elements"][i] properties
     # 5. With each object, we transform the data_name into a key using the mapping object
 
-    new_records = {
-        "record": {
-            "form_id": target_form_id,
-            "latitude": 0,
-            "longitude": 0,
-            "form_values": {}
-        }
-    }
+    complete_records = []
 
     flattened_elements = list(flatten(target_form["elements"]))
 
@@ -157,35 +206,20 @@ def main():
             print("Duplicate key found: " + value)
             exit()
 
-    for csv in csv_files:
-        csv_content = read_csv(os.path.join(SOURCE_DIR, csv))
+    for csv_file in csv_files:
+        isBase = csv_file == "base.csv"
+        records = create_records(flattened_elements, csv_file)
 
-        for row in csv_content:
-            for key, value in row.items():
-                for element in flattened_elements:
-                    if element["data_name"] == key:
-                        new_records["record"]["form_values"][element["key"]] = create_value_structure(
-                            element, value)
+        if isBase:
+            complete_records.append(records)
+            break
 
-                        if (isCaptionField(element["type"])):
-                            media_caption_el = row[key + "_caption"] if key + \
-                                "_caption" in row else None
-
-                            if media_caption_el is None:
-                                continue
-
-                            captions = media_caption_el.split(",")
-                            for i, entry in enumerate(new_records["record"]["form_values"][element["key"]]):
-                                entry["caption"] = captions[i] if len(
-                                    captions) > i else ""
-        break
-
-    with open("new_records.json", "w") as f:
-        json.dump(new_records, f, indent=2)
+    with open("all_records.json", "w") as f:
+        json.dump(complete_records, f, indent=2)
 
     # save_first_record()
     # save_form()
-    upload_records(new_records)
+    upload_records(complete_records[0])
 
 
 if __name__ == '__main__':
@@ -193,3 +227,6 @@ if __name__ == '__main__':
 
     if answer == "y":
         main()
+        print("Done.")
+    else:
+        print("Exiting...")
