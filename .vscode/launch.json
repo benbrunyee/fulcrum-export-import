@@ -79,11 +79,11 @@
         "--account_status_col",
         "account_status",
         "--site_address_prefix",
-        "site_address_",
+        "site_address_"
       ],
       "presentation": {
         "group": "create_site_locations",
-        "order": 3
+        "order": 1
       }
     },
     {
@@ -109,11 +109,11 @@
         "--account_status_col",
         "status",
         "--site_address_prefix",
-        "site_address_",
+        "site_address_"
       ],
       "presentation": {
         "group": "create_site_locations",
-        "order": 4
+        "order": 2
       }
     },
     {
@@ -137,7 +137,7 @@
       ],
       "presentation": {
         "group": "find_differences",
-        "order": 5
+        "order": 1
       }
     },
     {
@@ -161,7 +161,7 @@
       ],
       "presentation": {
         "group": "find_differences",
-        "order": 6
+        "order": 2
       }
     },
     {
@@ -187,7 +187,7 @@
       ],
       "presentation": {
         "group": "transform",
-        "order": 7
+        "order": 1
       }
     },
     {
@@ -213,7 +213,25 @@
       ],
       "presentation": {
         "group": "transform",
-        "order": 8
+        "order": 2
+      }
+    },
+    {
+      "name": "Import (JKMR)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/import_api.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--form_name",
+        "BB - SA (IMPORT)",
+        "--source_dir",
+        "japanese_knotweed_management_record"
+      ],
+      "presentation": {
+        "group": "import",
+        "order": 9
       }
     }
   ]
