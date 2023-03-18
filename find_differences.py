@@ -32,6 +32,8 @@ parser.add_argument("--target_dir", type=str,
                     help="Target directory", required=True)
 parser.add_argument("--target_prefix", type=str,
                     help="Target prefix", required=True)
+parser.add_argument("--skip_prompt_matching", action="store_true",
+                    help="Skip all prompt matching", required=False)
 
 args = parser.parse_args()
 
@@ -46,6 +48,8 @@ BASE_PREFIX = args.base_prefix
 
 TARGET_DIR = args.target_dir
 TARGET_PREFIX = args.target_prefix
+
+SKIP_PROMPT_MATCHING = args.skip_prompt_matching
 
 
 # Functions
@@ -88,8 +92,6 @@ def custom_rules(row):
         elif re.match(r"^.*?(_schedule)?_year_.*$", row):
             new_val = re.sub(r"^(.*?)(_schedule)?_year_(.*)$", "\\1_\\3", row)
             print(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
-    elif PARENT_DIR == "JKMR":
-        pass
 
     return new_val != row, new_val
 
@@ -119,6 +121,9 @@ def get_base_file(postfix=None):
             postfix = "knotweed_stand_details"
         elif postfix == "knotweed_survey_knotweed_stand_details_stand_photos":
             postfix = "knotweed_stand_details_stand_photos"
+    if PARENT_DIR == "JKMR_SV":
+        if postfix in ["herbicide_application_monitoring_records"]:
+            postfix = "service_visit_records"
 
     return postfix, os.path.join(BASE_DIR, f"{BASE_PREFIX}{('_' + postfix) if postfix else ''}.csv")
 
@@ -221,6 +226,33 @@ def transform_knotweed_survey_stand_details_jkmr():
         writer.writerows(new_rows)
 
 
+def transform_site_visits():
+    new_csv = []
+
+    visit_files = ["herbicide_application_monitoring_records",
+                   "other_treatments_inc_excavation", "site_monitoring_observations_and_recommendations"]
+
+    all_headers = []
+
+    for visit_file in visit_files:
+        with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_{visit_file}.csv"), "r") as f:
+            csv_content = csv.DictReader(f)
+            rows = list(csv_content)
+
+            if len(rows) == 0:
+                continue
+
+            new_csv.extend(rows)
+
+            headers = rows[0].keys()
+            all_headers.extend([k for k in headers if k not in all_headers])
+
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_site_visits_re_written.csv"), "w") as f:
+        writer = csv.DictWriter(f, fieldnames=all_headers)
+        writer.writeheader()
+        writer.writerows(new_csv)
+
+
 def find_and_write_diffs(base, target, prefix):
     # Find differences
     diff = [f for f in target if f not in base]
@@ -291,6 +323,9 @@ def find_and_write_diffs(base, target, prefix):
                     unmatched.remove(new_val)
                 mappings[row[0]] = new_val
             else:
+                if SKIP_PROMPT_MATCHING:
+                    continue
+
                 print(
                     f"Replace:\n{row[0]}\n{row[1]}? (y/n/type your own column name)")
                 response = input()
@@ -333,6 +368,19 @@ def find_and_write_diffs(base, target, prefix):
         writer.writerows([[f] for f in unmatched])
 
 
+def get_file_name(f):
+    if f == f"{TARGET_PREFIX}.csv":
+        if PARENT_DIR == "JKMR":
+            return f"{TARGET_PREFIX}_base_re_written.csv"
+        else:
+            return f
+    else:
+        if PARENT_DIR == "JKMR_SV" and f == f"{TARGET_PREFIX}_herbicide_application_monitoring_records.csv":
+            return f"{TARGET_PREFIX}_site_visits_re_written.csv"
+
+    return f
+
+
 # Main
 
 if not os.path.exists(f"{BASE_PARENT_DIR}"):
@@ -344,14 +392,20 @@ if PARENT_DIR == "JKMR":
     transform_knotweed_survey_repeatable_jkmr()
     transform_knotweed_survey_stand_details_jkmr()
 
-# Read all the files in the base & target directory
+if PARENT_DIR == "JKMR_SV":
+    transform_site_visits()
+
+    # Read all the files in the base & target directory
 base_files = get_files(BASE_DIR, BASE_PREFIX)
 target_files = get_files(TARGET_DIR, TARGET_PREFIX)
 
 for f in target_files:
-    if f == f"{TARGET_PREFIX}_base_re_written.csv" or f == f"{TARGET_PREFIX}_knotweed_survey.csv":
-        # Skip this re-written file
+    # Skip these files
+    if ((PARENT_DIR == "JKMR" and (f == f"{TARGET_PREFIX}_base_re_written.csv" or f == f"{TARGET_PREFIX}_knotweed_survey.csv")) or
+            (PARENT_DIR == "JKMR_SV" and f == f"{TARGET_PREFIX}_site_visits_re_written.csv" or f in [f"{f}.csv" for f in ["other_treatments_inc_excavation", "site_monitoring_observations_and_recommendations"]])):
         continue
+
+    target_f = get_file_name(f)
 
     # If the file is the prefix then this is the parent file
     if f == f"{TARGET_PREFIX}.csv":
@@ -368,7 +422,7 @@ for f in target_files:
             base_filepath
         ) if does_base_file_exist else []
         target_rows = read_csv_columns(os.path.join(
-            TARGET_DIR, f if PARENT_DIR != "JKMR" else f"{TARGET_PREFIX}_base_re_written.csv"))
+            TARGET_DIR, target_f))
 
         # Find and write differences
         find_and_write_diffs(base_rows, target_rows,
@@ -391,7 +445,7 @@ for f in target_files:
         base_rows = read_csv_columns(
             base_filepath
         ) if does_base_file_exist else []
-        target_rows = read_csv_columns(os.path.join(TARGET_DIR, f))
+        target_rows = read_csv_columns(os.path.join(TARGET_DIR, target_f))
 
         # Find and write differences
         find_and_write_diffs(base_rows, target_rows, new_postfix.lower(

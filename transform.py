@@ -20,6 +20,8 @@ parser.add_argument("--client_name_col", type=str,
                     help="Client name column", required=True)
 parser.add_argument("--acc_ref_col", type=str,
                     help="Account reference column", required=True)
+parser.add_argument("--transform_type", type=str,
+                    help="Transform type", required=True)
 
 args = parser.parse_args()
 
@@ -36,6 +38,8 @@ CLIENT_NAME_COL = args.client_name_col
 ACC_REF_COL = args.acc_ref_col
 
 SITE_LOCATION_FILE = args.site_location_file
+
+TRANSFORM_TYPE = args.transform_type
 
 TRANSFORMATIONS = {
     "KSMP": {
@@ -103,6 +107,9 @@ def clear_and_create_dir(dir):
 
 
 def transform(diff_dir_name, target_csv_name):
+    is_survey_transform = TRANSFORM_TYPE == "survey"
+    is_site_visit_transform = TRANSFORM_TYPE == "site_visit"
+
     diff = read_csv(
         f"{BASE_PARENT_DIR}\\differences\\{diff_dir_name}\\differences.csv")
     cols = [f["Column"] for f in diff]
@@ -111,8 +118,6 @@ def transform(diff_dir_name, target_csv_name):
                     "base" else f"{TARGET_DIR}\\{TARGET_PREFIX}.csv")
 
     new_cols = list(data[0].keys())
-
-    site_location_csv = read_csv(SITE_LOCATION_FILE)
 
     # Update columns
     for i, orig_col in enumerate(new_cols):
@@ -128,47 +133,56 @@ def transform(diff_dir_name, target_csv_name):
         # print(f"Replacing {new_cols[i]} with {val}")
         new_cols[i] = val
 
-    site_address_checks = ["site_address_postal_code", "site_address_thoroughfare",
-                           "site_address_sub_thoroughfare", "site_address_locality", "site_address_admin_area", "site_address_country"]
+    if is_survey_transform:
+        site_location_csv = read_csv(SITE_LOCATION_FILE)
 
-    # Match on site full address, client name and job id write this to the end file for the "site_location" link
-    if diff_dir_name == "base":
-        for i, row in enumerate(data):
-            found = False
+        site_address_checks = ["site_address_postal_code", "site_address_thoroughfare",
+                               "site_address_sub_thoroughfare", "site_address_locality", "site_address_admin_area", "site_address_country"]
 
-            for site_location in site_location_csv:
-                match = False
-
-                for check in site_address_checks:
-                    if (row[check] != site_location[check]):
-                        match = False
-                        break
-                    else:
-                        match = True
-
-                if (match and row[CLIENT_NAME_COL].strip() == site_location["client_name"] and row[ACC_REF_COL] == site_location["job_id"]):
-                    data[i]["site_location"] = site_location["fulcrum_id"]
-                    found = True
-                    break
-
-            if (not found):
-                raise Exception(
-                    f"Could not find site location: {data[i]['fulcrum_id']}")
-
-    # Set every row "record_type" column to "Management Plan"
-    for i, row in enumerate(data):
+        # Match on site full address, client name and job id write this to the end file for the "site_location" link
         if diff_dir_name == "base":
-            for (col, func) in DEFAULT_BASE_COLS.items():
-                data[i][col] = func(row)
+            for i, row in enumerate(data):
+                found = False
 
-        for k, v in row.items():
-            if (diff_dir_name in TRANSFORMATIONS[PARENT_DIR] and k in TRANSFORMATIONS[PARENT_DIR][diff_dir_name] and v in TRANSFORMATIONS[PARENT_DIR][diff_dir_name][k]):
-                data[i][k] = TRANSFORMATIONS[PARENT_DIR][diff_dir_name][k][v]
+                for site_location in site_location_csv:
+                    match = False
+
+                    for check in site_address_checks:
+                        if (row[check] != site_location[check]):
+                            match = False
+                            break
+                        else:
+                            match = True
+
+                    if (match and row[CLIENT_NAME_COL].strip() == site_location["client_name"] and row[ACC_REF_COL] == site_location["job_id"]):
+                        data[i]["site_location"] = site_location["fulcrum_id"]
+                        found = True
+                        break
+
+                if (not found):
+                    raise Exception(
+                        f"Could not find site location: {data[i]['fulcrum_id']}")
+
+        # Set every row "record_type" column to "Management Plan"
+        for i, row in enumerate(data):
+            if diff_dir_name == "base":
+                for (col, func) in DEFAULT_BASE_COLS.items():
+                    data[i][col] = func(row)
+
+            for k, v in row.items():
+                if (diff_dir_name in TRANSFORMATIONS[PARENT_DIR] and k in TRANSFORMATIONS[PARENT_DIR][diff_dir_name] and v in TRANSFORMATIONS[PARENT_DIR][diff_dir_name][k]):
+                    data[i][k] = TRANSFORMATIONS[PARENT_DIR][diff_dir_name][k][v]
 
     with open(f"{BASE_PARENT_DIR}\\new_records\\{diff_dir_name}.csv", "w", newline="") as f:
+        headers = []
+
+        if is_survey_transform:
+            headers = [*new_cols, "site_location", *(list(filter(lambda x: x not in new_cols, list(
+                DEFAULT_BASE_COLS.keys()))) if diff_dir_name == "base" else [])]
+
         writer = csv.writer(f, strict=True)
         writer.writerow(
-            [*new_cols, "site_location", *(list(filter(lambda x: x not in new_cols, list(DEFAULT_BASE_COLS.keys()))) if diff_dir_name == "base" else [])])
+            headers)
 
         rows = [list(f.values()) for f in data]
         writer.writerows(rows)
@@ -186,11 +200,17 @@ def get_file_mapping(dir_name):
             dir_name = "knotweed_survey_knotweed_stand_details_stand_photos"
         elif dir_name == "base":
             dir_name = "base_re_written"
+    if PARENT_DIR == "JKMR_SV":
+        if dir_name in "service_visit_records":
+            dir_name = "site_visits"
 
     return dir_name
 
 
 # Main
+
+if (TRANSFORM_TYPE not in ["survey", "site_visits"]):
+    raise Exception("Invalid transform type")
 
 clear_and_create_dir(f"{BASE_PARENT_DIR}\\new_records")
 

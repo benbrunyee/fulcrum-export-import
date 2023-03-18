@@ -165,6 +165,56 @@
       }
     },
     {
+      "name": "Find Differences (JKMR - SV)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/find_differences.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "JKMR_SV",
+        "--base_dir",
+        "base_sv",
+        "--base_prefix",
+        "bb_site_visit_records_do_not_use",
+        "--target_dir",
+        "japanese_knotweed_management_record",
+        "--target_prefix",
+        "japanese_knotweed_management_record",
+        "--skip_prompt_matching"
+      ],
+      "presentation": {
+        "group": "find_differences",
+        "order": 2
+      }
+    },
+    {
+      "name": "Find Differences (SV - SV)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/find_differences.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "SV_SV",
+        "--base_dir",
+        "base_sv",
+        "--base_prefix",
+        "bb_site_visit_records_do_not_use",
+        "--target_dir",
+        "japanese_knotweed_management_record",
+        "--target_prefix",
+        "japanese_knotweed_management_record",
+        "--skip_prompt_matching"
+      ],
+      "presentation": {
+        "group": "find_differences",
+        "order": 2
+      }
+    },
+    {
       "name": "Transform (KSMP)",
       "type": "python",
       "request": "launch",
@@ -217,6 +267,58 @@
       }
     },
     {
+      "name": "Transform (JKMR - SV)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/transform.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "JKMR_SV",
+        "--target_dir",
+        "japanese_knotweed_management_record",
+        "--target_prefix",
+        "japanese_knotweed_management_record",
+        "--site_location_file",
+        "bb_site_location_import\\bb_site_location_import.csv",
+        "--client_name_col",
+        "client_names",
+        "--acc_ref_col",
+        "job_id"
+      ],
+      "presentation": {
+        "group": "transform",
+        "order": 3
+      }
+    },
+    {
+      "name": "Transform (SV - SV)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/transform.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "SV_SV",
+        "--target_dir",
+        "",
+        "--target_prefix",
+        "",
+        "--site_location_file",
+        "bb_site_location_import\\bb_site_location_import.csv",
+        "--client_name_col",
+        "client_names",
+        "--acc_ref_col",
+        "job_id"
+      ],
+      "presentation": {
+        "group": "transform",
+        "order": 4
+      }
+    },
+    {
       "name": "Import (JKMR)",
       "type": "python",
       "request": "launch",
@@ -231,7 +333,47 @@
       ],
       "presentation": {
         "group": "import",
-        "order": 9
+        "order": 1
+      }
+    },
+    {
+      "name": "Get New Survey IDs (JKMR)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/get_survey_ids.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--csv_file",
+        "japanese_knotweed_management_record\\japanese_knotweed_management_record.csv",
+        "--form_name",
+        "JKMR (IMPORT)",
+        "--job_id_key",
+        "c4ee"
+      ],
+      "presentation": {
+        "group": "survey_ids",
+        "order": 1
+      }
+    },
+    {
+      "name": "Get New Survey IDs (SV)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/get_survey_ids.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--csv_file",
+        "",
+        "--form_name",
+        "JKMR (IMPORT)",
+        "--job_id_key",
+        "c4ee"
+      ],
+      "presentation": {
+        "group": "survey_ids",
+        "order": 1
       }
     }
   ]

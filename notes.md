@@ -162,9 +162,13 @@ shouldn't the "proximity_to_other_property_buildings" field in new app should be
 - Photo & Video captions need mapping manually
 
 - "Can the survey proceed?" not populated
+  - Determine source fields
 - "Site-Specific Risk Assessment" not populated
+  - Determine source fields
+
 - Calculation fields don't get populated until you click edit and then re-save
 - Client info will be populated once a re-link has occured (JKMR records)
 - Stand details may require editing and saving for fields to be populated (JKMR records)
 
 - "HERBICIDE APPLICATION & MONITORING RECORDS", "OTHER TREATMENTS INC EXCAVATION", "SITE MONITORING OBSERVATIONS AND RECOMMENDATIONS" not currently included in import
+  - Map to "SITE VISIT RECORDS"
