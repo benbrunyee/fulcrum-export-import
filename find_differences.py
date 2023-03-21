@@ -233,18 +233,23 @@ def transform_site_visits():
     fields_to_fill = {
         "technicians_names": [
             "surveyortechnician_names",
-            "technician_details_qualifications",
+            "technician_details_qualifications"
         ],
         "technicians_names_other": [
             "surveyortechnician_names_other",
-            "technician_details_qualifications_other",
+            "technician_details_qualifications_other"
         ],
         "time": [
             "treatment_start_time"
+        ],
+        "date": [
+            "treatment_date",
+            "information_date"
         ]
     }
 
     # This is for actually filling the data as the key lookup is more efficient
+    # Every child of each parent key is the now the key where the value of this key is the parent key
     inverted_mapping = {vv: k for k, v in fields_to_fill.items() for vv in v}
 
     visit_files = ["herbicide_application_monitoring_records",

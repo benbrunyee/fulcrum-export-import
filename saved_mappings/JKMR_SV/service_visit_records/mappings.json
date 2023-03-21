@@ -1,0 +1,8 @@
+{
+  "treatment_types": "visit_type_japanese_knotweed_other",
+  "technician_details_qualifications": "personnel_details_qualifications",
+  "technician_details_qualifications_other": "personnel_details_qualifications_other",
+  "treatment_date": "visit_date",
+  "time": "visit_time",
+  "specific_notes_for_the_next_visit": "notes"
+}

@@ -26,21 +26,20 @@ FULCRUM_API_KEY = os.getenv('FULCRUM_API_KEY')
 
 FULCRUM = Fulcrum(FULCRUM_API_KEY)
 
-target_form = None
-target_form_id = None
-
+READ_REPEATABLES = {}
 
 # Util
 
-def save_first_record():
+
+def save_first_record(form_id):
     records = FULCRUM.records.search(url_params={
-        'form_id': target_form_id})['records']
+        'form_id': form_id})['records']
 
     with open("record.json", "w") as f:
         json.dump(records[0], f, indent=2)
 
 
-def save_form():
+def save_form(target_form):
     with open("form.json", "w") as f:
         json.dump(target_form, f, indent=2)
 
@@ -62,8 +61,55 @@ def get_csv_files(dir):
 def upload_records(records):
     for record in records:
         res = FULCRUM.records.create(record)
-        print(res)
         print(res['record']['id'] + ' created.')
+
+
+def read_repeatable_data(element):
+    global READ_REPEATABLES
+
+    data_name = element["data_name"]
+
+    # If the file named "{data_name}.csv" does not exist then return an empty list
+    if not os.path.exists(os.path.join(SOURCE_DIR, data_name + ".csv")):
+        return []
+
+    # We do this so we don't read the CSV file multiple times
+    rows = []
+    if data_name not in READ_REPEATABLES:
+        rows = read_csv(os.path.join(SOURCE_DIR, data_name + ".csv"))
+        READ_REPEATABLES[data_name] = rows
+    else:
+        rows = READ_REPEATABLES[data_name]
+
+    flattened_elements = list(flatten(element["elements"]))
+
+    # TODO: Filter rows based on the fulcrum_parent_id column
+
+    return create_repeatable_objects(flattened_elements, rows)
+
+
+def handle_text_field(value, element):
+    if not value:
+        return value
+
+    if "format" not in element:
+        return value
+
+    if element["format"] == "decimal":
+        # We don't actually convert since the API will do that for us
+        try:
+            float(value)
+        except Exception:
+            print("Could not convert value to float: " + value)
+            return None
+    elif element["format"] == "integer":
+        try:
+            int(value)
+        except Exception:
+            print("Could not convert value to int: " + str(value))
+            return None
+
+    return value
 
 
 def create_value_structure(element, row):
@@ -76,8 +122,7 @@ def create_value_structure(element, row):
                         "_caption"] if data_name + "_caption" in row else None
 
     skip_types = [
-        "Section",
-        "Repeatable",
+        "Section"
     ]
 
     if el_type in skip_types:
@@ -91,6 +136,8 @@ def create_value_structure(element, row):
         "PhotoField": [{"photo_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "PhotoField" else None,
         "AudioField": [{"audio_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "AudioField" else None,
         "VideoField": [{"video_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "VideoField" else None,
+        "Repeatable": read_repeatable_data(element) if el_type == "Repeatable" else None,
+        "TextField": handle_text_field(value, element) if el_type == "TextField" else None,
         # TODO: Handle if we have any of these types
         "SignatureField": {"timestamp": "", "signature_id": ""} if el_type == "SignatureField" else None,
     }
@@ -103,37 +150,56 @@ def create_value_structure(element, row):
 
 def flatten(l):
     for el in l:
-        if el["type"] == "Section" and "elements" in el:
+        if (el["type"] == "Section" or el["type"] == "Repeatable") and "elements" in el:
             yield el
             yield from flatten(el["elements"])
         else:
             yield el
 
 
-def create_base_record():
+def create_base_record(form_id, row):
     return {
         "record": {
-            "form_id": target_form_id,
-            "latitude": 0,
-            "longitude": 0,
+            "form_id": form_id,
+            "latitude": float(row["latitude"]),
+            "longitude": float(row["longitude"]),
             "form_values": {}
         }
     }
 
 
-def create_records(elements, filepath):
-    csv_content = read_csv(os.path.join(SOURCE_DIR, filepath))
+def create_repeatable_objects(elements, rows):
+    repeatables_objects = []
 
-    all_records = []
-    new_record = create_base_record()
+    for row in rows:
+        new_obj = {
+            "latitude": float(row["latitude"]),
+            "longitude": float(row["longitude"]),
+            "form_values": {}
+        }
 
-    for row in csv_content:
         for element in elements:
-            data_name = element["data_name"]
             key = element["key"]
 
-            value = row[data_name
-                        ] if data_name in row else None
+            value_obj = create_value_structure(
+                element, row)
+
+            if value_obj is not None:
+                new_obj["form_values"][key] = value_obj
+
+        repeatables_objects.append(new_obj)
+
+    return repeatables_objects
+
+
+def create_records(form_id, elements, rows):
+    all_records = []
+
+    for row in rows:
+        new_record = create_base_record(form_id, row)
+
+        for element in elements:
+            key = element["key"]
 
             value_obj = create_value_structure(
                 element, row)
@@ -161,15 +227,11 @@ def create_records(elements, filepath):
             del new_record["record"]["form_values"][key]
 
         all_records.append(new_record)
-        new_record = create_base_record()
 
     return all_records
 
 
 def main():
-    global target_form
-    global target_form_id
-
     forms = FULCRUM.forms.search(FORM_NAME)
 
     for form in forms["forms"]:
@@ -181,7 +243,7 @@ def main():
         print("Form not found.")
         exit()
 
-    target_form_id = target_form["id"]
+    form_id = target_form["id"]
 
     # Process:
     # 1. We transform the records into a list of data names instead of IDs
@@ -191,11 +253,10 @@ def main():
     # 4. Create an object ({"{data_name}": obj }) for each value in the form, this object will depend on the target_form["elements"][i] properties
     # 5. With each object, we transform the data_name into a key using the mapping object
 
-    complete_records = []
-
     flattened_elements = list(flatten(target_form["elements"]))
+    # repeatables = get_repeatables(target_form["elements"])
 
-    csv_files = get_csv_files(SOURCE_DIR)
+    csv_base = os.path.join(SOURCE_DIR, "base.csv")
 
     data_name_key_mapping = {k["data_name"]: k["key"]
                              for k in flattened_elements}
@@ -206,20 +267,17 @@ def main():
             print("Duplicate key found: " + value)
             exit()
 
-    for csv_file in csv_files:
-        isBase = csv_file == "base.csv"
-        records = create_records(flattened_elements, csv_file)
-
-        if isBase:
-            complete_records.append(records)
-            break
+    rows = read_csv(csv_base)
+    records = create_records(form_id, flattened_elements, rows)
 
     with open("all_records.json", "w") as f:
-        json.dump(complete_records, f, indent=2)
+        json.dump(records, f, indent=2)
 
     # save_first_record()
     # save_form()
-    upload_records(complete_records[0])
+    # print(json.dumps(records, indent=2))
+
+    upload_records(records)
 
 
 if __name__ == '__main__':

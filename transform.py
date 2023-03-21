@@ -22,6 +22,9 @@ parser.add_argument("--acc_ref_col", type=str,
                     help="Account reference column", required=True)
 parser.add_argument("--transform_type", type=str,
                     help="Transform type", required=True)
+parser.add_argument("--survey_dir", type=str, help="Survey directory")
+parser.add_argument("--survey_dir_prefix", type=str,
+                    help="Survey directory prefix")
 
 args = parser.parse_args()
 
@@ -33,6 +36,9 @@ BASE_PARENT_DIR = f"new_files\\{PARENT_DIR}"
 
 TARGET_DIR = args.target_dir
 TARGET_PREFIX = args.target_prefix
+
+SURVEY_DIR = args.survey_dir
+SURVEY_DIR_PREFIX = args.survey_dir_prefix
 
 CLIENT_NAME_COL = args.client_name_col
 ACC_REF_COL = args.acc_ref_col
@@ -75,6 +81,10 @@ DEFAULT_BASE_COLS = {
     "document_version": lambda row: "1.0",
 }
 
+DEFAULT_SV_SV_COLS = {
+    "visit_category": lambda row: "Japanese Knotweed Management Record",
+}
+
 
 # Functions
 
@@ -108,6 +118,7 @@ def clear_and_create_dir(dir):
 
 def transform(diff_dir_name, target_csv_name):
     is_survey_transform = TRANSFORM_TYPE == "survey"
+    is_site_visits_transform = TRANSFORM_TYPE == "site_visits"
 
     diff = read_csv(
         f"{BASE_PARENT_DIR}\\differences\\{diff_dir_name}\\differences.csv")
@@ -132,6 +143,15 @@ def transform(diff_dir_name, target_csv_name):
         # print(f"Replacing {new_cols[i]} with {val}")
         new_cols[i] = val
 
+    if is_site_visits_transform:
+        # Find the survey ID for the site visit
+        # Match on the Job ID and the site address
+        for row in data:
+            # Set defaults
+            if diff_dir_name == "service_visit_records":
+                for col, func in DEFAULT_SV_SV_COLS.items():
+                    row[col] = func(row)
+
     if is_survey_transform:
         site_location_csv = read_csv(SITE_LOCATION_FILE)
 
@@ -139,8 +159,8 @@ def transform(diff_dir_name, target_csv_name):
                                "site_address_sub_thoroughfare", "site_address_locality", "site_address_admin_area", "site_address_country"]
 
         # Match on site full address, client name and job id write this to the end file for the "site_location" link
-        if diff_dir_name == "base":
-            for i, row in enumerate(data):
+        for row in data:
+            if diff_dir_name == "base":
                 found = False
 
                 for site_location in site_location_csv:
@@ -154,32 +174,31 @@ def transform(diff_dir_name, target_csv_name):
                             match = True
 
                     if (match and row[CLIENT_NAME_COL].strip() == site_location["client_name"] and row[ACC_REF_COL] == site_location["job_id"]):
-                        data[i]["site_location"] = site_location["fulcrum_id"]
+                        row["site_location"] = site_location["fulcrum_id"]
                         found = True
                         break
 
                 if (not found):
                     raise Exception(
-                        f"Could not find site location: {data[i]['fulcrum_id']}")
+                        f"Could not find site location: {row['fulcrum_id']}")
 
-        # Set every row "record_type" column to "Management Plan"
-        for i, row in enumerate(data):
-            if diff_dir_name == "base":
-                for (col, func) in DEFAULT_BASE_COLS.items():
-                    data[i][col] = func(row)
+                # Set default columns
+                for col, func in DEFAULT_BASE_COLS.items():
+                    row[col] = func(row)
 
             for k, v in row.items():
                 if (diff_dir_name in TRANSFORMATIONS[PARENT_DIR] and k in TRANSFORMATIONS[PARENT_DIR][diff_dir_name] and v in TRANSFORMATIONS[PARENT_DIR][diff_dir_name][k]):
-                    data[i][k] = TRANSFORMATIONS[PARENT_DIR][diff_dir_name][k][v]
+                    row[k] = TRANSFORMATIONS[PARENT_DIR][diff_dir_name][k][v]
 
     with open(f"{BASE_PARENT_DIR}\\new_records\\{diff_dir_name}.csv", "w", newline="") as f:
         headers = []
 
         if is_survey_transform:
-            headers = [*new_cols, "site_location", *(list(filter(lambda x: x not in new_cols, list(
-                DEFAULT_BASE_COLS.keys()))) if diff_dir_name == "base" else [])]
+            headers = [*new_cols, "site_location", *(list(filter(lambda x: x not in new_cols,
+                                                                 DEFAULT_BASE_COLS.keys())) if diff_dir_name == "base" else [])]
         else:
-            headers = new_cols
+            headers = [*new_cols, *(list(filter(lambda x: x not in new_cols,
+                                                DEFAULT_SV_SV_COLS.keys())) if diff_dir_name == "service_visit_records" else [])]
 
         writer = csv.writer(f, strict=True)
         writer.writerow(
@@ -212,6 +231,10 @@ def get_file_mapping(dir_name):
 
 if (TRANSFORM_TYPE not in ["survey", "site_visits"]):
     raise Exception("Invalid transform type")
+
+if TRANSFORM_TYPE == "site_visits" and not (SURVEY_DIR and SURVEY_DIR_PREFIX):
+    raise Exception(
+        "Missing survey export params, please set --survey_dir and --survey_dir_prefix")
 
 clear_and_create_dir(f"{BASE_PARENT_DIR}\\new_records")
 
