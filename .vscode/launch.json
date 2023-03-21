@@ -175,7 +175,7 @@
         "--parent_dir",
         "JKMR_SV",
         "--base_dir",
-        "base_sv",
+        "bb_site_visit_records_do_not_use",
         "--base_prefix",
         "bb_site_visit_records_do_not_use",
         "--target_dir",
@@ -233,7 +233,9 @@
         "--client_name_col",
         "client_name",
         "--acc_ref_col",
-        "account_reference"
+        "account_reference",
+        "--transform_type",
+        "survey"
       ],
       "presentation": {
         "group": "transform",
@@ -259,7 +261,9 @@
         "--client_name_col",
         "client_names",
         "--acc_ref_col",
-        "pba_reference"
+        "pba_reference",
+        "--transform_type",
+        "survey"
       ],
       "presentation": {
         "group": "transform",
@@ -285,7 +289,9 @@
         "--client_name_col",
         "client_names",
         "--acc_ref_col",
-        "job_id"
+        "job_id",
+        "--transform_type",
+        "site_visits"
       ],
       "presentation": {
         "group": "transform",
@@ -311,7 +317,9 @@
         "--client_name_col",
         "client_names",
         "--acc_ref_col",
-        "job_id"
+        "job_id",
+        "--transform_type",
+        "site_visits"
       ],
       "presentation": {
         "group": "transform",

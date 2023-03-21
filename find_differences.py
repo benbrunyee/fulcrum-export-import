@@ -122,7 +122,7 @@ def get_base_file(postfix=None):
         elif postfix == "knotweed_survey_knotweed_stand_details_stand_photos":
             postfix = "knotweed_stand_details_stand_photos"
     if PARENT_DIR == "JKMR_SV":
-        if postfix in ["herbicide_application_monitoring_records"]:
+        if postfix == "site_visits_re_written":
             postfix = "service_visit_records"
 
     return postfix, os.path.join(BASE_DIR, f"{BASE_PREFIX}{('_' + postfix) if postfix else ''}.csv")
@@ -229,8 +229,27 @@ def transform_knotweed_survey_stand_details_jkmr():
 def transform_site_visits():
     new_csv = []
 
+    # This is for just visualising the data
+    fields_to_fill = {
+        "technicians_names": [
+            "surveyortechnician_names",
+            "technician_details_qualifications",
+        ],
+        "technicians_names_other": [
+            "surveyortechnician_names_other",
+            "technician_details_qualifications_other",
+        ],
+        "time": [
+            "treatment_start_time"
+        ]
+    }
+
+    # This is for actually filling the data as the key lookup is more efficient
+    inverted_mapping = {vv: k for k, v in fields_to_fill.items() for vv in v}
+
     visit_files = ["herbicide_application_monitoring_records",
-                   "other_treatments_inc_excavation", "site_monitoring_observations_and_recommendations"]
+                   "other_treatments_inc_excavation",
+                   "site_monitoring_observations_and_recommendations"]
 
     all_headers = []
 
@@ -239,13 +258,21 @@ def transform_site_visits():
             csv_content = csv.DictReader(f)
             rows = list(csv_content)
 
+            headers = csv_content.fieldnames
+            all_headers.extend([k for k in headers if k not in all_headers])
+
+            for row in rows:
+                for header in headers:
+                    if header not in row:
+                        row[header] = ""
+
+                    if header in inverted_mapping and row[header]:
+                        row[inverted_mapping[header]] = row[header]
+
             if len(rows) == 0:
                 continue
 
             new_csv.extend(rows)
-
-            headers = rows[0].keys()
-            all_headers.extend([k for k in headers if k not in all_headers])
 
     with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_site_visits_re_written.csv"), "w") as f:
         writer = csv.DictWriter(f, fieldnames=all_headers)
@@ -368,15 +395,12 @@ def find_and_write_diffs(base, target, prefix):
         writer.writerows([[f] for f in unmatched])
 
 
-def get_file_name(f):
+def get_correct_file_name(f):
     if f == f"{TARGET_PREFIX}.csv":
         if PARENT_DIR == "JKMR":
             return f"{TARGET_PREFIX}_base_re_written.csv"
         else:
             return f
-    else:
-        if PARENT_DIR == "JKMR_SV" and f == f"{TARGET_PREFIX}_herbicide_application_monitoring_records.csv":
-            return f"{TARGET_PREFIX}_site_visits_re_written.csv"
 
     return f
 
@@ -397,15 +421,26 @@ if PARENT_DIR == "JKMR_SV":
 
     # Read all the files in the base & target directory
 base_files = get_files(BASE_DIR, BASE_PREFIX)
-target_files = get_files(TARGET_DIR, TARGET_PREFIX)
 
+target_files = []
+
+if PARENT_DIR != "JKMR_SV":
+    target_files = get_files(TARGET_DIR, TARGET_PREFIX)
+else:
+    # We only check the base and the re-written site visits when we are doing a site visits comparison
+    target_files = [
+        f"{TARGET_PREFIX}.csv",
+        f"{TARGET_PREFIX}_site_visits_re_written.csv"
+    ]
+
+# Loop through each target file, find the base equivalent and compare
 for f in target_files:
     # Skip these files
-    if ((PARENT_DIR == "JKMR" and (f == f"{TARGET_PREFIX}_base_re_written.csv" or f == f"{TARGET_PREFIX}_knotweed_survey.csv")) or
-            (PARENT_DIR == "JKMR_SV" and f == f"{TARGET_PREFIX}_site_visits_re_written.csv" or f in [f"{f}.csv" for f in ["other_treatments_inc_excavation", "site_monitoring_observations_and_recommendations"]])):
+    if (PARENT_DIR == "JKMR" and (f == f"{TARGET_PREFIX}_base_re_written.csv" or f == f"{TARGET_PREFIX}_knotweed_survey.csv")):
         continue
 
-    target_f = get_file_name(f)
+    # Sometimes we want to use a different file name, this functions provides those mappings
+    target_f = get_correct_file_name(f)
 
     # If the file is the prefix then this is the parent file
     if f == f"{TARGET_PREFIX}.csv":

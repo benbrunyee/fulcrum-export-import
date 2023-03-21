@@ -108,7 +108,6 @@ def clear_and_create_dir(dir):
 
 def transform(diff_dir_name, target_csv_name):
     is_survey_transform = TRANSFORM_TYPE == "survey"
-    is_site_visit_transform = TRANSFORM_TYPE == "site_visit"
 
     diff = read_csv(
         f"{BASE_PARENT_DIR}\\differences\\{diff_dir_name}\\differences.csv")
@@ -179,6 +178,8 @@ def transform(diff_dir_name, target_csv_name):
         if is_survey_transform:
             headers = [*new_cols, "site_location", *(list(filter(lambda x: x not in new_cols, list(
                 DEFAULT_BASE_COLS.keys()))) if diff_dir_name == "base" else [])]
+        else:
+            headers = new_cols
 
         writer = csv.writer(f, strict=True)
         writer.writerow(
@@ -202,7 +203,7 @@ def get_file_mapping(dir_name):
             dir_name = "base_re_written"
     if PARENT_DIR == "JKMR_SV":
         if dir_name in "service_visit_records":
-            dir_name = "site_visits"
+            dir_name = "site_visits_re_written"
 
     return dir_name
 

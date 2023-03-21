@@ -172,3 +172,12 @@ shouldn't the "proximity_to_other_property_buildings" field in new app should be
 
 - "HERBICIDE APPLICATION & MONITORING RECORDS", "OTHER TREATMENTS INC EXCAVATION", "SITE MONITORING OBSERVATIONS AND RECOMMENDATIONS" not currently included in import
   - Map to "SITE VISIT RECORDS"
+
+# Site Visit Notes
+
+## JKMR
+
+"visit_category" = "Japanese Knotweed Management Record" for all JKMR records
+"record_type_japanese_knotweed" = Repeatable name for site visit
+"visit_type_japanese_knotweed_application_monitoring" = "visit_type" unless for Site Monitoring record then set value to "Scheduled Monitoring"?
+"treatment_types" does not go with "treatment_types", it actually pairs with "visit_type_japanese_knotweed_other"
