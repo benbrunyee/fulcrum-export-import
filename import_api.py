@@ -108,7 +108,7 @@ def get_csv_files(dir):
 
 
 # Rate limited for 4000 calls per hour (actual limit is 5000/h but we want to be safe)
-@ rate_limited(4000 / 3600)
+@rate_limited(4000 / 3600)
 def upload_records(records):
     for record in records:
         id_mapping = {}
@@ -118,8 +118,14 @@ def upload_records(records):
         while retry_count < 3:
             try:
                 res = FULCRUM.records.create(record)
+
+                if "error" in res:
+                    raise Exception("Error creating record")
+
+                break
             except Exception:
-                print("Error creating record. Retrying...")
+                print("Error creating record. Retrying in 1 second...")
+                time.sleep(1)
                 retry_count += 1
 
         if not res:
@@ -204,7 +210,8 @@ def get_record_link(record_id, value, multiple=False):
     # We can find the record_id for this field by looking at the sa export,
     # matching on a row and then grabbing the fulcrum_id
 
-    if value:
+    # If there is a value or we are doing a survey import, use the value
+    if value or TYPE == "survey":
         return [{"record_id": v} for v in value.split(",")] if value else []
 
     if not SA_ROWS:
