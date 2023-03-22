@@ -2,6 +2,7 @@ import argparse
 import csv
 import json
 import os
+import time
 
 from dotenv import load_dotenv
 from fulcrum import Fulcrum
@@ -31,6 +32,27 @@ READ_REPEATABLES = {}
 # Util
 
 
+def rate_limited(max_per_second):
+    """
+    Decorator to limit the rate of function calls.
+    """
+    minimum_interval = 1.0 / float(max_per_second)
+
+    def decorate(func):
+        last_time_called = [0.0]
+
+        def rate_limited_function(*args, **kargs):
+            elapsed = time.perf_counter() - last_time_called[0]
+            left_to_wait = minimum_interval - elapsed
+            if left_to_wait > 0:
+                time.sleep(left_to_wait)
+            ret = func(*args, **kargs)
+            last_time_called[0] = time.perf_counter()
+            return ret
+        return rate_limited_function
+    return decorate
+
+
 def save_first_record(form_id):
     records = FULCRUM.records.search(url_params={
         'form_id': form_id})['records']
@@ -58,15 +80,19 @@ def get_csv_files(dir):
         os.path.join(dir, f)) and f.endswith(".csv")]
 
 
+# Rate limited for 4000 calls per hour (actual limit is 5000 but we want to be safe)
+@rate_limited(4000 / 3600)
 def upload_records(records):
     for record in records:
         res = FULCRUM.records.create(record)
         print(res['record']['id'] + ' created.')
 
 
-def read_repeatable_data(element):
+# {element} is the repeatable element
+def read_repeatable_data(parent_id, element):
     global READ_REPEATABLES
 
+    # The data_name of the repeatable element
     data_name = element["data_name"]
 
     # If the file named "{data_name}.csv" does not exist then return an empty list
@@ -84,8 +110,10 @@ def read_repeatable_data(element):
     flattened_elements = list(flatten(element["elements"]))
 
     # TODO: Filter rows based on the fulcrum_parent_id column
+    rows = list(
+        filter(lambda row: row["fulcrum_parent_id"] == parent_id, rows))
 
-    return create_repeatable_objects(flattened_elements, rows)
+    return create_repeatable_objects(flattened_elements, rows, parent_id)
 
 
 def handle_text_field(value, element):
@@ -112,7 +140,7 @@ def handle_text_field(value, element):
     return value
 
 
-def create_value_structure(element, row):
+def create_value_structure(element, row, record_id=None):
     el_type = element["type"]
     data_name = element["data_name"]
     value = row[data_name] if data_name in row else None
@@ -136,7 +164,7 @@ def create_value_structure(element, row):
         "PhotoField": [{"photo_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "PhotoField" else None,
         "AudioField": [{"audio_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "AudioField" else None,
         "VideoField": [{"video_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "VideoField" else None,
-        "Repeatable": read_repeatable_data(element) if el_type == "Repeatable" else None,
+        "Repeatable": read_repeatable_data(record_id, element) if el_type == "Repeatable" else None,
         "TextField": handle_text_field(value, element) if el_type == "TextField" else None,
         # TODO: Handle if we have any of these types
         "SignatureField": {"timestamp": "", "signature_id": ""} if el_type == "SignatureField" else None,
@@ -168,7 +196,7 @@ def create_base_record(form_id, row):
     }
 
 
-def create_repeatable_objects(elements, rows):
+def create_repeatable_objects(elements, rows, parent_id=None):
     repeatables_objects = []
 
     for row in rows:
@@ -182,7 +210,7 @@ def create_repeatable_objects(elements, rows):
             key = element["key"]
 
             value_obj = create_value_structure(
-                element, row)
+                element, row, record_id=parent_id)
 
             if value_obj is not None:
                 new_obj["form_values"][key] = value_obj
@@ -200,9 +228,10 @@ def create_records(form_id, elements, rows):
 
         for element in elements:
             key = element["key"]
+            record_id = row["fulcrum_id"]
 
             value_obj = create_value_structure(
-                element, row)
+                element, row, record_id)
 
             if value_obj is not None:
                 new_record["record"]["form_values"][key] = value_obj
