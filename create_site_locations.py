@@ -49,6 +49,26 @@ EXISTING_CLIENT_NAME_COL = "client_name"
 EXISTING_ACC_REF_COL = "job_id"
 EXISTING_SITE_ADDRESS_PREFIX = "site_address_"
 
+# This is for the JKMR app
+TRANSFORMATIONS = {
+    "account_status": {
+        "Guarantee  Period": "In guarantee period",
+        "Ongoing": "Instructed, ongoing, scheduled Treatment",
+        "Pending": "Not instructed",
+        "On hold": "Treatments stopped (no guarantee)",
+        "Completed": "Guarantee period finished",
+        "Cancelled": "Treatments stopped (no guarantee)",
+        "Ongoing (Scheduled Monitoring)": "Instructed, ongoing, scheduled monitoring"
+    },
+    "property_type": {
+        "Commercial,Retail outlet": "Commercial,Retail",
+        "Commercial,Hotel": "Commercial,Hospitality",
+        "Commercial,Development site": "Commercial,Development",
+        "Commercial,Construction site": "Commercial,Construction",
+        "Health & Social Care": "Healthcare,Other"
+    }
+}
+
 site_address_prefix = args.site_address_prefix
 site_address_postfixes = ["sub_thoroughfare", "thoroughfare", "locality",
                           "sub_admin_area", "admin_area", "postal_code", "country", "full"]
@@ -87,13 +107,19 @@ client_details = {}
 for row in record_rows:
     client_name = row[CLIENT_NAME_COL].strip()
     acc_ref = row[ACC_REF_COL]
-    property_type = row[PROPERTY_TYPE_COL]
-    account_status = row[ACCOUNT_STATUS_COL]
+    property_type_val = row[PROPERTY_TYPE_COL]
+    account_status_val = row[ACCOUNT_STATUS_COL]
+
+    if property_type_val in TRANSFORMATIONS["property_type"]:
+        property_type_val = TRANSFORMATIONS["property_type"][property_type_val]
+
+    if account_status_val in TRANSFORMATIONS["account_status"]:
+        account_status_val = TRANSFORMATIONS["account_status"][account_status_val]
 
     data = {
         "job_id": acc_ref,
-        "property_type": property_type,
-        "account_status": account_status
+        "property_type": property_type_val,
+        "account_status": account_status_val
     }
 
     # Create the site address

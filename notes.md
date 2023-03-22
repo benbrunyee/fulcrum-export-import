@@ -36,6 +36,8 @@ Add fields:
 
 - ec978219-2224-4d32-bb00-2e41326bdf9b: Both old and new values ("stand_location_visibly_impacted_areas") are populated. Old: 'front garden', New: 'front garden,front of property,side of property'
 
+- Confirm "account_status" transformation
+
 # Repeatable Transformation Notes
 
 ## Generic
@@ -164,6 +166,7 @@ shouldn't the "proximity_to_other_property_buildings" field in new app should be
 - "Can the survey proceed?" not populated
   - Determine source fields
 - "Site-Specific Risk Assessment" not populated
+
   - Determine source fields
 
 - Calculation fields don't get populated until you click edit and then re-save
