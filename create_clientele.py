@@ -102,5 +102,4 @@ with open(TARGET_FILE, 'r') as f:
 with open("new_files\\new_client_names.csv", 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(["client_name"])
-    for client in client_names:
-        writer.writerow([client])
+    writer.writerows([[client] for client in client_names])

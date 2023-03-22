@@ -350,6 +350,24 @@
         "group": "import",
         "order": 1
       }
+    },
+    {
+      "name": "Import (JKMR - SV)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/import_api.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--form_name",
+        "BB - SITE VISIT RECORDS (IMPORT)",
+        "--source_dir",
+        "new_files\\JKMR\\new_records"
+      ],
+      "presentation": {
+        "group": "import",
+        "order": 1
+      }
     }
     // {
     //   "name": "Get New Survey IDs (JKMR)",

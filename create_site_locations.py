@@ -134,6 +134,10 @@ for client in client_details:
         if row["client_name"] == client:
             client_details[client]["id"] = row[ID_COL]
 
+    if "id" not in client_details[client]:
+        print(f"Could not find ID for \"{client}\"")
+        exit()
+
 # Write the site location to a file
 with open("new_files\\new_site_locations.csv", "w", newline="") as f:
     writer = csv.writer(f)
