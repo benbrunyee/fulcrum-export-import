@@ -3,6 +3,7 @@ import csv
 import json
 import os
 import time
+from datetime import datetime
 
 from dotenv import load_dotenv
 from fulcrum import Fulcrum
@@ -28,9 +29,11 @@ FULCRUM_API_KEY = os.getenv('FULCRUM_API_KEY')
 FULCRUM = Fulcrum(FULCRUM_API_KEY)
 
 READ_REPEATABLES = {}
+PROJECT_IDS = {}
+USER_IDS = {}
+
 
 # Util
-
 
 def rate_limited(max_per_second):
     """
@@ -66,7 +69,17 @@ def save_form(target_form):
         json.dump(target_form, f, indent=2)
 
 
+def convert_to_epoch(string):
+    date_format = "%Y-%m-%d %H:%M:%S %Z"
+    date_obj = datetime.strptime(string, date_format)
+
+    # Convert the datetime object to seconds since the epoch
+    seconds_since_epoch = date_obj.timestamp()
+
+    return seconds_since_epoch
+
 # Main
+
 
 def read_csv(file_path):
     """Read a csv file and return a list of rows"""
@@ -80,7 +93,7 @@ def get_csv_files(dir):
         os.path.join(dir, f)) and f.endswith(".csv")]
 
 
-# Rate limited for 4000 calls per hour (actual limit is 5000 but we want to be safe)
+# Rate limited for 4000 calls per hour (actual limit is 5000/h but we want to be safe)
 @rate_limited(4000 / 3600)
 def upload_records(records):
     for record in records:
@@ -140,6 +153,11 @@ def handle_text_field(value, element):
     return value
 
 
+def save_records(records):
+    with open("all_records.json", "w") as f:
+        json.dump(records, f, indent=2)
+
+
 def create_value_structure(element, row, record_id=None):
     el_type = element["type"]
     data_name = element["data_name"]
@@ -159,7 +177,7 @@ def create_value_structure(element, row, record_id=None):
     object_types = {
         "ClassificationField": {"other_values": other_value.split(",") if other_value else [], "choice_values": value.split(",") if value else []} if el_type == "ClassificationField" else None,
         "ChoiceField": {"other_values": other_value.split(",") if other_value else [], "choice_values": value.split(",") if value else []} if el_type == "ChoiceField" else None,
-        "RecordLinkField": [{"record_id": v} for v in (value.split(",") if value else [None])] if el_type == "RecordLinkField" else None,
+        "RecordLinkField": [{"record_id": v} for v in value.split(",")] if value else [] if el_type == "RecordLinkField" else None,
         "AddressField": {postfix: row[data_name + "_" + postfix] for postfix in ["sub_thoroughfare", "thoroughfare", "suite", "locality", "sub_admin_area", "admin_area", "postal_code", "country"]} if el_type == "AddressField" else None,
         "PhotoField": [{"photo_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "PhotoField" else None,
         "AudioField": [{"audio_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "AudioField" else None,
@@ -185,12 +203,59 @@ def flatten(l):
             yield el
 
 
-def create_base_record(form_id, row):
+def get_project_id(project_name):
+    global PROJECT_IDS
+
+    if not project_name:
+        return None
+
+    if project_name not in PROJECT_IDS:
+        res = FULCRUM.projects.search(project_name)
+
+        for project in res["projects"]:
+            if project["name"] == project_name:
+                PROJECT_IDS[project["name"]] = project["id"]
+                break
+
+        if project_name not in PROJECT_IDS:
+            print("Could not find project with name: " + project_name)
+            return None
+
+    return PROJECT_IDS[project_name]
+
+
+def get_user_id(email):
+    global USER_IDS
+
+    if not email:
+        return None
+
+    if email not in USER_IDS:
+        res = FULCRUM.memberships.search()
+
+        for membership in res["memberships"]:
+            if membership["email"] == email:
+                USER_IDS[email] = membership["user_id"]
+                break
+
+        if email not in USER_IDS:
+            print("Could not find user with email: " + email)
+            return None
+
+    return USER_IDS[email]
+
+
+def create_base_record(form_id, row, base_obj={}):
     return {
         "record": {
+            **base_obj,
             "form_id": form_id,
             "latitude": float(row["latitude"]),
             "longitude": float(row["longitude"]),
+            "project_id": get_project_id(row["project"]),
+            "assigned_to_id": get_user_id(row["assigned_to"]),
+            "client_created_at": convert_to_epoch(row["system_created_at"]),
+            "client_updated_at": convert_to_epoch(row["system_updated_at"]),
             "form_values": {}
         }
     }
@@ -220,11 +285,11 @@ def create_repeatable_objects(elements, rows, parent_id=None):
     return repeatables_objects
 
 
-def create_records(form_id, elements, rows):
+def create_records(form_id, elements, rows, base_obj={}):
     all_records = []
 
     for row in rows:
-        new_record = create_base_record(form_id, row)
+        new_record = create_base_record(form_id, row, base_obj)
 
         for element in elements:
             key = element["key"]
@@ -261,16 +326,18 @@ def create_records(form_id, elements, rows):
 
 
 def main():
-    forms = FULCRUM.forms.search(FORM_NAME)
+    target_form = None
+
+    forms = FULCRUM.forms.search()
 
     for form in forms["forms"]:
         if form["name"] == FORM_NAME:
             target_form = form
             break
 
-    if target_form is None:
-        print("Form not found.")
-        exit()
+    if not target_form:
+        print("Form not found")
+        return
 
     form_id = target_form["id"]
 
@@ -299,10 +366,8 @@ def main():
     rows = read_csv(csv_base)
     records = create_records(form_id, flattened_elements, rows)
 
-    with open("all_records.json", "w") as f:
-        json.dump(records, f, indent=2)
-
-    # save_first_record()
+    # save_records(records)
+    # save_first_record(form_id)
     # save_form()
     # print(json.dumps(records, indent=2))
 

@@ -59,6 +59,16 @@ TRANSFORMATIONS = {
                 "Within an adjacent property only": "One adjacent property only",
                 "Within more than one adjacent property": "More than one other property only",
             }
+        },
+        "base": {
+            "jk_package_type": {
+                "kmp": "Contracted (Knotweed Management Plan)",
+                "payg": "Non-contract (Pay As You Go)",
+                "jk_identification_survey_&_report": "Knotweed identification survey and findings report",
+                "jk_survey_&_findings_report": "JK Survey & Findings Report",
+                "jk_mcp": "JK MCP",
+                "jk_payg": "JK PAYG"
+            }
         }
     }
 }
@@ -78,7 +88,6 @@ DEFAULT_BASE_COLS = {
     "client_type": lambda row: PROPERTY_TYPE_MAPPINGS[[k for k in PROPERTY_TYPE_MAPPINGS.keys() if re.match(k, row["property_type"])][0]] if any([re.match(k, row["property_type"]) for k in PROPERTY_TYPE_MAPPINGS.keys()]) else "",
     "plant_type": lambda row: "Japanese Knotweed",
     "job_type": lambda row: "Treatment",
-    "document_version": lambda row: "1.0",
 }
 
 DEFAULT_SV_SV_COLS = {
