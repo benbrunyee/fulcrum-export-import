@@ -17,10 +17,6 @@ parser.add_argument(
 parser.add_argument(
     '--source_dir', "-s", help='The directory containing the CSV files to import.')
 parser.add_argument(
-    "--sa_dir", help="The directory containing the CSV files of th SA export.", type=str)
-parser.add_argument(
-    "--sa_prefix", help="The prefix of the SA export files.", type=str)
-parser.add_argument(
     "--type", help="The type of import to perform.", type=str, required=True)
 
 args = parser.parse_args()
@@ -33,12 +29,6 @@ SOURCE_DIR = args.source_dir
 FULCRUM_API_KEY = os.getenv('FULCRUM_API_KEY')
 
 TYPE = args.type
-
-SA_DIR = args.sa_dir
-SA_PREFIX = args.sa_prefix
-
-# We store the rows of the SA export in memory so we don't have to read the file multiple times
-SA_ROWS = []
 
 FULCRUM = Fulcrum(FULCRUM_API_KEY)
 
@@ -203,8 +193,7 @@ def save_records(records):
         json.dump(records, f, indent=2)
 
 
-def get_record_link(record_id, value, multiple=False):
-    global SA_ROWS
+def get_record_link(record_id, value):
 
     # If there is no value then this is likely to be a new field that should be populated
     # We can find the record_id for this field by looking at the sa export,
@@ -214,26 +203,15 @@ def get_record_link(record_id, value, multiple=False):
     if value or TYPE == "survey":
         return [{"record_id": v} for v in value.split(",")] if value else []
 
-    if not SA_ROWS:
-        SA_ROWS = read_csv(os.path.join(SA_DIR, SA_PREFIX + ".csv"))
-
     # We match based on the mapping file that was created during the SA import process (using this script)
-    matches = list(filter(
-        lambda row: row["fulcrum_id"] == record_id, SA_ROWS))
+    with open("import_id_mapping.json", "r") as f:
+        mapping = json.load(f)
 
-    if len(matches) == 0:
-        print("Could not find a match for " + record_id)
-        exit(1)
+        if record_id not in mapping:
+            print("Could not find a match for " + record_id)
+            exit(1)
 
-    if len(matches) > 1:
-        if multiple:
-            return [{"record_id": m["fulcrum_id"]} for m in matches if m["fulcrum_id"]]
-
-        print("Found multiple matches for " + record_id)
-        exit(1)
-
-    # Only return one
-    return [{"record_id": matches[0]["fulcrum_id"]}] if matches[0]["fulcrum_id"] else []
+        return [{"record_id": mapping[record_id]}]
 
 
 def create_value_structure(element, row, record_id=None):

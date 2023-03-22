@@ -150,7 +150,6 @@ def transform_knotweed_survey_repeatable_jkmr():
                 child_records_mapping[r["fulcrum_parent_id"]].append(r)
 
     # Get all the data for each parent record
-
     with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}.csv")) as f:
         reader = csv.DictReader(f)
         rows = list(reader)
@@ -171,6 +170,8 @@ def transform_knotweed_survey_repeatable_jkmr():
         for child_record in child_records:
             child_keys = ["child_" + k for k in child_record.keys()]
             new_row = {"fulcrum_id": child_record["fulcrum_id"],
+                       # This is used for the import api script not the Fulcrum import interface
+                       "fulcrum_parent_id_not_used": child_record["fulcrum_parent_id"],
                        **{k: parent_record_data[parent_id][k] for k in parent_record_data[parent_id].keys() if k != "fulcrum_id"},
                        **{k: child_record[re.sub(r"^child_", "", k)] for k in child_keys if k != "child_fulcrum_id"}}
             new_rows.append(new_row)
