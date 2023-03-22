@@ -37,6 +37,7 @@ Add fields:
 - ec978219-2224-4d32-bb00-2e41326bdf9b: Both old and new values ("stand_location_visibly_impacted_areas") are populated. Old: 'front garden', New: 'front garden,front of property,side of property'
 
 - Confirm "account_status" transformation
+- Account status in both site location and survey ap
 
 # Repeatable Transformation Notes
 

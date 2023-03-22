@@ -344,7 +344,9 @@
         "--form_name",
         "BB - SA (IMPORT)",
         "--source_dir",
-        "new_files\\JKMR\\new_records"
+        "new_files\\JKMR\\new_records",
+        "--type",
+        "survey"
       ],
       "presentation": {
         "group": "import",
@@ -362,7 +364,13 @@
         "--form_name",
         "BB - SITE VISIT RECORDS (IMPORT)",
         "--source_dir",
-        "new_files\\JKMR\\new_records"
+        "new_files\\JKMR_SV\\new_records",
+        "--sa_dir",
+        "bb_sa_import",
+        "--sa_prefix",
+        "bb_sa_import",
+        "--type",
+        "site_visits"
       ],
       "presentation": {
         "group": "import",
