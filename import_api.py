@@ -112,8 +112,20 @@ def get_csv_files(dir):
 def upload_records(records):
     for record in records:
         id_mapping = {}
+        res = None
+        retry_count = 0
 
-        res = FULCRUM.records.create(record)
+        while retry_count < 3:
+            try:
+                res = FULCRUM.records.create(record)
+            except Exception:
+                print("Error creating record. Retrying...")
+                retry_count += 1
+
+        if not res:
+            print(f"Failed to create record {record['record']['fulcrum_id']}")
+            continue
+
         print(res['record']['id'] + ' created.')
 
         if TYPE == "survey":
