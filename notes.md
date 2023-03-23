@@ -37,8 +37,11 @@ Add fields:
 - ec978219-2224-4d32-bb00-2e41326bdf9b: Both old and new values ("stand_location_visibly_impacted_areas") are populated. Old: 'front garden', New: 'front garden,front of property,side of property'
 
 - Confirm "account_status" transformation
-- Account status in both site location and survey app
+- Account status is in both site location and survey apps
+  - Remove from site location
 - Knotweed surveys have been split into their own records but the site visits link to a record, what conditions are used to determine what survey record should be used for the link?
+  - Note of any records that have multiple surveys
+  - Link to the most recent survey
 
 # Repeatable Transformation Notes
 
@@ -182,7 +185,9 @@ shouldn't the "proximity_to_other_property_buildings" field in new app should be
 
 ## JKMR
 
-"visit_category" = "Japanese Knotweed Management Record" for all JKMR records
-"record_type_japanese_knotweed" = Repeatable name for site visit
-"visit_type_japanese_knotweed_application_monitoring" = "visit_type" unless for Site Monitoring record then set value to "Scheduled Monitoring"?
-"treatment_types" does not go with "treatment_types", it actually pairs with "visit_type_japanese_knotweed_other"
+"visit_category" = "Japanese Knotweed Management Record" for all JKMR records /
+"record_type_japanese_knotweed" = Repeatable name for site visit /
+"visit_type_japanese_knotweed_application_monitoring" = "visit_type" unless for Site Monitoring record then set value to "Scheduled Monitoring"? /
+"treatment_types" does not go with "treatment_types", it actually pairs with "visit_type_japanese_knotweed_other" /
+
+- TODO: Populate the data from the "Survey" app via the link, check Sheets

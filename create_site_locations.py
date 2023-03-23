@@ -56,8 +56,6 @@ TRANSFORMATIONS = {
         "Ongoing": "Instructed, ongoing, scheduled Treatment",
         "Pending": "Not instructed",
         "On hold": "Treatments stopped (no guarantee)",
-        "Completed": "Guarantee period finished",
-        "Cancelled": "Treatments stopped (no guarantee)",
         "Ongoing (Scheduled Monitoring)": "Instructed, ongoing, scheduled monitoring"
     },
     "property_type": {
