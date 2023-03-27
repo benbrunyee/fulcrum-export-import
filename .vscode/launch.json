@@ -373,45 +373,5 @@
         "order": 1
       }
     }
-    // {
-    //   "name": "Get New Survey IDs (JKMR)",
-    //   "type": "python",
-    //   "request": "launch",
-    //   "program": "${workspaceFolder}/get_survey_ids.py",
-    //   "console": "integratedTerminal",
-    //   "justMyCode": true,
-    //   "args": [
-    //     "--csv_file",
-    //     "japanese_knotweed_management_record\\japanese_knotweed_management_record.csv",
-    //     "--form_name",
-    //     "JKMR (IMPORT)",
-    //     "--job_id_key",
-    //     "c4ee"
-    //   ],
-    //   "presentation": {
-    //     "group": "survey_ids",
-    //     "order": 1
-    //   }
-    // },
-    // {
-    //   "name": "Get New Survey IDs (SV)",
-    //   "type": "python",
-    //   "request": "launch",
-    //   "program": "${workspaceFolder}/get_survey_ids.py",
-    //   "console": "integratedTerminal",
-    //   "justMyCode": true,
-    //   "args": [
-    //     "--csv_file",
-    //     "",
-    //     "--form_name",
-    //     "JKMR (IMPORT)",
-    //     "--job_id_key",
-    //     "c4ee"
-    //   ],
-    //   "presentation": {
-    //     "group": "survey_ids",
-    //     "order": 1
-    //   }
-    // }
   ]
 }

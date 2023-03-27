@@ -1,8 +1,19 @@
 {
   "treatment_types": "visit_type_japanese_knotweed_other",
+  "can_the_treatment_proceed": "can_the_planned_works_proceed",
+  "date": "visit_date",
+  "does_site_to_be_treated_meet_generic_rams_criteria": "does_site_meet_raams_criteria",
+  "local_environment_risk_assessment_for_pesticides_if_appropriate_list_proximity_of_buffer_zones_water_courses_etc_": "lerap_details_if_applicable",
+  "site_specific_risk_assessment_treatments": "site_specific_risk_assessment",
   "technician_details_qualifications": "personnel_details_qualifications",
   "technician_details_qualifications_other": "personnel_details_qualifications_other",
-  "treatment_date": "visit_date",
-  "time": "visit_time",
-  "specific_notes_for_the_next_visit": "notes"
+  "time": "start_time",
+  "treatment_not_proceeding_reasons": "activity_not_proceeding_reasons",
+  "treatmentmonitoring_notes": "notes",
+  "treatmentmonitoring_photos": "photos",
+  "treatmentmonitoring_photos_caption": "photos_caption",
+  "treatmentmonitoring_photos_url": "photos_url",
+  "visit_type": "visit_type_japanese_knotweed_application_monitoring",
+  "reasons_for_treatment_not_taking_place_or_treatment_interrupted": "reasons_for_treatment_not_taking_place_or_treatment_interr",
+  "reasons_for_treatment_not_taking_place_or_treatment_interrupted_other": "reasons_for_treatment_not_taking_place_or_treatment_interr_other"
 }

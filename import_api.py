@@ -36,6 +36,8 @@ READ_REPEATABLES = {}
 PROJECT_IDS = {}
 USER_IDS = {}
 
+PARENT_TO_LATEST_SURVEY_ID = "parent_to_latest_survey.json"
+
 
 # Util
 
@@ -125,14 +127,34 @@ def upload_records(records):
         print(res['record']['id'] + ' created.')
 
         if TYPE == "survey":
-            # Update the "import_id_mapping.json" file to map the old record_id to the new record_id
-            if os.path.exists("import_id_mapping.json"):
-                with open("import_id_mapping.json", "r") as f:
+            # Update the IMPORT_MAPPING_FILE file to map the old record_id to the new record_id
+            if os.path.exists(PARENT_TO_LATEST_SURVEY_ID):
+                with open(PARENT_TO_LATEST_SURVEY_ID, "r") as f:
                     id_mapping = json.load(f)
 
-            id_mapping[record['record']['fulcrum_id']] = res['record']['id']
+            if record["record"]["fulcrum_parent_id_not_used"] not in id_mapping:
+                id_mapping[record['record']['fulcrum_parent_id_not_used']] = {
+                    'id': res['record']['id'],
+                    'date': res['record']['created_at']
+                }
+            else:
+                existing_date = id_mapping[record['record']
+                                           ['fulcrum_parent_id_not_used']]['date']
+                date_format = "%Y-%m-%dT%H:%M:%SZ"
+                existing_date_obj = datetime.strptime(
+                    existing_date, date_format)
 
-            with open("import_id_mapping.json", "w") as f:
+                new_date = res['record']['created_at']
+                new_date_obj = datetime.strptime(new_date, date_format)
+
+                # If the new record is newer than the existing record then update the mapping
+                if new_date_obj > existing_date_obj:
+                    id_mapping[record['record']['fulcrum_parent_id_not_used']] = {
+                        'id': res['record']['id'],
+                        'date': res['record']['created_at']
+                    }
+
+            with open(PARENT_TO_LATEST_SURVEY_ID, "w") as f:
                 json.dump(id_mapping, f, indent=2)
 
 
@@ -194,7 +216,6 @@ def save_records(records):
 
 
 def get_record_link(record_id, value):
-
     # If there is no value then this is likely to be a new field that should be populated
     # We can find the record_id for this field by looking at the sa export,
     # matching on a row and then grabbing the fulcrum_id
@@ -204,14 +225,14 @@ def get_record_link(record_id, value):
         return [{"record_id": v} for v in value.split(",")] if value else []
 
     # We match based on the mapping file that was created during the SA import process (using this script)
-    with open("import_id_mapping.json", "r") as f:
+    with open(PARENT_TO_LATEST_SURVEY_ID, "r") as f:
         mapping = json.load(f)
 
         if record_id not in mapping:
             print("Could not find a match for " + record_id)
-            exit(1)
+            return []
 
-        return [{"record_id": mapping[record_id]}]
+        return [{"record_id": mapping[record_id]['id']}]
 
 
 def create_value_structure(element, row, record_id=None):
@@ -327,6 +348,7 @@ def create_base_record(form_id, row, base_obj={}):
             "client_created_at": convert_to_epoch(row["system_created_at"]),
             "client_updated_at": convert_to_epoch(row["system_updated_at"]),
             "fulcrum_id": row["fulcrum_id"],
+            **({"fulcrum_parent_id_not_used": row["fulcrum_parent_id_not_used"]} if TYPE == "survey" else {}),
             "form_values": {}
         }
     }
@@ -410,6 +432,11 @@ def create_records(form_id, elements, rows, base_obj={}):
 
 
 def main():
+    if TYPE == "survey":
+        # Remove the IMPORT_MAPPING_FILE file
+        if os.path.exists(PARENT_TO_LATEST_SURVEY_ID):
+            os.remove(PARENT_TO_LATEST_SURVEY_ID)
+
     target_form = None
 
     forms = FULCRUM.forms.search()
@@ -454,6 +481,7 @@ def main():
     # save_first_record(form_id)
     # save_form()
     # print(json.dumps(records, indent=2))
+    print("Records to upload: " + str(len(records)))
 
     upload_records(records)
 
@@ -461,11 +489,6 @@ def main():
 if TYPE != "survey" and TYPE != "site_visits":
     print("Invalid type: " + TYPE)
     exit()
-
-if TYPE == "survey":
-    # Remove the "import_id_mapping.json" file
-    if os.path.exists("import_id_mapping.json"):
-        os.remove("import_id_mapping.json")
 
 if __name__ == '__main__':
     answer = input("Are you sure? (y/n): ")

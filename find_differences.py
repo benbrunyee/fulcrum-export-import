@@ -140,9 +140,6 @@ def transform_knotweed_survey_repeatable_jkmr():
         reader = csv.DictReader(f)
         rows = list(reader)
 
-        # Get all parent records
-        parent_record_ids = [r["fulcrum_parent_id"] for r in rows]
-
         for r in rows:
             if r["fulcrum_parent_id"] not in child_records_mapping.keys():
                 child_records_mapping[r["fulcrum_parent_id"]] = [r]
@@ -153,6 +150,9 @@ def transform_knotweed_survey_repeatable_jkmr():
     with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}.csv")) as f:
         reader = csv.DictReader(f)
         rows = list(reader)
+
+        # Get all parent records
+        parent_record_ids = [r["fulcrum_id"] for r in rows]
 
         # Get the data for each parent record
         for r in rows:
@@ -174,6 +174,15 @@ def transform_knotweed_survey_repeatable_jkmr():
                        "fulcrum_parent_id_not_used": child_record["fulcrum_parent_id"],
                        **{k: parent_record_data[parent_id][k] for k in parent_record_data[parent_id].keys() if k != "fulcrum_id"},
                        **{k: child_record[re.sub(r"^child_", "", k)] for k in child_keys if k != "child_fulcrum_id"}}
+            new_rows.append(new_row)
+
+    # Now add all the parent records that don't have any child records
+    for parent_id, parent_record in parent_record_data.items():
+        if parent_id not in child_records_mapping.keys():
+            new_row = {"fulcrum_id": parent_record["fulcrum_id"],
+                       # This is used for the import api script not the Fulcrum import interface
+                       "fulcrum_parent_id_not_used": parent_record["fulcrum_id"],
+                       **{k: parent_record[k] for k in parent_record.keys() if k != "fulcrum_id"}}
             new_rows.append(new_row)
 
     # Write the new data to a new csv file
@@ -232,13 +241,13 @@ def transform_site_visits():
 
     # This is for just visualising the data
     fields_to_fill = {
-        "technicians_names": [
+        "technician_details_qualifications": [
             "surveyortechnician_names",
-            "technician_details_qualifications"
+            "technicians_names"
         ],
-        "technicians_names_other": [
+        "technician_details_qualifications_other": [
             "surveyortechnician_names_other",
-            "technician_details_qualifications_other"
+            "technicians_names_other"
         ],
         "time": [
             "treatment_start_time"
@@ -246,6 +255,10 @@ def transform_site_visits():
         "date": [
             "treatment_date",
             "information_date"
+        ],
+        "does_site_to_be_treated_meet_generic_rams_criteria": [
+            "does_site_meet_raams_criteria",
+            "does_site_for_treatment_meet_generic_rams_criteria"
         ]
     }
 
@@ -253,11 +266,21 @@ def transform_site_visits():
     # Every child of each parent key is the now the key where the value of this key is the parent key
     inverted_mapping = {vv: k for k, v in fields_to_fill.items() for vv in v}
 
-    visit_files = ["herbicide_application_monitoring_records",
-                   "other_treatments_inc_excavation",
-                   "site_monitoring_observations_and_recommendations"]
+    # TODO: Uncomment when the other sections are ready in the SITE VISITS APP
+    # visit_files = ["herbicide_application_monitoring_records",
+    #                "other_treatments_inc_excavation",
+    #                "site_monitoring_observations_and_recommendations"]
+    visit_files = ["herbicide_application_monitoring_records"]
 
-    all_headers = []
+    file_to_value_mapping = {
+        "herbicide_application_monitoring_records": "Herbicide Application & Monitoring Record",
+        "other_treatments_inc_excavation": "Other Treatments Inc. Excavation",
+        "site_monitoring_observations_and_recommendations": "Site Monitoring Observations & Recommendations"
+    }
+
+    # This is a new header based on the name of the repeatable but it also matches
+    # to a new column in the new site visit app
+    all_headers = ["record_type_japanese_knotweed"]
 
     for visit_file in visit_files:
         with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_{visit_file}.csv"), "r") as f:
@@ -268,6 +291,9 @@ def transform_site_visits():
             all_headers.extend([k for k in headers if k not in all_headers])
 
             for row in rows:
+                # Assign the record type to what repeatable the record came from
+                row["record_type_japanese_knotweed"] = file_to_value_mapping[visit_file]
+
                 for header in headers:
                     if header not in row:
                         row[header] = ""
