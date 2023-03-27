@@ -332,46 +332,6 @@
         "group": "transform",
         "order": 4
       }
-    },
-    {
-      "name": "Import (JKMR)",
-      "type": "python",
-      "request": "launch",
-      "program": "${workspaceFolder}/import_api.py",
-      "console": "integratedTerminal",
-      "justMyCode": true,
-      "args": [
-        "--form_name",
-        "BB - SA (IMPORT)",
-        "--source_dir",
-        "new_files\\JKMR\\new_records",
-        "--type",
-        "survey"
-      ],
-      "presentation": {
-        "group": "import",
-        "order": 1
-      }
-    },
-    {
-      "name": "Import (JKMR - SV)",
-      "type": "python",
-      "request": "launch",
-      "program": "${workspaceFolder}/import_api.py",
-      "console": "integratedTerminal",
-      "justMyCode": true,
-      "args": [
-        "--form_name",
-        "BB - SITE VISIT RECORDS (IMPORT)",
-        "--source_dir",
-        "new_files\\JKMR_SV\\new_records",
-        "--type",
-        "site_visits"
-      ],
-      "presentation": {
-        "group": "import",
-        "order": 1
-      }
     }
   ]
 }

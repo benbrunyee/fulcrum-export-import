@@ -18,6 +18,8 @@ parser.add_argument(
     '--source_dir', "-s", help='The directory containing the CSV files to import.')
 parser.add_argument(
     "--type", help="The type of import to perform.", type=str, required=True)
+parser.add_argument(
+    "--yes", "-y", help="Skip the confirmation prompt.", action="store_true")
 
 args = parser.parse_args()
 
@@ -29,6 +31,8 @@ SOURCE_DIR = args.source_dir
 FULCRUM_API_KEY = os.getenv('FULCRUM_API_KEY')
 
 TYPE = args.type
+
+CONFIRMED = args.yes
 
 FULCRUM = Fulcrum(FULCRUM_API_KEY)
 
@@ -89,7 +93,7 @@ def convert_to_epoch(string):
 
 def read_csv(file_path):
     """Read a csv file and return a list of rows"""
-    with open(file_path, "r") as f:
+    with open(file_path, "r", encoding='utf-8') as f:
         reader = csv.DictReader(f)
         return list(reader)
 
@@ -491,9 +495,12 @@ if TYPE != "survey" and TYPE != "site_visits":
     exit()
 
 if __name__ == '__main__':
-    answer = input("Are you sure? (y/n): ")
+    answer = None
 
-    if answer == "y":
+    if not CONFIRMED:
+        answer = input("Are you sure? (y/n): ")
+
+    if CONFIRMED or answer == "y":
         main()
         print("Done.")
     else:
