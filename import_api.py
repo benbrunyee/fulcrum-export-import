@@ -124,11 +124,13 @@ def upload_records(records):
 
                 break
             except Exception:
-                print("Error creating record. Retrying in 1 second...")
+                print(
+                    f"Error creating record '{record['record']['fulcrum_id']}'. Retrying in 1 second...")
                 time.sleep(1)
                 retry_count += 1
 
-        if not res:
+        if not res or "error" in res:
+            print(res)
             print(f"Failed to create record {record['record']['fulcrum_id']}")
             continue
 
@@ -383,7 +385,7 @@ def create_base_record(form_id, row, base_obj={}):
             "client_created_at": convert_to_epoch(row["system_created_at"]),
             "client_updated_at": convert_to_epoch(row["system_updated_at"]),
             "fulcrum_id": row["fulcrum_id"],
-            **({"fulcrum_parent_id_not_used": row["fulcrum_parent_id_not_used"]} if BASE_NAME == "JKMR" else {}),
+            **({"fulcrum_parent_id_not_used": row["fulcrum_parent_id_not_used"]} if BASE_NAME == "JKMR" and TYPE == "survey" else {}),
             "form_values": {}
         }
     }

@@ -350,6 +350,25 @@
         "--type",
         "site_visits"
       ]
+    },
+    {
+      "name": "JKMR SV Import",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/import_api.py",
+      "justMyCode": true,
+      "console": "integratedTerminal",
+      "args": [
+        "--yes",
+        "--base_name",
+        "JKMR",
+        "--form_name",
+        "BB - SITE VISIT RECORDS (IMPORT)",
+        "--source_dir",
+        "new_files\\JKMR_SV\\new_records",
+        "--type",
+        "site_visits"
+      ]
     }
   ]
 }
