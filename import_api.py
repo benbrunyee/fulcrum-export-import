@@ -469,14 +469,15 @@ def create_records(form_id, elements, rows, base_obj={}):
 
 
 def main():
-    if BASE_NAME == "JKMR":
-        # Remove the IMPORT_MAPPING_FILE file
-        if os.path.exists(PARENT_TO_LATEST_SURVEY_ID):
-            os.remove(PARENT_TO_LATEST_SURVEY_ID)
     if TYPE == "survey":
         # Remove the OLD_TO_NEW_ID_MAPPING file
         if os.path.exists(OLD_TO_NEW_ID_MAPPING):
             os.remove(OLD_TO_NEW_ID_MAPPING)
+
+        if BASE_NAME == "JKMR":
+            # Remove the IMPORT_MAPPING_FILE file
+            if os.path.exists(PARENT_TO_LATEST_SURVEY_ID):
+                os.remove(PARENT_TO_LATEST_SURVEY_ID)
 
     target_form = None
 
