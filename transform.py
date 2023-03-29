@@ -136,7 +136,7 @@ def transform(diff_dir_name, target_csv_name):
     data = read_csv(f"{TARGET_DIR}\\{TARGET_PREFIX}_{target_csv_name}.csv" if target_csv_name !=
                     "base" else f"{TARGET_DIR}\\{TARGET_PREFIX}.csv")
 
-    new_cols = list(data[0].keys())
+    new_cols = list(data[0].keys() if len(data) > 0 else [])
 
     # Update columns
     for i, orig_col in enumerate(new_cols):

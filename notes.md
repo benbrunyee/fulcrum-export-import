@@ -191,3 +191,7 @@ shouldn't the "proximity_to_other_property_buildings" field in new app should be
 "treatment_types" does not go with "treatment_types", it actually pairs with "visit_type_japanese_knotweed_other" /
 
 - TODO: Populate the data from the "Survey" app via the link, check Sheets
+
+## Existing SV
+
+- A lot of survey record links are missing (the ID they are linked to do not point to any existing record meaning they have probably been deleted)

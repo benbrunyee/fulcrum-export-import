@@ -2,11 +2,34 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "KSMP Import",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "import_api.py",
+        "--base_name",
+        "KSMP",
+        "--yes",
+        "--form_name",
+        "BB - SA (IMPORT)",
+        "--source_dir",
+        "new_files\\KSMP\\new_records",
+        "--type",
+        "survey"
+      ],
+      "presentation": {
+        "reveal": "always"
+      },
+      "hide": true
+    },
+    {
       "label": "JKMR Import",
       "command": "python",
       "type": "process",
       "args": [
         "import_api.py",
+        "--base_name",
+        "JKMR",
         "--yes",
         "--form_name",
         "BB - SA (IMPORT)",
@@ -21,12 +44,35 @@
       "hide": true
     },
     {
+      "label": "SV Import",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "import_api.py",
+        "--yes",
+        "--base_name",
+        "KSMP",
+        "--form_name",
+        "BB - SITE VISIT RECORDS (IMPORT)",
+        "--source_dir",
+        "new_files\\SV\\new_records",
+        "--type",
+        "site_visits"
+      ],
+      "presentation": {
+        "reveal": "always"
+      },
+      "hide": true
+    },
+    {
       "label": "JKMR SV Import",
       "command": "python",
       "type": "process",
       "args": [
         "import_api.py",
         "--yes",
+        "--base_name",
+        "JKMR",
         "--form_name",
         "BB - SITE VISIT RECORDS (IMPORT)",
         "--source_dir",
@@ -38,6 +84,12 @@
         "reveal": "always"
       },
       "hide": true
+    },
+    {
+      "label": "Run KSMP Import",
+      "dependsOn": ["SV Import"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
     },
     {
       "label": "Run JKMR Import",

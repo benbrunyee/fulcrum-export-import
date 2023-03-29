@@ -165,7 +165,7 @@
       }
     },
     {
-      "name": "Find Differences (JKMR - SV)",
+      "name": "Find Differences (JKMR SV - SV)",
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}/find_differences.py",
@@ -181,8 +181,7 @@
         "--target_dir",
         "japanese_knotweed_management_record",
         "--target_prefix",
-        "japanese_knotweed_management_record",
-        "--skip_prompt_matching"
+        "japanese_knotweed_management_record"
       ],
       "presentation": {
         "group": "find_differences",
@@ -198,16 +197,15 @@
       "justMyCode": true,
       "args": [
         "--parent_dir",
-        "SV_SV",
+        "SV",
         "--base_dir",
-        "base_sv",
+        "bb_site_visit_records_do_not_use",
         "--base_prefix",
         "bb_site_visit_records_do_not_use",
         "--target_dir",
-        "japanese_knotweed_management_record",
+        "site_visit_records",
         "--target_prefix",
-        "japanese_knotweed_management_record",
-        "--skip_prompt_matching"
+        "site_visit_records"
       ],
       "presentation": {
         "group": "find_differences",
@@ -271,7 +269,7 @@
       }
     },
     {
-      "name": "Transform (JKMR - SV)",
+      "name": "Transform (JKMR SV - SV)",
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}/transform.py",
@@ -311,11 +309,11 @@
       "justMyCode": true,
       "args": [
         "--parent_dir",
-        "SV_SV",
+        "SV",
         "--target_dir",
-        "",
+        "site_visit_records",
         "--target_prefix",
-        "",
+        "site_visit_records",
         "--site_location_file",
         "bb_site_location_import\\bb_site_location_import.csv",
         "--client_name_col",
@@ -323,6 +321,7 @@
         "--acc_ref_col",
         "job_id",
         "--transform_type",
+        "site_visits",
         "--survey_dir",
         "bb_sa",
         "--survey_dir_prefix",
@@ -332,6 +331,25 @@
         "group": "transform",
         "order": 4
       }
+    },
+    {
+      "name": "SV Import",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/import_api.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--yes",
+        "--base_name",
+        "KSMP",
+        "--form_name",
+        "BB - SITE VISIT RECORDS (IMPORT)",
+        "--source_dir",
+        "new_files\\SV\\new_records",
+        "--type",
+        "site_visits"
+      ]
     }
   ]
 }

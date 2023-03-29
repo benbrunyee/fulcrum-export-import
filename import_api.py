@@ -20,6 +20,8 @@ parser.add_argument(
     "--type", help="The type of import to perform.", type=str, required=True)
 parser.add_argument(
     "--yes", "-y", help="Skip the confirmation prompt.", action="store_true")
+parser.add_argument("--base_name", "-p",
+                    help="The base name of the source files")
 
 args = parser.parse_args()
 
@@ -40,10 +42,12 @@ READ_REPEATABLES = {}
 PROJECT_IDS = {}
 USER_IDS = {}
 
-PARENT_TO_LATEST_SURVEY_ID = "parent_to_latest_survey.json"
-
+BASE_NAME = args.base_name
+PARENT_TO_LATEST_SURVEY_ID = f"parent_to_latest_survey{('_' + BASE_NAME) if BASE_NAME else ''}.json"
+OLD_TO_NEW_ID_MAPPING = f"old_to_new_id_mapping{('_' + BASE_NAME) if BASE_NAME else ''}.json"
 
 # Util
+
 
 def rate_limited(max_per_second):
     """
@@ -131,6 +135,17 @@ def upload_records(records):
         print(res['record']['id'] + ' created.')
 
         if TYPE == "survey":
+            # Update the OLD_TO_NEW_ID_MAPPING file to map the old record_id to the new record_id
+            if os.path.exists(OLD_TO_NEW_ID_MAPPING):
+                with open(OLD_TO_NEW_ID_MAPPING, "r") as f:
+                    id_mapping = json.load(f)
+
+            id_mapping[record['record']['fulcrum_id']] = res['record']['id']
+
+            with open(OLD_TO_NEW_ID_MAPPING, "w") as f:
+                json.dump(id_mapping, f, indent=2)
+
+        if BASE_NAME == "JKMR" and TYPE == "survey":
             # Update the IMPORT_MAPPING_FILE file to map the old record_id to the new record_id
             if os.path.exists(PARENT_TO_LATEST_SURVEY_ID):
                 with open(PARENT_TO_LATEST_SURVEY_ID, "r") as f:
@@ -225,18 +240,34 @@ def get_record_link(record_id, value):
     # matching on a row and then grabbing the fulcrum_id
 
     # If there is a value or we are doing a survey import, use the value
-    if value or TYPE == "survey":
+    if (value or BASE_NAME == "JKMR") and not (BASE_NAME == "KSMP" and TYPE == "site_visits"):
         return [{"record_id": v} for v in value.split(",")] if value else []
 
     # We match based on the mapping file that was created during the SA import process (using this script)
-    with open(PARENT_TO_LATEST_SURVEY_ID, "r") as f:
-        mapping = json.load(f)
+    if BASE_NAME == "JKMR" and TYPE == "site_visits":
+        with open(PARENT_TO_LATEST_SURVEY_ID, "r") as f:
+            mapping = json.load(f)
 
-        if record_id not in mapping:
-            print("Could not find a match for " + record_id)
-            return []
+            if record_id not in mapping:
+                print("Could not find a match for " + record_id)
+                return []
 
-        return [{"record_id": mapping[record_id]['id']}]
+            print("Found a match for " + record_id)
+
+            return [{"record_id": mapping[record_id]['id']}]
+    elif BASE_NAME == "KSMP" and TYPE == "site_visits":
+        with open(OLD_TO_NEW_ID_MAPPING, "r") as f:
+            mapping = json.load(f)
+
+            if value not in mapping:
+                print("Could not find a match for " + value)
+                return []
+
+            print("Found a match for " + value)
+
+            return [{"record_id": mapping[value]}]
+
+    return []
 
 
 def create_value_structure(element, row, record_id=None):
@@ -352,7 +383,7 @@ def create_base_record(form_id, row, base_obj={}):
             "client_created_at": convert_to_epoch(row["system_created_at"]),
             "client_updated_at": convert_to_epoch(row["system_updated_at"]),
             "fulcrum_id": row["fulcrum_id"],
-            **({"fulcrum_parent_id_not_used": row["fulcrum_parent_id_not_used"]} if TYPE == "survey" else {}),
+            **({"fulcrum_parent_id_not_used": row["fulcrum_parent_id_not_used"]} if BASE_NAME == "JKMR" else {}),
             "form_values": {}
         }
     }
@@ -436,10 +467,14 @@ def create_records(form_id, elements, rows, base_obj={}):
 
 
 def main():
-    if TYPE == "survey":
+    if BASE_NAME == "JKMR":
         # Remove the IMPORT_MAPPING_FILE file
         if os.path.exists(PARENT_TO_LATEST_SURVEY_ID):
             os.remove(PARENT_TO_LATEST_SURVEY_ID)
+    if TYPE == "survey":
+        # Remove the OLD_TO_NEW_ID_MAPPING file
+        if os.path.exists(OLD_TO_NEW_ID_MAPPING):
+            os.remove(OLD_TO_NEW_ID_MAPPING)
 
     target_form = None
 

@@ -1,0 +1,8 @@
+{
+  "is_knotweed_growth_visible": "is_new_growth_visible",
+  "location_of_visible_growth": "location_of_visible_growth_invasive",
+  "location_of_visible_growth_other": "location_of_visible_growth_invasive_other",
+  "description_of_visible_growth": "describe_the_visible_growth",
+  "has_host_soil_been_disturbed_removed_cultivated_or_covered": "has_host_soil_been_disturbed_or_cultivated",
+  "has_any_new_soft_or_hard_landscaping_occurred_within_the_impacted_area": "has_any_landscaping_occurred_withinnear_the_impacted_area"
+}
