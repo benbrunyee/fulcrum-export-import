@@ -87,7 +87,7 @@
     },
     {
       "label": "Run KSMP Import",
-      "dependsOn": ["SV Import"],
+      "dependsOn": ["KSMP Import", "SV Import"],
       "dependsOrder": "sequence",
       "problemMatcher": []
     },
