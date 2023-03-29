@@ -95,6 +95,11 @@
       "label": "Run JKMR Import",
       "dependsOn": ["JKMR Import", "JKMR SV Import"],
       "dependsOrder": "sequence"
+    },
+    {
+      "label": "Run Both Imports",
+      "dependsOn": ["Run KSMP Import", "Run JKMR Import"],
+      "dependsOrder": "sequence"
     }
   ]
 }
