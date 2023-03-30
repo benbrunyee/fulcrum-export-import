@@ -242,32 +242,28 @@ def get_record_link(record_id, value):
     # matching on a row and then grabbing the fulcrum_id
 
     # If there is a value or we are doing a survey import, use the value
-    if (value or BASE_NAME == "JKMR") and not (BASE_NAME == "KSMP" and TYPE == "site_visits"):
+    if TYPE == "survey":
         return [{"record_id": v} for v in value.split(",")] if value else []
+    elif TYPE == "site_visits":
+        # We match based on the mapping file that was created during the SA import process (using this script)
+        if BASE_NAME == "JKMR":
+            with open(PARENT_TO_LATEST_SURVEY_ID, "r") as f:
+                mapping = json.load(f)
 
-    # We match based on the mapping file that was created during the SA import process (using this script)
-    if BASE_NAME == "JKMR" and TYPE == "site_visits":
-        with open(PARENT_TO_LATEST_SURVEY_ID, "r") as f:
-            mapping = json.load(f)
+                if record_id not in mapping:
+                    print("Could not find a match for " + record_id)
+                    return []
 
-            if record_id not in mapping:
-                print("Could not find a match for " + record_id)
-                return []
+                return [{"record_id": mapping[record_id]['id']}]
+        elif BASE_NAME == "KSMP":
+            with open(OLD_TO_NEW_ID_MAPPING, "r") as f:
+                mapping = json.load(f)
 
-            print("Found a match for " + record_id)
+                if value not in mapping:
+                    print("Could not find a match for " + value)
+                    return []
 
-            return [{"record_id": mapping[record_id]['id']}]
-    elif BASE_NAME == "KSMP" and TYPE == "site_visits":
-        with open(OLD_TO_NEW_ID_MAPPING, "r") as f:
-            mapping = json.load(f)
-
-            if value not in mapping:
-                print("Could not find a match for " + value)
-                return []
-
-            print("Found a match for " + value)
-
-            return [{"record_id": mapping[value]}]
+                return [{"record_id": mapping[value]}]
 
     return []
 
@@ -475,7 +471,7 @@ def main():
             os.remove(OLD_TO_NEW_ID_MAPPING)
 
         if BASE_NAME == "JKMR":
-            # Remove the IMPORT_MAPPING_FILE file
+            # Remove the PARENT_TO_LATEST_SURVEY_MAPPING file
             if os.path.exists(PARENT_TO_LATEST_SURVEY_ID):
                 os.remove(PARENT_TO_LATEST_SURVEY_ID)
 
