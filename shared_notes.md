@@ -21,6 +21,9 @@
 - "Site-Specific Risk Assessment" not populated but required fields (editing the record will require you to add a value to these fields)
 
 - Calculation fields don't get populated until you click edit and then re-save
+
+  - This impacts site visit record no. Of which may take a while as you have to edit each site visit to get the counter.
+
 - Client info will be populated once a re-link has occured (JKMR records)
 - Stand details may require editing and saving for fields to be populated (JKMR records)
 
