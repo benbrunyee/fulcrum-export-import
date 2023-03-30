@@ -19,21 +19,19 @@ import shutil
 from tabulate import tabulate
 
 # Arguments
-parser = argparse.ArgumentParser(
-    description="Find differences between 2 csv files")
+parser = argparse.ArgumentParser(description="Find differences between 2 csv files")
 
-parser.add_argument("--parent_dir", type=str,
-                    help="Parent directory", required=True)
-parser.add_argument("--base_dir", type=str,
-                    help="Base directory", required=True)
-parser.add_argument("--base_prefix", type=str,
-                    help="Base prefix", required=True)
-parser.add_argument("--target_dir", type=str,
-                    help="Target directory", required=True)
-parser.add_argument("--target_prefix", type=str,
-                    help="Target prefix", required=True)
-parser.add_argument("--skip_prompt_matching", action="store_true",
-                    help="Skip all prompt matching", required=False)
+parser.add_argument("--parent_dir", type=str, help="Parent directory", required=True)
+parser.add_argument("--base_dir", type=str, help="Base directory", required=True)
+parser.add_argument("--base_prefix", type=str, help="Base prefix", required=True)
+parser.add_argument("--target_dir", type=str, help="Target directory", required=True)
+parser.add_argument("--target_prefix", type=str, help="Target prefix", required=True)
+parser.add_argument(
+    "--skip_prompt_matching",
+    action="store_true",
+    help="Skip all prompt matching",
+    required=False,
+)
 
 args = parser.parse_args()
 
@@ -54,6 +52,7 @@ SKIP_PROMPT_MATCHING = args.skip_prompt_matching
 
 # Functions
 
+
 def read_csv_columns(file_path):
     """Read a csv file and return a list of rows"""
     # Open the file
@@ -63,10 +62,7 @@ def read_csv_columns(file_path):
 
 
 def create_table(rows):
-    return [
-        ["Column", "Closest Match", "Updated"],
-        *rows
-    ]
+    return [["Column", "Closest Match", "Updated"], *rows]
 
 
 def delete_mismatch_file():
@@ -97,8 +93,13 @@ def custom_rules(row):
 
 
 def get_files(dir, prefix):
-    return [f for f in os.listdir(dir) if os.path.isfile(
-        os.path.join(dir, f)) and f.startswith(prefix) and f.endswith(".csv")]
+    return [
+        f
+        for f in os.listdir(dir)
+        if os.path.isfile(os.path.join(dir, f))
+        and f.startswith(prefix)
+        and f.endswith(".csv")
+    ]
 
 
 def does_file_exist(filepath):
@@ -125,7 +126,9 @@ def get_base_file(postfix=None):
         if postfix == "site_visits_re_written":
             postfix = "service_visit_records"
 
-    return postfix, os.path.join(BASE_DIR, f"{BASE_PREFIX}{('_' + postfix) if postfix else ''}.csv")
+    return postfix, os.path.join(
+        BASE_DIR, f"{BASE_PREFIX}{('_' + postfix) if postfix else ''}.csv"
+    )
 
 
 def transform_knotweed_survey_repeatable_jkmr():
@@ -136,7 +139,9 @@ def transform_knotweed_survey_repeatable_jkmr():
     parent_record_ids = []
     parent_record_data = {}
     child_records_mapping = {}
-    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_knotweed_survey.csv"), "r") as f:
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_knotweed_survey.csv"), "r"
+    ) as f:
         reader = csv.DictReader(f)
         rows = list(reader)
 
@@ -169,24 +174,44 @@ def transform_knotweed_survey_repeatable_jkmr():
     for parent_id, child_records in child_records_mapping.items():
         for child_record in child_records:
             child_keys = ["child_" + k for k in child_record.keys()]
-            new_row = {"fulcrum_id": child_record["fulcrum_id"],
-                       # This is used for the import api script not the Fulcrum import interface
-                       "fulcrum_parent_id_not_used": child_record["fulcrum_parent_id"],
-                       **{k: parent_record_data[parent_id][k] for k in parent_record_data[parent_id].keys() if k != "fulcrum_id"},
-                       **{k: child_record[re.sub(r"^child_", "", k)] for k in child_keys if k != "child_fulcrum_id"}}
+            new_row = {
+                "fulcrum_id": child_record["fulcrum_id"],
+                # This is used for the import api script not the Fulcrum import interface
+                "fulcrum_parent_id_not_used": child_record["fulcrum_parent_id"],
+                **{
+                    k: parent_record_data[parent_id][k]
+                    for k in parent_record_data[parent_id].keys()
+                    if k != "fulcrum_id"
+                },
+                **{
+                    k: child_record[re.sub(r"^child_", "", k)]
+                    for k in child_keys
+                    if k != "child_fulcrum_id"
+                },
+            }
             new_rows.append(new_row)
 
     # Now add all the parent records that don't have any child records
     for parent_id, parent_record in parent_record_data.items():
         if parent_id not in child_records_mapping.keys():
-            new_row = {"fulcrum_id": parent_record["fulcrum_id"],
-                       # This is used for the import api script not the Fulcrum import interface
-                       "fulcrum_parent_id_not_used": parent_record["fulcrum_id"],
-                       **{k: parent_record[k] for k in parent_record.keys() if k != "fulcrum_id"}}
+            new_row = {
+                "fulcrum_id": parent_record["fulcrum_id"],
+                # This is used for the import api script not the Fulcrum import interface
+                "fulcrum_parent_id_not_used": parent_record["fulcrum_id"],
+                **{
+                    k: parent_record[k]
+                    for k in parent_record.keys()
+                    if k != "fulcrum_id"
+                },
+            }
             new_rows.append(new_row)
 
     # Write the new data to a new csv file
-    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_base_re_written.csv"), "w", newline="") as f:
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_base_re_written.csv"),
+        "w",
+        newline="",
+    ) as f:
         writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
         writer.writeheader()
         writer.writerows(new_rows)
@@ -195,7 +220,12 @@ def transform_knotweed_survey_repeatable_jkmr():
 def transform_knotweed_survey_stand_details_jkmr():
     new_rows = []
 
-    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_knotweed_survey_knotweed_stand_details.csv"), "r") as f:
+    with open(
+        os.path.join(
+            TARGET_DIR, f"{TARGET_PREFIX}_knotweed_survey_knotweed_stand_details.csv"
+        ),
+        "r",
+    ) as f:
         reader = csv.DictReader(f)
         rows = list(reader)
 
@@ -203,34 +233,59 @@ def transform_knotweed_survey_stand_details_jkmr():
             old_location_val = row["stand_location_visibly_impacted_areas"]
             old_location_other_val = row["stand_location_visibly_impacted_areas_other"]
             new_location_val = row["visibly_impacted_areas_subject_property"]
-            new_location_other_val = row["visibly_impacted_areas_subject_property_other"]
+            new_location_other_val = row[
+                "visibly_impacted_areas_subject_property_other"
+            ]
 
-            if old_location_val and new_location_val and old_location_val != new_location_val:
+            if (
+                old_location_val
+                and new_location_val
+                and old_location_val != new_location_val
+            ):
                 print(
-                    f"{row['fulcrum_id']}: Both old and new values are populated. Old: '{old_location_val}', New: '{new_location_val}'")
-            if old_location_other_val and new_location_other_val and old_location_other_val != new_location_other_val:
+                    f"{row['fulcrum_id']}: Both old and new values are populated. Old: '{old_location_val}', New: '{new_location_val}'"
+                )
+            if (
+                old_location_other_val
+                and new_location_other_val
+                and old_location_other_val != new_location_other_val
+            ):
                 print(
-                    f"{row['fulcrum_id']}: Both old and new other values are populated. Old: '{old_location_other_val}', New: '{new_location_other_val}'")
+                    f"{row['fulcrum_id']}: Both old and new other values are populated. Old: '{old_location_other_val}', New: '{new_location_other_val}'"
+                )
 
             if old_location_val:
                 row["visibly_impacted_areas_subject_property"] = old_location_val
 
             if old_location_other_val:
-                row["visibly_impacted_areas_subject_property_other"] = old_location_other_val
+                row[
+                    "visibly_impacted_areas_subject_property_other"
+                ] = old_location_other_val
 
             old_distance_val = row["distance_from_nearest_dwelling_m"]
             new_distance_val = row["distance_from_subject_property_dwelling_m"]
 
-            if old_distance_val and new_distance_val and old_distance_val != new_distance_val:
+            if (
+                old_distance_val
+                and new_distance_val
+                and old_distance_val != new_distance_val
+            ):
                 print(
-                    f"{row['fulcrum_id']}: Both old and new values are populated. Old: '{old_distance_val}', New: '{new_distance_val}'")
+                    f"{row['fulcrum_id']}: Both old and new values are populated. Old: '{old_distance_val}', New: '{new_distance_val}'"
+                )
 
             if old_distance_val and not new_distance_val:
                 row["distance_from_subject_property_dwelling_m"] = old_distance_val
 
         new_rows = rows
 
-    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_knotweed_survey_knotweed_stand_details_re_written.csv"), "w") as f:
+    with open(
+        os.path.join(
+            TARGET_DIR,
+            f"{TARGET_PREFIX}_knotweed_survey_knotweed_stand_details_re_written.csv",
+        ),
+        "w",
+    ) as f:
         writer = csv.DictWriter(f, fieldnames=rows[0].keys())
         writer.writeheader()
         writer.writerows(new_rows)
@@ -243,23 +298,18 @@ def transform_site_visits():
     fields_to_fill = {
         "technician_details_qualifications": [
             "surveyortechnician_names",
-            "technicians_names"
+            "technicians_names",
         ],
         "technician_details_qualifications_other": [
             "surveyortechnician_names_other",
-            "technicians_names_other"
+            "technicians_names_other",
         ],
-        "time": [
-            "treatment_start_time"
-        ],
-        "date": [
-            "treatment_date",
-            "information_date"
-        ],
+        "time": ["treatment_start_time"],
+        "date": ["treatment_date", "information_date"],
         "does_site_to_be_treated_meet_generic_rams_criteria": [
             "does_site_meet_raams_criteria",
-            "does_site_for_treatment_meet_generic_rams_criteria"
-        ]
+            "does_site_for_treatment_meet_generic_rams_criteria",
+        ],
     }
 
     # This is for actually filling the data as the key lookup is more efficient
@@ -270,12 +320,15 @@ def transform_site_visits():
     # visit_files = ["herbicide_application_monitoring_records",
     #                "other_treatments_inc_excavation",
     #                "site_monitoring_observations_and_recommendations"]
-    visit_files = ["herbicide_application_monitoring_records"]
+    visit_files = [
+        "herbicide_application_monitoring_records",
+        "site_monitoring_observations_and_recommendations",
+    ]
 
     file_to_value_mapping = {
         "herbicide_application_monitoring_records": "Herbicide Application & Monitoring Record",
         "other_treatments_inc_excavation": "Other Treatments Inc. Excavation",
-        "site_monitoring_observations_and_recommendations": "Site Monitoring Observations & Recommendations"
+        "site_monitoring_observations_and_recommendations": "Site Monitoring Observations & Recommendations",
     }
 
     # This is a new header based on the name of the repeatable but it also matches
@@ -283,7 +336,9 @@ def transform_site_visits():
     all_headers = ["record_type_japanese_knotweed"]
 
     for visit_file in visit_files:
-        with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_{visit_file}.csv"), "r") as f:
+        with open(
+            os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_{visit_file}.csv"), "r"
+        ) as f:
             csv_content = csv.DictReader(f)
             rows = list(csv_content)
 
@@ -306,7 +361,9 @@ def transform_site_visits():
 
             new_csv.extend(rows)
 
-    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_site_visits_re_written.csv"), "w") as f:
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_site_visits_re_written.csv"), "w"
+    ) as f:
         writer = csv.DictWriter(f, fieldnames=all_headers)
         writer.writeheader()
         writer.writerows(new_csv)
@@ -323,11 +380,17 @@ def find_and_write_diffs(base, target, prefix):
     unmatched = [f for f in base if f not in target]
 
     # Find closest matches
-    closest_matches = [difflib.get_close_matches(
-        f, unmatched, n=1, cutoff=0) for f in diff]
+    closest_matches = [
+        difflib.get_close_matches(f, unmatched, n=1, cutoff=0) for f in diff
+    ]
 
-    rows = list(zip(diff, ["N/A" if not f else f[0]
-                           for f in closest_matches], ["" for f in closest_matches]))
+    rows = list(
+        zip(
+            diff,
+            ["N/A" if not f else f[0] for f in closest_matches],
+            ["" for f in closest_matches],
+        )
+    )
 
     # Create table
     table = create_table(rows)
@@ -367,7 +430,7 @@ def find_and_write_diffs(base, target, prefix):
             if row[0] in mappings:
                 # print(f"Replacing: '{row[0]}' with '{mappings[row[0]]}'")
                 rows[i] = [row[0], row[1], mappings[row[0]]]
-                if (mappings[row[0]] in unmatched):
+                if mappings[row[0]] in unmatched:
                     unmatched.remove(mappings[row[0]])
                 continue
             elif mappings_exist:
@@ -378,15 +441,14 @@ def find_and_write_diffs(base, target, prefix):
 
             if changed:
                 rows[i] = [row[0], row[1], new_val]
-                if (new_val in unmatched):
+                if new_val in unmatched:
                     unmatched.remove(new_val)
                 mappings[row[0]] = new_val
             else:
                 if SKIP_PROMPT_MATCHING:
                     continue
 
-                print(
-                    f"Replace:\n{row[0]}\n{row[1]}? (y/n/type your own column name)")
+                print(f"Replace:\n{row[0]}\n{row[1]}? (y/n/type your own column name)")
                 response = input()
                 response = response.lower().strip()
 
@@ -394,19 +456,19 @@ def find_and_write_diffs(base, target, prefix):
                     # Replace column
                     print(f"Replacing: '{row[0]}' with '{row[1]}'")
                     rows[i] = [row[0], row[1], row[1]]
-                    if (row[1] in unmatched):
+                    if row[1] in unmatched:
                         unmatched.remove(row[1])
                     mappings[row[0]] = row[1]
                 elif response == "n":
                     print(f"Skipping: '{row[0]}'")
                     continue
                 else:
-                    if (response not in unmatched):
+                    if response not in unmatched:
                         print(f"Invalid column: '{response}'")
                         continue
                     print(f"Replacing: '{row[0]}' with '{response}'")
                     rows[i] = [row[0], row[1], response]
-                    if (response in unmatched):
+                    if response in unmatched:
                         unmatched.remove(response)
                     mappings[row[0]] = response
 
@@ -462,13 +524,16 @@ else:
     # We only check the base and the re-written site visits when we are doing a site visits comparison
     target_files = [
         f"{TARGET_PREFIX}.csv",
-        f"{TARGET_PREFIX}_site_visits_re_written.csv"
+        f"{TARGET_PREFIX}_site_visits_re_written.csv",
     ]
 
 # Loop through each target file, find the base equivalent and compare
 for f in target_files:
     # Skip these files
-    if (PARENT_DIR == "JKMR" and (f == f"{TARGET_PREFIX}_base_re_written.csv" or f == f"{TARGET_PREFIX}_knotweed_survey.csv")):
+    if PARENT_DIR == "JKMR" and (
+        f == f"{TARGET_PREFIX}_base_re_written.csv"
+        or f == f"{TARGET_PREFIX}_knotweed_survey.csv"
+    ):
         continue
 
     # Sometimes we want to use a different file name, this functions provides those mappings
@@ -485,15 +550,13 @@ for f in target_files:
             write_file_no_match(base_filepath)
 
         # Read the files
-        base_rows = read_csv_columns(
-            base_filepath
-        ) if does_base_file_exist else []
-        target_rows = read_csv_columns(os.path.join(
-            TARGET_DIR, target_f))
+        base_rows = read_csv_columns(base_filepath) if does_base_file_exist else []
+        target_rows = read_csv_columns(os.path.join(TARGET_DIR, target_f))
 
         # Find and write differences
-        find_and_write_diffs(base_rows, target_rows,
-                             "base" if does_base_file_exist else "NO_MATCH_base")
+        find_and_write_diffs(
+            base_rows, target_rows, "base" if does_base_file_exist else "NO_MATCH_base"
+        )
     else:
         # These are the child repeatables
         # Grab the postfix
@@ -509,13 +572,16 @@ for f in target_files:
             write_file_no_match(base_filepath)
 
         # Read the files
-        base_rows = read_csv_columns(
-            base_filepath
-        ) if does_base_file_exist else []
+        base_rows = read_csv_columns(base_filepath) if does_base_file_exist else []
         target_rows = read_csv_columns(os.path.join(TARGET_DIR, target_f))
 
         # Find and write differences
-        find_and_write_diffs(base_rows, target_rows, new_postfix.lower(
-        ) if does_base_file_exist else "NO_MATCH_" + new_postfix.lower())
+        find_and_write_diffs(
+            base_rows,
+            target_rows,
+            new_postfix.lower()
+            if does_base_file_exist
+            else "NO_MATCH_" + new_postfix.lower(),
+        )
 
 print("Success")

@@ -1,9 +1,11 @@
 {
+  "client_names": "client_name",
   "pba_reference": "account_reference",
   "site_photo_property": "site_photos_property",
   "site_photo_property_caption": "site_photos_property_caption",
   "site_photo_property_url": "site_photos_property_url",
   "site_video": "contextual_videos",
+  "site_video_caption": "contextual_videos_caption",
   "site_video_url": "contextual_videos_url",
   "site_plans_url": "break_before_site_plans_url",
   "site_plans": "break_before_site_plans",

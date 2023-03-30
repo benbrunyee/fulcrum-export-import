@@ -11,17 +11,21 @@ from fulcrum import Fulcrum
 load_dotenv()
 
 parser = argparse.ArgumentParser(
-    description='Import data from a CSV file into Fulcrum.')
+    description="Import data from a CSV file into Fulcrum."
+)
 parser.add_argument(
-    '--form_name', "-n", help='The name of the form to import data into.')
+    "--form_name", "-n", help="The name of the form to import data into."
+)
 parser.add_argument(
-    '--source_dir', "-s", help='The directory containing the CSV files to import.')
+    "--source_dir", "-s", help="The directory containing the CSV files to import."
+)
 parser.add_argument(
-    "--type", help="The type of import to perform.", type=str, required=True)
+    "--type", help="The type of import to perform.", type=str, required=True
+)
 parser.add_argument(
-    "--yes", "-y", help="Skip the confirmation prompt.", action="store_true")
-parser.add_argument("--base_name", "-p",
-                    help="The base name of the source files")
+    "--yes", "-y", help="Skip the confirmation prompt.", action="store_true"
+)
+parser.add_argument("--base_name", "-p", help="The base name of the source files")
 
 args = parser.parse_args()
 
@@ -30,7 +34,7 @@ args = parser.parse_args()
 
 FORM_NAME = args.form_name
 SOURCE_DIR = args.source_dir
-FULCRUM_API_KEY = os.getenv('FULCRUM_API_KEY')
+FULCRUM_API_KEY = os.getenv("FULCRUM_API_KEY")
 
 TYPE = args.type
 
@@ -43,8 +47,12 @@ PROJECT_IDS = {}
 USER_IDS = {}
 
 BASE_NAME = args.base_name
-PARENT_TO_LATEST_SURVEY_ID = f"parent_to_latest_survey{('_' + BASE_NAME) if BASE_NAME else ''}.json"
-OLD_TO_NEW_ID_MAPPING = f"old_to_new_id_mapping{('_' + BASE_NAME) if BASE_NAME else ''}.json"
+PARENT_TO_LATEST_SURVEY_ID = (
+    f"parent_to_latest_survey{('_' + BASE_NAME) if BASE_NAME else ''}.json"
+)
+OLD_TO_NEW_ID_MAPPING = (
+    f"old_to_new_id_mapping{('_' + BASE_NAME) if BASE_NAME else ''}.json"
+)
 
 # Util
 
@@ -66,13 +74,14 @@ def rate_limited(max_per_second):
             ret = func(*args, **kargs)
             last_time_called[0] = time.perf_counter()
             return ret
+
         return rate_limited_function
+
     return decorate
 
 
 def save_first_record(form_id):
-    records = FULCRUM.records.search(url_params={
-        'form_id': form_id})['records']
+    records = FULCRUM.records.search(url_params={"form_id": form_id})["records"]
 
     with open("record.json", "w") as f:
         json.dump(records[0], f, indent=2)
@@ -92,19 +101,23 @@ def convert_to_epoch(string):
 
     return seconds_since_epoch
 
+
 # Main
 
 
 def read_csv(file_path):
     """Read a csv file and return a list of rows"""
-    with open(file_path, "r", encoding='utf-8') as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         return list(reader)
 
 
 def get_csv_files(dir):
-    return [f for f in os.listdir(dir) if os.path.isfile(
-        os.path.join(dir, f)) and f.endswith(".csv")]
+    return [
+        f
+        for f in os.listdir(dir)
+        if os.path.isfile(os.path.join(dir, f)) and f.endswith(".csv")
+    ]
 
 
 # Rate limited for 4000 calls per hour (actual limit is 5000/h but we want to be safe)
@@ -125,7 +138,8 @@ def upload_records(records):
                 break
             except Exception:
                 print(
-                    f"Error creating record '{record['record']['fulcrum_id']}'. Retrying in 1 second...")
+                    f"Error creating record '{record['record']['fulcrum_id']}'. Retrying in 1 second..."
+                )
                 time.sleep(1)
                 retry_count += 1
 
@@ -134,7 +148,7 @@ def upload_records(records):
             print(f"Failed to create record {record['record']['fulcrum_id']}")
             continue
 
-        print(res['record']['id'] + ' created.')
+        print(res["record"]["id"] + " created.")
 
         if TYPE == "survey":
             # Update the OLD_TO_NEW_ID_MAPPING file to map the old record_id to the new record_id
@@ -142,7 +156,7 @@ def upload_records(records):
                 with open(OLD_TO_NEW_ID_MAPPING, "r") as f:
                     id_mapping = json.load(f)
 
-            id_mapping[record['record']['fulcrum_id']] = res['record']['id']
+            id_mapping[record["record"]["fulcrum_id"]] = res["record"]["id"]
 
             with open(OLD_TO_NEW_ID_MAPPING, "w") as f:
                 json.dump(id_mapping, f, indent=2)
@@ -154,25 +168,25 @@ def upload_records(records):
                     id_mapping = json.load(f)
 
             if record["record"]["fulcrum_parent_id_not_used"] not in id_mapping:
-                id_mapping[record['record']['fulcrum_parent_id_not_used']] = {
-                    'id': res['record']['id'],
-                    'date': res['record']['created_at']
+                id_mapping[record["record"]["fulcrum_parent_id_not_used"]] = {
+                    "id": res["record"]["id"],
+                    "date": res["record"]["created_at"],
                 }
             else:
-                existing_date = id_mapping[record['record']
-                                           ['fulcrum_parent_id_not_used']]['date']
+                existing_date = id_mapping[
+                    record["record"]["fulcrum_parent_id_not_used"]
+                ]["date"]
                 date_format = "%Y-%m-%dT%H:%M:%SZ"
-                existing_date_obj = datetime.strptime(
-                    existing_date, date_format)
+                existing_date_obj = datetime.strptime(existing_date, date_format)
 
-                new_date = res['record']['created_at']
+                new_date = res["record"]["created_at"]
                 new_date_obj = datetime.strptime(new_date, date_format)
 
                 # If the new record is newer than the existing record then update the mapping
                 if new_date_obj > existing_date_obj:
-                    id_mapping[record['record']['fulcrum_parent_id_not_used']] = {
-                        'id': res['record']['id'],
-                        'date': res['record']['created_at']
+                    id_mapping[record["record"]["fulcrum_parent_id_not_used"]] = {
+                        "id": res["record"]["id"],
+                        "date": res["record"]["created_at"],
                     }
 
             with open(PARENT_TO_LATEST_SURVEY_ID, "w") as f:
@@ -201,8 +215,7 @@ def read_repeatable_data(parent_id, element):
     flattened_elements = list(flatten(element["elements"]))
 
     # TODO: Filter rows based on the fulcrum_parent_id column
-    rows = list(
-        filter(lambda row: row["fulcrum_parent_id"] == parent_id, rows))
+    rows = list(filter(lambda row: row["fulcrum_parent_id"] == parent_id, rows))
 
     return create_repeatable_objects(flattened_elements, rows, parent_id)
 
@@ -254,7 +267,7 @@ def get_record_link(record_id, value):
                     print("Could not find a match for " + record_id)
                     return []
 
-                return [{"record_id": mapping[record_id]['id']}]
+                return [{"record_id": mapping[record_id]["id"]}]
         elif BASE_NAME == "KSMP":
             with open(OLD_TO_NEW_ID_MAPPING, "r") as f:
                 mapping = json.load(f)
@@ -273,30 +286,81 @@ def create_value_structure(element, row, record_id=None):
     data_name = element["data_name"]
 
     value = row[data_name] if data_name in row else None
-    other_value = row[data_name +
-                      "_other"] if data_name + "_other" in row else None
-    caption_value = row[data_name +
-                        "_caption"] if data_name + "_caption" in row else None
+    other_value = row[data_name + "_other"] if data_name + "_other" in row else None
+    caption_value = (
+        row[data_name + "_caption"] if data_name + "_caption" in row else None
+    )
 
-    skip_types = [
-        "Section"
-    ]
+    skip_types = ["Section"]
 
     if el_type in skip_types:
         return None
 
     object_types = {
-        "ClassificationField": {"other_values": other_value.split(",") if other_value else [], "choice_values": value.split(",") if value else []} if el_type == "ClassificationField" else None,
-        "ChoiceField": {"other_values": other_value.split(",") if other_value else [], "choice_values": value.split(",") if value else []} if el_type == "ChoiceField" else None,
-        "RecordLinkField": get_record_link(record_id, value) if el_type == "RecordLinkField" else None,
-        "AddressField": {postfix: row[data_name + "_" + postfix] for postfix in ["sub_thoroughfare", "thoroughfare", "suite", "locality", "sub_admin_area", "admin_area", "postal_code", "country"]} if el_type == "AddressField" else None,
-        "PhotoField": [{"photo_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "PhotoField" else None,
-        "AudioField": [{"audio_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "AudioField" else None,
-        "VideoField": [{"video_id": v, "caption": caption_value.split(",")[i]} for i, v in enumerate(value.split(","))] if value and caption_value else [] if el_type == "VideoField" else None,
-        "Repeatable": read_repeatable_data(record_id, element) if el_type == "Repeatable" else None,
-        "TextField": handle_text_field(value, element) if el_type == "TextField" else None,
+        "ClassificationField": {
+            "other_values": other_value.split(",") if other_value else [],
+            "choice_values": value.split(",") if value else [],
+        }
+        if el_type == "ClassificationField"
+        else None,
+        "ChoiceField": {
+            "other_values": other_value.split(",") if other_value else [],
+            "choice_values": value.split(",") if value else [],
+        }
+        if el_type == "ChoiceField"
+        else None,
+        "RecordLinkField": get_record_link(record_id, value)
+        if el_type == "RecordLinkField"
+        else None,
+        "AddressField": {
+            postfix: row[data_name + "_" + postfix]
+            for postfix in [
+                "sub_thoroughfare",
+                "thoroughfare",
+                "suite",
+                "locality",
+                "sub_admin_area",
+                "admin_area",
+                "postal_code",
+                "country",
+            ]
+        }
+        if el_type == "AddressField"
+        else None,
+        "PhotoField": [
+            {"photo_id": v, "caption": caption_value.split(",")[i]}
+            for i, v in enumerate(value.split(","))
+        ]
+        if value and caption_value
+        else []
+        if el_type == "PhotoField"
+        else None,
+        "AudioField": [
+            {"audio_id": v, "caption": caption_value.split(",")[i]}
+            for i, v in enumerate(value.split(","))
+        ]
+        if value and caption_value
+        else []
+        if el_type == "AudioField"
+        else None,
+        "VideoField": [
+            {"video_id": v, "caption": caption_value.split(",")[i]}
+            for i, v in enumerate(value.split(","))
+        ]
+        if value and caption_value
+        else []
+        if el_type == "VideoField"
+        else None,
+        "Repeatable": read_repeatable_data(record_id, element)
+        if el_type == "Repeatable"
+        else None,
+        "TextField": handle_text_field(value, element)
+        if el_type == "TextField"
+        else None,
         # TODO: Handle if we have any of these types
-        "SignatureField": {"timestamp": "", "signature_id": ""} if el_type == "SignatureField" else None,
+        "SignatureField": {"timestamp": "", "signature_id": ""}
+        if el_type == "SignatureField"
+        else None,
     }
 
     if el_type in object_types:
@@ -374,6 +438,7 @@ def create_base_record(form_id, row, base_obj={}):
         "record": {
             **base_obj,
             "form_id": form_id,
+            "status": row["status"],
             "latitude": latitude_val,
             "longitude": longitude_val,
             "project_id": get_project_id(row["project"]),
@@ -381,8 +446,12 @@ def create_base_record(form_id, row, base_obj={}):
             "client_created_at": convert_to_epoch(row["system_created_at"]),
             "client_updated_at": convert_to_epoch(row["system_updated_at"]),
             "fulcrum_id": row["fulcrum_id"],
-            **({"fulcrum_parent_id_not_used": row["fulcrum_parent_id_not_used"]} if BASE_NAME == "JKMR" and TYPE == "survey" else {}),
-            "form_values": {}
+            **(
+                {"fulcrum_parent_id_not_used": row["fulcrum_parent_id_not_used"]}
+                if BASE_NAME == "JKMR" and TYPE == "survey"
+                else {}
+            ),
+            "form_values": {},
         }
     }
 
@@ -407,14 +476,13 @@ def create_repeatable_objects(elements, rows, parent_id=None):
         new_obj = {
             "latitude": latitute_val,
             "longitude": longitude_val,
-            "form_values": {}
+            "form_values": {},
         }
 
         for element in elements:
             key = element["key"]
 
-            value_obj = create_value_structure(
-                element, row, record_id=parent_id)
+            value_obj = create_value_structure(element, row, record_id=parent_id)
 
             if value_obj is not None:
                 new_obj["form_values"][key] = value_obj
@@ -434,8 +502,7 @@ def create_records(form_id, elements, rows, base_obj={}):
             key = element["key"]
             record_id = row["fulcrum_id"]
 
-            value_obj = create_value_structure(
-                element, row, record_id)
+            value_obj = create_value_structure(element, row, record_id)
 
             if value_obj is not None:
                 new_record["record"]["form_values"][key] = value_obj
@@ -453,7 +520,10 @@ def create_records(form_id, elements, rows, base_obj={}):
 
             if isinstance(value, dict):
                 if "choice_values" in value and "other_values" in value:
-                    if len(value["choice_values"]) == 0 and len(value["other_values"]) == 0:
+                    if (
+                        len(value["choice_values"]) == 0
+                        and len(value["other_values"]) == 0
+                    ):
                         keys_to_delete.append(key)
 
         for key in keys_to_delete:
@@ -503,8 +573,7 @@ def main():
 
     csv_base = os.path.join(SOURCE_DIR, "base.csv")
 
-    data_name_key_mapping = {k["data_name"]: k["key"]
-                             for k in flattened_elements}
+    data_name_key_mapping = {k["data_name"]: k["key"] for k in flattened_elements}
 
     for value in data_name_key_mapping.values():
         # Check if the value occurs more than once in the values
@@ -517,7 +586,7 @@ def main():
 
     # save_records(records)
     # save_first_record(form_id)
-    # save_form()
+    # save_form(target_form)
     # print(json.dumps(records, indent=2))
     print("Records to upload: " + str(len(records)))
 
@@ -528,7 +597,7 @@ if TYPE != "survey" and TYPE != "site_visits":
     print("Invalid type: " + TYPE)
     exit()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     answer = None
 
     if not CONFIRMED:
