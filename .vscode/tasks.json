@@ -20,7 +20,7 @@
       "presentation": {
         "reveal": "always"
       },
-      "hide": true
+      "problemMatcher": []
     },
     {
       "label": "JKMR Import",
@@ -41,7 +41,7 @@
       "presentation": {
         "reveal": "always"
       },
-      "hide": true
+      "problemMatcher": []
     },
     {
       "label": "SV Import",
@@ -62,7 +62,7 @@
       "presentation": {
         "reveal": "always"
       },
-      "hide": true
+      "problemMatcher": []
     },
     {
       "label": "JKMR SV Import",
@@ -83,7 +83,7 @@
       "presentation": {
         "reveal": "always"
       },
-      "hide": true
+      "problemMatcher": []
     },
     {
       "label": "Run KSMP Import",
