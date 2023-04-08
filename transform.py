@@ -94,9 +94,11 @@ DEFAULT_BASE_COLS = {
 
 DEFAULT_SV_SV_COLS = {
     "visit_category": lambda row: "Japanese Knotweed Management Record",
-    "visit_type": lambda row: row["visit_type"]
-    if row["record_type_japanese_knotweed"]
-    != "Site Monitoring Observations & Recommendations"
+    "record_type_japanese_knotweed": lambda row: row["record_type_japanese_knotweed"]
+    if "record_type_japanese_knotweed" in row
+    else "Herbicide Application & Monitoring Record",
+    "visit_type_japanese_knotweed_application_monitoring": lambda row: row["visit_type"]
+    if row["visit_type"] != "Site Monitoring Observations & Recommendations"
     else "Scheduled Monitoring",
 }
 
@@ -107,7 +109,6 @@ DEFAULT_SV_SV_COLS = {
 def read_csv(file_path):
     """Read a csv file and return a list of rows"""
     with open(file_path, "r") as f:
-
         reader = csv.DictReader(f)
         return list(reader)
 
