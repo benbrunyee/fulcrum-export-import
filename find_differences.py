@@ -119,21 +119,34 @@ def write_file_no_match(filepath):
         f.write(filepath + "\n")
 
 
-def custom_rules(row):
-    new_val = row
+def apply_custom_rules(target_row):
+    """
+    Apply custom rules to the target row (input csv rows)
+    """
+    new_val = target_row
 
-    if PARENT_DIR == "KSMP" or PARENT_DIR == "IPMR":
-        if re.match(r"^.*?_year_1$", row):
-            new_val = re.sub(r"^(.*?)_year_1$", "\\1", row)
-            logger.info(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
-        elif re.match(r"^.*?_year_1_other$", row):
-            new_val = re.sub(r"^(.*?)_year_1_other$", "\\1_other", row)
-            logger.info(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
-        elif re.match(r"^.*?(_schedule)?_year_.*$", row):
-            new_val = re.sub(r"^(.*?)(_schedule)?_year_(.*)$", "\\1_\\3", row)
-            logger.info(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
+    if PARENT_DIR == "KSMP":
+        if re.match(r"^.*?_year_1$", target_row):
+            new_val = re.sub(r"^(.*?)_year_1$", "\\1", target_row)
+            logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
+        elif re.match(r"^.*?_year_1_other$", target_row):
+            new_val = re.sub(r"^(.*?)_year_1_other$", "\\1_other", target_row)
+            logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
+        elif re.match(r"^.*?(_schedule)?_year_.*$", target_row):
+            new_val = re.sub(r"^(.*?)(_schedule)?_year_(.*)$", "\\1_\\3", target_row)
+            logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
+    elif PARENT_DIR == "IPMR":
+        if re.match(r"^.*?_schedule_year_1$", target_row):
+            new_val = re.sub(r"^(.*?)_schedule_year_1$", "\\1", target_row)
+            logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
+        elif re.match(r"^.*?_schedule_year_1_other$", target_row):
+            new_val = re.sub(r"^(.*?)_year_1_other$", "\\1_other", target_row)
+            logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
+        elif re.match(r"^.*?(_schedule)?_year_.*$", target_row):
+            new_val = re.sub(r"^(.*?)(_schedule)?_year_(.*)$", "\\1_\\3", target_row)
+            logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
 
-    return new_val != row, new_val
+    return new_val != target_row, new_val
 
 
 def get_files(dir, prefix):
@@ -166,9 +179,14 @@ def get_matching_file(postfix=None):
             postfix = "knotweed_stand_details"
         elif postfix == "knotweed_survey_knotweed_stand_details_stand_photos":
             postfix = "knotweed_stand_details_stand_photos"
-    if PARENT_DIR == "JKMR_SV":
+    elif PARENT_DIR == "JKMR_SV":
         if postfix == "site_visits_re_written":
             postfix = "service_visit_records"
+    elif PARENT_DIR == "IPMR":
+        if postfix == "stand_details":
+            postfix = "knotweed_stand_details"
+        elif postfix == "stand_details_stand_photos":
+            postfix = "knotweed_stand_details_stand_photos"
 
     return postfix, os.path.join(
         BASE_DIR, f"{BASE_PREFIX}{('_' + postfix) if postfix else ''}.csv"
@@ -336,6 +354,11 @@ def transform_knotweed_survey_stand_details_jkmr():
 
 
 def transform_service_visits_ipmr():
+    """
+    Transform the service visit records for the IPMR app into individual records that
+    have been joined to the parent record
+    """
+
     # Each service visit is an entire record in the new survey app
     # We want to read all the child values and then join them to the parent values
     # to create a new record for each service visit. We should add a new field to say
@@ -599,7 +622,7 @@ def find_and_write_diffs(base, target, prefix):
                 logger.debug(f"Skipping: '{row[0]}'")
                 continue
 
-            changed, new_val = custom_rules(row[0])
+            changed, new_val = apply_custom_rules(row[0])
 
             if changed:
                 rows[i] = [row[0], row[1], new_val]
@@ -681,7 +704,7 @@ if PARENT_DIR == "JKMR":
 if PARENT_DIR == "JKMR_SV":
     transform_site_visits()
 
-if PARENT_DIR == "IPMR":
+if PARENT_DIR == "IPMR_SV":
     transform_service_visits_ipmr()
 
 # Read all the files in the base & target directory

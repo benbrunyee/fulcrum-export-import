@@ -1,4 +1,4 @@
-# After
+<s># After
 
 New Survey App - Demo records (title):
 
@@ -185,13 +185,21 @@ shouldn't the "proximity_to_other_property_buildings" field in new app should be
 
 ## JKMR
 
-"visit_category" = "Japanese Knotweed Management Record" for all JKMR records /
-"record_type_japanese_knotweed" = Repeatable name for site visit /
-"visit_type_japanese_knotweed_application_monitoring" = "visit_type" unless for Site Monitoring record then set value to "Scheduled Monitoring"? /
-"treatment_types" does not go with "treatment_types", it actually pairs with "visit_type_japanese_knotweed_other" /
+- "visit_category" = "Japanese Knotweed Management Record" for all JKMR records /
+- "record_type_japanese_knotweed" = Repeatable name for site visit /
+- "visit_type_japanese_knotweed_application_monitoring" = "visit_type" unless for Site Monitoring record then set value to "Scheduled Monitoring"? /
+- "treatment_types" does not go with "treatment_types", it actually pairs with "visit_type_japanese_knotweed_other" /
 
 - TODO: Populate the data from the "Survey" app via the link, check Sheets
 
 ## Existing SV
 
 - A lot of survey record links are missing (the ID they are linked to do not point to any existing record meaning they have probably been deleted)
+</s>
+
+# IPMR Notes
+
+## Survey Transformtion
+
+- Yearly schedules are different. IPMR = Jan/Feb, Mar/Apr whereas Survey app = Jan/Feb, Feb/Mar, Mar/Apr
+- "does_site_to_be_surveyed_meet_generic_hs_criteria" same as "does_site_to_be_surveyed_meet_generic_rams_criteria"?

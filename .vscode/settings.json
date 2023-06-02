@@ -2,6 +2,7 @@
   "python.analysis.typeCheckingMode": "off",
   "files.exclude": {
     "**/*.jpg": true,
-    "**/*.png": true
+    "**/*.png": true,
+    "**/*.pdf": true
   }
 }
