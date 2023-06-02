@@ -12,6 +12,7 @@ import argparse
 import csv
 import difflib
 import json
+import logging
 import os
 import re
 import shutil
@@ -21,6 +22,9 @@ from tabulate import tabulate
 # Arguments
 parser = argparse.ArgumentParser(description="Find differences between 2 csv files")
 
+parser.add_argument(
+    "--debug", action="store_true", help="Enable debug logging", required=False
+)
 parser.add_argument("--parent_dir", type=str, help="Parent directory", required=True)
 parser.add_argument("--base_dir", type=str, help="Base directory", required=True)
 parser.add_argument("--base_prefix", type=str, help="Base prefix", required=True)
@@ -34,6 +38,46 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
+
+# Logging
+
+# Logging format of: [LEVEL]::[FUNCTION]::[HH:MM:SS] - [MESSAGE]
+# Where the level is colored based on the level and the rest except from the message is grey
+start = "\033["
+end = "\033[0m"
+colors = {
+    "GREEN": "32m",
+    "ORANGE": "33m",
+    "RED": "31m",
+    "GREY": "90m",
+}
+for color in colors:
+    colors[color] = start + colors[color]  # Add the start to the color
+
+logging.addLevelName(logging.DEBUG, f"{colors['GREEN']}DEBUG{colors['GREY']}")  # Green
+logging.addLevelName(logging.INFO, f"{colors['GREEN']}INFO{colors['GREY']}")  # Green
+logging.addLevelName(
+    logging.WARNING, f"{colors['ORANGE']}WARNING{colors['GREY']}"
+)  # Orange
+logging.addLevelName(logging.ERROR, f"{colors['RED']}ERROR{colors['GREY']}")  # Red
+logging.addLevelName(
+    logging.CRITICAL, f"{colors['RED']}CRITICAL{colors['GREY']}"
+)  # Red
+
+# Define the format of the logging
+logging.basicConfig(
+    format=f"%(levelname)s::%(funcName)s::%(asctime)s - {end}%(message)s",
+    datefmt="%H:%M:%S",
+    handlers=[logging.StreamHandler()],
+)
+
+logger = logging.getLogger(__name__)
+
+if args.debug:
+    logger.setLevel(logging.DEBUG)
+else:
+    logger.setLevel(logging.INFO)
+
 
 # Constants
 
@@ -78,16 +122,16 @@ def write_file_no_match(filepath):
 def custom_rules(row):
     new_val = row
 
-    if PARENT_DIR == "KSMP":
+    if PARENT_DIR == "KSMP" or PARENT_DIR == "IPMR":
         if re.match(r"^.*?_year_1$", row):
             new_val = re.sub(r"^(.*?)_year_1$", "\\1", row)
-            print(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
+            logger.info(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
         elif re.match(r"^.*?_year_1_other$", row):
             new_val = re.sub(r"^(.*?)_year_1_other$", "\\1_other", row)
-            print(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
+            logger.info(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
         elif re.match(r"^.*?(_schedule)?_year_.*$", row):
             new_val = re.sub(r"^(.*?)(_schedule)?_year_(.*)$", "\\1_\\3", row)
-            print(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
+            logger.info(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
 
     return new_val != row, new_val
 
@@ -112,7 +156,7 @@ def clear_and_create_dir(dir):
     os.makedirs(dir)
 
 
-def get_base_file(postfix=None):
+def get_matching_file(postfix=None):
     if PARENT_DIR == "JKMR":
         if postfix == "site_plans":
             postfix = "break_before_site_plans"
@@ -242,7 +286,7 @@ def transform_knotweed_survey_stand_details_jkmr():
                 and new_location_val
                 and old_location_val != new_location_val
             ):
-                print(
+                logger.info(
                     f"{row['fulcrum_id']}: Both old and new values are populated. Old: '{old_location_val}', New: '{new_location_val}'"
                 )
             if (
@@ -250,7 +294,7 @@ def transform_knotweed_survey_stand_details_jkmr():
                 and new_location_other_val
                 and old_location_other_val != new_location_other_val
             ):
-                print(
+                logger.info(
                     f"{row['fulcrum_id']}: Both old and new other values are populated. Old: '{old_location_other_val}', New: '{new_location_other_val}'"
                 )
 
@@ -270,7 +314,7 @@ def transform_knotweed_survey_stand_details_jkmr():
                 and new_distance_val
                 and old_distance_val != new_distance_val
             ):
-                print(
+                logger.info(
                     f"{row['fulcrum_id']}: Both old and new values are populated. Old: '{old_distance_val}', New: '{new_distance_val}'"
                 )
 
@@ -291,14 +335,132 @@ def transform_knotweed_survey_stand_details_jkmr():
         writer.writerows(new_rows)
 
 
+def transform_service_visits_ipmr():
+    # Each service visit is an entire record in the new survey app
+    # We want to read all the child values and then join them to the parent values
+    # to create a new record for each service visit. We should add a new field to say
+    # what the parent record id is and map the child record id to the id of the new
+    # record
+
+    # To hold the IDs of the parent records
+    parent_record_ids = []
+
+    # To hold the values of the parent records
+    # We will use the parent record id as the key
+    parent_record_data = {}
+
+    # To hold the values of the child records
+    # The key will be the parent record id and the value will be a list of child record ids
+    parent_to_child_record_mapping = {}
+
+    # To hold the values of the child records
+    # The key will be the child record id
+    child_record_data = {}
+
+    service_visit_postfix = "_service_visit_records"
+
+    # Read the parent records
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}.csv"), "r") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        for row in rows:
+            parent_record_id = row["fulcrum_id"]
+            parent_record_ids.append(parent_record_id)
+            parent_record_data[parent_record_id] = row
+
+    # Read the child records
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}{service_visit_postfix}.csv"), "r"
+    ) as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        for row in rows:
+            parent_record_id = row["fulcrum_parent_id"]
+            child_record_id = row["fulcrum_id"]
+
+            # Throw an error if the parent record id is not in the list
+            if parent_record_id not in parent_record_ids:
+                raise Exception(
+                    f"Parent record id '{parent_record_id}' does not exist in the list of parent record ids.\n"
+                    + "This means that there are child records for a parent record that does not exist.\n"
+                    + "This is not allowed."
+                )
+
+            # Throw an error if the child record id is already in the list
+            if child_record_id in child_record_data:
+                raise Exception(
+                    f"Child record id '{child_record_id}' already exists in the list of child record ids.\n"
+                    + "This means that there are multiple child records with the same id.\n"
+                    + "This is not allowed."
+                )
+
+            # Add the child record to the list of child records
+            child_record_data[child_record_id] = row
+
+            # Add the child record to the mapping of parent record ids to child record ids
+            if parent_record_id not in parent_to_child_record_mapping:
+                parent_to_child_record_mapping[parent_record_id] = []
+
+            parent_to_child_record_mapping[parent_record_id].append(child_record_id)
+
+    logger.debug("Parent record ids: %s", parent_record_ids)
+    logger.debug("Child record ids: %s", child_record_data.keys())
+    logger.debug("Parent to child record mapping: %s", parent_to_child_record_mapping)
+
+    # Create a new list of rows
+    new_rows = []
+
+    # Loop through the parent records
+    for parent_record_id in parent_record_ids:
+        parent_record = parent_record_data[parent_record_id]
+
+        # Ignore parent records that don't have any child records
+        if parent_record_id not in parent_to_child_record_mapping:
+            continue
+
+        # Loop through the child records
+        for child_record_id in parent_to_child_record_mapping[parent_record_id]:
+            child_record = child_record_data[child_record_id]
+
+            # Create a new row
+            new_row = {}
+
+            # Copy the parent record values to the new row
+            for key, value in parent_record.items():
+                new_row[key] = value
+
+            # Copy the child record values to the new row
+            for key, value in child_record.items():
+                new_row[key] = value
+
+            # Add a new field to the new row to say what the parent record id is
+            new_row["fulcrum_parent_id"] = parent_record_id
+
+            # Add the new row to the list of new rows
+            new_rows.append(new_row)
+
+    # Write the new rows to a new CSV file
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_service_visits_re_written.csv"),
+        "w",
+        newline="",
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
+        writer.writeheader()
+        writer.writerows(new_rows)
+
+
 def transform_site_visits():
     new_csv = []
 
     # This is for just visualising the data
     fields_to_fill = {
+        # All the child fields of each parent key here will be filled with the value of the parent key
         "technician_details_qualifications": [
-            "surveyortechnician_names",
-            "technicians_names",
+            "surveyortechnician_names",  # surveyortechnician_names will then be filled with the value of technician_details_qualifications
+            "technicians_names",  # technicians_names will then be filled with the value of technician_details_qualifications
         ],
         "technician_details_qualifications_other": [
             "surveyortechnician_names_other",
@@ -428,13 +590,13 @@ def find_and_write_diffs(base, target, prefix):
         if row[1] != "N/A":
             # Check if mapping exists
             if row[0] in mappings:
-                # print(f"Replacing: '{row[0]}' with '{mappings[row[0]]}'")
+                logger.debug(f"Replacing: '{row[0]}' with '{mappings[row[0]]}'")
                 rows[i] = [row[0], row[1], mappings[row[0]]]
                 if mappings[row[0]] in unmatched:
                     unmatched.remove(mappings[row[0]])
                 continue
             elif mappings_exist:
-                # print(f"Skipping: '{row[0]}'")
+                logger.debug(f"Skipping: '{row[0]}'")
                 continue
 
             changed, new_val = custom_rules(row[0])
@@ -448,25 +610,27 @@ def find_and_write_diffs(base, target, prefix):
                 if SKIP_PROMPT_MATCHING:
                     continue
 
-                print(f"Replace:\n{row[0]}\n{row[1]}? (y/n/type your own column name)")
+                logger.info(
+                    f"Replace:\n{row[0]}\n{row[1]}? (Y/n/type your own column name)"
+                )
                 response = input()
                 response = response.lower().strip()
 
                 if response == "y" or response == "":
                     # Replace column
-                    print(f"Replacing: '{row[0]}' with '{row[1]}'")
+                    logger.info(f"Replacing: '{row[0]}' with '{row[1]}'")
                     rows[i] = [row[0], row[1], row[1]]
                     if row[1] in unmatched:
                         unmatched.remove(row[1])
                     mappings[row[0]] = row[1]
                 elif response == "n":
-                    print(f"Skipping: '{row[0]}'")
+                    logger.info(f"Skipping: '{row[0]}'")
                     continue
                 else:
                     if response not in unmatched:
-                        print(f"Invalid column: '{response}'")
+                        logger.info(f"Invalid column: '{response}'")
                         continue
-                    print(f"Replacing: '{row[0]}' with '{response}'")
+                    logger.info(f"Replacing: '{row[0]}' with '{response}'")
                     rows[i] = [row[0], row[1], response]
                     if response in unmatched:
                         unmatched.remove(response)
@@ -495,6 +659,9 @@ def get_correct_file_name(f):
             return f"{TARGET_PREFIX}_base_re_written.csv"
         else:
             return f
+    elif f == f"{TARGET_PREFIX}_service_visits.csv":
+        if PARENT_DIR == "IPMR_SV":
+            return f"{TARGET_PREFIX}_service_visits_re_written.csv"
 
     return f
 
@@ -507,32 +674,42 @@ if not os.path.exists(f"{BASE_PARENT_DIR}"):
 delete_mismatch_file()
 
 if PARENT_DIR == "JKMR":
+    # This re-writes some repeatables so it can match the survey
     transform_knotweed_survey_repeatable_jkmr()
     transform_knotweed_survey_stand_details_jkmr()
 
 if PARENT_DIR == "JKMR_SV":
     transform_site_visits()
 
-    # Read all the files in the base & target directory
+if PARENT_DIR == "IPMR":
+    transform_service_visits_ipmr()
+
+# Read all the files in the base & target directory
 base_files = get_files(BASE_DIR, BASE_PREFIX)
 
 target_files = []
 
-if PARENT_DIR != "JKMR_SV":
-    target_files = get_files(TARGET_DIR, TARGET_PREFIX)
-else:
+if PARENT_DIR == "JKMR_SV":
     # We only check the base and the re-written site visits when we are doing a site visits comparison
     target_files = [
         f"{TARGET_PREFIX}.csv",
         f"{TARGET_PREFIX}_site_visits_re_written.csv",
     ]
+else:
+    target_files = get_files(TARGET_DIR, TARGET_PREFIX)
 
 # Loop through each target file, find the base equivalent and compare
 for f in target_files:
     # Skip these files
-    if PARENT_DIR == "JKMR" and (
-        f == f"{TARGET_PREFIX}_base_re_written.csv"
-        or f == f"{TARGET_PREFIX}_knotweed_survey.csv"
+    if (
+        PARENT_DIR == "JKMR"
+        and (
+            f == f"{TARGET_PREFIX}_base_re_written.csv"
+            or f == f"{TARGET_PREFIX}_knotweed_survey.csv"
+        )
+    ) or (
+        PARENT_DIR == "IPMR_SV"
+        and f == f"{TARGET_PREFIX}_service_visits_re_written.csv"
     ):
         continue
 
@@ -541,7 +718,7 @@ for f in target_files:
 
     # If the file is the prefix then this is the parent file
     if f == f"{TARGET_PREFIX}.csv":
-        new_postfix, base_filepath = get_base_file()
+        new_postfix, base_filepath = get_matching_file()
 
         does_base_file_exist = does_file_exist(base_filepath)
 
@@ -563,7 +740,7 @@ for f in target_files:
         postfix = f.replace(f"{TARGET_PREFIX}_", "").replace(".csv", "")
 
         # Base filepath
-        new_postfix, base_filepath = get_base_file(postfix)
+        new_postfix, base_filepath = get_matching_file(postfix)
 
         does_base_file_exist = does_file_exist(base_filepath)
 
@@ -584,4 +761,4 @@ for f in target_files:
             else "NO_MATCH_" + new_postfix.lower(),
         )
 
-print("Success")
+logger.info("Success")

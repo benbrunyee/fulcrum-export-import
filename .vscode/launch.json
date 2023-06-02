@@ -220,12 +220,38 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "args": [
+        "--debug",
         "--parent_dir",
-        "IV",
+        "IPMR",
         "--base_dir",
         "survey",
         "--base_prefix",
         "survey",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records"
+      ],
+      "presentation": {
+        "group": "find_differences",
+        "order": 2
+      }
+    },
+    {
+      "name": "Find Differences (IPMR - SV)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/find_differences.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--debug",
+        "--parent_dir",
+        "IPMR_SV",
+        "--base_dir",
+        "site_visit_records",
+        "--base_prefix",
+        "site_visit_records",
         "--target_dir",
         "invasive_plants_management_records",
         "--target_prefix",
