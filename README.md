@@ -54,3 +54,10 @@ This file contains a list of site locations tied with Job IDs and Fulcrum IDs fo
 ### `unmatched_columns.csv`
 
 This file is a list of destination columns that have gone unmatched. These columns will contain no data when the `NEW_RECORDS.csv` is used for an import.
+
+## Key
+
+- JKMR = Japanese Knotweed Management Record
+- SA = Survey App
+- KMP = Knotweed Management Plan
+- IPMR = Invasive Plants Management Record

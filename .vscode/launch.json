@@ -213,6 +213,30 @@
       }
     },
     {
+      "name": "Find Differences (IPMR)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/find_differences.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "IV",
+        "--base_dir",
+        "survey",
+        "--base_prefix",
+        "survey",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records"
+      ],
+      "presentation": {
+        "group": "find_differences",
+        "order": 2
+      }
+    },
+    {
       "name": "Transform (KSMP)",
       "type": "python",
       "request": "launch",
