@@ -52,7 +52,8 @@ colors = {
     "GREY": "90m",
 }
 for color in colors:
-    colors[color] = start + colors[color]  # Add the start to the color
+    # Add the start to the color
+    colors[color] = start + colors[color]
 
 logging.addLevelName(logging.DEBUG, f"{colors['GREEN']}DEBUG{colors['GREY']}")  # Green
 logging.addLevelName(logging.INFO, f"{colors['GREEN']}INFO{colors['GREY']}")  # Green
@@ -68,18 +69,14 @@ logging.addLevelName(
 logging.basicConfig(
     format=f"%(levelname)s::%(funcName)s::%(asctime)s - {end}%(message)s",
     datefmt="%H:%M:%S",
-    handlers=[logging.StreamHandler()],
 )
 
 logger = logging.getLogger(__name__)
-
-if args.debug:
-    logger.setLevel(logging.DEBUG)
-else:
-    logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG if args.debug else logging.INFO)
 
 
 # Constants
+
 
 PARENT_DIR = args.parent_dir
 
