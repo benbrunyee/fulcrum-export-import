@@ -1,10 +1,13 @@
 import argparse
+import json
 import logging
 import os
+import random
 import time
 
 from dotenv import load_dotenv
 from fulcrum import Fulcrum
+from tqdm import tqdm
 
 load_dotenv()
 
@@ -83,9 +86,30 @@ def main():
         app = get_app(APP_NAME)
 
     logger.debug(f"App selected for duplication: {app}")
+    # Write to temp file if in debug mode
+    if args.debug:
+        logger.debug(f"Writing app to file: {app}")
+        with open(".app.json", "w") as f:
+            json.dump(app, f, indent=2)
+
+    # Get confirmation from the user
+    confirmation = input(
+        f"Are you sure you want to duplicate the app: {app['name']}? (y/N): "
+    )
+
+    # Delete the temp file if in debug mode
+    if args.debug:
+        os.remove(".app.json")
+
+    # If the user does not confirm, exit
+    if confirmation.lower() != "y":
+        logger.info("Exiting")
+        exit(0)
 
     # Duplicate the app
     duplicate_app(app)
+
+    logger.info("Done")
 
 
 def list_apps():
@@ -129,6 +153,9 @@ def duplicate_app(app: dict):
     # Get the app elements
     app_elements = app["elements"]
 
+    # Get the app title field keys
+    app_title_field_keys = app["title_field_keys"]
+
     # Add the new app name postfix
     new_app_name = app_name + NEW_APP_POSTFIX
 
@@ -139,9 +166,11 @@ def duplicate_app(app: dict):
             {
                 "form": {
                     "name": new_app_name,
+                    "title_field_keys": app_title_field_keys,
                     "description": app_description,
                     "elements": app_elements,
-                }
+                    "hidden_on_dashboard": True,
+                },
             }
         )
 
@@ -156,10 +185,49 @@ def duplicate_app(app: dict):
     # Get the records from the existing app
     records = get_app_records(app["id"])
 
+    # Get the percentage of records to duplicate
+    record_duplication_percentage = input(
+        f"What percentage of records do you want to duplicate ({len(records)} records)? (100%): "
+    )
+
+    # If the user does not enter a percentage, default to 100
+    if not record_duplication_percentage:
+        record_duplication_percentage = 100
+    else:
+        try:
+            record_duplication_percentage = int(record_duplication_percentage)
+        except ValueError:
+            logger.error("Invalid percentage")
+            exit(1)
+
+    # Shuffle the records
+    logger.debug("Shuffling records")
+    random.shuffle(records)
+
+    # Get the number of records to duplicate
+    number_of_records_to_duplicate = int(
+        (record_duplication_percentage / 100) * len(records)
+    )
+    logger.debug(
+        f"Number of records to duplicate: {number_of_records_to_duplicate}/{len(records)} ({record_duplication_percentage}%)"
+    )
+
+    # Get the records to duplicate
+    records_to_duplicate = records[:number_of_records_to_duplicate]
+
     # Create the new records
-    logger.debug(f"Creating {len(records)} records for app: {new_app_name}")
-    for record in records:
+    logger.debug(
+        f"Creating {len(records_to_duplicate)} records for app: {new_app_name}"
+    )
+    progress_records = tqdm(
+        records_to_duplicate,
+        total=number_of_records_to_duplicate,
+        desc="Records created",
+    )
+    for record in progress_records:
+        progress_records.set_description(f"Creating record: {record['id']}")
         create_app_record(record, new_app_id)
+    progress_records.close()
 
 
 def get_app_records(app_id: str):
@@ -215,9 +283,9 @@ def create_app_record(record: dict, app_id: str):
         # Get the new record id
         new_record_id = new_record["record"]["id"]
 
-        logger.info(f"New record created: {new_record_id}")
+        logger.debug(f"New record created: {new_record_id}")
     else:
-        logger.info(f"New record created: {record_id} (dry run)")
+        logger.debug(f"New record created: {record_id} (dry run)")
 
 
 if __name__ == "__main__":
