@@ -13,6 +13,58 @@
       "justMyCode": true
     },
     {
+      "name": "Duplicate App (CLIENT)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/duplicate_app.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["--name", "CLIENT"],
+      "presentation": {
+        "group": "duplicate_app",
+        "order": 1
+      }
+    },
+    {
+      "name": "Duplicate App (SITE DETAILS)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/duplicate_app.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["--name", "SITE DETAILS"],
+      "presentation": {
+        "group": "duplicate_app",
+        "order": 2
+      }
+    },
+    {
+      "name": "Duplicate App (SURVEY)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/duplicate_app.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["--name", "SURVEY"],
+      "presentation": {
+        "group": "duplicate_app",
+        "order": 3
+      }
+    },
+    {
+      "name": "Duplicate App (SITE VISIT RECORDS)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/duplicate_app.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["--name", "SITE VISIT RECORDS"],
+      "presentation": {
+        "group": "duplicate_app",
+        "order": 4
+      }
+    },
+    {
       "name": "Create Clientele (KSMP)",
       "type": "python",
       "request": "launch",
@@ -399,7 +451,11 @@
         "new_files\\SV\\new_records",
         "--type",
         "site_visits"
-      ]
+      ],
+      "presentation": {
+        "group": "import",
+        "order": 5
+      }
     },
     {
       "name": "JKMR Import",
@@ -418,7 +474,11 @@
         "new_files\\JKMR\\new_records",
         "--type",
         "survey"
-      ]
+      ],
+      "presentation": {
+        "group": "import",
+        "order": 5
+      }
     },
     {
       "name": "JKMR SV Import",
@@ -437,7 +497,11 @@
         "new_files\\JKMR_SV\\new_records",
         "--type",
         "site_visits"
-      ]
+      ],
+      "presentation": {
+        "group": "import",
+        "order": 5
+      }
     }
   ]
 }
