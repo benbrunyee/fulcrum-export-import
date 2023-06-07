@@ -199,7 +199,41 @@ shouldn't the "proximity_to_other_property_buildings" field in new app should be
 
 # IPMR Notes
 
-## Survey Transformtion
+## Process
+
+### Mapping Process
+
+1. Export existing SA + IPMR apps
+1. Find differences
+1. Duplicate SA app
+1. Create new fields/restructure for IPMR fields
+1. Export and find differences to ensure that all fields have been mapped to the new structure
+1. Repeat for all relevant repeatable sections
+1. Repeat for SV app
+
+### Once all fields have been mapped to new app structure
+
+Options:
+
+- Attempt to replicate structure in existing apps <-- This is the process that should be followed
+  - Pros:
+    - Can be simple and quicker to do
+  - Cons:
+    - Higher risk of data loss, an exact backup will need to be created with all records
+- Export and import data via API
+  - Pros:
+    - Can be more accurate and higher change capture rate
+  - Cons:
+    - Can take a lot longer
+
+## Survey Transformation
 
 - Yearly schedules are different. IPMR = Jan/Feb, Mar/Apr whereas Survey app = Jan/Feb, Feb/Mar, Mar/Apr
 - "does_site_to_be_surveyed_meet_generic_hs_criteria" same as "does_site_to_be_surveyed_meet_generic_rams_criteria"?
+
+- Knotweed Stand Details repeatable in the current SA is under a Knotweed Survey specific section.
+  - We can pull out the stand details from the section and generalize it (have specific fields for knotweed)
+
+- Have a variable within field names that can be replaced with the plant name?
+  - This will allow more fields to be generalized
+  - Or we could generlize the field title anyways
