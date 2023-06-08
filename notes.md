@@ -229,11 +229,18 @@ Options:
 ## Survey Transformation
 
 - Yearly schedules are different. IPMR = Jan/Feb, Mar/Apr whereas Survey app = Jan/Feb, Feb/Mar, Mar/Apr
-- "does_site_to_be_surveyed_meet_generic_hs_criteria" same as "does_site_to_be_surveyed_meet_generic_rams_criteria"?
 
 - Knotweed Stand Details repeatable in the current SA is under a Knotweed Survey specific section.
   - We can pull out the stand details from the section and generalize it (have specific fields for knotweed)
 
+- I will need to check whether any fields have been mapped to Knowtweed specific fields (which will be hidden for this type of record)
+
+- Changed "Target Plant(s)" from a single choice field to a multiple choice field
+
 - Have a variable within field names that can be replaced with the plant name?
   - This will allow more fields to be generalized
   - Or we could generlize the field title anyways
+
+- "spraying_near_water_documentation_aqherb01_if_appropriate" has been omitted (should this be the case?)
+- "distance_from_stand_to_water_body" is under 2m then populate "close_to_water_within_2_metres" with "true"
+- "does_site_to_be_surveyed_meet_generic_hs_criteria" same as "does_site_to_be_surveyed_meet_generic_rams_criteria"?

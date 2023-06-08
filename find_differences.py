@@ -132,7 +132,7 @@ def apply_custom_rules(target_row):
         elif re.match(r"^.*?(_schedule)?_year_.*$", target_row):
             new_val = re.sub(r"^(.*?)(_schedule)?_year_(.*)$", "\\1_\\3", target_row)
             logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
-    elif PARENT_DIR == "IPMR":
+    elif PARENT_DIR == "IPMR" or PARENT_DIR == "IPMR_NEW_STRUCTURE":
         if re.match(r"^.*?_schedule_year_1$", target_row):
             new_val = re.sub(r"^(.*?)_schedule_year_1$", "\\1", target_row)
             logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
@@ -179,11 +179,6 @@ def get_matching_file(postfix=None):
     elif PARENT_DIR == "JKMR_SV":
         if postfix == "site_visits_re_written":
             postfix = "service_visit_records"
-    elif PARENT_DIR == "IPMR":
-        if postfix == "stand_details":
-            postfix = "knotweed_stand_details"
-        elif postfix == "stand_details_stand_photos":
-            postfix = "knotweed_stand_details_stand_photos"
 
     return postfix, os.path.join(
         BASE_DIR, f"{BASE_PREFIX}{('_' + postfix) if postfix else ''}.csv"

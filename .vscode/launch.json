@@ -290,6 +290,31 @@
       }
     },
     {
+      "name": "Find Differences (IPMR) (to new structure)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/find_differences.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--debug",
+        "--parent_dir",
+        "IPMR_NEW_STRUCTURE",
+        "--base_dir",
+        "survey_copy_do_not_use",
+        "--base_prefix",
+        "survey_copy_do_not_use",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records"
+      ],
+      "presentation": {
+        "group": "find_differences",
+        "order": 2
+      }
+    },
+    {
       "name": "Find Differences (IPMR - SV)",
       "type": "python",
       "request": "launch",

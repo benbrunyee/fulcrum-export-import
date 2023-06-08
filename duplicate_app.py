@@ -85,7 +85,7 @@ def main():
     else:
         app = get_app(APP_NAME)
 
-    logger.debug(f"App selected for duplication: {app}")
+    logger.info(f"App selected for duplication: {app}")
     # Write to temp file if in debug mode
     if args.debug:
         logger.debug(f"Writing app to file: {app}")
