@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-This script checks whether a field mapping has been applied to a section/field
-that is conditionally rendered. If so, it will need to be manually checked to
-see whether this field mapping is still applicable.
+! DOES NOT WORK YET
+This script will count how many records within an app have a value for a field
 """
 
 import argparse
@@ -21,7 +20,9 @@ parser = argparse.ArgumentParser()
 # App name is referenced as a "Form" in the Fulcrum API
 parser.add_argument("--name", help="The name of the app to match on")
 parser.add_argument(
-    "--target-mappings", help="The file containing the mappings", required=True
+    "--data-name",
+    help="The data name of the field you would like to check",
+    required=True,
 )
 # Debug argument
 parser.add_argument("--debug", help="Print debug statements", action="store_true")
@@ -36,7 +37,7 @@ FULCRUM = Fulcrum(FULCRUM_API_KEY)
 # Store the name of the app to duplicate
 APP_NAME = None
 # The file containing the mappings
-MAPPING_FILE = args.target_mappings
+TARGET_DATA_NAME = args.data_name
 # The postfix to add to the new app name
 NEW_APP_POSTFIX = " - COPY (DO NOT USE)"
 
@@ -109,46 +110,25 @@ def select_app(apps: list):
     return apps[int(selection) - 1]
 
 
-def get_mappings():
-    with open(MAPPING_FILE) as f:
-        mappings = json.load(f)
+def get_all_fields_with_data_name(records: list, data_name: str):
+    found_fields = []
 
-    return mappings
+    for record in records:
+        if "data_name" in record and record["data_name"] == data_name:
+            logger.debug(f"Found field with data name: {record}")
+            found_fields.append(record)
 
+        if "elements" in record and record["elements"] != None:
+            found_fields.extend(get_all_fields_with_data_name(record, data_name))
 
-def get_section_elements(elements: list):
-    section_elements = []
-    for element in elements:
-        if "elements" in element and element["elements"] != None:
-            section_elements.extend(get_section_elements(element["elements"]))
-        else:
-            section_elements.append(element)
-
-    return section_elements
+    return found_fields
 
 
-def get_conditional_elements(elements: list):
-    # If the element is a section/repeatable (has "elements" key), check the elements
-    # If any of the parent elements are conditionally rendered, add them to the list and don't check the children
-    # since they will be conditionally rendered as well
-    # If the element is a field, check the "visible_conditions" key
-
-    conditional_elements = []
-    for element in elements:
-        if "visible_conditions" in element and element["visible_conditions"] != None:
-            element_copy = element.copy()
-            children_elements = (
-                element_copy.pop("elements") if "elements" in element_copy else None
-            )
-
-            conditional_elements.append(element_copy)
-            if children_elements != None:
-                # Extend with all the elements in the section since they will be conditionally rendered as well
-                conditional_elements.extend(get_section_elements(children_elements))
-        elif "elements" in element and element["elements"] != None:
-            conditional_elements.extend(get_conditional_elements(element["elements"]))
-
-    return conditional_elements
+def get_app_records(app: dict):
+    records = FULCRUM.records.search({"form_id": app["id"]})["records"]
+    logger.info(f"Found {len(records)} records")
+    logger.debug(f"Records: {json.dumps(records, indent=4)}")
+    return records
 
 
 def main():
@@ -160,29 +140,12 @@ def main():
     else:
         app = get_app(APP_NAME)
 
-    logger.debug(f"App selected: {app}")
+    logger.debug(f"App selected: {json.dumps(app, indent=4)}")
 
-    mappings = get_mappings()
-    mapping_values = mappings.values()
+    app_records = get_app_records(app)
+    fields_with_data_name = get_all_fields_with_data_name(app_records, TARGET_DATA_NAME)
 
-    app_elements = app["elements"]
-    conditional_elements = get_conditional_elements(app_elements)
-
-    data_names = {}
-    for element in conditional_elements:
-        data_names[element["data_name"]] = element["label"]
-
-    # Find intersection of conditional elements and mapping values
-    intersection = set(data_names.keys()).intersection(mapping_values)
-
-    if len(intersection) > 0:
-        logger.warning(
-            f"Found {len(intersection)} conditional elements that have been mapped"
-        )
-
-        logger.warning(f"Please check whether these mappings are still applicable:")
-        for element in intersection:
-            logger.warning(f"{element} = {data_names[element]}")
+    logger.info(f"Found {len(fields_with_data_name)} fields ")
 
 
 if __name__ == "__main__":
