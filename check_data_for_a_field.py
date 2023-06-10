@@ -119,7 +119,7 @@ def flatten_app_elements(app: dict):
     flattened_elements = []
 
     for element in elements:
-        if element["type"] == "Section":
+        if element["type"] == "Section" or element["type"] == "Repeatable":
             flattened_elements += flatten_app_elements(element)
         else:
             flattened_elements.append(element)
@@ -201,10 +201,23 @@ def main():
     logger.debug(f"Records with key: {json.dumps(target_values_with_key, indent=4)}")
 
     # Count how many records have each value
-    # A value can a dict with any number of keys or a direct value
+    # A value can a dict with at least 1 value in the "choice_values" key or "other_values" key
+    # or a direct value
     value_counts = 0
     for target_value in target_values_with_key:
-        if (isinstance(target_value, dict) and len(target_value) > 0) or target_value:
+        has_choice_value_set = False
+        has_other_value_set = False
+
+        if isinstance(target_value, dict):
+            if "choice_values" in target_value:
+                if len(target_value["choice_values"]) > 0:
+                    has_choice_value_set = True
+
+            if "other_values" in target_value:
+                if len(target_value["other_values"]) > 0:
+                    has_other_value_set = True
+
+        if has_choice_value_set or has_other_value_set or target_value:
             value_counts += 1
 
     logger.info(
