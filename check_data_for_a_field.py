@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """
-! DOES NOT WORK YET
 This script will count how many records within an app have a value for a field
 """
 
@@ -110,25 +109,66 @@ def select_app(apps: list):
     return apps[int(selection) - 1]
 
 
-def get_all_fields_with_data_name(records: list, data_name: str):
-    found_fields = []
-
-    for record in records:
-        if "data_name" in record and record["data_name"] == data_name:
-            logger.debug(f"Found field with data name: {record}")
-            found_fields.append(record)
-
-        if "elements" in record and record["elements"] != None:
-            found_fields.extend(get_all_fields_with_data_name(record, data_name))
-
-    return found_fields
-
-
 def get_app_records(app: dict):
     records = FULCRUM.records.search({"form_id": app["id"]})["records"]
-    logger.info(f"Found {len(records)} records")
-    logger.debug(f"Records: {json.dumps(records, indent=4)}")
     return records
+
+
+def flatten_app_elements(app: dict):
+    elements = app["elements"]
+    flattened_elements = []
+
+    for element in elements:
+        if element["type"] == "Section":
+            flattened_elements += flatten_app_elements(element)
+        else:
+            flattened_elements.append(element)
+
+    return flattened_elements
+
+
+def flatten_records_form_values(records: dict):
+    flattened_records = []
+
+    for record in records:
+        if "form_values" in record:
+            flattened_records.append(record["form_values"])
+
+    return flattened_records
+
+
+def traverse_search_record_for_key(record: dict, key: str):
+    """
+    Recursively search a record for a key
+    """
+
+    # If the record is a list, iterate over it
+    if isinstance(record, list):
+        for item in record:
+            traverse_search_record_for_key(item, key)
+    # If the record is a dict, check if it has the key
+    elif isinstance(record, dict):
+        if key in record:
+            return record[key]
+        else:
+            for k, v in record.items():
+                found_record = traverse_search_record_for_key(v, key)
+                if found_record:
+                    return found_record
+    else:
+        # If the record is not a list or dict, return None
+        return None
+
+
+def get_data_name_field_key(app: dict, data_name: str):
+    elements = flatten_app_elements(app)
+
+    for element in elements:
+        logger.debug(f"Field: {json.dumps(element, indent=4)}")
+        if element["data_name"] == data_name:
+            return element["key"]
+
+    raise Exception(f"Could not find field with data name {data_name}")
 
 
 def main():
@@ -142,10 +182,34 @@ def main():
 
     logger.debug(f"App selected: {json.dumps(app, indent=4)}")
 
-    app_records = get_app_records(app)
-    fields_with_data_name = get_all_fields_with_data_name(app_records, TARGET_DATA_NAME)
+    # Get the key of the field with the data name
+    field_key = get_data_name_field_key(app, TARGET_DATA_NAME)
+    logger.info(f"Data name field key: {field_key}")
 
-    logger.info(f"Found {len(fields_with_data_name)} fields ")
+    app_records = get_app_records(app)
+    logger.info(f"Found {len(app_records)} records")
+    logger.debug(f"App records: {json.dumps(app_records, indent=4)}")
+
+    target_values_with_key = []
+
+    for target_value in app_records:
+        record_with_key = traverse_search_record_for_key(target_value, field_key)
+        if record_with_key:
+            target_values_with_key.append(target_value)
+
+    logger.info(f"Found {len(target_values_with_key)} records with key: {field_key}")
+    logger.debug(f"Records with key: {json.dumps(target_values_with_key, indent=4)}")
+
+    # Count how many records have each value
+    # A value can a dict with any number of keys or a direct value
+    value_counts = 0
+    for target_value in target_values_with_key:
+        if (isinstance(target_value, dict) and len(target_value) > 0) or target_value:
+            value_counts += 1
+
+    logger.info(
+        f"Found {value_counts} records with a value for {field_key} ({TARGET_DATA_NAME})"
+    )
 
 
 if __name__ == "__main__":
