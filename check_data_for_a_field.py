@@ -127,44 +127,40 @@ def flatten_app_elements(app: dict):
     return flattened_elements
 
 
-def flatten_records_form_values(records: dict):
-    flattened_records = []
-
-    for record in records:
-        if "form_values" in record:
-            flattened_records.append(record["form_values"])
-
-    return flattened_records
-
-
 def traverse_search_record_for_key(record: dict, key: str):
     """
     Recursively search a record for a key
     """
 
+    found_record = None
+
     # If the record is a list, iterate over it
     if isinstance(record, list):
         for item in record:
-            traverse_search_record_for_key(item, key)
+            found_record = traverse_search_record_for_key(item, key)
+            if found_record:
+                break
     # If the record is a dict, check if it has the key
     elif isinstance(record, dict):
         if key in record:
             return record[key]
         else:
-            for k, v in record.items():
+            for v in record.values():
                 found_record = traverse_search_record_for_key(v, key)
                 if found_record:
-                    return found_record
-    else:
-        # If the record is not a list or dict, return None
-        return None
+                    break
+    return found_record
 
 
 def get_data_name_field_key(app: dict, data_name: str):
     elements = flatten_app_elements(app)
 
+    if args.debug:
+        with open("elements.json", "w") as f:
+            f.write(json.dumps(elements, indent=4))
+            logger.debug("Wrote elements to elements.json")
+
     for element in elements:
-        logger.debug(f"Field: {json.dumps(element, indent=4)}")
         if element["data_name"] == data_name:
             return element["key"]
 
@@ -180,7 +176,10 @@ def main():
     else:
         app = get_app(APP_NAME)
 
-    logger.debug(f"App selected: {json.dumps(app, indent=4)}")
+    if args.debug:
+        with open("app.json", "w") as f:
+            f.write(json.dumps(app, indent=4))
+            logger.debug("Wrote app to app.json")
 
     # Get the key of the field with the data name
     field_key = get_data_name_field_key(app, TARGET_DATA_NAME)
@@ -188,7 +187,11 @@ def main():
 
     app_records = get_app_records(app)
     logger.info(f"Found {len(app_records)} records")
-    logger.debug(f"App records: {json.dumps(app_records, indent=4)}")
+
+    if args.debug:
+        with open("app_records.json", "w") as f:
+            f.write(json.dumps(app_records, indent=4))
+            logger.debug("Wrote app records to app_records.json")
 
     target_values_with_key = []
 
@@ -198,7 +201,11 @@ def main():
             target_values_with_key.append(target_value)
 
     logger.info(f"Found {len(target_values_with_key)} records with key: {field_key}")
-    logger.debug(f"Records with key: {json.dumps(target_values_with_key, indent=4)}")
+
+    if args.debug:
+        with open("target_values_with_key.json", "w") as f:
+            f.write(json.dumps(target_values_with_key, indent=4))
+            logger.debug("Wrote target values with key to target_values_with_key.json")
 
     # Count how many records have each value
     # A value can a dict with at least 1 value in the "choice_values" key or "other_values" key
