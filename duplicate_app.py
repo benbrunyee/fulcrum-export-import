@@ -22,7 +22,7 @@ parser.add_argument(
 )
 # Debug argument
 parser.add_argument("--debug", help="Print debug statements", action="store_true")
-
+parser.add_argument("--postfix", help="The postfix to add to the new app name")
 # Parse the arguments
 args = parser.parse_args()
 
@@ -33,7 +33,7 @@ FULCRUM = Fulcrum(FULCRUM_API_KEY)
 # Store the name of the app to duplicate
 APP_NAME = None
 # The postfix to add to the new app name
-NEW_APP_POSTFIX = " - COPY (DO NOT USE)"
+NEW_APP_POSTFIX = args.postfix or " - COPY (DO NOT USE)"
 
 # Logging format of: [LEVEL]::[FUNCTION]::[HH:MM:SS] - [MESSAGE]
 # Where the level is colored based on the level and the rest except from the message is grey
