@@ -88,7 +88,7 @@ DEFAULT_BASE_COLS = {
     ]
     if any([re.match(k, row["property_type"]) for k in PROPERTY_TYPE_MAPPINGS.keys()])
     else "",
-    "plant_type": lambda row: "Japanese Knotweed",
+    "plant_type": lambda row: "Other" if PARENT_DIR == "IPMR" else "Japanese Knotweed",
     "job_type": lambda row: "Treatment",
 }
 

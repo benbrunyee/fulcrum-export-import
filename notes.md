@@ -244,3 +244,12 @@ Options:
 - "spraying_near_water_documentation_aqherb01_if_appropriate" has been omitted (should this be the case?)
 - "distance_from_stand_to_water_body" is under 2m then populate "close_to_water_within_2_metres" with "true"
 - "does_site_to_be_surveyed_meet_generic_hs_criteria" same as "does_site_to_be_surveyed_meet_generic_rams_criteria"?
+
+Fields to show for all plant types?
+
+- other_impacted_site_details
+
+TODO:
+
+- Map "is_the_entire_stand_located_within_the_boundaries_of_the_subject_site" to "stand_location_relative_to_boundaries"?
+- Map "distance_from_stand_to_water_body" & "is_there_a_water_body_nearby" to "close_to_water_within_2_metres"?

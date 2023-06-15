@@ -109,6 +109,28 @@
       }
     },
     {
+      "name": "Create Clientele (IPMR)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/create_clientele.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--existing_clientele",
+        "client\\client.csv",
+        "--target_file",
+        "invasive_plants_management_records\\invasive_plants_management_records.csv",
+        "--ref_col",
+        "pba_reference",
+        "--client_name_col",
+        "client_names"
+      ],
+      "presentation": {
+        "group": "create_clientele",
+        "order": 3
+      }
+    },
+    {
       "name": "Create Site Locations (KSMP)",
       "type": "python",
       "request": "launch",
@@ -166,6 +188,36 @@
       "presentation": {
         "group": "create_site_locations",
         "order": 2
+      }
+    },
+    {
+      "name": "Create Site Locations (IPMR)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/create_site_locations.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--existing_site_locations",
+        "site_details\\site_details.csv",
+        "--clientele_file",
+        "client_copy_do_not_use\\client_copy_do_not_use.csv",
+        "--target_file",
+        "invasive_plants_management_records\\invasive_plants_management_records.csv",
+        "--acc_ref_col",
+        "pba_reference",
+        "--client_name_col",
+        "client_names",
+        "--property_type_col",
+        "property_type",
+        "--account_status_col",
+        "status",
+        "--site_address_prefix",
+        "site_address_"
+      ],
+      "presentation": {
+        "group": "create_site_locations",
+        "order": 3
       }
     },
     {
@@ -457,6 +509,34 @@
       "presentation": {
         "group": "transform",
         "order": 4
+      }
+    },
+    {
+      "name": "Transform (IPMR)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/transform.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "IPMR",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records",
+        "--site_location_file",
+        "bb_site_location_import\\bb_site_location_import.csv",
+        "--client_name_col",
+        "client_names",
+        "--acc_ref_col",
+        "pba_reference",
+        "--transform_type",
+        "survey"
+      ],
+      "presentation": {
+        "group": "transform",
+        "order": 2
       }
     },
     {
