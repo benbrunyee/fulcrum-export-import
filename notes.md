@@ -253,3 +253,9 @@ TODO:
 
 - Map "is_the_entire_stand_located_within_the_boundaries_of_the_subject_site" to "stand_location_relative_to_boundaries"?
 - Map "distance_from_stand_to_water_body" & "is_there_a_water_body_nearby" to "close_to_water_within_2_metres"?
+
+### Changes Made
+
+- App structure
+- Report code
+- Field prefix tags {BREAK} on "Site Plans"
