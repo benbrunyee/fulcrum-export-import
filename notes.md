@@ -259,3 +259,5 @@ TODO:
 - App structure
 - Report code
 - Field prefix tags {BREAK} on "Site Plans"
+- Calculation fields:
+  - Stand Title
