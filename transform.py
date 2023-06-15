@@ -45,6 +45,7 @@ SITE_LOCATION_FILE = args.site_location_file
 TRANSFORM_TYPE = args.transform_type
 
 TRANSFORMATIONS = {
+    "IPMR": {},
     "KSMP": {},
     "JKMR": {
         "knotweed_stand_details": {

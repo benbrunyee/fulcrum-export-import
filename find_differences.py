@@ -33,7 +33,7 @@ parser.add_argument("--target_prefix", type=str, help="Target prefix", required=
 parser.add_argument(
     "--skip_prompt_matching",
     action="store_true",
-    help="Skip all prompt matching",
+    help="Skip all prompt matching. Don't ask for user input.",
     required=False,
 )
 
@@ -132,12 +132,14 @@ def apply_custom_rules(target_row):
         elif re.match(r"^.*?(_schedule)?_year_.*$", target_row):
             new_val = re.sub(r"^(.*?)(_schedule)?_year_(.*)$", "\\1_\\3", target_row)
             logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
-    elif PARENT_DIR == "IPMR" or PARENT_DIR == "IPMR_NEW_STRUCTURE":
-        if re.match(r"^.*?_schedule_year_1$", target_row):
-            new_val = re.sub(r"^(.*?)_schedule_year_1$", "\\1", target_row)
+    elif PARENT_DIR == "IPMR":
+        if re.match(r"^.*?_year_1$", target_row):
+            new_val = re.sub(r"^(.*?)(_schedule)?_year_1$", "\\1", target_row)
             logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
-        elif re.match(r"^.*?_schedule_year_1_other$", target_row):
-            new_val = re.sub(r"^(.*?)_year_1_other$", "\\1_other", target_row)
+        elif re.match(r"^.*?_year_1_other$", target_row):
+            new_val = re.sub(
+                r"^(.*?)(_schedule)?_year_1_other$", "\\1_other", target_row
+            )
             logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
         elif re.match(r"^.*?(_schedule)?_year_.*$", target_row):
             new_val = re.sub(r"^(.*?)(_schedule)?_year_(.*)$", "\\1_\\3", target_row)
@@ -643,7 +645,7 @@ def find_and_write_diffs(base, target, prefix):
                     continue
                 else:
                     if response not in unmatched:
-                        logger.info(f"Invalid column: '{response}'")
+                        logger.warning(f"Invalid column: '{response}'")
                         continue
                     logger.info(f"Replacing: '{row[0]}' with '{response}'")
                     rows[i] = [row[0], row[1], response]

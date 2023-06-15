@@ -328,31 +328,6 @@
         "--parent_dir",
         "IPMR",
         "--base_dir",
-        "survey",
-        "--base_prefix",
-        "survey",
-        "--target_dir",
-        "invasive_plants_management_records",
-        "--target_prefix",
-        "invasive_plants_management_records"
-      ],
-      "presentation": {
-        "group": "find_differences",
-        "order": 2
-      }
-    },
-    {
-      "name": "Find Differences (IPMR) (to new structure)",
-      "type": "python",
-      "request": "launch",
-      "program": "${workspaceFolder}/find_differences.py",
-      "console": "integratedTerminal",
-      "justMyCode": true,
-      "args": [
-        "--debug",
-        "--parent_dir",
-        "IPMR_NEW_STRUCTURE",
-        "--base_dir",
         "survey_copy_do_not_use",
         "--base_prefix",
         "survey_copy_do_not_use",
@@ -526,7 +501,7 @@
         "--target_prefix",
         "invasive_plants_management_records",
         "--site_location_file",
-        "bb_site_location_import\\bb_site_location_import.csv",
+        "site_details_copy_do_not_use\\site_details_copy_do_not_use.csv",
         "--client_name_col",
         "client_names",
         "--acc_ref_col",
