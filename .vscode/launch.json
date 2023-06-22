@@ -359,7 +359,8 @@
         "--target_dir",
         "invasive_plants_management_records",
         "--target_prefix",
-        "invasive_plants_management_records"
+        "invasive_plants_management_records",
+        "--skip_prompt_matching"
       ],
       "presentation": {
         "group": "find_differences",
@@ -484,6 +485,38 @@
       "presentation": {
         "group": "transform",
         "order": 4
+      }
+    },
+    {
+      "name": "Transform (IPMR - SV)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/transform.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "IPMR_SV",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records",
+        "--site_location_file",
+        "site_details_copy_do_not_use\\site_details_copy_do_not_use.csv",
+        "--client_name_col",
+        "client_names",
+        "--acc_ref_col",
+        "pba_reference",
+        "--transform_type",
+        "site_visits",
+        "--survey_dir",
+        "survey",
+        "--survey_dir_prefix",
+        "survey"
+      ],
+      "presentation": {
+        "group": "transform",
+        "order": 2
       }
     },
     {

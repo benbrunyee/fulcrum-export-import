@@ -44,8 +44,10 @@ SITE_LOCATION_FILE = args.site_location_file
 
 TRANSFORM_TYPE = args.transform_type
 
+# Structure: Repeatble -> target field key in old app -> value: new value
 TRANSFORMATIONS = {
     "IPMR": {},
+    "IPMR_SV": {},
     "KSMP": {},
     "JKMR": {
         "knotweed_stand_details": {
@@ -94,13 +96,54 @@ DEFAULT_BASE_COLS = {
 }
 
 DEFAULT_SV_SV_COLS = {
-    "visit_category": lambda row: "Japanese Knotweed Management Record",
-    "record_type_japanese_knotweed": lambda row: row["record_type_japanese_knotweed"]
-    if "record_type_japanese_knotweed" in row
-    else "Herbicide Application & Monitoring Record",
-    "visit_type_japanese_knotweed_application_monitoring": lambda row: row["visit_type"]
-    if row["visit_type"] != "Site Monitoring Observations & Recommendations"
-    else "Scheduled Monitoring",
+    "visit_category": lambda row: "Japanese Knotweed Management Record"
+    if PARENT_DIR != "IPMR_SV"
+    else "Invasive Plants Management Record",
+    **(
+        {
+            "record_type_japanese_knotweed": lambda row: row[
+                "record_type_japanese_knotweed"
+            ]
+            if "record_type_japanese_knotweed" in row
+            else "Herbicide Application & Monitoring Record"
+        }
+        if PARENT_DIR != "IPMR_SV"
+        else {}
+    ),
+    **(
+        {
+            # TODO: Confirm this logic
+            "record_type_invasive_plants": lambda row: row[
+                "record_type_invasive_plants"
+            ]
+            if "record_type_invasive_plants" in row
+            else "Herbicide Application"
+        }
+        if PARENT_DIR == "IPMR_SV"
+        else {}
+    ),
+    **(
+        {
+            "visit_type_japanese_knotweed_application_monitoring": lambda row: row[
+                "visit_type"
+            ]
+            if row["visit_type"] != "Site Monitoring Observations & Recommendations"
+            else "Scheduled Monitoring"
+        }
+        if PARENT_DIR != "IPMR_SV"
+        else {}
+    ),
+    **(
+        {
+            # This won't match up exactly but the data will still be there.
+            # This can be fixed on manual edits
+            "visit_type_invasive_plants_application": lambda row: row["service_type"]
+            if row["service_type"] != "Monitoring visit"
+            else "Scheduled Monitoring"
+        }
+        if PARENT_DIR == "IPMR_SV"
+        else {}
+    ),
 }
 
 

@@ -1,4 +1,4 @@
-<s># After
+# After
 
 New Survey App - Demo records (title):
 
@@ -233,7 +233,8 @@ Options:
 - Knotweed Stand Details repeatable in the current SA is under a Knotweed Survey specific section.
   - We can pull out the stand details from the section and generalize it (have specific fields for knotweed)
 
-- I will need to check whether any fields have been mapped to Knowtweed specific fields (which will be hidden for this type of record)
+- I will need to check whether any fields have been mapped to Knotweed specific fields (which will be hidden for this type of record)
+  - Use [script](check_for_conditional_mapping.py)
 
 - Changed "Target Plant(s)" from a single choice field to a multiple choice field
 
@@ -261,3 +262,12 @@ TODO:
 - Field prefix tags {BREAK} on "Site Plans"
 - Calculation fields:
   - Stand Title
+
+## Site Visits Transformation
+
+- "visit_type_invasive_plants_application" won't match up exactly but data will still be there and this can be edited manually in the future
+
+Questions:
+
+- SITE VISIT RECORDS - Why is there "Planned work carried out?" and "Treatment carried out?" fields? Aren't they the same?
+- SITE VISIT RECORDS - "Total number of knotweed stands identified" need to be conditionally hidden?

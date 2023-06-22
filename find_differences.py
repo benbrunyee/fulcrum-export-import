@@ -17,8 +17,6 @@ import os
 import re
 import shutil
 
-from tabulate import tabulate
-
 # Arguments
 parser = argparse.ArgumentParser(description="Find differences between 2 csv files")
 
@@ -181,6 +179,9 @@ def get_matching_file(postfix=None):
     elif PARENT_DIR == "JKMR_SV":
         if postfix == "site_visits_re_written":
             postfix = "service_visit_records"
+    elif PARENT_DIR == "IPMR_SV":
+        if postfix == "service_visits_re_written":
+            postfix = "service_visit_records"
 
     return postfix, os.path.join(
         BASE_DIR, f"{BASE_PREFIX}{('_' + postfix) if postfix else ''}.csv"
@@ -273,6 +274,24 @@ def transform_knotweed_survey_repeatable_jkmr():
         writer.writerows(new_rows)
 
 
+def merge_fields(row, field_key_1, field_key_2):
+    """
+    Merge two fields together, if the first field is empty, use the second field
+    """
+    if field_key_1 not in row.keys() and field_key_2 not in row.keys():
+        return row
+    elif field_key_2 in row.keys() and not row[field_key_1]:
+        logger.info(
+            f"Field {field_key_1} is empty, using {field_key_2} instead for row {row['fulcrum_id']}"
+        )
+        row[field_key_1] = row[field_key_2]
+        return row
+    elif field_key_1 in row.keys() and not row[field_key_2]:
+        return row
+
+    return row
+
+
 def transform_knotweed_survey_stand_details_jkmr():
     new_rows = []
 
@@ -343,6 +362,37 @@ def transform_knotweed_survey_stand_details_jkmr():
         "w",
     ) as f:
         writer = csv.DictWriter(f, fieldnames=rows[0].keys())
+        writer.writeheader()
+        writer.writerows(new_rows)
+
+
+def transform_base_for_service_visits_ipmr():
+    """
+    Transform the base app when for an IPMR difference findings when we are
+    finding differences for the site visits transformation
+    """
+
+    new_rows = []
+
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}.csv"), "r") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        fields_to_merge = [
+            ["property_type", "property_type_other"],
+        ]
+
+        for row in rows:
+            for field_pair in fields_to_merge:
+                row = merge_fields(row, field_pair[0], field_pair[1])
+            new_rows.append(row)
+
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_base_re_written.csv"),
+        "w",
+        newline="",
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
         writer.writeheader()
         writer.writerows(new_rows)
 
@@ -628,7 +678,7 @@ def find_and_write_diffs(base, target, prefix):
                     continue
 
                 logger.info(
-                    f"Replace:\n{row[0]}\n{row[1]}? (Y/n/type your own column name)"
+                    f"Replace:\n{row[0]}\nSuggested: {row[1]}? (Y/n/type your own column name)"
                 )
                 response = input()
                 response = response.lower().strip()
@@ -676,7 +726,7 @@ def get_correct_file_name(f):
             return f"{TARGET_PREFIX}_base_re_written.csv"
         else:
             return f
-    elif f == f"{TARGET_PREFIX}_service_visits.csv":
+    elif f == f"{TARGET_PREFIX}_service_visit_records.csv":
         if PARENT_DIR == "IPMR_SV":
             return f"{TARGET_PREFIX}_service_visits_re_written.csv"
 
@@ -699,6 +749,7 @@ if PARENT_DIR == "JKMR_SV":
     transform_site_visits()
 
 if PARENT_DIR == "IPMR_SV":
+    transform_base_for_service_visits_ipmr()
     transform_service_visits_ipmr()
 
 # Read all the files in the base & target directory
@@ -706,11 +757,13 @@ base_files = get_files(BASE_DIR, BASE_PREFIX)
 
 target_files = []
 
-if PARENT_DIR == "JKMR_SV":
+if re.search(r"_SV$", PARENT_DIR):
     # We only check the base and the re-written site visits when we are doing a site visits comparison
     target_files = [
         f"{TARGET_PREFIX}.csv",
-        f"{TARGET_PREFIX}_site_visits_re_written.csv",
+        f"{TARGET_PREFIX}_site_visits_re_written.csv"
+        if PARENT_DIR == "JKMR"
+        else f"{TARGET_PREFIX}_service_visits_re_written.csv",
     ]
 else:
     target_files = get_files(TARGET_DIR, TARGET_PREFIX)
@@ -725,8 +778,7 @@ for f in target_files:
             or f == f"{TARGET_PREFIX}_knotweed_survey.csv"
         )
     ) or (
-        PARENT_DIR == "IPMR_SV"
-        and f == f"{TARGET_PREFIX}_service_visits_re_written.csv"
+        PARENT_DIR == "IPMR" and f == f"{TARGET_PREFIX}_service_visits_re_written.csv"
     ):
         continue
 
