@@ -266,8 +266,10 @@ TODO:
 ## Site Visits Transformation
 
 - "visit_type_invasive_plants_application" won't match up exactly but data will still be there and this can be edited manually in the future
+- "adjuvant_included_in_mix" doesn't actually map to "adjuvant_included_in_mix" since data types are different
 
 Questions:
 
 - SITE VISIT RECORDS - Why is there "Planned work carried out?" and "Treatment carried out?" fields? Aren't they the same?
 - SITE VISIT RECORDS - "Total number of knotweed stands identified" need to be conditionally hidden?
+- SITE VISIT RECORDS - "Technician feedback" should be within the "Service Visit Records" repeatable?
