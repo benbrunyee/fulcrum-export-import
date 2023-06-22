@@ -397,128 +397,6 @@ def transform_base_for_service_visits_ipmr():
         writer.writerows(new_rows)
 
 
-def transform_service_visits_ipmr():
-    """
-    Transform the service visit records for the IPMR app into individual records that
-    have been joined to the parent record
-    """
-
-    # Each service visit is an entire record in the new survey app
-    # We want to read all the child values and then join them to the parent values
-    # to create a new record for each service visit. We should add a new field to say
-    # what the parent record id is and map the child record id to the id of the new
-    # record
-
-    # To hold the IDs of the parent records
-    parent_record_ids = []
-
-    # To hold the values of the parent records
-    # We will use the parent record id as the key
-    parent_record_data = {}
-
-    # To hold the values of the child records
-    # The key will be the parent record id and the value will be a list of child record ids
-    parent_to_child_record_mapping = {}
-
-    # To hold the values of the child records
-    # The key will be the child record id
-    child_record_data = {}
-
-    service_visit_postfix = "_service_visit_records"
-
-    # Read the parent records
-    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}.csv"), "r") as f:
-        reader = csv.DictReader(f)
-        rows = list(reader)
-
-        for row in rows:
-            parent_record_id = row["fulcrum_id"]
-            parent_record_ids.append(parent_record_id)
-            parent_record_data[parent_record_id] = row
-
-    # Read the child records
-    with open(
-        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}{service_visit_postfix}.csv"), "r"
-    ) as f:
-        reader = csv.DictReader(f)
-        rows = list(reader)
-
-        for row in rows:
-            parent_record_id = row["fulcrum_parent_id"]
-            child_record_id = row["fulcrum_id"]
-
-            # Throw an error if the parent record id is not in the list
-            if parent_record_id not in parent_record_ids:
-                raise Exception(
-                    f"Parent record id '{parent_record_id}' does not exist in the list of parent record ids.\n"
-                    + "This means that there are child records for a parent record that does not exist.\n"
-                    + "This is not allowed."
-                )
-
-            # Throw an error if the child record id is already in the list
-            if child_record_id in child_record_data:
-                raise Exception(
-                    f"Child record id '{child_record_id}' already exists in the list of child record ids.\n"
-                    + "This means that there are multiple child records with the same id.\n"
-                    + "This is not allowed."
-                )
-
-            # Add the child record to the list of child records
-            child_record_data[child_record_id] = row
-
-            # Add the child record to the mapping of parent record ids to child record ids
-            if parent_record_id not in parent_to_child_record_mapping:
-                parent_to_child_record_mapping[parent_record_id] = []
-
-            parent_to_child_record_mapping[parent_record_id].append(child_record_id)
-
-    logger.debug("Parent record ids: %s", parent_record_ids)
-    logger.debug("Child record ids: %s", child_record_data.keys())
-    logger.debug("Parent to child record mapping: %s", parent_to_child_record_mapping)
-
-    # Create a new list of rows
-    new_rows = []
-
-    # Loop through the parent records
-    for parent_record_id in parent_record_ids:
-        parent_record = parent_record_data[parent_record_id]
-
-        # Ignore parent records that don't have any child records
-        if parent_record_id not in parent_to_child_record_mapping:
-            continue
-
-        # Loop through the child records
-        for child_record_id in parent_to_child_record_mapping[parent_record_id]:
-            child_record = child_record_data[child_record_id]
-
-            # Create a new row
-            new_row = {}
-
-            # Copy the parent record values to the new row
-            for key, value in parent_record.items():
-                new_row[key] = value
-
-            # Copy the child record values to the new row
-            for key, value in child_record.items():
-                new_row[key] = value
-
-            # Add a new field to the new row to say what the parent record id is
-            new_row["fulcrum_parent_id"] = parent_record_id
-
-            # Add the new row to the list of new rows
-            new_rows.append(new_row)
-
-    # Write the new rows to a new CSV file
-    with open(
-        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_service_visits_re_written.csv"),
-        "w",
-        newline="",
-    ) as f:
-        writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
-        writer.writeheader()
-        writer.writerows(new_rows)
-
-
 def transform_site_visits():
     new_csv = []
 
@@ -726,9 +604,6 @@ def get_correct_file_name(f):
             return f"{TARGET_PREFIX}_base_re_written.csv"
         else:
             return f
-    elif f == f"{TARGET_PREFIX}_service_visit_records.csv":
-        if PARENT_DIR == "IPMR_SV":
-            return f"{TARGET_PREFIX}_service_visits_re_written.csv"
 
     return f
 
@@ -750,7 +625,6 @@ if PARENT_DIR == "JKMR_SV":
 
 if PARENT_DIR == "IPMR_SV":
     transform_base_for_service_visits_ipmr()
-    transform_service_visits_ipmr()
 
 # Read all the files in the base & target directory
 base_files = get_files(BASE_DIR, BASE_PREFIX)
@@ -763,7 +637,7 @@ if re.search(r"_SV$", PARENT_DIR):
         f"{TARGET_PREFIX}.csv",
         f"{TARGET_PREFIX}_site_visits_re_written.csv"
         if PARENT_DIR == "JKMR"
-        else f"{TARGET_PREFIX}_service_visits_re_written.csv",
+        else f"{TARGET_PREFIX}_service_visit_records.csv",
     ]
 else:
     target_files = get_files(TARGET_DIR, TARGET_PREFIX)
@@ -771,14 +645,9 @@ else:
 # Loop through each target file, find the base equivalent and compare
 for f in target_files:
     # Skip these files
-    if (
-        PARENT_DIR == "JKMR"
-        and (
-            f == f"{TARGET_PREFIX}_base_re_written.csv"
-            or f == f"{TARGET_PREFIX}_knotweed_survey.csv"
-        )
-    ) or (
-        PARENT_DIR == "IPMR" and f == f"{TARGET_PREFIX}_service_visits_re_written.csv"
+    if PARENT_DIR == "JKMR" and (
+        f == f"{TARGET_PREFIX}_base_re_written.csv"
+        or f == f"{TARGET_PREFIX}_knotweed_survey.csv"
     ):
         continue
 

@@ -4,6 +4,7 @@ This script will count how many records within an app have a value for a field
 """
 
 import argparse
+import builtins
 import json
 import logging
 import os
@@ -39,6 +40,9 @@ APP_NAME = None
 TARGET_DATA_NAME = args.data_name
 # The postfix to add to the new app name
 NEW_APP_POSTFIX = " - COPY (DO NOT USE)"
+
+# The list of files created
+FILES_CREATED = []
 
 # Logging format of: [LEVEL]::[FUNCTION]::[HH:MM:SS] - [MESSAGE]
 # Where the level is colored based on the level and the rest except from the message is grey
@@ -167,6 +171,22 @@ def get_data_name_field_key(app: dict, data_name: str):
     raise Exception(f"Could not find field with data name {data_name}")
 
 
+def open(filename, mode):
+    """
+    Override builtin "open" function to open file but add filename to the global list of files
+    This is so we can delete them later
+    """
+    global FILES_CREATED
+    FILES_CREATED.append(filename)
+    return builtins.open(filename, mode)
+
+
+def cleanup():
+    # Delete all file that were created during the script
+    for filename in FILES_CREATED:
+        os.remove(filename)
+
+
 def main():
     # If the app name is not passed, list all apps and get the user to select one
     app = None
@@ -230,6 +250,9 @@ def main():
     logger.info(
         f"Found {value_counts} records with a value for {field_key} ({TARGET_DATA_NAME})"
     )
+
+    # Clean up
+    cleanup()
 
 
 if __name__ == "__main__":
