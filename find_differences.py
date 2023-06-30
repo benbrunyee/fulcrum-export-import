@@ -180,7 +180,7 @@ def get_matching_file(postfix=None):
         if postfix == "site_visits_re_written":
             postfix = "service_visit_records"
     elif PARENT_DIR == "IPMR_SV":
-        if postfix == "service_visits_re_written":
+        if postfix == "service_visit_records_re_written":
             postfix = "service_visit_records"
 
     return postfix, os.path.join(
@@ -278,16 +278,29 @@ def merge_fields(row, field_key_1, field_key_2):
     """
     Merge two fields together, if the first field is empty, use the second field
     """
-    if field_key_1 not in row.keys() and field_key_2 not in row.keys():
-        return row
-    elif field_key_2 in row.keys() and not row[field_key_1]:
+    if field_key_1 not in row.keys() or field_key_2 not in row.keys():
+        raise Exception(
+            f"Field {field_key_1} or {field_key_2} not found in row {row['fulcrum_id']}"
+        )
+    elif not row[field_key_1]:
         logger.info(
             f"Field {field_key_1} is empty, using {field_key_2} instead for row {row['fulcrum_id']}"
         )
         row[field_key_1] = row[field_key_2]
         return row
-    elif field_key_1 in row.keys() and not row[field_key_2]:
-        return row
+
+    return row
+
+
+def map_fields(row, field_map):
+    """
+    Map fields to a new field name
+    """
+    for old_field, new_field in field_map.items():
+        if old_field not in row.keys():
+            raise Exception(f"Field {old_field} not found in row {row['fulcrum_id']}")
+
+        row[new_field] = row[old_field]
 
     return row
 
@@ -397,7 +410,104 @@ def transform_base_for_service_visits_ipmr():
         writer.writerows(new_rows)
 
 
-def transform_site_visits():
+def transform_service_visits_ipmr():
+    """
+    Transform the base app when for an IPMR difference findings when we are
+    finding differences for the site visits transformation and site visits
+    repeatable
+    """
+
+    new_rows = []
+
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_service_visit_records.csv"), "r"
+    ) as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        # regex
+        service_type_to_record_type_map = {
+            "Herbicide treatment .*": "Herbicide Application",
+            "Monitoring visit": "Site Monitoring",
+            ".*": "Cut / Clearance / Excavation / Barrier / Other",
+        }
+
+        # regex
+        service_type_to_visit_type_data_name_map = {
+            "Herbicide treatment .*": "visit_type_invasive_plants_application",
+            ".*": "visit_type_invasive_plants_other",
+        }
+
+        fields_to_merge = [
+            ["service_visit_type", "service_type"],
+            ["service_visit_type_other", "service_type_other"],
+            ["adjuvant_name", "adjuvant_name_other"],
+            ["treatment_notes_observations_and_issues", "works_notes"],
+            ["treatment_photos", "works_photo_record"],
+            ["treatment_photos_caption", "works_photo_record_caption"],
+            ["treatment_photos_url", "works_photo_record_url"],
+            ["treatment_video", "works_video_record"],
+            ["treatment_video_caption", "works_video_record_caption"],
+            ["treatment_video_url", "works_video_record_url"],
+        ]
+
+        for row in rows:
+            for field_pair in fields_to_merge:
+                row = merge_fields(row, field_pair[0], field_pair[1])
+
+            # Find first matching regex and set the record type
+            is_match = False
+            for regex in service_type_to_record_type_map.keys():
+                if re.match(regex, row["service_visit_type"]):
+                    row[
+                        "record_type_invasive_plants"
+                    ] = service_type_to_record_type_map[regex]
+                    is_match = True
+                    break
+
+            # If no match, set the last record type
+            if not is_match:
+                row["record_type_invasive_plants"] = service_type_to_record_type_map[
+                    service_type_to_record_type_map.keys()[-1]
+                ]
+
+            # Populate the row with all the visit type data names
+            for (
+                visit_type_data_name
+            ) in service_type_to_visit_type_data_name_map.values():
+                row[visit_type_data_name] = ""
+
+            # Find the first matching regex and create a new field with the visit type data name
+            is_match = False
+            for regex in service_type_to_visit_type_data_name_map.keys():
+                if re.match(regex, row["service_visit_type"]):
+                    row[service_type_to_visit_type_data_name_map[regex]] = row[
+                        "service_visit_type"
+                    ]
+                    is_match = True
+                    break
+
+            # If no match, set the last visit type data name
+            if not is_match:
+                row[service_type_to_visit_type_data_name_map.keys()[-1]] = row[
+                    "service_visit_type"
+                ]
+
+            new_rows.append(row)
+
+    with open(
+        os.path.join(
+            TARGET_DIR, f"{TARGET_PREFIX}_service_visit_records_re_written.csv"
+        ),
+        "w",
+        newline="",
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
+        writer.writeheader()
+        writer.writerows(new_rows)
+
+
+def transform_site_visits_jkmr():
     new_csv = []
 
     # This is for just visualising the data
@@ -621,10 +731,11 @@ if PARENT_DIR == "JKMR":
     transform_knotweed_survey_stand_details_jkmr()
 
 if PARENT_DIR == "JKMR_SV":
-    transform_site_visits()
+    transform_site_visits_jkmr()
 
 if PARENT_DIR == "IPMR_SV":
     transform_base_for_service_visits_ipmr()
+    transform_service_visits_ipmr()
 
 # Read all the files in the base & target directory
 base_files = get_files(BASE_DIR, BASE_PREFIX)
@@ -637,7 +748,7 @@ if re.search(r"_SV$", PARENT_DIR):
         f"{TARGET_PREFIX}.csv",
         f"{TARGET_PREFIX}_site_visits_re_written.csv"
         if PARENT_DIR == "JKMR"
-        else f"{TARGET_PREFIX}_service_visit_records.csv",
+        else f"{TARGET_PREFIX}_service_visit_records_re_written.csv",
     ]
 else:
     target_files = get_files(TARGET_DIR, TARGET_PREFIX)

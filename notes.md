@@ -270,6 +270,6 @@ TODO:
 
 Questions:
 
-- SITE VISIT RECORDS - Why is there "Planned work carried out?" and "Treatment carried out?" fields? Aren't they the same?
-- SITE VISIT RECORDS - "Total number of knotweed stands identified" need to be conditionally hidden?
-- SITE VISIT RECORDS - "Technician feedback" should be within the "Service Visit Records" repeatable?
+- SITE VISIT RECORDS - Why is there "Planned work carried out?" and "Treatment carried out?" fields? Aren't they the same? - Check notes
+- SITE VISIT RECORDS - "Total number of knotweed stands identified" need to be conditionally hidden? - Check notes
+- SITE VISIT RECORDS - "Technician feedback" should be within the "Service Visit Records" repeatable? - Check notes

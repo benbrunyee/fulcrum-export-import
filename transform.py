@@ -47,7 +47,9 @@ TRANSFORM_TYPE = args.transform_type
 # Structure: Repeatble -> target field key in old app -> value: new value
 TRANSFORMATIONS = {
     "IPMR": {},
-    "IPMR_SV": {},
+    "IPMR_SV": {
+        "service_visit_records": {"visit_type_invasive_plants_application": {}}
+    },
     "KSMP": {},
     "JKMR": {
         "knotweed_stand_details": {
@@ -112,7 +114,6 @@ DEFAULT_SV_SV_COLS = {
     ),
     **(
         {
-            # TODO: Confirm this logic
             "record_type_invasive_plants": lambda row: row[
                 "record_type_invasive_plants"
             ]
@@ -317,6 +318,9 @@ def get_file_mapping(dir_name):
     if PARENT_DIR == "JKMR_SV":
         if dir_name in "service_visit_records":
             dir_name = "site_visits_re_written"
+    if PARENT_DIR == "IPMR_SV":
+        if dir_name in "service_visit_records":
+            dir_name = "service_visit_records_re_written"
 
     return dir_name
 
