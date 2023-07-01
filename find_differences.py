@@ -179,6 +179,9 @@ def get_matching_file(postfix=None):
     elif PARENT_DIR == "JKMR_SV":
         if postfix == "site_visits_re_written":
             postfix = "service_visit_records"
+    elif PARENT_DIR == "IPMR":
+        if postfix == "stand_details_re_written":
+            postfix = "stand_details"
     elif PARENT_DIR == "IPMR_SV":
         if postfix == "service_visit_records_re_written":
             postfix = "service_visit_records"
@@ -425,14 +428,14 @@ def transform_service_visits_ipmr():
         reader = csv.DictReader(f)
         rows = list(reader)
 
-        # regex
+        # regex for key
         service_type_to_record_type_map = {
             "Herbicide treatment .*": "Herbicide Application",
             "Monitoring visit": "Site Monitoring",
             ".*": "Cut / Clearance / Excavation / Barrier / Other",
         }
 
-        # regex
+        # regex for key
         service_type_to_visit_type_data_name_map = {
             "Herbicide treatment .*": "visit_type_invasive_plants_application",
             ".*": "visit_type_invasive_plants_other",
@@ -452,9 +455,12 @@ def transform_service_visits_ipmr():
         ]
 
         for row in rows:
+            # ==================
             for field_pair in fields_to_merge:
                 row = merge_fields(row, field_pair[0], field_pair[1])
+            # ==================
 
+            # ==================
             # Find first matching regex and set the record type
             is_match = False
             for regex in service_type_to_record_type_map.keys():
@@ -470,7 +476,6 @@ def transform_service_visits_ipmr():
                 row["record_type_invasive_plants"] = service_type_to_record_type_map[
                     service_type_to_record_type_map.keys()[-1]
                 ]
-
             # Populate the row with all the visit type data names
             for (
                 visit_type_data_name
@@ -492,6 +497,25 @@ def transform_service_visits_ipmr():
                 row[service_type_to_visit_type_data_name_map.keys()[-1]] = row[
                     "service_visit_type"
                 ]
+            # ==================
+
+            # ==================
+            # The "service_visit_type" field is a multiple-choice field but we are trying
+            # to map it to a single-choice field in the new app. So we need to create a
+            # new row (record) for each  alue and then merge them into a single field
+            # We don't want to merge all the fields, just the relevant ones for each
+            # value in the multiple choice.
+
+            # Define the relevant fields for each service_visit_type value
+            # regex as key
+            service_type_to_relevant_fields_map = {
+                "Herbicide treatment .*": [
+                    # TODO: Fill out
+                ]
+            }
+
+            # TODO: Implement logic
+            # ==================
 
             new_rows.append(row)
 
@@ -584,6 +608,42 @@ def transform_site_visits_jkmr():
         writer = csv.DictWriter(f, fieldnames=all_headers)
         writer.writeheader()
         writer.writerows(new_csv)
+
+
+def transform_stand_details_ipmr():
+    """
+    Transform the stand_details repeatable in the IPMR app
+    """
+    new_rows = []
+
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_stand_details.csv"), "r") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        for row in rows:
+            # ==================
+            # Write the "close_to_water_within_2_metres" value based on the value
+            # of the "distance_from_stand_to_water_body" value
+            distance = row["distance_from_stand_to_water_body"]
+            if distance:
+                if distance == "<= 2 metres":
+                    row["close_to_water_within_2_metres"] = "Yes"
+                else:
+                    row["close_to_water_within_2_metres"] = "No"
+            else:
+                row["close_to_water_within_2_metres"] = ""
+            # ==================
+
+            new_rows.append(row)
+
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_stand_details_re_written.csv"),
+        "w",
+        newline="",
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
+        writer.writeheader()
+        writer.writerows(new_rows)
 
 
 def find_and_write_diffs(base, target, prefix):
@@ -712,8 +772,9 @@ def get_correct_file_name(f):
     if f == f"{TARGET_PREFIX}.csv":
         if PARENT_DIR == "JKMR":
             return f"{TARGET_PREFIX}_base_re_written.csv"
-        else:
-            return f
+    elif f == f"{TARGET_PREFIX}_stand_details.csv":
+        if PARENT_DIR == "IPMR":
+            return f"{TARGET_PREFIX}_stand_details_re_written.csv"
 
     return f
 
@@ -732,6 +793,9 @@ if PARENT_DIR == "JKMR":
 
 if PARENT_DIR == "JKMR_SV":
     transform_site_visits_jkmr()
+
+if PARENT_DIR == "IPMR":
+    transform_stand_details_ipmr()
 
 if PARENT_DIR == "IPMR_SV":
     transform_base_for_service_visits_ipmr()
@@ -756,10 +820,13 @@ else:
 # Loop through each target file, find the base equivalent and compare
 for f in target_files:
     # Skip these files
-    if PARENT_DIR == "JKMR" and (
-        f == f"{TARGET_PREFIX}_base_re_written.csv"
-        or f == f"{TARGET_PREFIX}_knotweed_survey.csv"
-    ):
+    if (
+        PARENT_DIR == "JKMR"
+        and (
+            f == f"{TARGET_PREFIX}_base_re_written.csv"
+            or f == f"{TARGET_PREFIX}_knotweed_survey.csv"
+        )
+    ) or (PARENT_DIR == "IPMR" and f == f"{TARGET_PREFIX}_stand_details.csv"):
         continue
 
     # Sometimes we want to use a different file name, this functions provides those mappings
