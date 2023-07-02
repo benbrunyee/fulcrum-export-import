@@ -277,9 +277,10 @@ def transform_knotweed_survey_repeatable_jkmr():
         writer.writerows(new_rows)
 
 
-def merge_fields(row, field_key_1, field_key_2):
+def merge_fields(row, field_key_1, field_key_2, allow_multiple=False):
     """
-    Merge two fields together, if the first field is empty, use the second field
+    Merge two fields together, if the first field is empty, use the second field.
+    If allow_multiple is defined, then add the second field to the first field, separated by a comma.
     """
     if field_key_1 not in row.keys() or field_key_2 not in row.keys():
         raise Exception(
@@ -290,6 +291,9 @@ def merge_fields(row, field_key_1, field_key_2):
             f"Field {field_key_1} is empty, using {field_key_2} instead for row {row['fulcrum_id']}"
         )
         row[field_key_1] = row[field_key_2]
+        return row
+    elif allow_multiple and row[field_key_1] and row[field_key_2]:
+        row[field_key_1] = f"{row[field_key_1]},{row[field_key_2]}"
         return row
 
     return row
@@ -419,21 +423,13 @@ def transform_service_visits_ipmr():
     finding differences for the site visits transformation and site visits
     repeatable
     """
-
     new_rows = []
-
     with open(
-        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_service_visit_records.csv"), "r"
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_service_visit_records.csv"),
+        "r",
     ) as f:
         reader = csv.DictReader(f)
         rows = list(reader)
-
-        # regex for key
-        service_type_to_record_type_map = {
-            "Herbicide treatment .*": "Herbicide Application",
-            "Monitoring visit": "Site Monitoring",
-            ".*": "Cut / Clearance / Excavation / Barrier / Other",
-        }
 
         # regex for key
         service_type_to_visit_type_data_name_map = {
@@ -442,61 +438,40 @@ def transform_service_visits_ipmr():
         }
 
         fields_to_merge = [
-            ["service_visit_type", "service_type"],
-            ["service_visit_type_other", "service_type_other"],
-            ["adjuvant_name", "adjuvant_name_other"],
-            ["treatment_notes_observations_and_issues", "works_notes"],
-            ["treatment_photos", "works_photo_record"],
-            ["treatment_photos_caption", "works_photo_record_caption"],
-            ["treatment_photos_url", "works_photo_record_url"],
-            ["treatment_video", "works_video_record"],
-            ["treatment_video_caption", "works_video_record_caption"],
-            ["treatment_video_url", "works_video_record_url"],
+            {
+                "type": "allow_multiple",
+                "fields": [
+                    ["service_visit_type", "service_type"],
+                    ["service_visit_type_other", "service_type_other"],
+                    ["adjuvant_name", "adjuvant_name_other"],
+                ],
+            },
+            {
+                "type": "single",
+                "fields": [
+                    ["treatment_notes_observations_and_issues", "works_notes"],
+                    ["treatment_photos", "works_photo_record"],
+                    ["treatment_photos_caption", "works_photo_record_caption"],
+                    ["treatment_photos_url", "works_photo_record_url"],
+                    ["treatment_video", "works_video_record"],
+                    ["treatment_video_caption", "works_video_record_caption"],
+                    ["treatment_video_url", "works_video_record_url"],
+                ],
+            },
         ]
 
         for row in rows:
-            # ==================
-            for field_pair in fields_to_merge:
-                row = merge_fields(row, field_pair[0], field_pair[1])
-            # ==================
+            row_handled = False
 
             # ==================
-            # Find first matching regex and set the record type
-            is_match = False
-            for regex in service_type_to_record_type_map.keys():
-                if re.match(regex, row["service_visit_type"]):
-                    row[
-                        "record_type_invasive_plants"
-                    ] = service_type_to_record_type_map[regex]
-                    is_match = True
-                    break
-
-            # If no match, set the last record type
-            if not is_match:
-                row["record_type_invasive_plants"] = service_type_to_record_type_map[
-                    service_type_to_record_type_map.keys()[-1]
-                ]
-            # Populate the row with all the visit type data names
-            for (
-                visit_type_data_name
-            ) in service_type_to_visit_type_data_name_map.values():
-                row[visit_type_data_name] = ""
-
-            # Find the first matching regex and create a new field with the visit type data name
-            is_match = False
-            for regex in service_type_to_visit_type_data_name_map.keys():
-                if re.match(regex, row["service_visit_type"]):
-                    row[service_type_to_visit_type_data_name_map[regex]] = row[
-                        "service_visit_type"
-                    ]
-                    is_match = True
-                    break
-
-            # If no match, set the last visit type data name
-            if not is_match:
-                row[service_type_to_visit_type_data_name_map.keys()[-1]] = row[
-                    "service_visit_type"
-                ]
+            for obj_type in fields_to_merge:
+                for field_pair in obj_type["fields"]:
+                    if obj_type["type"] == "allow_multiple":
+                        row = merge_fields(
+                            row, field_pair[0], field_pair[1], allow_multiple=True
+                        )
+                    else:
+                        row = merge_fields(row, field_pair[0], field_pair[1])
             # ==================
 
             # ==================
@@ -506,23 +481,228 @@ def transform_service_visits_ipmr():
             # We don't want to merge all the fields, just the relevant ones for each
             # value in the multiple choice.
 
-            # Define the relevant fields for each service_visit_type value
-            # regex as key
-            service_type_to_relevant_fields_map = {
+            # Define what section has what data_names so we can split a row and only
+            # keep the relevant data for each selected option
+            # regex for key
+            section_types = {
+                # Herbicide Application
                 "Herbicide treatment .*": [
-                    # TODO: Fill out
-                ]
+                    "weather_conditions",
+                    "local_environment_risk_assessment_for_pesticides_if_appropriate_list_proximity_of_buffer_zones_water_courses_etc_",
+                    "treatment_carried_out",
+                    "reasons_for_treatment_not_taking_place_or_treatment_interrupted",
+                    "target_species",
+                    "treatment_types",
+                    "reason_for_treatment",
+                    "product_name_mapp_number_active_ingredient",
+                    "quantity_of_product_per_litre_ml",
+                    "total_mix_applied_l",
+                    "total_active_ingredient_applied_ml",
+                    "adjuvant_included_in_mix",
+                    "adjuvant_name",
+                    "ppe_worn",
+                    "treatment_notes_observations_and_issues",
+                    "treatment_photos",
+                    "treatment_video",
+                ],
+                # Site Monitoring
+                "Monitoring visit": [
+                    "is_new_growth_visible",
+                    "location_of_visible_growth",
+                    "describe_the_visible_growth",
+                    "was_the_visible_growth_treated",
+                    "reason_for_treatment_not_taking_place",
+                    "has_host_soil_been_disturbed_or_cultivated",
+                    "has_host_soil_been_covered_by_any_new_artefactsfeaturesconstruction",
+                    "has_any_new_soft_or_hard_landscaping_occurred_within_the_impacted_area",
+                    "other_findingscomments",
+                    "recommendations",
+                    "monitoring_photos",
+                    "monitoring_video",
+                ],
+                # Cut / Clearance / Excavation / Barrier / Other
+                ".*": [
+                    "service_activity_types",
+                    "planned_works_completed",
+                    "works_notes",
+                    "works_audio_record",
+                    "works_photo_record",
+                    "works_video_record",
+                ],
             }
 
-            # TODO: Implement logic
+            service_visit_data_names = [
+                "service_visit_type",
+                "service_visit_type_other",
+            ]
+            all_selected = []
+            for data_name in service_visit_data_names:
+                if data_name in row and row[data_name] != "":
+                    all_selected.extend(row[data_name].split(","))
+            logger.debug("All selected service visit types: %s", all_selected)
+            if len(all_selected) > 1:
+                logger.debug(
+                    "Creating new rows for each selected option: %s. (1 row -> %s rows)",
+                    row["fulcrum_id"],
+                    len(all_selected),
+                )
+                for service_visit_data_name in service_visit_data_names:
+                    row_handled = False
+                    selected_options = [
+                        f.strip() for f in row[service_visit_data_name].split(",")
+                    ]
+
+                    has_regex_match = False
+                    for selected_option in selected_options:
+                        if selected_option == "":
+                            continue
+
+                        for regex in section_types.keys():
+                            if re.match(regex, selected_option):
+                                has_regex_match = True
+                                break
+
+                        if not has_regex_match:
+                            raise Exception(
+                                "No regex match for selected option: %s",
+                                selected_option,
+                            )
+
+                        logger.debug(
+                            "Creating new row for selected option: %s", selected_option
+                        )
+
+                        all_row_data_names = row.keys()
+                        copy_row = row.copy()
+
+                        # Filter the other data_names to not include any that are defined in
+                        # the array for each section type
+                        # This is because we want to keep all the data except ones that are
+                        # relevant to other section types. For example, if the section type is
+                        # "Herbicide treatment" we want to keep all the data except the data
+                        # that is relevant to "Monitoring visit" and "Cut / Clearance / Excavation / Barrier / Other"
+                        # This is because we are creating a new row for each selected option
+                        # and we want to keep all the data except the data that is relevant
+                        # to other section types.
+                        for data_name in all_row_data_names:
+                            for section_type in section_types.values():
+                                if data_name in section_type:
+                                    # Set the value to an empty string so we can merge the rows later
+                                    copy_row[data_name] = ""
+                                    break
+
+                        # Set the other service_visit_data_names to an empty string
+                        for data_name in service_visit_data_names:
+                            if data_name != service_visit_data_name:
+                                copy_row[data_name] = ""
+
+                        # Set the value of the selected option to the data_name for the section type
+                        copy_row[service_visit_data_name] = selected_option
+
+                        # Add the new row to the new_rows array
+                        new_rows.append(copy_row)
+
+                        # We no longer want to add the original row to the new_rows array
+                        row_handled = True
             # ==================
 
-            new_rows.append(row)
+            if not row_handled:
+                new_rows.append(row)
+
+    # regex for key
+    service_type_to_record_type_map = {
+        "Herbicide treatment .*": "Herbicide Application",
+        "Monitoring visit": "Site Monitoring",
+        ".*": "Cut / Clearance / Excavation / Barrier / Other",
+    }
+    for row in new_rows:
+        # ==================
+        # Find first matching regex and set the record type
+        is_match = False
+        for regex in service_type_to_record_type_map.keys():
+            selected_options = [f.strip() for f in row["service_visit_type"].split(",")]
+
+            for selected_option in selected_options:
+                if re.match(regex, selected_option):
+                    is_match = True
+                    row[
+                        "record_type_invasive_plants"
+                    ] = service_type_to_record_type_map[regex]
+                    break
+
+            if is_match:
+                break
+
+        # If no match, set the last record type
+        if not is_match:
+            row["record_type_invasive_plants"] = service_type_to_record_type_map[
+                service_type_to_record_type_map.keys()[-1]
+            ]
+        # Populate the row with all the visit type data names
+        for visit_type_data_name in service_type_to_visit_type_data_name_map.values():
+            row[visit_type_data_name] = ""
+
+        # Find the first matching regex and create a new field with the visit type data name
+        is_match = False
+        for regex in service_type_to_visit_type_data_name_map.keys():
+            if re.match(regex, row["service_visit_type"]):
+                row[service_type_to_visit_type_data_name_map[regex]] = (
+                    row["service_visit_type"]
+                    if row["service_visit_type"] != ""
+                    else row["service_visit_type_other"]
+                )
+                is_match = True
+                break
+
+        # If no match, set the last visit type data name
+        if not is_match:
+            row[service_type_to_visit_type_data_name_map.keys()[-1]] = (
+                row["service_visit_type"]
+                if row["service_visit_type"] != ""
+                else row["service_visit_type_other"]
+            )
+        # ==================
 
     with open(
         os.path.join(
             TARGET_DIR, f"{TARGET_PREFIX}_service_visit_records_re_written.csv"
         ),
+        "w",
+        newline="",
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
+        writer.writeheader()
+        writer.writerows(new_rows)
+
+
+def transform_stand_details_ipmr():
+    """
+    Transform the stand_details repeatable in the IPMR app
+    """
+    new_rows = []
+
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_stand_details.csv"), "r") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        for row in rows:
+            # ==================
+            # Write the "close_to_water_within_2_metres" value based on the value
+            # of the "distance_from_stand_to_water_body" value
+            distance = row["distance_from_stand_to_water_body"]
+            if distance:
+                if distance == "<= 2 metres":
+                    row["close_to_water_within_2_metres"] = "Yes"
+                else:
+                    row["close_to_water_within_2_metres"] = "No"
+            else:
+                row["close_to_water_within_2_metres"] = ""
+            # ==================
+
+            new_rows.append(row)
+
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_stand_details_re_written.csv"),
         "w",
         newline="",
     ) as f:
@@ -608,42 +788,6 @@ def transform_site_visits_jkmr():
         writer = csv.DictWriter(f, fieldnames=all_headers)
         writer.writeheader()
         writer.writerows(new_csv)
-
-
-def transform_stand_details_ipmr():
-    """
-    Transform the stand_details repeatable in the IPMR app
-    """
-    new_rows = []
-
-    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_stand_details.csv"), "r") as f:
-        reader = csv.DictReader(f)
-        rows = list(reader)
-
-        for row in rows:
-            # ==================
-            # Write the "close_to_water_within_2_metres" value based on the value
-            # of the "distance_from_stand_to_water_body" value
-            distance = row["distance_from_stand_to_water_body"]
-            if distance:
-                if distance == "<= 2 metres":
-                    row["close_to_water_within_2_metres"] = "Yes"
-                else:
-                    row["close_to_water_within_2_metres"] = "No"
-            else:
-                row["close_to_water_within_2_metres"] = ""
-            # ==================
-
-            new_rows.append(row)
-
-    with open(
-        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_stand_details_re_written.csv"),
-        "w",
-        newline="",
-    ) as f:
-        writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
-        writer.writeheader()
-        writer.writerows(new_rows)
 
 
 def find_and_write_diffs(base, target, prefix):
