@@ -441,8 +441,7 @@ def transform_service_visits_ipmr():
             {
                 "type": "allow_multiple",
                 "fields": [
-                    ["service_visit_type", "service_type"],
-                    ["service_visit_type_other", "service_type_other"],
+                    # We purposefully ignore the service_visit_type field
                     ["adjuvant_name", "adjuvant_name_other"],
                 ],
             },
@@ -475,7 +474,7 @@ def transform_service_visits_ipmr():
             # ==================
 
             # ==================
-            # The "service_visit_type" field is a multiple-choice field but we are trying
+            # The "service_type" field is a multiple-choice field but we are trying
             # to map it to a single-choice field in the new app. So we need to create a
             # new row (record) for each  alue and then merge them into a single field
             # We don't want to merge all the fields, just the relevant ones for each
@@ -532,8 +531,8 @@ def transform_service_visits_ipmr():
             }
 
             service_visit_data_names = [
-                "service_visit_type",
-                "service_visit_type_other",
+                "service_type",
+                "service_type_other",
             ]
             all_selected = []
             for data_name in service_visit_data_names:
@@ -620,7 +619,7 @@ def transform_service_visits_ipmr():
         # Find first matching regex and set the record type
         is_match = False
         for regex in service_type_to_record_type_map.keys():
-            selected_options = [f.strip() for f in row["service_visit_type"].split(",")]
+            selected_options = [f.strip() for f in row["service_type"].split(",")]
 
             for selected_option in selected_options:
                 if re.match(regex, selected_option):
@@ -645,11 +644,11 @@ def transform_service_visits_ipmr():
         # Find the first matching regex and create a new field with the visit type data name
         is_match = False
         for regex in service_type_to_visit_type_data_name_map.keys():
-            if re.match(regex, row["service_visit_type"]):
+            if re.match(regex, row["service_type"]):
                 row[service_type_to_visit_type_data_name_map[regex]] = (
-                    row["service_visit_type"]
-                    if row["service_visit_type"] != ""
-                    else row["service_visit_type_other"]
+                    row["service_type"]
+                    if row["service_type"] != ""
+                    else row["service_type_other"]
                 )
                 is_match = True
                 break
@@ -657,9 +656,9 @@ def transform_service_visits_ipmr():
         # If no match, set the last visit type data name
         if not is_match:
             row[service_type_to_visit_type_data_name_map.keys()[-1]] = (
-                row["service_visit_type"]
-                if row["service_visit_type"] != ""
-                else row["service_visit_type_other"]
+                row["service_type"]
+                if row["service_type"] != ""
+                else row["service_type_other"]
             )
         # ==================
 

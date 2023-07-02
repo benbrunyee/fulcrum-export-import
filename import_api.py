@@ -214,7 +214,6 @@ def read_repeatable_data(parent_id, element):
 
     flattened_elements = list(flatten(element["elements"]))
 
-    # TODO: Filter rows based on the fulcrum_parent_id column
     rows = list(filter(lambda row: row["fulcrum_parent_id"] == parent_id, rows))
 
     return create_repeatable_objects(flattened_elements, rows, parent_id)
@@ -589,6 +588,10 @@ def main():
     # save_form(target_form)
     # print(json.dumps(records, indent=2))
     print("Records to upload: " + str(len(records)))
+
+    if CONFIRMED:
+        print("Waiting 5 seconds before import. Press Ctrl+C to cancel.")
+        time.sleep(5)
 
     upload_records(records)
 

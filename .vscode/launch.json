@@ -488,6 +488,34 @@
       }
     },
     {
+      "name": "Transform (IPMR)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/transform.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "IPMR",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records",
+        "--site_location_file",
+        "site_details_copy_do_not_use\\site_details_copy_do_not_use.csv",
+        "--client_name_col",
+        "client_names",
+        "--acc_ref_col",
+        "pba_reference",
+        "--transform_type",
+        "survey"
+      ],
+      "presentation": {
+        "group": "transform",
+        "order": 2
+      }
+    },
+    {
       "name": "Transform (IPMR - SV)",
       "type": "python",
       "request": "launch",
@@ -512,34 +540,6 @@
         "--survey_dir",
         "survey",
         "--survey_dir_prefix",
-        "survey"
-      ],
-      "presentation": {
-        "group": "transform",
-        "order": 2
-      }
-    },
-    {
-      "name": "Transform (IPMR)",
-      "type": "python",
-      "request": "launch",
-      "program": "${workspaceFolder}/transform.py",
-      "console": "integratedTerminal",
-      "justMyCode": true,
-      "args": [
-        "--parent_dir",
-        "IPMR",
-        "--target_dir",
-        "invasive_plants_management_records",
-        "--target_prefix",
-        "invasive_plants_management_records",
-        "--site_location_file",
-        "site_details_copy_do_not_use\\site_details_copy_do_not_use.csv",
-        "--client_name_col",
-        "client_names",
-        "--acc_ref_col",
-        "pba_reference",
-        "--transform_type",
         "survey"
       ],
       "presentation": {
@@ -614,6 +614,52 @@
       "presentation": {
         "group": "import",
         "order": 5
+      }
+    },
+    {
+      "name": "IPMR Import",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/import_api.py",
+      "justMyCode": true,
+      "console": "integratedTerminal",
+      "args": [
+        "--yes",
+        "--base_name",
+        "IPMR",
+        "--form_name",
+        "SURVEY - IMPORT (DO NOT USE)",
+        "--source_dir",
+        "new_files\\IPMR\\new_records",
+        "--type",
+        "survey"
+      ],
+      "presentation": {
+        "group": "import",
+        "order": 6
+      }
+    },
+    {
+      "name": "IPMR SV Import",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/import_api.py",
+      "justMyCode": true,
+      "console": "integratedTerminal",
+      "args": [
+        "--yes",
+        "--base_name",
+        "IPMR_SV",
+        "--form_name",
+        "SITE VISIT RECORDS - IMPORT (DO NOT USE)",
+        "--source_dir",
+        "new_files\\IPMR_SV\\new_records",
+        "--type",
+        "site_visits"
+      ],
+      "presentation": {
+        "group": "import",
+        "order": 7
       }
     }
   ]
