@@ -20,6 +20,9 @@ parser.add_argument("--name", help="The name of the app to match on")
 parser.add_argument(
     "--dry-run", help="A dry run will not create a new app", action="store_true"
 )
+parser.add_argument(
+    "--yes", "-y", help="Automatically answer yes to all prompts", action="store_true"
+)
 # Debug argument
 parser.add_argument("--debug", help="Print debug statements", action="store_true")
 parser.add_argument("--postfix", help="The postfix to add to the new app name")
@@ -34,6 +37,8 @@ FULCRUM = Fulcrum(FULCRUM_API_KEY)
 APP_NAME = None
 # The postfix to add to the new app name
 NEW_APP_POSTFIX = args.postfix or " - COPY (DO NOT USE)"
+# If the user has confirmed all prompts
+CONFIRMED = args.yes
 
 # Logging format of: [LEVEL]::[FUNCTION]::[HH:MM:SS] - [MESSAGE]
 # Where the level is colored based on the level and the rest except from the message is grey
@@ -85,7 +90,6 @@ def main():
     else:
         app = get_app(APP_NAME)
 
-    logger.info(f"App selected for duplication: {app}")
     # Write to temp file if in debug mode
     if args.debug:
         logger.debug(f"Writing app to file: {app}")
@@ -93,16 +97,18 @@ def main():
             json.dump(app, f, indent=2)
 
     # Get confirmation from the user
-    confirmation = input(
-        f"Are you sure you want to duplicate the app: {app['name']}? (y/N): "
-    )
+    confirmation = ""
+    if not CONFIRMED:
+        confirmation = input(
+            f"Are you sure you want to duplicate the app: {app['name']}? (y/N): "
+        )
 
     # Delete the temp file if in debug mode
     if args.debug:
         os.remove(".app.json")
 
     # If the user does not confirm, exit
-    if confirmation.lower() != "y":
+    if confirmation.lower() != "y" and not CONFIRMED:
         logger.info("Exiting")
         exit(0)
 
@@ -159,6 +165,9 @@ def duplicate_app(app: dict):
     # Add the new app name postfix
     new_app_name = app_name + NEW_APP_POSTFIX
 
+    # Status field
+    status_field = app["status_field"]
+
     # Create the new app
     new_app_id = None
     if not args.dry_run:
@@ -168,6 +177,7 @@ def duplicate_app(app: dict):
                     "name": new_app_name,
                     "title_field_keys": app_title_field_keys,
                     "description": app_description,
+                    "status_field": status_field,
                     "elements": app_elements,
                     "hidden_on_dashboard": True,
                 },
@@ -186,12 +196,14 @@ def duplicate_app(app: dict):
     records = get_app_records(app["id"])
 
     # Get the percentage of records to duplicate
-    record_duplication_percentage = input(
-        f"What percentage of records do you want to duplicate ({len(records)} records)? (100%): "
-    )
+    record_duplication_percentage = 100
+    if not CONFIRMED:
+        record_duplication_percentage = input(
+            f"What percentage of records do you want to duplicate ({len(records)} records)? (100%): "
+        )
 
     # If the user does not enter a percentage, default to 100
-    if not record_duplication_percentage:
+    if not record_duplication_percentage or CONFIRMED:
         record_duplication_percentage = 100
     else:
         try:

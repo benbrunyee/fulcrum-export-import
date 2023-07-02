@@ -85,6 +85,7 @@
       },
       "problemMatcher": []
     },
+
     {
       "label": "Run KSMP Import",
       "dependsOn": ["KSMP Import", "SV Import"],
@@ -100,6 +101,71 @@
     {
       "label": "Run Both Imports",
       "dependsOn": ["Run KSMP Import", "Run JKMR Import"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+
+    {
+      "label": "Duplicate CLIENT app",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "duplicate_app.py",
+        "--yes",
+        "--name",
+        "CLIENT",
+        "--postfix",
+        " - IMPORT (DO NOT USE)"
+      ]
+    },
+    {
+      "label": "Duplicate SITE DETAILS app",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "duplicate_app.py",
+        "--yes",
+        "--name",
+        "SITE DETAILS",
+        "--postfix",
+        " - IMPORT (DO NOT USE)"
+      ]
+    },
+    {
+      "label": "Duplicate SURVEY app",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "duplicate_app.py",
+        "--yes",
+        "--name",
+        "SURVEY",
+        "--postfix",
+        " - IMPORT (DO NOT USE)"
+      ]
+    },
+    {
+      "label": "Duplicate SITE VISIT RECORDS app",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "duplicate_app.py",
+        "--yes",
+        "--name",
+        "SITE VISIT RECORDS",
+        "--postfix",
+        " - IMPORT (DO NOT USE)"
+      ]
+    },
+
+    {
+      "label": "Run all duplications (sequentially)",
+      "dependsOn": [
+        "Duplicate CLIENT app",
+        "Duplicate SITE DETAILS app",
+        "Duplicate SURVEY app",
+        "Duplicate SITE VISIT RECORDS app"
+      ],
       "dependsOrder": "sequence",
       "problemMatcher": []
     }
