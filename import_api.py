@@ -54,6 +54,9 @@ OLD_TO_NEW_ID_MAPPING = (
     f"old_to_new_id_mapping{('_' + BASE_NAME) if BASE_NAME else ''}.json"
 )
 
+# If the records are being split into a survey and site visit record
+IS_JOINED_RECORDS = BASE_NAME == "JKMR" or BASE_NAME == "IPMR"
+
 # Util
 
 
@@ -165,7 +168,7 @@ def upload_records(records):
             with open(OLD_TO_NEW_ID_MAPPING, "w") as f:
                 json.dump(id_mapping, f, indent=2)
 
-        if BASE_NAME == "JKMR" and TYPE == "survey":
+        if IS_JOINED_RECORDS and TYPE == "survey":
             # Update the IMPORT_MAPPING_FILE file to map the old record_id to the new record_id
             if os.path.exists(PARENT_TO_LATEST_SURVEY_ID):
                 with open(PARENT_TO_LATEST_SURVEY_ID, "r") as f:
@@ -262,7 +265,7 @@ def get_record_link(record_id, value):
         return [{"record_id": v} for v in value.split(",")] if value else []
     elif TYPE == "site_visits":
         # We match based on the mapping file that was created during the SA import process (using this script)
-        if BASE_NAME == "JKMR":
+        if IS_JOINED_RECORDS:
             with open(PARENT_TO_LATEST_SURVEY_ID, "r") as f:
                 mapping = json.load(f)
 
@@ -451,7 +454,7 @@ def create_base_record(form_id, row, base_obj={}):
             "fulcrum_id": row["fulcrum_id"],
             **(
                 {"fulcrum_parent_id_not_used": row["fulcrum_parent_id_not_used"]}
-                if BASE_NAME == "JKMR" and TYPE == "survey"
+                if IS_JOINED_RECORDS and TYPE == "survey"
                 else {}
             ),
             "form_values": {},
@@ -543,7 +546,7 @@ def main():
         if os.path.exists(OLD_TO_NEW_ID_MAPPING):
             os.remove(OLD_TO_NEW_ID_MAPPING)
 
-        if BASE_NAME == "JKMR":
+        if IS_JOINED_RECORDS:
             # Remove the PARENT_TO_LATEST_SURVEY_MAPPING file
             if os.path.exists(PARENT_TO_LATEST_SURVEY_ID):
                 os.remove(PARENT_TO_LATEST_SURVEY_ID)
