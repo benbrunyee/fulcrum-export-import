@@ -253,7 +253,7 @@ def save_records(records):
 
 
 def get_record_link(record_id, value):
-    # If there is no value then this is likely to be a new field that should be populated
+    # If there is no `value` then this is likely to be a new field that should be populated
     # We can find the record_id for this field by looking at the sa export,
     # matching on a row and then grabbing the fulcrum_id
 
@@ -271,7 +271,7 @@ def get_record_link(record_id, value):
                     return []
 
                 return [{"record_id": mapping[record_id]["id"]}]
-        elif BASE_NAME == "KSMP":
+        else:
             with open(OLD_TO_NEW_ID_MAPPING, "r") as f:
                 mapping = json.load(f)
 
