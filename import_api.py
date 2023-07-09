@@ -148,6 +148,10 @@ def upload_records(records):
             print(f"Failed to create record {record['record']['fulcrum_id']}")
             continue
 
+        if not "id" in res["record"]:
+            print(res)
+            raise Exception(f"Failed to create record {record['record']['fulcrum_id']}")
+
         print(res["record"]["id"] + " created.")
 
         if TYPE == "survey":
