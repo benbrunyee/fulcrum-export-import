@@ -1,6 +1,7 @@
 {
   "version": "2.0.0",
   "tasks": [
+    // KSMP & JKMR
     {
       "label": "KSMP Import",
       "command": "python",
@@ -105,6 +106,57 @@
       "problemMatcher": []
     },
 
+    // IPMR
+    {
+      "label": "IPMR Import",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "import_api.py",
+        "--base_name",
+        "IPMR",
+        "--yes",
+        "--form_name",
+        "SURVEY - IMPORT (DO NOT USE)",
+        "--source_dir",
+        "new_files\\IPMR\\new_records",
+        "--type",
+        "survey"
+      ],
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "IPMR SV Import",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "import_api.py",
+        "--yes",
+        "--base_name",
+        "IPMR",
+        "--form_name",
+        "SITE VISIT RECORDS - IMPORT (DO NOT USE)",
+        "--source_dir",
+        "new_files\\IPMR_SV\\new_records",
+        "--type",
+        "site_visits"
+      ],
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run IPMR Import",
+      "dependsOn": ["IPMR Import", "IPMR SV Import"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+
+    // Duplications
     {
       "label": "Duplicate CLIENT app",
       "command": "python",
