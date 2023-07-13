@@ -275,6 +275,13 @@ def get_record_link(record_id, value):
             with open(OLD_TO_NEW_ID_MAPPING, "r") as f:
                 mapping = json.load(f)
 
+                if not value:
+                    if record_id not in mapping:
+                        print("Could not find a match for " + record_id)
+                        return []
+
+                    return [{"record_id": mapping[record_id]}]
+
                 if value not in mapping:
                     print("Could not find a match for " + value)
                     return []

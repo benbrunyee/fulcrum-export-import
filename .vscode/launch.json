@@ -649,7 +649,7 @@
       "args": [
         "--yes",
         "--base_name",
-        "IPMR_SV",
+        "IPMR",
         "--form_name",
         "SITE VISIT RECORDS - IMPORT (DO NOT USE)",
         "--source_dir",

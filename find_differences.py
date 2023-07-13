@@ -447,15 +447,7 @@ def transform_service_visits_ipmr():
             },
             {
                 "type": "single",
-                "fields": [
-                    ["treatment_notes_observations_and_issues", "works_notes"],
-                    ["treatment_photos", "works_photo_record"],
-                    ["treatment_photos_caption", "works_photo_record_caption"],
-                    ["treatment_photos_url", "works_photo_record_url"],
-                    ["treatment_video", "works_video_record"],
-                    ["treatment_video_caption", "works_video_record_caption"],
-                    ["treatment_video_url", "works_video_record_url"],
-                ],
+                "fields": [],
             },
         ]
 
@@ -483,51 +475,68 @@ def transform_service_visits_ipmr():
             # Define what section has what data_names so we can split a row and only
             # keep the relevant data for each selected option
             # regex for key
+            # If there is a data name with a value set, this is because the value is of
+            # a dataname that is shared between the section types. We map this so that
+            # we can later set the relevant values for the data names once we have split
+            # the rows into multiple rows based on the section type. These are fields
+            # like: "notes", "photos", "video"
             section_types = {
                 # Herbicide Application
-                "Herbicide treatment .*": [
-                    "weather_conditions",
-                    "local_environment_risk_assessment_for_pesticides_if_appropriate_list_proximity_of_buffer_zones_water_courses_etc_",
-                    "treatment_carried_out",
-                    "reasons_for_treatment_not_taking_place_or_treatment_interrupted",
-                    "target_species",
-                    "treatment_types",
-                    "reason_for_treatment",
-                    "product_name_mapp_number_active_ingredient",
-                    "quantity_of_product_per_litre_ml",
-                    "total_mix_applied_l",
-                    "total_active_ingredient_applied_ml",
-                    "adjuvant_included_in_mix",
-                    "adjuvant_name",
-                    "ppe_worn",
-                    "treatment_notes_observations_and_issues",
-                    "treatment_photos",
-                    "treatment_video",
-                ],
+                "Herbicide treatment .*": {
+                    "weather_conditions": None,
+                    "local_environment_risk_assessment_for_pesticides_if_appropriate_list_proximity_of_buffer_zones_water_courses_etc_": None,
+                    "treatment_carried_out": None,
+                    "reasons_for_treatment_not_taking_place_or_treatment_interrupted": None,
+                    "target_species": None,
+                    "treatment_types": None,
+                    "reason_for_treatment": None,
+                    "product_name_mapp_number_active_ingredient": None,
+                    "quantity_of_product_per_litre_ml": None,
+                    "total_mix_applied_l": None,
+                    "total_active_ingredient_applied_ml": None,
+                    "adjuvant_included_in_mix": None,
+                    "adjuvant_name": None,
+                    "ppe_worn": None,
+                    "treatment_notes_observations_and_issues": None,
+                    "treatment_photos": None,
+                    "treatment_photos_caption": None,
+                    "treatment_photos_url": None,
+                    "treatment_video": None,
+                    "treatment_video_caption": None,
+                    "treatment_video_url": None,
+                },
                 # Site Monitoring
-                "Monitoring visit": [
-                    "is_new_growth_visible",
-                    "location_of_visible_growth",
-                    "describe_the_visible_growth",
-                    "was_the_visible_growth_treated",
-                    "reason_for_treatment_not_taking_place",
-                    "has_host_soil_been_disturbed_or_cultivated",
-                    "has_host_soil_been_covered_by_any_new_artefactsfeaturesconstruction",
-                    "has_any_new_soft_or_hard_landscaping_occurred_within_the_impacted_area",
-                    "other_findingscomments",
-                    "recommendations",
-                    "monitoring_photos",
-                    "monitoring_video",
-                ],
+                "Monitoring visit": {
+                    "is_new_growth_visible": None,
+                    "location_of_visible_growth": None,
+                    "describe_the_visible_growth": None,
+                    "was_the_visible_growth_treated": None,
+                    "reason_for_treatment_not_taking_place": None,
+                    "has_host_soil_been_disturbed_or_cultivated": None,
+                    "has_host_soil_been_covered_by_any_new_artefactsfeaturesconstruction": None,
+                    "has_any_new_soft_or_hard_landscaping_occurred_within_the_impacted_area": None,
+                    "other_findingscomments": None,
+                    "recommendations": None,
+                    "monitoring_photos": None,
+                    "monitoring_photos_caption": None,
+                    "monitoring_photos_url": None,
+                    "monitoring_video": None,
+                    "monitoring_video_caption": None,
+                    "monitoring_video_url": None,
+                },
                 # Cut / Clearance / Excavation / Barrier / Other
-                ".*": [
-                    "service_activity_types",
-                    "planned_works_completed",
-                    "works_notes",
-                    "works_audio_record",
-                    "works_photo_record",
-                    "works_video_record",
-                ],
+                ".*": {
+                    "service_activity_types": None,
+                    "planned_works_completed": None,
+                    "works_notes": "treatment_notes_observations_and_issues",
+                    "works_audio_record": None,
+                    "works_photo_record": "treatment_photos",
+                    "works_photo_record_caption": "treatment_photos_caption",
+                    "works_photo_record_url": "treatment_photos_url",
+                    "works_video_record": "treatment_video",
+                    "works_video_record_caption": "treatment_video_caption",
+                    "works_video_record_url": "treatment_video_url",
+                },
             }
 
             service_visit_data_names = [
@@ -546,7 +555,6 @@ def transform_service_visits_ipmr():
                     len(all_selected),
                 )
                 for service_visit_data_name in service_visit_data_names:
-                    row_handled = False
                     selected_options = [
                         f.strip() for f in row[service_visit_data_name].split(",")
                     ]
@@ -571,11 +579,9 @@ def transform_service_visits_ipmr():
                             "Creating new row for selected option: %s", selected_option
                         )
 
-                        all_row_data_names = row.keys()
                         copy_row = row.copy()
 
-                        # Filter the other data_names to not include any that are defined in
-                        # the array for each section type
+                        # Set the other service_visit_data_names to an empty string
                         # This is because we want to keep all the data except ones that are
                         # relevant to other section types. For example, if the section type is
                         # "Herbicide treatment" we want to keep all the data except the data
@@ -583,17 +589,30 @@ def transform_service_visits_ipmr():
                         # This is because we are creating a new row for each selected option
                         # and we want to keep all the data except the data that is relevant
                         # to other section types.
-                        for data_name in all_row_data_names:
-                            for section_type in section_types.values():
-                                if data_name in section_type:
-                                    # Set the value to an empty string so we can merge the rows later
-                                    copy_row[data_name] = ""
-                                    break
-
-                        # Set the other service_visit_data_names to an empty string
                         for data_name in service_visit_data_names:
                             if data_name != service_visit_data_name:
                                 copy_row[data_name] = ""
+
+                        # There are some data names that are shared between service types but we
+                        # need to determine what values should fill these data names. This is
+                        # provided in the dictionary (if there is a value associated with a data name)
+                        for (
+                            service_type_regex_key,
+                            service_type_data_name_object_value,
+                        ) in section_types.items():
+                            # Check what section this row is relevant to
+                            if not re.match(service_type_regex_key, selected_option):
+                                continue
+
+                            # This is a match so we can continue
+                            for (
+                                data_name,
+                                data_name_target,
+                            ) in service_type_data_name_object_value.items():
+                                if not data_name_target:
+                                    continue
+
+                                copy_row[data_name_target] = copy_row[data_name]
 
                         # Set the value of the selected option to the data_name for the section type
                         copy_row[service_visit_data_name] = selected_option
