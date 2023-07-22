@@ -282,11 +282,11 @@ def rate_limited(max_per_second):
 def create_app_record(record: dict, app_id: str):
     record_id = record["id"]
     record_form_values = record["form_values"]
-    status = record["status"]
+    record_status = record["status"]
 
     # GPS coordinates
-    longitude = record["longitude"]
-    latitude = record["latitude"]
+    record_longitude = record["longitude"]
+    record_latitude = record["latitude"]
 
     # Create the record
     if not args.dry_run:
@@ -294,16 +294,22 @@ def create_app_record(record: dict, app_id: str):
             {
                 "record": {
                     "form_id": app_id,
-                    "status": status,
-                    "longitude": longitude,
-                    "latitude": latitude,
+                    "status": record_status,
                     "form_values": record_form_values,
+                    "longitude": record_longitude,
+                    "latitude": record_latitude,
                 }
             }
         )
 
         # Get the new record id
-        new_record_id = new_record["record"]["id"]
+        new_record_id = (
+            new_record["record"]["id"] if "id" in new_record["record"] else None
+        )
+
+        if not new_record_id:
+            logger.error(f"Failed to create record: {record_id}")
+            raise Exception(f"Could not find new record id in: {new_record}")
 
         logger.debug(f"New record created: {new_record_id}")
     else:
