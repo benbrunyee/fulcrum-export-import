@@ -316,3 +316,8 @@ Questions
     1. Ensure field values are what is expected   : []
     1. Ensure that app links are set correctly    : []
     1. Ensure that record links are set correctly : []
+1. Make the new SURVEY app available on the mobile dashboard
+
+## Import Notes
+
+- Status fields for SURVEY backup/duplication cannot be replicated since the API does not allow for invalid values whereas the Fulcrum interface does

@@ -45,14 +45,7 @@
       "program": "${workspaceFolder}/duplicate_app.py",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "args": [
-        "--name",
-        "SURVEY",
-        "--postfix",
-        " (BACKUP)",
-        "--dry-run",
-        "--debug"
-      ],
+      "args": ["--name", "SURVEY", "--postfix", " (BACKUP)"],
       "presentation": {
         "group": "duplicate_app",
         "order": 3
