@@ -616,7 +616,7 @@ def main():
 
     rows = read_csv(csv_base)
     records = [
-        correct_record(target_form, x)
+        correct_record(target_form, x["record"])
         for x in create_records(form_id, flattened_elements, rows)
     ]
 
