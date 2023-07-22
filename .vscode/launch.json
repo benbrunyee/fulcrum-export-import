@@ -45,7 +45,7 @@
       "program": "${workspaceFolder}/duplicate_app.py",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "args": ["--name", "SURVEY"],
+      "args": ["--name", "SURVEY", "--postfix", " (BACKUP)"],
       "presentation": {
         "group": "duplicate_app",
         "order": 3
@@ -58,7 +58,7 @@
       "program": "${workspaceFolder}/duplicate_app.py",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "args": ["--name", "SITE VISIT RECORDS"],
+      "args": ["--name", "SITE VISIT RECORDS", "--postfix", " (BACKUP)"],
       "presentation": {
         "group": "duplicate_app",
         "order": 4

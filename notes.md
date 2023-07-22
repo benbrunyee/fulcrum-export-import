@@ -277,12 +277,13 @@ Questions
 ## Import Process
 
 1. Ensure that there are no more critical TODOS before proceeding with the merge (check Trello) : [/]
-1. Create csv backups of the following apps and download them locally (csv, with photos, with GPS). Do each individually : []
+1. Create backups of the following apps and download them locally (csv, with photos, with GPS). Do each individually.
+    if exports cannot be created, create replicas using [duplicate_app.py](duplicate_app.py) : []
     1. CLIENT                             : [/]
     1. SITE DETAILS                       : [/]
-    1. SURVEY                             : []
-    1. SITE VISIT RECORDS                 : []
-    1. Invasive Plants Management Records : []
+    1. SURVEY (replica)                   : [/]
+    1. SITE VISIT RECORDS (replica)       : []
+    1. Invasive Plants Management Records : [/]
 1. Export all data from Invasive Plants Management Records (csv, without photos) : []
 1. Rename the following apps                                                     : []
     1. SURVEY -> SURVEY (LEGACY)                                                         : []
