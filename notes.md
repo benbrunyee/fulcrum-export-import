@@ -1,18 +1,18 @@
 # After
 
-New Survey App - Demo records (title):
+New Survey App - Demo records (title)
 
 - Q22222
 - Bill Cooper, Q12740
 - Bob, Q999999
 - Seasick Steve, 0987654321 (x2)
 
-Change:
+Change
 
 - "proximity_to_other_property_buildings" to "Proximity to buildings outside the site"
 - "Close to water? (within 2 metres)" to "Close to a water body? (within 1 metre of the top of the bank)" (visibility logic to show next 3 fields below)
 
-Add fields:
+Add fields
 
 - "EA spraying near water authorisation status"
   - "pending"
@@ -22,7 +22,7 @@ Add fields:
 
 - Feed the data in ‘EA…status’ to a new field in the Site Visits app, to appear as a direct copy (field name and data).
 
-# Import/Export notes:
+# Import/Export notes
 
 - Added "Other" option to some fields so data is not lost
 
@@ -213,17 +213,17 @@ shouldn't the "proximity_to_other_property_buildings" field in new app should be
 
 ### Once all fields have been mapped to new app structure
 
-Options:
+Options
 
 - Attempt to replicate structure in existing apps <-- This is the process that should be followed
-  - Pros:
+  - Pros
     - Can be simple and quicker to do
-  - Cons:
+  - Cons
     - Higher risk of data loss, an exact backup will need to be created with all records
 - Export and import data via API
-  - Pros:
+  - Pros
     - Can be more accurate and higher change capture rate
-  - Cons:
+  - Cons
     - Can take a lot longer
 
 ## Survey Transformation
@@ -250,7 +250,7 @@ Fields to show for all plant types?
 
 - other_impacted_site_details
 
-TODO:
+TODO
 
 - Map "is_the_entire_stand_located_within_the_boundaries_of_the_subject_site" to "stand_location_relative_to_boundaries"?
 - Map "distance_from_stand_to_water_body" & "is_there_a_water_body_nearby" to "close_to_water_within_2_metres"?
@@ -260,7 +260,7 @@ TODO:
 - App structure
 - Report code
 - Field prefix tags {BREAK} on "Site Plans"
-- Calculation fields:
+- Calculation fields
   - Stand Title
 
 ## Site Visits Transformation
@@ -268,8 +268,50 @@ TODO:
 - "visit_type_invasive_plants_application" won't match up exactly but data will still be there and this can be edited manually in the future
 - "adjuvant_included_in_mix" doesn't actually map to "adjuvant_included_in_mix" since data types are different
 
-Questions:
+Questions
 
 - SITE VISIT RECORDS - Why is there "Planned work carried out?" and "Treatment carried out?" fields? Aren't they the same? - Check notes
 - SITE VISIT RECORDS - "Total number of knotweed stands identified" need to be conditionally hidden? - Check notes
 - SITE VISIT RECORDS - "Technician feedback" should be within the "Service Visit Records" repeatable? - Check notes
+
+## Import Process
+
+1. Ensure that there are no more critical TODOS before proceeding with the merge (check Trello) : [/]
+1. Create csv backups of the following apps and download them locally (csv, with photos, with GPS). Do each individually : []
+    1. CLIENT                             : [/]
+    1. SITE DETAILS                       : [/]
+    1. SURVEY                             : []
+    1. SITE VISIT RECORDS                 : []
+    1. Invasive Plants Management Records : []
+1. Export all data from Invasive Plants Management Records (csv, without photos) : []
+1. Rename the following apps                                                     : []
+    1. SURVEY -> SURVEY (LEGACY)                                                         : []
+    1. Invasive Plants Management Records -> Invasive Plants Management Records (LEGACY) : []
+1. (First time only) Add the status field to the new SURVEY app                                 : []
+1. Duplicate the new SURVEY app and call it "SURVEY" using [duplicate_app.py](duplicate_app.py) : []
+1. Confirm that the structure, status, title, title field matches fine                          : []
+1. Ensure the logo and reports match the SURVEY (LEGACY) app                                    : []
+1. Delete any testing apps                                                                      : []
+    1. IMPORT apps : []
+1. Export the CLIENT app (csv, without photos)                                                  : []
+1. Using the CLIENT backup. Create new client records to upload                                 : []
+1. Upload the new records to the existing CLIENT app                                            : []
+1. Export the CLIENT app again                                                                  : []
+1. Export the SITE DETAILS app (csv, without photos)                                            : []
+1. Using the SITE DETAILS backup. Create new site details records                               : []
+1. Upload the new records to the existing SITE DETAILS app                                      : []
+1. Export the SITE DETAILS app again.                                                           : []
+1. Using the predefined mappings                                                                : []
+    1. Run all the following scripts: []
+        1. [find_differences.py](find_differences.py) : []
+        1. [transform.py](transform.py)               : []
+        1. [import_api.py](import_api.py)             : []
+    1. For these apps, in this order (run all the scripts for each app before proceeding to the next app): []
+        1. IMPR (Invasive Plants Management Records)                  : []
+        1. IPMR_SV (Invasive Plants Management Records - Site Visits) : []
+        1. S (SURVEY - old to new)                                    : []
+1. Confirm that all records have been uploaded                                                   : []
+1. Do a splatter test across a minimum of 5 records to ensure that no problems can be identified : []
+    1. Ensure field values are what is expected   : []
+    1. Ensure that app links are set correctly    : []
+    1. Ensure that record links are set correctly : []

@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
   "tasks": [
-    // KSMP & JKMR
+    // KSMP & JKMR Import
     {
       "label": "KSMP Import",
       "command": "python",
@@ -87,26 +87,7 @@
       "problemMatcher": []
     },
 
-    {
-      "label": "Run KSMP Import",
-      "dependsOn": ["KSMP Import", "SV Import"],
-      "dependsOrder": "sequence",
-      "problemMatcher": []
-    },
-    {
-      "label": "Run JKMR Import",
-      "dependsOn": ["JKMR Import", "JKMR SV Import"],
-      "dependsOrder": "sequence",
-      "problemMatcher": []
-    },
-    {
-      "label": "Run KSMP & JKMR Imports",
-      "dependsOn": ["Run KSMP Import", "Run JKMR Import"],
-      "dependsOrder": "sequence",
-      "problemMatcher": []
-    },
-
-    // IPMR
+    // IPMR Import
     {
       "label": "IPMR Import",
       "command": "python",
@@ -149,9 +130,46 @@
       },
       "problemMatcher": []
     },
+
+    // S Import
     {
-      "label": "Run IPMR Import",
-      "dependsOn": ["IPMR Import", "IPMR SV Import"],
+      "label": "S Import",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "import_api.py",
+        "--base_name",
+        "S",
+        "--yes",
+        "--form_name",
+        "SURVEY - IMPORT (DO NOT USE)",
+        "--source_dir",
+        "new_files\\S\\new_records",
+        "--type",
+        "survey"
+      ],
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+
+    // Sequential Imports
+    {
+      "label": "Run KSMP Import",
+      "dependsOn": ["KSMP Import", "SV Import"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run JKMR Import",
+      "dependsOn": ["JKMR Import", "JKMR SV Import"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run KSMP & JKMR Imports",
+      "dependsOn": ["Run KSMP Import", "Run JKMR Import"],
       "dependsOrder": "sequence",
       "problemMatcher": []
     },

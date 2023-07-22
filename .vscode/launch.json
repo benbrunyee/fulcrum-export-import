@@ -368,6 +368,30 @@
       }
     },
     {
+      "name": "Find Differences (S)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/find_differences.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "S",
+        "--base_dir",
+        "survey_copy_do_not_use",
+        "--base_prefix",
+        "survey_copy_do_not_use",
+        "--target_dir",
+        "survey",
+        "--target_prefix",
+        "survey"
+      ],
+      "presentation": {
+        "group": "find_differences",
+        "order": 3
+      }
+    },
+    {
       "name": "Transform (KSMP)",
       "type": "python",
       "request": "launch",
@@ -548,6 +572,33 @@
       }
     },
     {
+      "name": "Transform (S)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/transform.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "S",
+        "--target_dir",
+        "survey",
+        "--target_prefix",
+        "survey",
+        "--site_location_file",
+        "site_details\\site_details.csv",
+        "--client_name_col",
+        "client_name",
+        "--has_site_location_link",
+        "--transform_type",
+        "survey"
+      ],
+      "presentation": {
+        "group": "transform",
+        "order": 5
+      }
+    },
+    {
       "name": "SV Import",
       "type": "python",
       "request": "launch",
@@ -567,7 +618,7 @@
       ],
       "presentation": {
         "group": "import",
-        "order": 5
+        "order": 2
       }
     },
     {

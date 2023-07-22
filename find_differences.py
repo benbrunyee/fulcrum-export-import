@@ -185,6 +185,16 @@ def get_matching_file(postfix=None):
     elif PARENT_DIR == "IPMR_SV":
         if postfix == "service_visit_records_re_written":
             postfix = "service_visit_records"
+    elif PARENT_DIR == "S":
+        if postfix == "knotweed_stand_details":
+            postfix = "stand_details"
+        elif postfix == "knotweed_stand_details_stand_photos":
+            postfix = "stand_details_stand_photos"
+        elif (
+            postfix
+            == "knotweed_stand_details_hide_stand_shape_and_area_capture_point_data"
+        ):
+            postfix = "stand_details_hide_stand_shape_and_area_capture_point_data"
 
     return postfix, os.path.join(
         BASE_DIR, f"{BASE_PREFIX}{('_' + postfix) if postfix else ''}.csv"
@@ -382,6 +392,34 @@ def transform_knotweed_survey_stand_details_jkmr():
         "w",
     ) as f:
         writer = csv.DictWriter(f, fieldnames=rows[0].keys())
+        writer.writeheader()
+        writer.writerows(new_rows)
+
+
+def transform_base_ipmr():
+    new_rows = []
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}.csv"), "r") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        # Remove the quotations from the following fields
+        fields_to_remove_quotations = [
+            "surveyors_and_qualifications",
+            "surveyors_and_qualifications_other",
+        ]
+
+        for row in rows:
+            for field in fields_to_remove_quotations:
+                row[field] = row[field].replace('"', "")
+
+            new_rows.append(row)
+
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_base_re_written.csv"),
+        "w",
+        newline="",
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
         writer.writeheader()
         writer.writerows(new_rows)
 
@@ -932,7 +970,7 @@ def find_and_write_diffs(base, target, prefix):
 
 def get_correct_file_name(f):
     if f == f"{TARGET_PREFIX}.csv":
-        if PARENT_DIR == "JKMR":
+        if PARENT_DIR == "JKMR" or PARENT_DIR == "IPMR" or PARENT_DIR == "IPMR_SV":
             return f"{TARGET_PREFIX}_base_re_written.csv"
     elif f == f"{TARGET_PREFIX}_stand_details.csv":
         if PARENT_DIR == "IPMR":
@@ -957,6 +995,7 @@ if PARENT_DIR == "JKMR_SV":
     transform_site_visits_jkmr()
 
 if PARENT_DIR == "IPMR":
+    transform_base_ipmr()
     transform_stand_details_ipmr()
 
 if PARENT_DIR == "IPMR_SV":
@@ -985,6 +1024,9 @@ for f in target_files:
     if (
         PARENT_DIR == "JKMR"
         and (
+            # ? Not sure why we skip on the re-written base file
+            # ? Anyways, this work is done so maybe we can ignore this
+            # ? logic
             f == f"{TARGET_PREFIX}_base_re_written.csv"
             or f == f"{TARGET_PREFIX}_knotweed_survey.csv"
         )
