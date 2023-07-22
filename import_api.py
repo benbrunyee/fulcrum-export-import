@@ -615,10 +615,11 @@ def main():
             exit()
 
     rows = read_csv(csv_base)
-    records = [
-        correct_record(target_form, x["record"])
-        for x in create_records(form_id, flattened_elements, rows)
-    ]
+    records = create_records(form_id, flattened_elements, rows)
+
+    # Correct the records
+    for record in records:
+        record["record"] = correct_record(target_form, record["record"])
 
     # save_records(records)
     # save_first_record(form_id)
