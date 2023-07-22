@@ -195,6 +195,11 @@ def duplicate_app(app: dict):
     # Get the records from the existing app
     records = get_app_records(app["id"])
 
+    if args.debug:
+        logger.debug(f"Writing records to file: {records}")
+        with open(".records.json", "w") as f:
+            json.dump(records, f, indent=2)
+
     # Get the percentage of records to duplicate
     record_duplication_percentage = 100
     if not CONFIRMED:
@@ -275,11 +280,13 @@ def rate_limited(max_per_second):
 # Rate limited for 4000 calls per hour (actual limit is 5000/h but we want to be safe)
 @rate_limited(4000 / 3600)
 def create_app_record(record: dict, app_id: str):
-    # Get the record id
     record_id = record["id"]
-
-    # Get the record form values
     record_form_values = record["form_values"]
+    status = record["status"]
+
+    # GPS coordinates
+    longitude = record["longitude"]
+    latitude = record["latitude"]
 
     # Create the record
     if not args.dry_run:
@@ -287,6 +294,9 @@ def create_app_record(record: dict, app_id: str):
             {
                 "record": {
                     "form_id": app_id,
+                    "status": status,
+                    "longitude": longitude,
+                    "latitude": latitude,
                     "form_values": record_form_values,
                 }
             }
