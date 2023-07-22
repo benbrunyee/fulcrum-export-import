@@ -1,4 +1,5 @@
 import argparse
+import copy
 import json
 import logging
 import os
@@ -242,9 +243,32 @@ def duplicate_app(app: dict):
         desc="Records created",
     )
     for record in progress_records:
+        record = correct_record(app, record)
         progress_records.set_description(f"Creating record: {record['id']}")
         create_app_record(record, new_app_id)
     progress_records.close()
+
+
+def correct_record(app: dict, record: dict):
+    """
+    Corrects the record to be created
+    """
+    # Deep copy the record
+    corrected_record = copy.deepcopy(record)
+
+    # Get all valid status values
+    valid_status_values = [x["value"] for x in app["status_field"]["choices"]]
+
+    # Ensure that the record status is valid
+    if not record["status"] or record["status"] == "":
+        # Set it to the default status
+        corrected_record["status"] = app["status_field"]["default_value"]
+    elif record["status"] not in valid_status_values:
+        # Leave it blank if it is invalid otherwise this will cause an error
+        # when creating the record
+        corrected_record["status"] = ""
+
+    return corrected_record
 
 
 def get_app_records(app_id: str):
