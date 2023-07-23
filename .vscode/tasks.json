@@ -1,6 +1,180 @@
 {
   "version": "2.0.0",
   "tasks": [
+    // IPMR Full Transformation
+    {
+      "label": "Find Differences (IPMR)",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "find_differences.py",
+        "--debug",
+        "--parent_dir",
+        "IPMR",
+        "--base_dir",
+        "survey",
+        "--base_prefix",
+        "survey",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records"
+      ],
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Transform (IPMR)",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "transform.py",
+        "--parent_dir",
+        "IPMR",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records",
+        "--site_location_file",
+        "site_details\\site_details.csv",
+        "--client_name_col",
+        "client_names",
+        "--acc_ref_col",
+        "pba_reference",
+        "--transform_type",
+        "survey"
+      ],
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Full IPMR Transformation",
+      "dependsOn": ["Find Differences (IPMR)", "Transform (IPMR)"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+
+    // IPMR SV Full Transformation
+    {
+      "label": "Find Differences (IPMR - SV)",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "find_differences.py",
+        "--debug",
+        "--parent_dir",
+        "IPMR_SV",
+        "--base_dir",
+        "site_visit_records",
+        "--base_prefix",
+        "site_visit_records",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records",
+        "--skip_prompt_matching"
+      ],
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Transform (IPMR - SV)",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "transform.py",
+        "--parent_dir",
+        "IPMR_SV",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records",
+        "--site_location_file",
+        "site_details\\site_details.csv",
+        "--client_name_col",
+        "client_names",
+        "--acc_ref_col",
+        "pba_reference",
+        "--transform_type",
+        "site_visits",
+        "--survey_dir",
+        "survey",
+        "--survey_dir_prefix",
+        "survey"
+      ],
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Full IPMR SV Transformation",
+      "dependsOn": ["Find Differences (IPMR - SV)", "Transform (IPMR - SV)"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+
+    // S Full Transformation
+    {
+      "label": "Find Differences (S)",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "find_differences.py",
+        "--parent_dir",
+        "S",
+        "--base_dir",
+        "survey",
+        "--base_prefix",
+        "survey",
+        "--target_dir",
+        "survey_legacy",
+        "--target_prefix",
+        "survey_legacy"
+      ],
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Transform (S)",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "transform.py",
+        "--parent_dir",
+        "S",
+        "--target_dir",
+        "survey_legacy",
+        "--target_prefix",
+        "survey_legacy",
+        "--site_location_file",
+        "site_details\\site_details.csv",
+        "--client_name_col",
+        "client_name",
+        "--has_site_location_link",
+        "--transform_type",
+        "survey"
+      ],
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Full S Transformation",
+      "dependsOn": ["Find Differences (S)", "Transform (S)"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+
     // KSMP & JKMR Import
     {
       "label": "KSMP Import",
@@ -170,6 +344,30 @@
     {
       "label": "Run KSMP & JKMR Imports",
       "dependsOn": ["Run KSMP Import", "Run JKMR Import"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run IPMR & S Transformation & Imports",
+      "dependsOn": [
+        "Full S Transformation",
+        "S Import",
+        "Full IPMR Transformation",
+        "IPMR Import"
+      ],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run IPMR & IPMR SV & S Transformation & Imports",
+      "dependsOn": [
+        "Full S Transformation",
+        "S Import",
+        "Full IPMR Transformation",
+        "IPMR Import",
+        "Full IPMR SV Transformation",
+        "IPMR SV Import"
+      ],
       "dependsOrder": "sequence",
       "problemMatcher": []
     },
