@@ -4,17 +4,18 @@ import os
 import re
 
 # Arguments
-parser = argparse.ArgumentParser(
-    description="Create clientele list for import")
+parser = argparse.ArgumentParser(description="Create clientele list for import")
 
-parser.add_argument("--existing_clientele", type=str,
-                    help="Existing clientele file", required=False)
-parser.add_argument("--target_file", type=str,
-                    help="Target file for finding clientele", required=True)
-parser.add_argument("--ref_col", type=str,
-                    help="Reference column name", required=True)
-parser.add_argument("--client_name_col", type=str,
-                    help="Client name column name", required=True)
+parser.add_argument(
+    "--existing_clientele", type=str, help="Existing clientele file", required=False
+)
+parser.add_argument(
+    "--target_file", type=str, help="Target file for finding clientele", required=True
+)
+parser.add_argument("--ref_col", type=str, help="Reference column name", required=True)
+parser.add_argument(
+    "--client_name_col", type=str, help="Client name column name", required=True
+)
 
 args = parser.parse_args()
 
@@ -28,8 +29,11 @@ ID_COL = "fulcrum_id"
 
 EXISTING_CLIENT_COL_NAME = "client_name"
 
-MISSING_CLIENT_NAMES_FILE = "new_files\\empty_client_names_" + \
-    re.sub(r"\.csv", "", TARGET_FILE.split('\\')[-1]) + ".txt"
+MISSING_CLIENT_NAMES_FILE = (
+    "new_files\\empty_client_names_"
+    + re.sub(r"\.csv", "", TARGET_FILE.split("\\")[-1])
+    + ".txt"
+)
 
 # Main
 
@@ -46,15 +50,19 @@ existing_names = []
 client_details = {}
 
 # Read the existing clientele file
-if EXISTING_CLIENTELE and os.path.exists(EXISTING_CLIENTELE) and os.path.getsize(EXISTING_CLIENTELE) > 0:
-    with open(EXISTING_CLIENTELE, 'r') as f:
+if (
+    EXISTING_CLIENTELE
+    and os.path.exists(EXISTING_CLIENTELE)
+    and os.path.getsize(EXISTING_CLIENTELE) > 0
+):
+    with open(EXISTING_CLIENTELE, "r") as f:
         reader = csv.DictReader(f)
 
         for row in reader:
             existing_names.append(row[EXISTING_CLIENT_COL_NAME])
 
 # Read the file using csv
-with open(TARGET_FILE, 'r') as f:
+with open(TARGET_FILE, "r") as f:
     reader = csv.DictReader(f)
 
     for row in reader:
@@ -64,28 +72,34 @@ with open(TARGET_FILE, 'r') as f:
 
         if client_name in existing_names:
             # This client name already exists
+            # This is not important
             print(
-                f"ID: {row[ID_COL]}, Client name already exists: {client_name}, Account reference: {row[REF_COL_NAME]}")
+                f"ID: {row[ID_COL]}, Client name already exists: {client_name}, Account reference: {row[REF_COL_NAME]}"
+            )
             continue
 
         if not client_name:
             # This is important
             print(
-                f"ID: {row[ID_COL]}, Client name is empty, Account reference: {row[REF_COL_NAME]}")
-            open(MISSING_CLIENT_NAMES_FILE, 'a').write(
-                f"Account reference: {row[REF_COL_NAME]}: Missing client name\n")
+                f"ID: {row[ID_COL]}, Client name is empty, Account reference: {row[REF_COL_NAME]}"
+            )
+            open(MISSING_CLIENT_NAMES_FILE, "a").write(
+                f"Account reference: {row[REF_COL_NAME]}: Missing client name\n"
+            )
 
         if client_name in client_names:
             # This is not important
             print(
-                f"ID: {row[ID_COL]}, Duplicate client name: {client_name}, Account reference: {row[REF_COL_NAME]}")
+                f"ID: {row[ID_COL]}, Duplicate client name: {client_name}, Account reference: {row[REF_COL_NAME]}"
+            )
         else:
             client_names.append(client_name)
 
         if row[REF_COL_NAME] in acc_refs:
             # This is not important
             print(
-                f"ID: {row[ID_COL]}, Duplicate account reference: {row[REF_COL_NAME]}, Client: {client_name}")
+                f"ID: {row[ID_COL]}, Duplicate account reference: {row[REF_COL_NAME]}, Client: {client_name}"
+            )
         else:
             acc_refs.append(row[REF_COL_NAME])
 
@@ -99,7 +113,7 @@ with open(TARGET_FILE, 'r') as f:
 #     print(f"Client: {client}, Account references: {client_details[client]}")
 
 # Write the client names to a file
-with open("new_files\\new_client_names.csv", 'w', newline='') as f:
+with open("new_files\\new_client_names.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["client_name"])
     writer.writerows([[client] for client in client_names])

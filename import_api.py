@@ -1,4 +1,5 @@
 import argparse
+import copy
 import csv
 import json
 import os
@@ -148,6 +149,10 @@ def upload_records(records):
             print(f"Failed to create record {record['record']['fulcrum_id']}")
             continue
 
+        if not "id" in res["record"]:
+            print(res)
+            raise Exception(f"Failed to create record {record['record']['fulcrum_id']}")
+
         print(res["record"]["id"] + " created.")
 
         if TYPE == "survey":
@@ -214,7 +219,6 @@ def read_repeatable_data(parent_id, element):
 
     flattened_elements = list(flatten(element["elements"]))
 
-    # TODO: Filter rows based on the fulcrum_parent_id column
     rows = list(filter(lambda row: row["fulcrum_parent_id"] == parent_id, rows))
 
     return create_repeatable_objects(flattened_elements, rows, parent_id)
@@ -250,7 +254,7 @@ def save_records(records):
 
 
 def get_record_link(record_id, value):
-    # If there is no value then this is likely to be a new field that should be populated
+    # If there is no `value` then this is likely to be a new field that should be populated
     # We can find the record_id for this field by looking at the sa export,
     # matching on a row and then grabbing the fulcrum_id
 
@@ -268,9 +272,16 @@ def get_record_link(record_id, value):
                     return []
 
                 return [{"record_id": mapping[record_id]["id"]}]
-        elif BASE_NAME == "KSMP":
+        else:
             with open(OLD_TO_NEW_ID_MAPPING, "r") as f:
                 mapping = json.load(f)
+
+                if not value:
+                    if record_id not in mapping:
+                        print("Could not find a match for " + record_id)
+                        return []
+
+                    return [{"record_id": mapping[record_id]}]
 
                 if value not in mapping:
                     print("Could not find a match for " + value)
@@ -418,6 +429,28 @@ def get_user_id(email):
             return None
 
     return USER_IDS[email]
+
+
+def correct_record(app: dict, record: dict):
+    """
+    Corrects the record to be created
+    """
+    # Deep copy the record
+    corrected_record = copy.deepcopy(record)
+
+    # Get all valid status values
+    valid_status_values = [x["value"] for x in app["status_field"]["choices"]]
+
+    # Ensure that the record status is valid
+    if not record["status"] or record["status"] == "":
+        # Set it to the default status
+        corrected_record["status"] = app["status_field"]["default_value"]
+    elif record["status"] not in valid_status_values:
+        # Leave it blank if it is invalid otherwise this will cause an error
+        # when creating the record
+        corrected_record["status"] = ""
+
+    return corrected_record
 
 
 def create_base_record(form_id, row, base_obj={}):
@@ -584,11 +617,19 @@ def main():
     rows = read_csv(csv_base)
     records = create_records(form_id, flattened_elements, rows)
 
+    # Correct the records
+    for record in records:
+        record["record"] = correct_record(target_form, record["record"])
+
     # save_records(records)
     # save_first_record(form_id)
     # save_form(target_form)
     # print(json.dumps(records, indent=2))
     print("Records to upload: " + str(len(records)))
+
+    if CONFIRMED:
+        print("Waiting 5 seconds before import. Press Ctrl+C to cancel.")
+        time.sleep(5)
 
     upload_records(records)
 

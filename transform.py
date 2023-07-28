@@ -16,9 +16,15 @@ parser.add_argument(
 parser.add_argument(
     "--client_name_col", type=str, help="Client name column", required=True
 )
+
+# One of these is required
 parser.add_argument(
-    "--acc_ref_col", type=str, help="Account reference column", required=True
+    "--acc_ref_col", type=str, help="Account reference column", required=False
 )
+parser.add_argument(
+    "--has_site_location_link", action="store_true", help="Has site location link"
+)
+
 parser.add_argument("--transform_type", type=str, help="Transform type", required=True)
 parser.add_argument("--survey_dir", type=str, help="Survey directory")
 parser.add_argument("--survey_dir_prefix", type=str, help="Survey directory prefix")
@@ -39,12 +45,23 @@ SURVEY_DIR_PREFIX = args.survey_dir_prefix
 
 CLIENT_NAME_COL = args.client_name_col
 ACC_REF_COL = args.acc_ref_col
+HAS_SITE_LOCATION_LINK = args.has_site_location_link
+
+if not HAS_SITE_LOCATION_LINK and not ACC_REF_COL:
+    raise Exception(
+        "Missing account reference column, please set --acc_ref_col or --has_site_location_link"
+    )
 
 SITE_LOCATION_FILE = args.site_location_file
 
 TRANSFORM_TYPE = args.transform_type
 
+# Structure: Repeatble -> target field key in old app -> value: new value
 TRANSFORMATIONS = {
+    "IPMR": {},
+    "IPMR_SV": {
+        "service_visit_records": {"visit_type_invasive_plants_application": {}}
+    },
     "KSMP": {},
     "JKMR": {
         "knotweed_stand_details": {
@@ -67,6 +84,7 @@ TRANSFORMATIONS = {
             }
         },
     },
+    "S": {},
 }
 
 PROPERTY_TYPE_MAPPINGS = {
@@ -88,18 +106,58 @@ DEFAULT_BASE_COLS = {
     ]
     if any([re.match(k, row["property_type"]) for k in PROPERTY_TYPE_MAPPINGS.keys()])
     else "",
-    "plant_type": lambda row: "Japanese Knotweed",
+    "plant_type": lambda row: "Other" if PARENT_DIR == "IPMR" else "Japanese Knotweed",
     "job_type": lambda row: "Treatment",
 }
 
 DEFAULT_SV_SV_COLS = {
-    "visit_category": lambda row: "Japanese Knotweed Management Record",
-    "record_type_japanese_knotweed": lambda row: row["record_type_japanese_knotweed"]
-    if "record_type_japanese_knotweed" in row
-    else "Herbicide Application & Monitoring Record",
-    "visit_type_japanese_knotweed_application_monitoring": lambda row: row["visit_type"]
-    if row["visit_type"] != "Site Monitoring Observations & Recommendations"
-    else "Scheduled Monitoring",
+    "visit_category": lambda row: "Japanese Knotweed Management Record"
+    if PARENT_DIR != "IPMR_SV"
+    else "Invasive Plants Management Record",
+    **(
+        {
+            "record_type_japanese_knotweed": lambda row: row[
+                "record_type_japanese_knotweed"
+            ]
+            if "record_type_japanese_knotweed" in row
+            else "Herbicide Application & Monitoring Record"
+        }
+        if PARENT_DIR != "IPMR_SV"
+        else {}
+    ),
+    **(
+        {
+            "record_type_invasive_plants": lambda row: row[
+                "record_type_invasive_plants"
+            ]
+            if "record_type_invasive_plants" in row
+            else "Herbicide Application"
+        }
+        if PARENT_DIR == "IPMR_SV"
+        else {}
+    ),
+    **(
+        {
+            "visit_type_japanese_knotweed_application_monitoring": lambda row: row[
+                "visit_type"
+            ]
+            if row["visit_type"] != "Site Monitoring Observations & Recommendations"
+            else "Scheduled Monitoring"
+        }
+        if PARENT_DIR != "IPMR_SV"
+        else {}
+    ),
+    **(
+        {
+            # This won't match up exactly but the data will still be there.
+            # This can be fixed on manual edits
+            "visit_type_invasive_plants_application": lambda row: row["service_type"]
+            if row["service_type"] != "Monitoring visit"
+            else "Scheduled Monitoring"
+        }
+        if PARENT_DIR == "IPMR_SV"
+        else {}
+    ),
 }
 
 
@@ -193,26 +251,39 @@ def transform(diff_dir_name, target_csv_name):
                 for site_location in site_location_csv:
                     match = False
 
-                    for check in site_address_checks:
-                        if row[check] != site_location[check]:
-                            match = False
+                    # Should only really be used for survey to survey transformations
+                    # since the site location link would already be set
+                    if HAS_SITE_LOCATION_LINK:
+                        if row["site_location"] == site_location["fulcrum_id"]:
+                            found = True
                             break
-                        else:
-                            match = True
+                    else:
+                        for check in site_address_checks:
+                            if row[check] != site_location[check]:
+                                match = False
+                                break
+                            else:
+                                match = True
 
-                    if (
-                        match
-                        and row[CLIENT_NAME_COL].strip() == site_location["client_name"]
-                        and row[ACC_REF_COL] == site_location["job_id"]
-                    ):
-                        row["site_location"] = site_location["fulcrum_id"]
-                        found = True
-                        break
+                        if (
+                            match
+                            and row[CLIENT_NAME_COL].strip()
+                            == site_location["client_name"]
+                            and row[ACC_REF_COL] == site_location["job_id"]
+                        ):
+                            row["site_location"] = site_location["fulcrum_id"]
+                            found = True
+                            break
 
                 if not found:
-                    raise Exception(
-                        f"Could not find site location: {row['fulcrum_id']}"
-                    )
+                    if not HAS_SITE_LOCATION_LINK:
+                        raise Exception(
+                            f"Could not find site location: {row['fulcrum_id']}"
+                        )
+                    else:
+                        print(
+                            f"WARNING: Could not find site location for row: {row['fulcrum_id']}, {row[CLIENT_NAME_COL]}"
+                        )
 
                 # Set default columns
                 for col, func in DEFAULT_BASE_COLS.items():
@@ -270,9 +341,26 @@ def get_file_mapping(dir_name):
             dir_name = "knotweed_survey_knotweed_stand_details_stand_photos"
         elif dir_name == "base":
             dir_name = "base_re_written"
-    if PARENT_DIR == "JKMR_SV":
+    elif PARENT_DIR == "JKMR_SV":
         if dir_name in "service_visit_records":
             dir_name = "site_visits_re_written"
+    elif PARENT_DIR == "IPMR":
+        if dir_name in "base":
+            dir_name = "base_re_written"
+    elif PARENT_DIR == "IPMR_SV":
+        if dir_name in "service_visit_records":
+            dir_name = "service_visit_records_re_written"
+        elif dir_name in "base":
+            dir_name = "base_re_written"
+    elif PARENT_DIR == "S":
+        if dir_name == "stand_details":
+            dir_name = "knotweed_stand_details"
+        elif dir_name == "stand_details_stand_photos":
+            dir_name = "knotweed_stand_details_stand_photos"
+        elif dir_name == "stand_details_hide_stand_shape_and_area_capture_point_data":
+            dir_name = (
+                "knotweed_stand_details_hide_stand_shape_and_area_capture_point_data"
+            )
 
     return dir_name
 

@@ -13,6 +13,58 @@
       "justMyCode": true
     },
     {
+      "name": "Duplicate App (CLIENT)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/duplicate_app.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["--name", "CLIENT"],
+      "presentation": {
+        "group": "duplicate_app",
+        "order": 1
+      }
+    },
+    {
+      "name": "Duplicate App (SITE DETAILS)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/duplicate_app.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["--name", "SITE DETAILS"],
+      "presentation": {
+        "group": "duplicate_app",
+        "order": 2
+      }
+    },
+    {
+      "name": "Duplicate App (SURVEY)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/duplicate_app.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["--name", "SURVEY", "--postfix", " (BACKUP)"],
+      "presentation": {
+        "group": "duplicate_app",
+        "order": 3
+      }
+    },
+    {
+      "name": "Duplicate App (SITE VISIT RECORDS)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/duplicate_app.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["--name", "SITE VISIT RECORDS", "--postfix", " (BACKUP)"],
+      "presentation": {
+        "group": "duplicate_app",
+        "order": 4
+      }
+    },
+    {
       "name": "Create Clientele (KSMP)",
       "type": "python",
       "request": "launch",
@@ -54,6 +106,28 @@
       "presentation": {
         "group": "create_clientele",
         "order": 2
+      }
+    },
+    {
+      "name": "Create Clientele (IPMR)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/create_clientele.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--existing_clientele",
+        "client\\client.csv",
+        "--target_file",
+        "invasive_plants_management_records\\invasive_plants_management_records.csv",
+        "--ref_col",
+        "pba_reference",
+        "--client_name_col",
+        "client_names"
+      ],
+      "presentation": {
+        "group": "create_clientele",
+        "order": 3
       }
     },
     {
@@ -114,6 +188,36 @@
       "presentation": {
         "group": "create_site_locations",
         "order": 2
+      }
+    },
+    {
+      "name": "Create Site Locations (IPMR)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/create_site_locations.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--existing_site_locations",
+        "site_details\\site_details.csv",
+        "--clientele_file",
+        "client\\client.csv",
+        "--target_file",
+        "invasive_plants_management_records\\invasive_plants_management_records.csv",
+        "--acc_ref_col",
+        "pba_reference",
+        "--client_name_col",
+        "client_names",
+        "--property_type_col",
+        "property_type",
+        "--account_status_col",
+        "status",
+        "--site_address_prefix",
+        "site_address_"
+      ],
+      "presentation": {
+        "group": "create_site_locations",
+        "order": 3
       }
     },
     {
@@ -210,6 +314,81 @@
       "presentation": {
         "group": "find_differences",
         "order": 2
+      }
+    },
+    {
+      "name": "Find Differences (IPMR)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/find_differences.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--debug",
+        "--parent_dir",
+        "IPMR",
+        "--base_dir",
+        "survey",
+        "--base_prefix",
+        "survey",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records"
+      ],
+      "presentation": {
+        "group": "find_differences",
+        "order": 2
+      }
+    },
+    {
+      "name": "Find Differences (IPMR - SV)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/find_differences.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--debug",
+        "--parent_dir",
+        "IPMR_SV",
+        "--base_dir",
+        "site_visit_records",
+        "--base_prefix",
+        "site_visit_records",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records",
+        "--skip_prompt_matching"
+      ],
+      "presentation": {
+        "group": "find_differences",
+        "order": 2
+      }
+    },
+    {
+      "name": "Find Differences (S)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/find_differences.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "S",
+        "--base_dir",
+        "survey",
+        "--base_prefix",
+        "survey",
+        "--target_dir",
+        "survey_legacy",
+        "--target_prefix",
+        "survey_legacy"
+      ],
+      "presentation": {
+        "group": "find_differences",
+        "order": 3
       }
     },
     {
@@ -333,6 +512,93 @@
       }
     },
     {
+      "name": "Transform (IPMR)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/transform.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "IPMR",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records",
+        "--site_location_file",
+        "site_details\\site_details.csv",
+        "--client_name_col",
+        "client_names",
+        "--acc_ref_col",
+        "pba_reference",
+        "--transform_type",
+        "survey"
+      ],
+      "presentation": {
+        "group": "transform",
+        "order": 2
+      }
+    },
+    {
+      "name": "Transform (IPMR - SV)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/transform.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "IPMR_SV",
+        "--target_dir",
+        "invasive_plants_management_records",
+        "--target_prefix",
+        "invasive_plants_management_records",
+        "--site_location_file",
+        "site_details\\site_details.csv",
+        "--client_name_col",
+        "client_names",
+        "--acc_ref_col",
+        "pba_reference",
+        "--transform_type",
+        "site_visits",
+        "--survey_dir",
+        "survey",
+        "--survey_dir_prefix",
+        "survey"
+      ],
+      "presentation": {
+        "group": "transform",
+        "order": 2
+      }
+    },
+    {
+      "name": "Transform (S)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/transform.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--parent_dir",
+        "S",
+        "--target_dir",
+        "survey_legacy",
+        "--target_prefix",
+        "survey_legacy",
+        "--site_location_file",
+        "site_details\\site_details.csv",
+        "--client_name_col",
+        "client_name",
+        "--has_site_location_link",
+        "--transform_type",
+        "survey"
+      ],
+      "presentation": {
+        "group": "transform",
+        "order": 5
+      }
+    },
+    {
       "name": "SV Import",
       "type": "python",
       "request": "launch",
@@ -349,7 +615,11 @@
         "new_files\\SV\\new_records",
         "--type",
         "site_visits"
-      ]
+      ],
+      "presentation": {
+        "group": "import",
+        "order": 2
+      }
     },
     {
       "name": "JKMR Import",
@@ -368,7 +638,11 @@
         "new_files\\JKMR\\new_records",
         "--type",
         "survey"
-      ]
+      ],
+      "presentation": {
+        "group": "import",
+        "order": 5
+      }
     },
     {
       "name": "JKMR SV Import",
@@ -387,6 +661,71 @@
         "new_files\\JKMR_SV\\new_records",
         "--type",
         "site_visits"
+      ],
+      "presentation": {
+        "group": "import",
+        "order": 5
+      }
+    },
+    {
+      "name": "IPMR Import",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/import_api.py",
+      "justMyCode": true,
+      "console": "integratedTerminal",
+      "args": [
+        "--yes",
+        "--base_name",
+        "IPMR",
+        "--form_name",
+        "SURVEY",
+        "--source_dir",
+        "new_files\\IPMR\\new_records",
+        "--type",
+        "survey"
+      ],
+      "presentation": {
+        "group": "import",
+        "order": 6
+      }
+    },
+    {
+      "name": "IPMR SV Import",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/import_api.py",
+      "justMyCode": true,
+      "console": "integratedTerminal",
+      "args": [
+        "--yes",
+        "--base_name",
+        "IPMR",
+        "--form_name",
+        "SITE VISIT RECORDS",
+        "--source_dir",
+        "new_files\\IPMR_SV\\new_records",
+        "--type",
+        "site_visits"
+      ],
+      "presentation": {
+        "group": "import",
+        "order": 7
+      }
+    },
+
+    {
+      "name": "Debug delete_records.py",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/delete_records.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "-r",
+        "old_to_new_id_mapping_IPMR.json",
+        "-n",
+        "SITE VISIT RECORDS"
       ]
     }
   ]

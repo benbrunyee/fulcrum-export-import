@@ -12,15 +12,17 @@ import argparse
 import csv
 import difflib
 import json
+import logging
 import os
 import re
 import shutil
 
-from tabulate import tabulate
-
 # Arguments
 parser = argparse.ArgumentParser(description="Find differences between 2 csv files")
 
+parser.add_argument(
+    "--debug", action="store_true", help="Enable debug logging", required=False
+)
 parser.add_argument("--parent_dir", type=str, help="Parent directory", required=True)
 parser.add_argument("--base_dir", type=str, help="Base directory", required=True)
 parser.add_argument("--base_prefix", type=str, help="Base prefix", required=True)
@@ -29,13 +31,50 @@ parser.add_argument("--target_prefix", type=str, help="Target prefix", required=
 parser.add_argument(
     "--skip_prompt_matching",
     action="store_true",
-    help="Skip all prompt matching",
+    help="Skip all prompt matching. Don't ask for user input.",
     required=False,
 )
 
 args = parser.parse_args()
 
+# Logging
+
+# Logging format of: [LEVEL]::[FUNCTION]::[HH:MM:SS] - [MESSAGE]
+# Where the level is colored based on the level and the rest except from the message is grey
+start = "\033["
+end = "\033[0m"
+colors = {
+    "GREEN": "32m",
+    "ORANGE": "33m",
+    "RED": "31m",
+    "GREY": "90m",
+}
+for color in colors:
+    # Add the start to the color
+    colors[color] = start + colors[color]
+
+logging.addLevelName(logging.DEBUG, f"{colors['GREEN']}DEBUG{colors['GREY']}")  # Green
+logging.addLevelName(logging.INFO, f"{colors['GREEN']}INFO{colors['GREY']}")  # Green
+logging.addLevelName(
+    logging.WARNING, f"{colors['ORANGE']}WARNING{colors['GREY']}"
+)  # Orange
+logging.addLevelName(logging.ERROR, f"{colors['RED']}ERROR{colors['GREY']}")  # Red
+logging.addLevelName(
+    logging.CRITICAL, f"{colors['RED']}CRITICAL{colors['GREY']}"
+)  # Red
+
+# Define the format of the logging
+logging.basicConfig(
+    format=f"%(levelname)s::%(funcName)s::%(asctime)s - {end}%(message)s",
+    datefmt="%H:%M:%S",
+)
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG if args.debug else logging.INFO)
+
+
 # Constants
+
 
 PARENT_DIR = args.parent_dir
 
@@ -75,21 +114,36 @@ def write_file_no_match(filepath):
         f.write(filepath + "\n")
 
 
-def custom_rules(row):
-    new_val = row
+def apply_custom_rules(target_row):
+    """
+    Apply custom rules to the target row (input csv rows)
+    """
+    new_val = target_row
 
     if PARENT_DIR == "KSMP":
-        if re.match(r"^.*?_year_1$", row):
-            new_val = re.sub(r"^(.*?)_year_1$", "\\1", row)
-            print(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
-        elif re.match(r"^.*?_year_1_other$", row):
-            new_val = re.sub(r"^(.*?)_year_1_other$", "\\1_other", row)
-            print(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
-        elif re.match(r"^.*?(_schedule)?_year_.*$", row):
-            new_val = re.sub(r"^(.*?)(_schedule)?_year_(.*)$", "\\1_\\3", row)
-            print(f"Custom Rule. Replacing: '{row}' with '{new_val}'")
+        if re.match(r"^.*?_year_1$", target_row):
+            new_val = re.sub(r"^(.*?)_year_1$", "\\1", target_row)
+            logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
+        elif re.match(r"^.*?_year_1_other$", target_row):
+            new_val = re.sub(r"^(.*?)_year_1_other$", "\\1_other", target_row)
+            logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
+        elif re.match(r"^.*?(_schedule)?_year_.*$", target_row):
+            new_val = re.sub(r"^(.*?)(_schedule)?_year_(.*)$", "\\1_\\3", target_row)
+            logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
+    elif PARENT_DIR == "IPMR":
+        if re.match(r"^.*?_year_1$", target_row):
+            new_val = re.sub(r"^(.*?)(_schedule)?_year_1$", "\\1", target_row)
+            logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
+        elif re.match(r"^.*?_year_1_other$", target_row):
+            new_val = re.sub(
+                r"^(.*?)(_schedule)?_year_1_other$", "\\1_other", target_row
+            )
+            logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
+        elif re.match(r"^.*?(_schedule)?_year_.*$", target_row):
+            new_val = re.sub(r"^(.*?)(_schedule)?_year_(.*)$", "\\1_\\3", target_row)
+            logger.debug(f"Custom Rule. Replacing: '{target_row}' with '{new_val}'")
 
-    return new_val != row, new_val
+    return new_val != target_row, new_val
 
 
 def get_files(dir, prefix):
@@ -112,7 +166,7 @@ def clear_and_create_dir(dir):
     os.makedirs(dir)
 
 
-def get_base_file(postfix=None):
+def get_matching_file(postfix=None):
     if PARENT_DIR == "JKMR":
         if postfix == "site_plans":
             postfix = "break_before_site_plans"
@@ -122,9 +176,25 @@ def get_base_file(postfix=None):
             postfix = "knotweed_stand_details"
         elif postfix == "knotweed_survey_knotweed_stand_details_stand_photos":
             postfix = "knotweed_stand_details_stand_photos"
-    if PARENT_DIR == "JKMR_SV":
+    elif PARENT_DIR == "JKMR_SV":
         if postfix == "site_visits_re_written":
             postfix = "service_visit_records"
+    elif PARENT_DIR == "IPMR":
+        if postfix == "stand_details_re_written":
+            postfix = "stand_details"
+    elif PARENT_DIR == "IPMR_SV":
+        if postfix == "service_visit_records_re_written":
+            postfix = "service_visit_records"
+    elif PARENT_DIR == "S":
+        if postfix == "knotweed_stand_details":
+            postfix = "stand_details"
+        elif postfix == "knotweed_stand_details_stand_photos":
+            postfix = "stand_details_stand_photos"
+        elif (
+            postfix
+            == "knotweed_stand_details_hide_stand_shape_and_area_capture_point_data"
+        ):
+            postfix = "stand_details_hide_stand_shape_and_area_capture_point_data"
 
     return postfix, os.path.join(
         BASE_DIR, f"{BASE_PREFIX}{('_' + postfix) if postfix else ''}.csv"
@@ -217,6 +287,41 @@ def transform_knotweed_survey_repeatable_jkmr():
         writer.writerows(new_rows)
 
 
+def merge_fields(row, field_key_1, field_key_2, allow_multiple=False):
+    """
+    Merge two fields together, if the first field is empty, use the second field.
+    If allow_multiple is defined, then add the second field to the first field, separated by a comma.
+    """
+    if field_key_1 not in row.keys() or field_key_2 not in row.keys():
+        raise Exception(
+            f"Field {field_key_1} or {field_key_2} not found in row {row['fulcrum_id']}"
+        )
+    elif not row[field_key_1]:
+        logger.info(
+            f"Field {field_key_1} is empty, using {field_key_2} instead for row {row['fulcrum_id']}"
+        )
+        row[field_key_1] = row[field_key_2]
+        return row
+    elif allow_multiple and row[field_key_1] and row[field_key_2]:
+        row[field_key_1] = f"{row[field_key_1]},{row[field_key_2]}"
+        return row
+
+    return row
+
+
+def map_fields(row, field_map):
+    """
+    Map fields to a new field name
+    """
+    for old_field, new_field in field_map.items():
+        if old_field not in row.keys():
+            raise Exception(f"Field {old_field} not found in row {row['fulcrum_id']}")
+
+        row[new_field] = row[old_field]
+
+    return row
+
+
 def transform_knotweed_survey_stand_details_jkmr():
     new_rows = []
 
@@ -242,7 +347,7 @@ def transform_knotweed_survey_stand_details_jkmr():
                 and new_location_val
                 and old_location_val != new_location_val
             ):
-                print(
+                logger.info(
                     f"{row['fulcrum_id']}: Both old and new values are populated. Old: '{old_location_val}', New: '{new_location_val}'"
                 )
             if (
@@ -250,7 +355,7 @@ def transform_knotweed_survey_stand_details_jkmr():
                 and new_location_other_val
                 and old_location_other_val != new_location_other_val
             ):
-                print(
+                logger.info(
                     f"{row['fulcrum_id']}: Both old and new other values are populated. Old: '{old_location_other_val}', New: '{new_location_other_val}'"
                 )
 
@@ -270,7 +375,7 @@ def transform_knotweed_survey_stand_details_jkmr():
                 and new_distance_val
                 and old_distance_val != new_distance_val
             ):
-                print(
+                logger.info(
                     f"{row['fulcrum_id']}: Both old and new values are populated. Old: '{old_distance_val}', New: '{new_distance_val}'"
                 )
 
@@ -291,14 +396,386 @@ def transform_knotweed_survey_stand_details_jkmr():
         writer.writerows(new_rows)
 
 
-def transform_site_visits():
+def transform_base_ipmr():
+    new_rows = []
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}.csv"), "r") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        # Remove the quotations from the following fields
+        fields_to_remove_quotations = [
+            "surveyors_and_qualifications",
+            "surveyors_and_qualifications_other",
+        ]
+
+        for row in rows:
+            for field in fields_to_remove_quotations:
+                row[field] = row[field].replace('"', "")
+
+            new_rows.append(row)
+
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_base_re_written.csv"),
+        "w",
+        newline="",
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
+        writer.writeheader()
+        writer.writerows(new_rows)
+
+
+def transform_base_for_service_visits_ipmr():
+    """
+    Transform the base app when for an IPMR difference findings when we are
+    finding differences for the site visits transformation
+    """
+
+    new_rows = []
+
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}.csv"), "r") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        fields_to_merge = [
+            ["property_type", "property_type_other"],
+        ]
+
+        for row in rows:
+            for field_pair in fields_to_merge:
+                row = merge_fields(row, field_pair[0], field_pair[1])
+            new_rows.append(row)
+
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_base_re_written.csv"),
+        "w",
+        newline="",
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
+        writer.writeheader()
+        writer.writerows(new_rows)
+
+
+def transform_service_visits_ipmr():
+    """
+    Transform the base app when for an IPMR difference findings when we are
+    finding differences for the site visits transformation and site visits
+    repeatable
+    """
+    new_rows = []
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_service_visit_records.csv"),
+        "r",
+    ) as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        # regex for key
+        service_type_to_visit_type_data_name_map = {
+            "Herbicide treatment .*": "visit_type_invasive_plants_application",
+            ".*": "visit_type_invasive_plants_other",
+        }
+
+        fields_to_merge = [
+            {
+                "type": "allow_multiple",
+                "fields": [
+                    # We purposefully ignore the service_visit_type field
+                    ["adjuvant_name", "adjuvant_name_other"],
+                ],
+            },
+            {
+                "type": "single",
+                "fields": [],
+            },
+        ]
+
+        for row in rows:
+            row_handled = False
+
+            # ==================
+            for obj_type in fields_to_merge:
+                for field_pair in obj_type["fields"]:
+                    if obj_type["type"] == "allow_multiple":
+                        row = merge_fields(
+                            row, field_pair[0], field_pair[1], allow_multiple=True
+                        )
+                    else:
+                        row = merge_fields(row, field_pair[0], field_pair[1])
+            # ==================
+
+            # ==================
+            # The "service_type" field is a multiple-choice field but we are trying
+            # to map it to a single-choice field in the new app. So we need to create a
+            # new row (record) for each  alue and then merge them into a single field
+            # We don't want to merge all the fields, just the relevant ones for each
+            # value in the multiple choice.
+
+            # Define what section has what data_names so we can split a row and only
+            # keep the relevant data for each selected option
+            # regex for key
+            # If there is a data name with a value set, this is because the value is of
+            # a dataname that is shared between the section types. We map this so that
+            # we can later set the relevant values for the data names once we have split
+            # the rows into multiple rows based on the section type. These are fields
+            # like: "notes", "photos", "video"
+            section_types = {
+                # Herbicide Application
+                "Herbicide treatment .*": {
+                    "weather_conditions": None,
+                    "local_environment_risk_assessment_for_pesticides_if_appropriate_list_proximity_of_buffer_zones_water_courses_etc_": None,
+                    "treatment_carried_out": None,
+                    "reasons_for_treatment_not_taking_place_or_treatment_interrupted": None,
+                    "target_species": None,
+                    "treatment_types": None,
+                    "reason_for_treatment": None,
+                    "product_name_mapp_number_active_ingredient": None,
+                    "quantity_of_product_per_litre_ml": None,
+                    "total_mix_applied_l": None,
+                    "total_active_ingredient_applied_ml": None,
+                    "adjuvant_included_in_mix": None,
+                    "adjuvant_name": None,
+                    "ppe_worn": None,
+                    "treatment_notes_observations_and_issues": None,
+                    "treatment_photos": None,
+                    "treatment_photos_caption": None,
+                    "treatment_photos_url": None,
+                    "treatment_video": None,
+                    "treatment_video_caption": None,
+                    "treatment_video_url": None,
+                },
+                # Site Monitoring
+                "Monitoring visit": {
+                    "is_new_growth_visible": None,
+                    "location_of_visible_growth": None,
+                    "describe_the_visible_growth": None,
+                    "was_the_visible_growth_treated": None,
+                    "reason_for_treatment_not_taking_place": None,
+                    "has_host_soil_been_disturbed_or_cultivated": None,
+                    "has_host_soil_been_covered_by_any_new_artefactsfeaturesconstruction": None,
+                    "has_any_new_soft_or_hard_landscaping_occurred_within_the_impacted_area": None,
+                    "other_findingscomments": None,
+                    "recommendations": None,
+                    "monitoring_photos": None,
+                    "monitoring_photos_caption": None,
+                    "monitoring_photos_url": None,
+                    "monitoring_video": None,
+                    "monitoring_video_caption": None,
+                    "monitoring_video_url": None,
+                },
+                # Cut / Clearance / Excavation / Barrier / Other
+                ".*": {
+                    "service_activity_types": None,
+                    "planned_works_completed": None,
+                    "works_notes": "treatment_notes_observations_and_issues",
+                    "works_audio_record": None,
+                    "works_photo_record": "treatment_photos",
+                    "works_photo_record_caption": "treatment_photos_caption",
+                    "works_photo_record_url": "treatment_photos_url",
+                    "works_video_record": "treatment_video",
+                    "works_video_record_caption": "treatment_video_caption",
+                    "works_video_record_url": "treatment_video_url",
+                },
+            }
+
+            service_visit_data_names = [
+                "service_type",
+                "service_type_other",
+            ]
+            all_selected = []
+            for data_name in service_visit_data_names:
+                if data_name in row and row[data_name] != "":
+                    all_selected.extend(row[data_name].split(","))
+            logger.debug("All selected service visit types: %s", all_selected)
+            if len(all_selected) > 1:
+                logger.debug(
+                    "Creating new rows for each selected option: %s. (1 row -> %s rows)",
+                    row["fulcrum_id"],
+                    len(all_selected),
+                )
+                for service_visit_data_name in service_visit_data_names:
+                    selected_options = [
+                        f.strip() for f in row[service_visit_data_name].split(",")
+                    ]
+
+                    has_regex_match = False
+                    for selected_option in selected_options:
+                        if selected_option == "":
+                            continue
+
+                        for regex in section_types.keys():
+                            if re.match(regex, selected_option):
+                                has_regex_match = True
+                                break
+
+                        if not has_regex_match:
+                            raise Exception(
+                                "No regex match for selected option: %s",
+                                selected_option,
+                            )
+
+                        logger.debug(
+                            "Creating new row for selected option: %s", selected_option
+                        )
+
+                        copy_row = row.copy()
+
+                        # Set the other service_visit_data_names to an empty string
+                        # This is because we want to keep all the data except ones that are
+                        # relevant to other section types. For example, if the section type is
+                        # "Herbicide treatment" we want to keep all the data except the data
+                        # that is relevant to "Monitoring visit" and "Cut / Clearance / Excavation / Barrier / Other"
+                        # This is because we are creating a new row for each selected option
+                        # and we want to keep all the data except the data that is relevant
+                        # to other section types.
+                        for data_name in service_visit_data_names:
+                            if data_name != service_visit_data_name:
+                                copy_row[data_name] = ""
+
+                        # There are some data names that are shared between service types but we
+                        # need to determine what values should fill these data names. This is
+                        # provided in the dictionary (if there is a value associated with a data name)
+                        for (
+                            service_type_regex_key,
+                            service_type_data_name_object_value,
+                        ) in section_types.items():
+                            # Check what section this row is relevant to
+                            if not re.match(service_type_regex_key, selected_option):
+                                continue
+
+                            # This is a match so we can continue
+                            for (
+                                data_name,
+                                data_name_target,
+                            ) in service_type_data_name_object_value.items():
+                                if not data_name_target:
+                                    continue
+
+                                copy_row[data_name_target] = copy_row[data_name]
+
+                        # Set the value of the selected option to the data_name for the section type
+                        copy_row[service_visit_data_name] = selected_option
+
+                        # Add the new row to the new_rows array
+                        new_rows.append(copy_row)
+
+                        # We no longer want to add the original row to the new_rows array
+                        row_handled = True
+            # ==================
+
+            if not row_handled:
+                new_rows.append(row)
+
+    # regex for key
+    service_type_to_record_type_map = {
+        "Herbicide treatment .*": "Herbicide Application",
+        "Monitoring visit": "Site Monitoring",
+        ".*": "Cut / Clearance / Excavation / Barrier / Other",
+    }
+    for row in new_rows:
+        # ==================
+        # Find first matching regex and set the record type
+        is_match = False
+        for regex in service_type_to_record_type_map.keys():
+            selected_options = [f.strip() for f in row["service_type"].split(",")]
+
+            for selected_option in selected_options:
+                if re.match(regex, selected_option):
+                    is_match = True
+                    row[
+                        "record_type_invasive_plants"
+                    ] = service_type_to_record_type_map[regex]
+                    break
+
+            if is_match:
+                break
+
+        # If no match, set the last record type
+        if not is_match:
+            row["record_type_invasive_plants"] = service_type_to_record_type_map[
+                service_type_to_record_type_map.keys()[-1]
+            ]
+        # Populate the row with all the visit type data names
+        for visit_type_data_name in service_type_to_visit_type_data_name_map.values():
+            row[visit_type_data_name] = ""
+
+        # Find the first matching regex and create a new field with the visit type data name
+        is_match = False
+        for regex in service_type_to_visit_type_data_name_map.keys():
+            if re.match(regex, row["service_type"]):
+                row[service_type_to_visit_type_data_name_map[regex]] = (
+                    row["service_type"]
+                    if row["service_type"] != ""
+                    else row["service_type_other"]
+                )
+                is_match = True
+                break
+
+        # If no match, set the last visit type data name
+        if not is_match:
+            row[service_type_to_visit_type_data_name_map.keys()[-1]] = (
+                row["service_type"]
+                if row["service_type"] != ""
+                else row["service_type_other"]
+            )
+        # ==================
+
+    with open(
+        os.path.join(
+            TARGET_DIR, f"{TARGET_PREFIX}_service_visit_records_re_written.csv"
+        ),
+        "w",
+        newline="",
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
+        writer.writeheader()
+        writer.writerows(new_rows)
+
+
+def transform_stand_details_ipmr():
+    """
+    Transform the stand_details repeatable in the IPMR app
+    """
+    new_rows = []
+
+    with open(os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_stand_details.csv"), "r") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+        for row in rows:
+            # ==================
+            # Write the "close_to_water_within_2_metres" value based on the value
+            # of the "distance_from_stand_to_water_body" value
+            distance = row["distance_from_stand_to_water_body"]
+            if distance:
+                if distance == "<= 2 metres":
+                    row["close_to_water_within_2_metres"] = "Yes"
+                else:
+                    row["close_to_water_within_2_metres"] = "No"
+            else:
+                row["close_to_water_within_2_metres"] = ""
+            # ==================
+
+            new_rows.append(row)
+
+    with open(
+        os.path.join(TARGET_DIR, f"{TARGET_PREFIX}_stand_details_re_written.csv"),
+        "w",
+        newline="",
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=new_rows[0].keys())
+        writer.writeheader()
+        writer.writerows(new_rows)
+
+
+def transform_site_visits_jkmr():
     new_csv = []
 
     # This is for just visualising the data
     fields_to_fill = {
+        # All the child fields of each parent key here will be filled with the value of the parent key
         "technician_details_qualifications": [
-            "surveyortechnician_names",
-            "technicians_names",
+            "surveyortechnician_names",  # surveyortechnician_names will then be filled with the value of technician_details_qualifications
+            "technicians_names",  # technicians_names will then be filled with the value of technician_details_qualifications
         ],
         "technician_details_qualifications_other": [
             "surveyortechnician_names_other",
@@ -428,16 +905,16 @@ def find_and_write_diffs(base, target, prefix):
         if row[1] != "N/A":
             # Check if mapping exists
             if row[0] in mappings:
-                # print(f"Replacing: '{row[0]}' with '{mappings[row[0]]}'")
+                logger.debug(f"Replacing: '{row[0]}' with '{mappings[row[0]]}'")
                 rows[i] = [row[0], row[1], mappings[row[0]]]
                 if mappings[row[0]] in unmatched:
                     unmatched.remove(mappings[row[0]])
                 continue
             elif mappings_exist:
-                # print(f"Skipping: '{row[0]}'")
+                logger.debug(f"Skipping: '{row[0]}'")
                 continue
 
-            changed, new_val = custom_rules(row[0])
+            changed, new_val = apply_custom_rules(row[0])
 
             if changed:
                 rows[i] = [row[0], row[1], new_val]
@@ -448,25 +925,27 @@ def find_and_write_diffs(base, target, prefix):
                 if SKIP_PROMPT_MATCHING:
                     continue
 
-                print(f"Replace:\n{row[0]}\n{row[1]}? (y/n/type your own column name)")
+                logger.info(
+                    f"Replace:\n{row[0]}\nSuggested: {row[1]}? (Y/n/type your own column name)"
+                )
                 response = input()
                 response = response.lower().strip()
 
                 if response == "y" or response == "":
                     # Replace column
-                    print(f"Replacing: '{row[0]}' with '{row[1]}'")
+                    logger.info(f"Replacing: '{row[0]}' with '{row[1]}'")
                     rows[i] = [row[0], row[1], row[1]]
                     if row[1] in unmatched:
                         unmatched.remove(row[1])
                     mappings[row[0]] = row[1]
                 elif response == "n":
-                    print(f"Skipping: '{row[0]}'")
+                    logger.info(f"Skipping: '{row[0]}'")
                     continue
                 else:
                     if response not in unmatched:
-                        print(f"Invalid column: '{response}'")
+                        logger.warning(f"Invalid column: '{response}'")
                         continue
-                    print(f"Replacing: '{row[0]}' with '{response}'")
+                    logger.info(f"Replacing: '{row[0]}' with '{response}'")
                     rows[i] = [row[0], row[1], response]
                     if response in unmatched:
                         unmatched.remove(response)
@@ -491,10 +970,11 @@ def find_and_write_diffs(base, target, prefix):
 
 def get_correct_file_name(f):
     if f == f"{TARGET_PREFIX}.csv":
-        if PARENT_DIR == "JKMR":
+        if PARENT_DIR == "JKMR" or PARENT_DIR == "IPMR" or PARENT_DIR == "IPMR_SV":
             return f"{TARGET_PREFIX}_base_re_written.csv"
-        else:
-            return f
+    elif f == f"{TARGET_PREFIX}_stand_details.csv":
+        if PARENT_DIR == "IPMR":
+            return f"{TARGET_PREFIX}_stand_details_re_written.csv"
 
     return f
 
@@ -507,33 +987,50 @@ if not os.path.exists(f"{BASE_PARENT_DIR}"):
 delete_mismatch_file()
 
 if PARENT_DIR == "JKMR":
+    # This re-writes some repeatables so it can match the survey
     transform_knotweed_survey_repeatable_jkmr()
     transform_knotweed_survey_stand_details_jkmr()
 
 if PARENT_DIR == "JKMR_SV":
-    transform_site_visits()
+    transform_site_visits_jkmr()
 
-    # Read all the files in the base & target directory
+if PARENT_DIR == "IPMR":
+    transform_base_ipmr()
+    transform_stand_details_ipmr()
+
+if PARENT_DIR == "IPMR_SV":
+    transform_base_for_service_visits_ipmr()
+    transform_service_visits_ipmr()
+
+# Read all the files in the base & target directory
 base_files = get_files(BASE_DIR, BASE_PREFIX)
 
 target_files = []
 
-if PARENT_DIR != "JKMR_SV":
-    target_files = get_files(TARGET_DIR, TARGET_PREFIX)
-else:
+if re.search(r"_SV$", PARENT_DIR):
     # We only check the base and the re-written site visits when we are doing a site visits comparison
     target_files = [
         f"{TARGET_PREFIX}.csv",
-        f"{TARGET_PREFIX}_site_visits_re_written.csv",
+        f"{TARGET_PREFIX}_site_visits_re_written.csv"
+        if PARENT_DIR == "JKMR"
+        else f"{TARGET_PREFIX}_service_visit_records_re_written.csv",
     ]
+else:
+    target_files = get_files(TARGET_DIR, TARGET_PREFIX)
 
 # Loop through each target file, find the base equivalent and compare
 for f in target_files:
     # Skip these files
-    if PARENT_DIR == "JKMR" and (
-        f == f"{TARGET_PREFIX}_base_re_written.csv"
-        or f == f"{TARGET_PREFIX}_knotweed_survey.csv"
-    ):
+    if (
+        PARENT_DIR == "JKMR"
+        and (
+            # ? Not sure why we skip on the re-written base file
+            # ? Anyways, this work is done so maybe we can ignore this
+            # ? logic
+            f == f"{TARGET_PREFIX}_base_re_written.csv"
+            or f == f"{TARGET_PREFIX}_knotweed_survey.csv"
+        )
+    ) or (PARENT_DIR == "IPMR" and f == f"{TARGET_PREFIX}_stand_details.csv"):
         continue
 
     # Sometimes we want to use a different file name, this functions provides those mappings
@@ -541,7 +1038,7 @@ for f in target_files:
 
     # If the file is the prefix then this is the parent file
     if f == f"{TARGET_PREFIX}.csv":
-        new_postfix, base_filepath = get_base_file()
+        new_postfix, base_filepath = get_matching_file()
 
         does_base_file_exist = does_file_exist(base_filepath)
 
@@ -563,7 +1060,7 @@ for f in target_files:
         postfix = f.replace(f"{TARGET_PREFIX}_", "").replace(".csv", "")
 
         # Base filepath
-        new_postfix, base_filepath = get_base_file(postfix)
+        new_postfix, base_filepath = get_matching_file(postfix)
 
         does_base_file_exist = does_file_exist(base_filepath)
 
@@ -584,4 +1081,4 @@ for f in target_files:
             else "NO_MATCH_" + new_postfix.lower(),
         )
 
-print("Success")
+logger.info("Success")
