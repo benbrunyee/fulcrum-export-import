@@ -712,6 +712,21 @@
         "group": "import",
         "order": 7
       }
+    },
+
+    {
+      "name": "Debug delete_records.py",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/delete_records.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "-r",
+        "old_to_new_id_mapping_IPMR.json",
+        "-n",
+        "SITE VISIT RECORDS"
+      ]
     }
   ]
 }

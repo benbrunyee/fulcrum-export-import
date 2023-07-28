@@ -316,14 +316,16 @@ Questions
         1. IMPR (Invasive Plants Management Records)                  : [/]
         1. IPMR_SV (Invasive Plants Management Records - Site Visits) : [/]
         1. S (SURVEY - old to new)                                    : [/]
-1. Confirm that all records have been uploaded                                                   : []
-1. Do a splatter test across a minimum of 5 records to ensure that no problems can be identified : []
-    1. Ensure field values are what is expected   : []
-    1. Ensure that app links are set correctly    : []
-    1. Ensure that record links are set correctly : []
-1. Make the new SURVEY app available on the mobile dashboard          : []
-1. Make sure old apps are no longer available on the mobile dashboard : []
+1. Confirm that all records have been uploaded                                                   : [/]
+1. Do a splatter test across a minimum of 5 records to ensure that no problems can be identified : [/]
+    1. Ensure field values are what is expected   : [/]
+    1. Ensure that app links are set correctly    : [/]
+    1. Ensure that record links are set correctly : [/]
+1. Make the new SURVEY app available on the mobile dashboard          : [/]
+1. Make sure old apps are no longer available on the mobile dashboard : [/]
+1. Send out confirmation email                                        : []
 
 ## Import Notes
 
-- Status fields for SURVEY backup/duplication cannot be replicated since the API does not allow for invalid values whereas the Fulcrum interface does
+- Status fields have been added with colours. Maybe you want to change a colours?
+- Videos haven't been mapped over (can do over a seperate update)
