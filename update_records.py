@@ -204,12 +204,8 @@ def main():
     # Loop for each key/value pair in the record mappings
     for record in progress_bar:
         updated, updated_record = get_updated_record(record)
-
         if not updated:
             continue
-
-        print(updated_record)
-        print()
 
         update_made = update_record(updated_record["id"], {"record": updated_record})
         if update_made:
