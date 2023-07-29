@@ -1,5 +1,5 @@
 import argparse
-import json
+import copy
 import os
 import time
 
@@ -11,7 +11,13 @@ load_dotenv()
 
 parser = argparse.ArgumentParser(description="Update records.")
 parser.add_argument(
-    "--record_mappings_file", "-r", help="The file containing the record mappings."
+    "--form_name", "-n", help="The name of the form of which to update records."
+)
+parser.add_argument(
+    "--dry_run",
+    "-d",
+    action="store_true",
+    help="Whether to run the script without updating records.",
 )
 
 args = parser.parse_args()
@@ -19,76 +25,93 @@ args = parser.parse_args()
 FULCRUM_API_KEY = os.getenv("FULCRUM_API_KEY")
 FULCRUM = Fulcrum(FULCRUM_API_KEY)
 
-
-def traverse_search_record_for_key(record: dict, key: str):
-    """
-    Recursively search a record for a key
-    """
-
-    found_record = None
-
-    # If the record is a list, iterate over it
-    if isinstance(record, list):
-        for item in record:
-            found_record = traverse_search_record_for_key(item, key)
-            if found_record:
-                break
-    # If the record is a dict, check if it has the key
-    elif isinstance(record, dict):
-        if key in record:
-            return record[key]
-        else:
-            for v in record.values():
-                found_record = traverse_search_record_for_key(v, key)
-                if found_record:
-                    break
-    return found_record
+FORM_NAME = args.form_name
+DRY_RUN = args.dry_run
 
 
-def get_updated_record(old_record: dict, new_record: dict):
+def get_updated_record(existing_record: dict):
     # =====================
-    # Update the "Plant Name" field (old key: "6008", new key: "4361")
-    # This can be found within the repeatable section "Stand Details" (old key: "d93c", new key: "562d")
+    # This function is where you can update the record mappings
+    # Provide your custom logic here
+    # =====================
 
-    # Find this repeatable section (by key) within the old record
-    # Loop through each repeatable and match to the new record equivalent
-    # Do this by comparing all the values for each field in the repeatable
-    # If there is no match, throw an error
-    # If there is a match, we update the repeatable to include an key/value pair
-    # of { "6008": {old_record_6008_object} }
+    # =====================
+    # UPDATE: "Personnel details & qualifications" (key: "385f")
+    # Wihin repeatable "Service Visit Records" (key: "3bdb")
+    name_mappings = {
+        "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW": [
+            '"Jon Barton. CSJK. PCAQT. NPTC 499877 (PA1',
+            "Jon Barton",
+        ],
+        "Tom Clarke. PCAQT. NPTC 107028, PA1 PA6AW": ["Tom Clarke"],
+        "Phil Cox. CSJK. PCAQT. NPTC 723725, PA1 PA6AW": [
+            '"Phil Cox. CSJK. PCAQT. NPTC 723725 (PA1',
+            "Phil Cox",
+        ],
+        "Matthew Patrycy. PCAQT. NPTC 353281 (PA1 PA6A)": [
+            "Matthew Patrycy",
+            "Matthew Patrycy ",
+            "Matthew Patrycy NPTC",
+            "Matthew Patrycy NPTC ",
+            "Matthew Patrycy PCAQT ",
+            "Matthew Patrycy PCAQT",
+            "Matthew Patrycy. PCAQT.",
+            '"Matthew Patrycy. PCAQT. NPTC 353281 (PA1',
+        ],
+        "David Soffe. PCAQT. NPTC 622432, PA1 PA6AW": ["David Soffe"],
+        "Phil Walker. CSJK. PCAQT.  NPTC 410111, PA1 PA6AW": [
+            '"Phil Walker. CSJK. PCAQT.  NPTC 410111 (PA1',
+            "Phil Walker",
+        ],
+        "Paul Sweetman NPTC PA1 PA6": ["Paul Sweetman"],
+        "James Erlam PA1 PA6 NPTC 88233": ["James Erlam"],
+        None: [' PA6A)"', ' PA6/AW)"', " PA1 PA6", " NPTC 88233"],
+    }
 
-    # If the "Plant Name" field (key: "6008") cannot be found within the old record
-    # we can skip this. This is because, there will not be a key if there was no
-    # value set for this field.
+    if (
+        "3bdb" not in existing_record["form_values"]
+        or not existing_record["form_values"]["3bdb"]
+    ):
+        return False, existing_record
 
-    old_d93c_value = traverse_search_record_for_key(old_record, "d93c")
-    if not old_d93c_value:
-        print(f"No d93c value found for old record ID: {old_record['id']}")
-        print("Skipping this record")
-        return new_record
+    repeatable = existing_record["form_values"]["3bdb"]
 
-    new_562d_value = traverse_search_record_for_key(new_record, "562d")
-    if not new_562d_value:
-        print(f"No 562d value found for new record ID: {new_record['id']}")
-        raise Exception("This section should always exist")
-
-    # Loop through each repeatable in the new record
-    for i, new_repeatable in enumerate(new_562d_value):
-        old_6008_value = traverse_search_record_for_key(
-            old_d93c_value[i]["form_values"], "6008"
-        )
-
-        if not old_6008_value:
-            print(f"No 6008 value found for old record ID: {old_record['id']}")
-            print("Skipping this repeatable")
+    for entry in repeatable:
+        if "385f" not in entry["form_values"] or not entry["form_values"]["385f"]:
             continue
 
-        # Add the "4361" new key equivalent to the repeatable
-        # Set it to the old "6008" value
-        new_repeatable["form_values"]["4361"] = old_6008_value
+        selected_values_object = entry["form_values"]["385f"]
+        updated_selected_values_object = copy.deepcopy(selected_values_object)
 
-    return new_record
+        for choice_value_object in [
+            updated_selected_values_object["choice_values"],
+            updated_selected_values_object["other_values"],
+        ]:
+            for i, choice in enumerate(choice_value_object):
+                for key, value in name_mappings.items():
+                    if choice in value:
+                        choice_value_object[i] = key
+                        break
+
+        # Delete all values that equal None
+        updated_selected_values_object["choice_values"] = [
+            value for value in updated_selected_values_object["choice_values"] if value
+        ]
+        updated_selected_values_object["other_values"] = [
+            value for value in updated_selected_values_object["other_values"] if value
+        ]
+        print(
+            "Changing: "
+            + str(selected_values_object)
+            + " to: "
+            + str(updated_selected_values_object)
+        )
+
+        # Replace the existing selected values object with the updated one
+        entry["form_values"]["385f"] = updated_selected_values_object
     # =====================
+
+    return True, existing_record
 
 
 def rate_limited(max_per_second):
@@ -117,30 +140,82 @@ def rate_limited(max_per_second):
 # Rate limited for 4000 calls per hour (actual limit is 5000/h but we want to be safe)
 @rate_limited(4000 / 3600)
 def update_record(id: str, record: dict):
-    FULCRUM.records.update(id, record)
-    print(f"Updated record: {record['record']['id']}")
+    if not DRY_RUN:
+        FULCRUM.records.update(id, record)
+        return True
+    else:
+        return False
+
+
+def list_apps():
+    apps = FULCRUM.forms.search()["forms"]
+    print(f"Found {len(apps)} apps")
+    return apps
+
+
+def select_app(apps: list):
+    print("Select an app to get records for:")
+
+    for i, app in enumerate(apps):
+        print(f"{i + 1}) {app['name']}")
+        pass
+
+    selection = input("Enter the number of the app you want to update records for: ")
+
+    try:
+        selection = int(selection)
+    except ValueError:
+        print("Invalid selection")
+        exit(1)
+
+    return apps[int(selection) - 1]
+
+
+def get_app(name: str):
+    apps = list_apps()
+    for app in apps:
+        if app["name"] == name:
+            return app
 
 
 def main():
-    record_mappings = {}
+    # If the app name is not passed, list all apps and get the user to select one
+    app = None
+    if not FORM_NAME:
+        apps = list_apps()
+        app = select_app(apps)
+    else:
+        app = get_app(FORM_NAME)
 
-    with open(args.record_mappings_file) as f:
-        record_mappings = json.load(f)
+    # Get the form ID
+    form_id = app["id"]
+
+    # Get the records for the form
+    records = FULCRUM.records.search(url_params={"form_id": form_id})["records"]
 
     progress_bar = tqdm(
-        record_mappings.items(),
-        total=len(record_mappings),
+        records,
+        total=len(records),
         desc="Updating records",
     )
 
     # Loop for each key/value pair in the record mappings
-    for old_record_id, new_record_id in progress_bar:
-        old_record = FULCRUM.records.find(old_record_id)["record"]
-        new_record = FULCRUM.records.find(new_record_id)["record"]
+    for record in progress_bar:
+        updated, updated_record = get_updated_record(record)
+        if not updated:
+            continue
 
-        progress_bar.set_description(f"Updating record: {old_record_id}")
-        updated_record = get_updated_record(old_record, new_record)
-        update_record(updated_record["id"], {"record": updated_record})
+        update_made = update_record(updated_record["id"], {"record": updated_record})
+        if update_made:
+            progress_bar.set_description(f"Updated record: {updated_record['id']}")
+        elif DRY_RUN and not update_made:
+            progress_bar.set_description(
+                f"Would have updated record: {updated_record['id']}"
+            )
+        else:
+            progress_bar.set_description(
+                f"Failed to update record: {updated_record['id']}"
+            )
 
     progress_bar.close()
     print("Finished updating records")
