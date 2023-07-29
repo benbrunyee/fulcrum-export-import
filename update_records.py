@@ -78,9 +78,7 @@ def get_updated_record(existing_record: dict):
 
     for entry in repeatable:
         if "385f" not in entry["form_values"] or not entry["form_values"]["385f"]:
-            raise Exception(
-                "Could not find 'Personnel details & qualifications' field in repeatable"
-            )
+            continue
 
         selected_values_object = entry["form_values"]["385f"]
         updated_selected_values_object = copy.deepcopy(selected_values_object)

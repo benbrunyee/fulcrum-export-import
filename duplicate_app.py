@@ -245,7 +245,12 @@ def duplicate_app(app: dict):
     for record in progress_records:
         record = correct_record(app, record)
         progress_records.set_description(f"Creating record: {record['id']}")
-        create_app_record(record, new_app_id)
+        try:
+            create_app_record(record, new_app_id)
+        except Exception as e:
+            logger.error(f"Failed to create record: {record['id']}")
+            logger.error(e)
+            exit(1)
     progress_records.close()
 
 
