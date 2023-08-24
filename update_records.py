@@ -1,5 +1,6 @@
 import argparse
 import copy
+import json
 import os
 import time
 
@@ -29,13 +30,7 @@ FORM_NAME = args.form_name
 DRY_RUN = args.dry_run
 
 
-def get_updated_record(existing_record: dict):
-    # =====================
-    # This function is where you can update the record mappings
-    # Provide your custom logic here
-    # =====================
-
-    # =====================
+def update_name_mappings(existing_record: dict):
     # UPDATE: "Personnel details & qualifications" (key: "385f")
     # Wihin repeatable "Service Visit Records" (key: "3bdb")
     name_mappings = {
@@ -109,9 +104,111 @@ def get_updated_record(existing_record: dict):
 
         # Replace the existing selected values object with the updated one
         entry["form_values"]["385f"] = updated_selected_values_object
-    # =====================
 
     return True, existing_record
+
+
+SURVEY_RECORDS = []
+
+
+def get_record_from_survey_app(id: str):
+    global SURVEY_RECORDS
+    # Get the record from the "SURVEY" app (id: "8d430ae2-64cc-4b27-9b57-259afdbd8858")
+    if len(SURVEY_RECORDS) == 0:
+        SURVEY_RECORDS = FULCRUM.records.search(
+            url_params={"form_id": "8d430ae2-64cc-4b27-9b57-259afdbd8858"}
+        )["records"]
+
+    for record in SURVEY_RECORDS:
+        if record["id"] == id:
+            return record
+
+    return None
+
+
+OLD_TO_NEW_MAPPING = None
+
+
+def update_survey_record_links(existing_record: dict):
+    """
+    # UPDATE: "Survey Record Links" (key: "96e4")
+
+    SPECIFIC TO SITE VISIT RECORDS!
+
+    1. Find the ID value for the "Survey Record Links"
+    1. Check if the ID exists within the records for the "SURVEY" app
+    1. If they do exist then don't perform any updates
+    1. If they don't exist then check the "old_to_new_maping_IPMR.json" file for an ID mapping
+    1. If there is not a mapping, then throw an error
+    1. If there is a mapping, then update the ID value
+    """
+    global OLD_TO_NEW_MAPPING
+
+    # Get the ID value for the "Survey Record Links" field
+    survey_record_links_id = None
+    if "96e4" in existing_record["form_values"]:
+        survey_record_links_id = existing_record["form_values"]["96e4"]
+    else:
+        return False, existing_record
+
+    if not survey_record_links_id or len(survey_record_links_id) == 0:
+        # No survey record links to update
+        print("No survey record links to update")
+        return False, existing_record
+    elif len(survey_record_links_id) > 1:
+        raise Exception(
+            f"Found multiple survey record links for record: {existing_record['id']}"
+        )
+
+    # Get the first record id
+
+    survey_record_link_id = survey_record_links_id[0]["record_id"]
+
+    does_record_exist_in_survey_app = bool(
+        get_record_from_survey_app(survey_record_link_id)
+    )
+
+    if does_record_exist_in_survey_app:
+        print("Record already exists in survey app")
+        # No update required
+        return False, existing_record
+
+    # Check if there is a mapping for this ID
+    if OLD_TO_NEW_MAPPING is None:
+        with open("old_to_new_id_mapping_IPMR.json") as f:
+            OLD_TO_NEW_MAPPING = json.load(f)
+
+        with open("old_to_new_id_mapping_S.json") as f:
+            OLD_TO_NEW_MAPPING.update(json.load(f))
+
+    if survey_record_link_id not in OLD_TO_NEW_MAPPING:
+        print(
+            f"Could not find a mapping for ID: {survey_record_link_id} in 'old_to_new_id_mapping_IPMR.json' or 'old_to_new_id_mapping_S.json'"
+        )
+        with open("missing_mapping.txt", "a") as f:
+            f.write(f"{survey_record_link_id}\n")
+        return False, existing_record
+
+    # Update the ID value
+    print("Updating survey record link ID value")
+    existing_record["form_values"]["96e4"][0]["record_id"] = OLD_TO_NEW_MAPPING[
+        survey_record_link_id
+    ]
+
+    return True, existing_record
+
+
+def get_updated_record(existing_record: dict):
+    # =====================
+    # This function is where you can update the record mappings
+    # Provide your custom logic here
+    # =====================
+    updated = False
+
+    # updated, existing_record = update_name_mappings(existing_record)
+    updated, existing_record = update_survey_record_links(existing_record)
+
+    return updated, existing_record
 
 
 def rate_limited(max_per_second):

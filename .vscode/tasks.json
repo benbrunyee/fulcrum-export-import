@@ -436,6 +436,36 @@
       ],
       "dependsOrder": "sequence",
       "problemMatcher": []
+    },
+
+    // Specific
+    {
+      "label": "Duplicate SITE VISIT RECORDS app (BACKUP 2)",
+      "command": "python",
+      "type": "process",
+      "args": [
+        "duplicate_app.py",
+        "--yes",
+        "--name",
+        "SITE VISIT RECORDS",
+        "--postfix",
+        " (BACKUP 2)"
+      ]
+    },
+    {
+      "label": "Update SITE VISIT RECORDS records",
+      "command": "python",
+      "type": "process",
+      "args": ["update_records.py", "--form_name", "SITE VISIT RECORDS"]
+    },
+    {
+      "label": "Run duplicate and update (SITE VISIT RECORDS)",
+      "dependsOn": [
+        "Duplicate SITE VISIT RECORDS app (BACKUP 2)",
+        "Update SITE VISIT RECORDS records"
+      ],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
     }
   ]
 }

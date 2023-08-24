@@ -86,9 +86,9 @@ def get_updated_record(old_record: dict, new_record: dict):
         # Add the "4361" new key equivalent to the repeatable
         # Set it to the old "6008" value
         new_repeatable["form_values"]["4361"] = old_6008_value
+    # =====================
 
     return new_record
-    # =====================
 
 
 def rate_limited(max_per_second):
