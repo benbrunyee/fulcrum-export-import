@@ -31,8 +31,10 @@ DRY_RUN = args.dry_run
 
 
 def update_name_mappings(existing_record: dict):
-    # UPDATE: "Personnel details & qualifications" (key: "385f")
-    # Wihin repeatable "Service Visit Records" (key: "3bdb")
+    """
+    UPDATE: "Personnel details & qualifications" (key: "385f")
+    Wihin repeatable "Service Visit Records" (key: "3bdb")
+    """
     name_mappings = {
         "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW": [
             '"Jon Barton. CSJK. PCAQT. NPTC 499877 (PA1',
@@ -131,7 +133,7 @@ OLD_TO_NEW_MAPPING = None
 
 def update_survey_record_links(existing_record: dict):
     """
-    # UPDATE: "Survey Record Links" (key: "96e4")
+    UPDATE: "Survey Record Links" (key: "96e4")
 
     SPECIFIC TO SITE VISIT RECORDS!
 
@@ -198,6 +200,65 @@ def update_survey_record_links(existing_record: dict):
     return True, existing_record
 
 
+def update_repeatable_titles(existing_record: dict):
+    """
+    UPDATE: "{HIDE} Title" (key: "82f0")
+    Within repeatable "Stand Details" (key: "562d")
+
+    Related fields:
+        - "Plant Type" (key: "6a00")
+        - "Stand Details" -> "Plant Name" (key: "4361")
+        - "Stand Details" -> "Stand Number" (key: "30c0")
+
+    The related fields are used to mimic the calculation field for the title
+    """
+    updated = False
+
+    if (
+        "562d" not in existing_record["form_values"]
+        or not existing_record["form_values"]["562d"]
+        or len(existing_record["form_values"]["562d"]) == 0
+    ):
+        return updated, existing_record
+
+    if (
+        "6a00" not in existing_record["form_values"]
+        or not existing_record["form_values"]["6a00"]
+    ):
+        return updated, existing_record
+
+    plant_type = existing_record["form_values"]["6a00"]["choice_values"][0]
+    repeatable = existing_record["form_values"]["562d"]
+
+    for i, stand in enumerate(repeatable):
+        plant_name = (
+            "4361" in existing_record["form_values"]
+            and existing_record["form_values"]["4361"]
+            or "Invasive Plant"
+        )
+        title_prefix = (
+            plant_type == "Japanese Knotweed"
+            and "Knotweed stand number"
+            or f"{plant_name} Location"
+        )
+
+        stand_number = (
+            "30c0" in stand["form_values"]
+            and stand["form_values"]["30c0"]
+            or f"{i + 1}"
+        )
+
+        if "82f0" in stand["form_values"]:
+            # Title already exists so skip
+            continue
+
+        title = f"{title_prefix} {stand_number}"
+        stand["form_values"]["82f0"] = title
+        updated = True
+
+    return updated, existing_record
+
+
 def get_updated_record(existing_record: dict):
     # =====================
     # This function is where you can update the record mappings
@@ -206,7 +267,8 @@ def get_updated_record(existing_record: dict):
     updated = False
 
     # updated, existing_record = update_name_mappings(existing_record)
-    updated, existing_record = update_survey_record_links(existing_record)
+    # updated, existing_record = update_survey_record_links(existing_record)
+    updated, existing_record = update_repeatable_titles(existing_record)
 
     return updated, existing_record
 
