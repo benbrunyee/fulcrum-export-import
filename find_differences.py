@@ -586,7 +586,7 @@ def transform_service_visits_ipmr():
                 if data_name in row and row[data_name] != "":
                     all_selected.extend(row[data_name].split(","))
             logger.debug("All selected service visit types: %s", all_selected)
-            if len(all_selected) > 1:
+            if len(all_selected) >= 1:
                 logger.debug(
                     "Creating new rows for each selected option: %s. (1 row -> %s rows)",
                     row["fulcrum_id"],
@@ -600,6 +600,7 @@ def transform_service_visits_ipmr():
                     has_regex_match = False
                     for selected_option in selected_options:
                         if selected_option == "":
+                            logger.debug("Skipping empty selected service option")
                             continue
 
                         for regex in section_types.keys():
@@ -640,6 +641,9 @@ def transform_service_visits_ipmr():
                         ) in section_types.items():
                             # Check what section this row is relevant to
                             if not re.match(service_type_regex_key, selected_option):
+                                logger.debug(
+                                    "Skipping service type: %s", service_type_regex_key
+                                )
                                 continue
 
                             # This is a match so we can continue
@@ -648,11 +652,25 @@ def transform_service_visits_ipmr():
                                 data_name_target,
                             ) in service_type_data_name_object_value.items():
                                 if not data_name_target:
+                                    logger.debug(
+                                        "Skipping value copying for data name: %s",
+                                        data_name,
+                                    )
                                     continue
 
+                                logger.debug(
+                                    "Copying value from data name: %s to %s",
+                                    data_name,
+                                    data_name_target,
+                                )
                                 copy_row[data_name_target] = copy_row[data_name]
 
                         # Set the value of the selected option to the data_name for the section type
+                        logger.debug(
+                            "Setting service visit data name: %s to value: %s",
+                            service_visit_data_name,
+                            selected_option,
+                        )
                         copy_row[service_visit_data_name] = selected_option
 
                         # Add the new row to the new_rows array
