@@ -727,6 +727,16 @@
         "-n",
         "SITE VISIT RECORDS"
       ]
+    },
+
+    {
+      "name": "Update records",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/update_records.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["-n", "SITE VISIT RECORDS", "-d"]
     }
   ]
 }

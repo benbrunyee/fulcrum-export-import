@@ -203,7 +203,7 @@ def update_survey_record_links(existing_record: dict):
 def update_repeatable_titles(existing_record: dict):
     """
     UPDATE: "{HIDE} Title" (key: "82f0")
-    Within repeatable "Stand Details" (key: "562d")
+    Within repeatable "Stand Details" key: "562d")
 
     Related fields:
         - "Plant Type" (key: "6a00")
@@ -259,6 +259,139 @@ def update_repeatable_titles(existing_record: dict):
     return updated, existing_record
 
 
+LEGACY_RECORDS = None
+LEGACY_SERVICE_VISIT_RECORDS = None
+
+
+def update_site_visit_photos(existing_record: dict):
+    """
+    UPDATE:
+        - "Photos" & captions (key: "e77c")
+        - "Video" & captions (key: "8fb1")
+        - "Notes" (key: "2d29")
+    Within repeatable "Service Visit Records" key: "3bdb")
+
+    Get the data from the legacy records.
+    Legacy app name: "Invasive Plants Management Records (LEGACY)"
+    Get data from under "Service Visit Records" (key: "6b8a"):
+        - "Works photo record" (key: "35fb")
+        - "Works video record" (key: "6821")
+        - "Works notes" (key: "2227")
+    Match records using the following data:
+        - "Site address" (legacy key: "1b4b", new key: "c4ee")
+        - "PBA REFERENCE" (legacy key: "c4ee", new key: "48ca")
+    Match individual site visits using the following data:
+        - "Service visit date" (legacy key: "8eaf", new key: "8eaf")
+        - "Service visit time" (legacy key: "2a76", new key: "2a76")
+        - "Service type" (legacy key: "a0ac", new key: "5c53")
+        - "Visit category" (new app field == "Invasive Plants Management Record") (key: "4010")
+        - "Record Type (new app field Invasive Plants == "Cut / Clearance / Excavation / Barrier / Other") (key: "1db0")
+    """
+    global LEGACY_RECORDS
+    global LEGACY_SERVICE_VISIT_RECORDS
+
+    updated = False
+
+    if not LEGACY_RECORDS:
+        LEGACY_RECORDS = get_app_records_by_app_name(
+            "Invasive Plants Management Records (LEGACY)"
+        )
+        print(f"Found {len(LEGACY_RECORDS)} legacy records")
+
+        LEGACY_SERVICE_VISIT_RECORDS = dict()
+        for record in LEGACY_RECORDS:
+            if "6b8a" not in record["form_values"] or not record["form_values"]["6b8a"]:
+                continue
+
+            LEGACY_SERVICE_VISIT_RECORDS[record["id"]] = record["form_values"]["6b8a"]
+
+    service_visit_records = (
+        "3bdb" in existing_record["form_values"]
+        and existing_record["form_values"]["3bdb"]
+        or []
+    )
+
+    if len(service_visit_records) == 0:
+        return updated, existing_record
+
+    for visit in service_visit_records:
+        form_values = visit["form_values"]
+
+        # If the "Visit category" does not exist for this visit or...
+        # If the "Visit category" is not of the "Invasive Plants Management Record" category
+        if (
+            "4010" not in form_values
+            or "Invasive Plants Management Record"
+            not in form_values["4010"]["choice_values"]
+        ):
+            continue
+
+        # If the "Record Type" does not exist for this visit or...
+        # If the "Record Type" is not of the "Cut / Clearance / Excavation / Barrier / Other" category
+        if (
+            "1db0" not in form_values
+            or "Cut / Clearance / Excavation / Barrier / Other"
+            not in form_values["1db0"]["choice_values"]
+        ):
+            continue
+
+        # If the service visit type is not of the "Other" category for Invasive plants
+        if "5c53" not in form_values:
+            continue
+
+        # All checks have passed, this record needs fixing!
+
+        # Get the legacy record that matches this record
+        legacy_record = None
+
+        for record in LEGACY_RECORDS:
+            # TODO: Don't compare on ID, use fields to match
+            if record["id"] == existing_record["id"]:
+                legacy_record = record
+                break
+
+        # Get the legacy service visit entry that matches this record
+        legacy_service_visit_entry = None
+        if not legacy_record:
+            raise Exception(
+                f"Could not find legacy record for record: {existing_record['id']}"
+            )
+        for service_visit in LEGACY_SERVICE_VISIT_RECORDS[legacy_record["id"]]:
+            # If the service visit date, time and type aren't present then skip
+            if (
+                "8eaf" not in service_visit["form_values"]
+                or "2a76" not in service_visit["form_values"]
+                or "a0ac" not in service_visit["form_values"]
+            ):
+                continue
+
+            for k1, k2 in [["8eaf", "8eaf"], ["2a76", "2a76"], ["a0ac", "5c53"]]:
+                if not do_record_key_values_match(service_visit, visit, k1, k2):
+                    continue
+                legacy_service_visit_entry = service_visit
+
+        if not legacy_service_visit_entry:
+            raise Exception(
+                f"Could not find legacy service visit entry for record: {existing_record['id']}"
+            )
+
+    return updated, existing_record
+
+
+def do_record_key_values_match(record_1: dict, record_2: dict, key_1: str, key_2: str):
+    if key_1 not in record_1["form_values"] or key_2 not in record_2["form_values"]:
+        return False
+    elif record_1["form_values"][key_1] != record_2["form_values"][key_2]:
+        return False
+    else:
+        return True
+
+
+def get_app_records_by_app_name(app_name: str):
+    app = get_app(app_name)
+    return FULCRUM.records.search(url_params={"form_id": app["id"]})["records"]
+
+
 def get_updated_record(existing_record: dict):
     # =====================
     # This function is where you can update the record mappings
@@ -268,7 +401,8 @@ def get_updated_record(existing_record: dict):
 
     # updated, existing_record = update_name_mappings(existing_record)
     # updated, existing_record = update_survey_record_links(existing_record)
-    updated, existing_record = update_repeatable_titles(existing_record)
+    # updated, existing_record = update_repeatable_titles(existing_record)
+    updates, existing_record = update_site_visit_photos(existing_record)
 
     return updated, existing_record
 
