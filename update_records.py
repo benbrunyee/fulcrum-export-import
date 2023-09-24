@@ -278,12 +278,19 @@ def update_site_visit_photos(existing_record: dict):
         - "Works video record" (key: "6821")
         - "Works notes" (key: "2227")
     Match records using the following data:
-        - "Site address" (legacy key: "1b4b", new key: "c4ee")
-        - "PBA REFERENCE" (legacy key: "c4ee", new key: "48ca")
+        - "Site address" (legacy key: "1b4b", new key: "48ca")
+            - "sub_thoroughfare"
+            - "thoroughfare"
+            - "postal_code"
+            - "locality"
+            - "country"
+            - "sub_admin_area"
+            - "suite"
+        - "PBA REFERENCE" (legacy key: "c4ee", new key: "c4ee")
     Match individual site visits using the following data:
         - "Service visit date" (legacy key: "8eaf", new key: "8eaf")
         - "Service visit time" (legacy key: "2a76", new key: "2a76")
-        - "Service type" (legacy key: "a0ac", new key: "5c53")
+        - "Service type" (legacy key: "a0ac" | "fda7", new key: "5c53")
         - "Visit category" (new app field == "Invasive Plants Management Record") (key: "4010")
         - "Record Type (new app field Invasive Plants == "Cut / Clearance / Excavation / Barrier / Other") (key: "1db0")
     """
@@ -298,13 +305,6 @@ def update_site_visit_photos(existing_record: dict):
         )
         print(f"Found {len(LEGACY_RECORDS)} legacy records")
 
-        LEGACY_SERVICE_VISIT_RECORDS = dict()
-        for record in LEGACY_RECORDS:
-            if "6b8a" not in record["form_values"] or not record["form_values"]["6b8a"]:
-                continue
-
-            LEGACY_SERVICE_VISIT_RECORDS[record["id"]] = record["form_values"]["6b8a"]
-
     service_visit_records = (
         "3bdb" in existing_record["form_values"]
         and existing_record["form_values"]["3bdb"]
@@ -313,6 +313,16 @@ def update_site_visit_photos(existing_record: dict):
 
     if len(service_visit_records) == 0:
         return updated, existing_record
+
+    site_address_keys = [
+        "sub_thoroughfare",
+        "thoroughfare",
+        "postal_code",
+        "locality",
+        "country",
+        "sub_admin_area",
+        "suite",
+    ]
 
     for visit in service_visit_records:
         form_values = visit["form_values"]
@@ -335,7 +345,7 @@ def update_site_visit_photos(existing_record: dict):
         ):
             continue
 
-        # If the service visit type is not of the "Other" category for Invasive plants
+        # If the service type is not of the "Other" category for Invasive plants
         if "5c53" not in form_values:
             continue
 
@@ -343,31 +353,73 @@ def update_site_visit_photos(existing_record: dict):
 
         # Get the legacy record that matches this record
         legacy_record = None
-
         for record in LEGACY_RECORDS:
-            # TODO: Don't compare on ID, use fields to match
-            if record["id"] == existing_record["id"]:
-                legacy_record = record
-                break
+            legacy_form_values = record["form_values"]
 
-        # Get the legacy service visit entry that matches this record
-        legacy_service_visit_entry = None
+            # If the site address and PBA REFERENCE aren't present then skip
+            if "1b4b" not in legacy_form_values or "c4ee" not in legacy_form_values:
+                continue
+
+            # If the PBA REFERENCE don't match then skip
+            if legacy_form_values["c4ee"] != existing_record["form_values"]["c4ee"]:
+                continue
+
+            # Match the site address
+            match = True
+            for site_address_key in site_address_keys:
+                # If the values are not falsy then it's a match
+                if (
+                    not legacy_form_values["1b4b"][site_address_key]
+                    and not existing_record["form_values"]["48ca"][site_address_key]
+                ):
+                    continue
+
+                if (
+                    legacy_form_values["1b4b"][site_address_key]
+                    != existing_record["form_values"]["48ca"][site_address_key]
+                ):
+                    match = False
+                    break
+
+            if not match:
+                continue
+
+            # We have a match!
+            legacy_record = record
+
         if not legacy_record:
             raise Exception(
                 f"Could not find legacy record for record: {existing_record['id']}"
             )
-        for service_visit in LEGACY_SERVICE_VISIT_RECORDS[legacy_record["id"]]:
+
+        # Get the legacy service visit entry that matches this record
+        legacy_service_visit_entry = None
+        for service_visit in legacy_record["form_values"]["6b8a"]:
             # If the service visit date, time and type aren't present then skip
             if (
                 "8eaf" not in service_visit["form_values"]
                 or "2a76" not in service_visit["form_values"]
-                or "a0ac" not in service_visit["form_values"]
+                or not (
+                    "a0ac" in service_visit["form_values"]
+                    or "fda7" in service_visit["form_values"]
+                )
             ):
                 continue
 
+            # TODO: Compare by checking if current is in legacy array (since we split each into multiple values into single visits)
             for k1, k2 in [["8eaf", "8eaf"], ["2a76", "2a76"], ["a0ac", "5c53"]]:
                 if not do_record_key_values_match(service_visit, visit, k1, k2):
                     continue
+
+                # ! We confirm on the other key for the service type (key: "fda7") since
+                # ! we have mapped entries to "Cut / Clearance / Excavation / Barrier / Other" where the
+                # ! this key is used
+                if not (
+                    "fda7" in service_visit["form_values"]
+                    and "a0ac" not in service_visit["form_values"]
+                ):
+                    continue
+
                 legacy_service_visit_entry = service_visit
 
         if not legacy_service_visit_entry:
@@ -381,6 +433,9 @@ def update_site_visit_photos(existing_record: dict):
 def do_record_key_values_match(record_1: dict, record_2: dict, key_1: str, key_2: str):
     if key_1 not in record_1["form_values"] or key_2 not in record_2["form_values"]:
         return False
+    elif not record_1["form_values"][key_1] and not record_2["form_values"][key_2]:
+        # Both values are falsy
+        return True
     elif record_1["form_values"][key_1] != record_2["form_values"][key_2]:
         return False
     else:
