@@ -1,11 +1,21 @@
 import argparse
 import json
+import logging
 import os
 import re
+import time
 
 from dotenv import load_dotenv
 from fulcrum import Fulcrum
 from tqdm import tqdm
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)-8s %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 
@@ -17,7 +27,6 @@ parser.add_argument(
     help="Whether to run the script without updating records.",
 )
 
-
 args = parser.parse_args()
 
 FULCRUM_API_KEY = os.getenv("FULCRUM_API_KEY")
@@ -26,7 +35,7 @@ FULCRUM = Fulcrum(FULCRUM_API_KEY)
 DRY_RUN = args.dry_run
 
 if DRY_RUN:
-    print("Running in dry run mode. No records will be updated.")
+    logger.info("Running in dry run mode. No records will be updated.")
 
 
 def get_records(form_name: str):
@@ -96,7 +105,7 @@ def load_user_mapping():
 def get_single_matching_record(id: str, current_records: list):
     matching_records = [r for r in current_records if r["id"] == id]
     if len(matching_records) == 0:
-        raise Exception(f"Could not find matching record in the new app: {id}.")
+        raise Exception(f"Could not find matching record in the new app: {id}")
     elif len(matching_records) > 1:
         raise Exception(f"More than one matching record found: {id}.")
     else:
@@ -328,12 +337,12 @@ def confirm_or_fail(message: str):
     if not DRY_RUN:
         user_input = input(f"{message}.\nContinue? (y/n): ")
     else:
-        print(message)
+        logger.info(message)
 
     if user_input.lower() not in confirmations and not DRY_RUN:
         raise Exception("User aborted script.")
 
-    print("Continuing as requested...")
+    logger.info("Continuing as requested...")
 
 
 def update_fields_from_priority_dict(
@@ -347,7 +356,7 @@ def update_fields_from_priority_dict(
             if value:
                 if current_service_visit["form_values"].get(field_key, None):
                     # Print a warning since there is already a value
-                    print(
+                    logger.warning(
                         f"Warning: {field_key} already has a value: {current_service_visit['form_values'][field_key]}. Value will be overwritten."
                     )
                 current_service_visit["form_values"][field_key] = value
@@ -398,9 +407,13 @@ if os.path.exists("missing_site_visits.txt"):
     os.remove("missing_site_visits.txt")
 
 
-def log_missing_site_visit(parent_record_id: str, legacy_service_visit_id: str):
+def log_missing_site_visit(
+    parent_record_id: str, legacy_service_visit_id: str, *args, **kwargs
+):
     with open("missing_site_visits.txt", "a") as f:
-        f.write(f"{legacy_service_visit_id}\n")
+        f.write(
+            f"Legacy parent record ID: {parent_record_id} -> Service visit entry ID: {legacy_service_visit_id} -> {json.dumps(kwargs.get('metadata', None))}\n"
+        )
 
 
 if os.path.exists("missing_records.txt"):
@@ -410,21 +423,65 @@ if os.path.exists("multiple_record_matches.txt"):
     os.remove("multiple_record_matches.txt")
 
 
+def rate_limited(max_per_second):
+    """
+    Decorator to limit the rate of function calls.
+    """
+    minimum_interval = 1.0 / float(max_per_second)
+
+    def decorate(func):
+        last_time_called = [0.0]
+
+        def rate_limited_function(*args, **kargs):
+            elapsed = time.perf_counter() - last_time_called[0]
+            left_to_wait = minimum_interval - elapsed
+            if left_to_wait > 0:
+                time.sleep(left_to_wait)
+            ret = func(*args, **kargs)
+            last_time_called[0] = time.perf_counter()
+            return ret
+
+        return rate_limited_function
+
+    return decorate
+
+
+# Rate limited for 4000 calls per hour (actual limit is 5000/h but we want to be safe)
+@rate_limited(4000 / 3600)
+def update_fulcrum_record(id: str, record: dict):
+    if not DRY_RUN:
+        FULCRUM.records.update(id, record)
+        return True
+    else:
+        return False
+
+
 def main():
     # Get all the legacy records
     legacy_records = get_records("Invasive Plants Management Records (LEGACY)")
 
     # Get all the current records
-    current_records = get_records("SITE VISIT RECORDS")
+    current_records = get_records("SITE VISIT RECORDS (TESTING APP)")
 
     # Find the matching data entries
     current_record = None
     current_service_visit = None
 
     # Loop through all the legacy records
-    updated_records_count = []
+    updated_records_mapping = []
     updated_service_visit_entries = []
-    for legacy_record in legacy_records:
+
+    progress_bar_legacy_records = tqdm(
+        legacy_records,
+        total=len(legacy_records),
+        desc="Updating records",
+    )
+
+    for legacy_record in progress_bar_legacy_records:
+        progress_bar_legacy_records.set_description(
+            f"Updating records: {legacy_record['id']}"
+        )
+
         # Get matching current record
         current_record = get_matching_current_record(legacy_record, current_records)
         if not current_record:
@@ -433,7 +490,7 @@ def main():
             )
             with open("missing_records.txt", "a") as f:
                 f.write(
-                    f"{legacy_record['id']} -> {legacy_record['form_values'].get('c4ee', 'No ID')}\n"
+                    f"Legacy record ID: {legacy_record['id']} -> Legacy record 'c4ee' form value: {legacy_record['form_values'].get('c4ee', 'No ID')}\n"
                 )
             continue
         if isinstance(current_record, list) and len(current_record) > 1:
@@ -463,7 +520,7 @@ def main():
             ) and not site_visit_contains_cut_clearance_activity(
                 legacy_service_visit["form_values"]["a0ac"]
             ):
-                print(
+                logger.debug(
                     f"Skipping site visit of type: {','.join(get_choice_values(legacy_service_visit['form_values']['a0ac']))}"
                 )
                 continue
@@ -476,7 +533,13 @@ def main():
             # If there is no matching current service visit then something has gone wrong
             # in the transfer
             if not current_service_visit:
-                log_missing_site_visit(legacy_record["id"], legacy_service_visit["id"])
+                log_missing_site_visit(
+                    legacy_record["id"],
+                    legacy_service_visit["id"],
+                    metadata={
+                        "date": legacy_service_visit["form_values"].get("8eaf", None)
+                    },
+                )
                 confirm_or_fail(
                     f"Could not find matching service visit in the new app: {legacy_service_visit['id']}."
                 )
@@ -493,20 +556,24 @@ def main():
                 did_update_take_place = True
 
         if did_update_take_place:
-            updated_records_count.append(
-                legacy_record["id"] + " -> " + current_record["id"]
+            current_record_id = current_record["id"]
+
+            updated_records_mapping.append(
+                f"Legacy record ID: {legacy_record['id']} =~ Current record ID: {current_record_id}"
             )
-            # if not DRY_RUN:
-            #     FULCRUM.records.update(current_service_visit)
 
-    print(f"Updated {len(updated_service_visit_entries)} service visit entries.")
-    print(f"Updated {len(updated_records_count)} records")
+            # Perform the update
+            update_fulcrum_record(current_record_id, current_record)
 
+    progress_bar_legacy_records.close()
+
+    logger.info(f"Updated {len(updated_records_mapping)} records")
+    with open("updated_records.txt", "w") as f:
+        f.write("\n".join(updated_records_mapping))
+
+    logger.info(f"Updated {len(updated_service_visit_entries)} service visit entries.")
     with open("updated_service_visit_entries.txt", "w") as f:
         f.write("\n".join(updated_service_visit_entries))
-
-    with open("updated_records.txt", "w") as f:
-        f.write("\n".join(updated_records_count))
 
 
 if __name__ == "__main__":
