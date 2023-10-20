@@ -345,6 +345,29 @@ def confirm_or_fail(message: str):
     logger.info("Continuing as requested...")
 
 
+def does_field_value_have_a_value(value):
+    if value is None:
+        return False
+
+    if isinstance(value, list):
+        if len(value) == 0:
+            return False
+
+    if isinstance(value, dict):
+        if value.get("choice_values", None) and value.get("other_values", None):
+            if (
+                len(value.get("choice_values", [])) == 0
+                and len(value.get("other_values", [])) == 0
+            ):
+                return False
+
+        if value.get("photo_id", None) and value.get("caption", None):
+            if not value["photo_id"]:
+                return False
+
+    return True
+
+
 def update_fields_from_priority_dict(
     legacy_service_visit: dict, current_service_visit: dict, priority_dict: dict
 ):
@@ -354,14 +377,17 @@ def update_fields_from_priority_dict(
         for field_key_to_pull_data_from in field_keys_to_pull_data_from:
             value = legacy_service_visit["form_values"].get(field_key_to_pull_data_from)
             if value:
-                if current_service_visit["form_values"].get(field_key, None):
+                existing_value = current_service_visit["form_values"].get(
+                    field_key, None
+                )
+                if does_field_value_have_a_value(existing_value):
                     # Print a warning since there is already a value
                     logger.warning(
-                        f"Warning: {field_key} already has a value: {current_service_visit['form_values'][field_key]}. Value will be overwritten."
+                        f"Warning: {field_key} already has a value: {existing_value}. This value will not be overwritten."
                     )
+                    break
                 current_service_visit["form_values"][field_key] = value
                 did_update_take_place = True
-                break
 
     return did_update_take_place, current_service_visit
 
@@ -378,10 +404,10 @@ def update_service_visit(legacy_service_visit: dict, current_service_visit: dict
 
     update_required = False
     for field_key in fields_to_check_for_data.values():
-        value = current_service_visit["form_values"].get(field_key, None)
+        existing_value = current_service_visit["form_values"].get(field_key, None)
 
         # There is already a value, so we don't need to update
-        if not value or len(value) == 0:
+        if does_field_value_have_a_value(existing_value):
             break
 
         update_required = True
@@ -392,13 +418,17 @@ def update_service_visit(legacy_service_visit: dict, current_service_visit: dict
     # Update the fields
     # The last value in the list is the highest priority
     fields_to_pull_data_from = {
-        "notes": ["2227", "2d29"],
-        "photos": ["35fb", "e77c"],
-        "video": ["6821", "8fb1"],
+        "2d29": ["2227"],
+        "e77c": ["35fb"],
+        "8fb1": ["6821"],
     }
     did_update_take_place, current_service_visit = update_fields_from_priority_dict(
         legacy_service_visit, current_service_visit, fields_to_pull_data_from
     )
+
+    # Update the version
+    if did_update_take_place:
+        current_service_visit["version"] = 2
 
     return did_update_take_place, current_service_visit
 
@@ -484,6 +514,7 @@ def main():
 
         # Get matching current record
         current_record = get_matching_current_record(legacy_record, current_records)
+
         if not current_record:
             confirm_or_fail(
                 f"Could not find matching record in the new app: {legacy_record['id']} -> {legacy_record['form_values'].get('c4ee', 'No ID')}."
@@ -493,6 +524,7 @@ def main():
                     f"Legacy record ID: {legacy_record['id']} -> Legacy record 'c4ee' form value: {legacy_record['form_values'].get('c4ee', 'No ID')}\n"
                 )
             continue
+
         if isinstance(current_record, list) and len(current_record) > 1:
             confirm_or_fail(
                 f"More than one matching record found: {legacy_record['id']} -> {legacy_record['form_values'].get('c4ee', 'No ID')}."
@@ -503,6 +535,11 @@ def main():
                 )
             continue
 
+        current_record_id = current_record["id"]
+
+        if current_record_id == "b4ff5cfa-9e1a-4a7f-8732-a2a5b31f07d5":
+            pass
+
         # "6b8a" is the key for the legacy service visits repeatable
         legacy_service_visits = get_repeatable_entries(legacy_record, "6b8a")
 
@@ -511,9 +548,6 @@ def main():
 
         did_update_take_place = False
         for legacy_service_visit in legacy_service_visits:
-            if legacy_service_visit["id"] == "2ea13fa1-ecd9-4af8-9f1e-8140cc92f078":
-                pass
-
             # Are we interested in this site visit
             if legacy_service_visit["form_values"].get(
                 "a0ac", None
@@ -552,12 +586,12 @@ def main():
             ) = update_service_visit(legacy_service_visit, current_service_visit)
 
             if did_service_visit_update_take_place:
-                updated_service_visit_entries.append(current_record["id"])
+                updated_service_visit_entries.append(
+                    f"{current_record_id} -> {current_service_visit['form_values'].get('8eaf', None)}"
+                )
                 did_update_take_place = True
 
         if did_update_take_place:
-            current_record_id = current_record["id"]
-
             updated_records_mapping.append(
                 f"Legacy record ID: {legacy_record['id']} =~ Current record ID: {current_record_id}"
             )
