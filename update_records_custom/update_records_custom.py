@@ -541,9 +541,9 @@ def are_changes_okay_confirm(dict_1: dict, dict_2: dict):
     )
 
     if user_input.lower() not in ["y", "yes"]:
-        return False
+        return False, keys_modified_readable
 
-    return True
+    return True, keys_modified_readable
 
 
 def main():
@@ -658,10 +658,16 @@ def main():
             )
 
             # Perform the update
-            have_changes_been_confirmed = are_changes_okay_confirm(
+            have_changes_been_confirmed, updated_key_paths = are_changes_okay_confirm(
                 current_record, copy_of_current_record
             )
             if have_changes_been_confirmed:
+                with open("updated_key_paths.txt", "a") as f:
+                    f.write(
+                        f"Legacy record ID: {legacy_record['id']} -> Current record ID: {current_record_id}:\n"
+                        + "\n".join(updated_key_paths)
+                        + "\n\n"
+                    )
                 update_fulcrum_record(current_record_id, current_record)
 
     progress_bar_legacy_records.close()
