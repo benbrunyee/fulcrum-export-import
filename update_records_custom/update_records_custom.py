@@ -1,10 +1,12 @@
 import argparse
+import copy
 import json
 import logging
 import os
 import re
 import time
 
+from deepdiff import DeepDiff
 from dotenv import load_dotenv
 from fulcrum import Fulcrum
 from tqdm import tqdm
@@ -383,7 +385,7 @@ def update_fields_from_priority_dict(
                 if does_field_value_have_a_value(existing_value):
                     # Print a warning since there is already a value
                     logger.warning(
-                        f"Warning: {field_key} already has a value: {existing_value}. This value will not be overwritten."
+                        f"Warning: {field_key} already has a value: {existing_value}.\nThis value will not be overwritten."
                     )
                     break
                 current_service_visit["form_values"][field_key] = value
@@ -486,15 +488,73 @@ def update_fulcrum_record(id: str, record: dict):
         return False
 
 
+def are_changes_okay_confirm(dict_1: dict, dict_2: dict):
+    # Deep compare the dicts, log ALL the keys that are modified
+    # and ask the user to confirm the changes
+    # If the user does not confirm the changes, return False
+    # If the user confirms the changes, return True
+    # If there are no changes, return True
+
+    # Deep compare using deepdiff
+    diff = DeepDiff(dict_1, dict_2, ignore_order=True)
+
+    # Get the keys that are modified
+    keys_modified = diff.affected_paths.items
+
+    # Common translations for readability
+    translations_regex = {
+        r"root\['form_values'\]\['3bdb'\]\[\d+\]\['version'\]": "Service visit entry version",
+        r"root\['form_values'\]\['3bdb'\]\[\d+\]\['form_values'\]\['e77c'\]": "Service visit entry photos",
+        r"root\['form_values'\]\['3bdb'\]\[\d+\]\['form_values'\]\['2d29'\]": "Service visit entry notes",
+        r"root\['form_values'\]\['3bdb'\]\[\d+\]\['form_values'\]\['8fb1'\]": "Service visit entry video",
+        r"root\['form_values'\]\['3bdb'\]\[\d+\]\['form_values'\]\['8eaf'\]": "Service visit entry date",
+    }
+
+    keys_modified_readable = []
+    for key in keys_modified:
+        has_translation_matched = False
+        for regex, readable in translations_regex.items():
+            if re.match(regex, key):
+                # Get the index of the service visit
+                service_visit_index = "N/A"
+                try:
+                    service_visit_index = (
+                        int(re.sub(r"[\[\]]", "", (re.findall(r"\[\d+\]", key)[0]))) + 1
+                    )
+                except:
+                    pass
+
+                keys_modified_readable.append(
+                    f"Visit {service_visit_index} => {readable}"
+                )
+                has_translation_matched = True
+                break
+
+        if not has_translation_matched:
+            keys_modified_readable.append(key)
+
+    # Ask the user to confirm the changes
+    user_input = input(
+        f"The following keys have been modified:\n\x1b[33m"
+        + "\n".join(keys_modified_readable)
+        + "\x1b[0m\nContinue? (y/n): "
+    )
+
+    if user_input.lower() not in ["y", "yes"]:
+        return False
+
+    return True
+
+
 def main():
     # Get all the legacy records
     legacy_records = get_records("Invasive Plants Management Records (LEGACY)")
 
     # Get all the current records
-    current_records = get_records("SITE VISIT RECORDS (TESTING APP)")
+    current_records = get_records("SITE VISIT RECORDS (TESTING)")
 
     # Find the matching data entries
-    current_record = None
+    current_record, copy_of_current_record = None, None
     current_service_visit = None
 
     # Loop through all the legacy records
@@ -509,11 +569,12 @@ def main():
 
     for legacy_record in progress_bar_legacy_records:
         progress_bar_legacy_records.set_description(
-            f"Updating records: {legacy_record['id']}"
+            f"Updating records: \x1b[1m{legacy_record['id']}\x1b[0m"
         )
 
         # Get matching current record
         current_record = get_matching_current_record(legacy_record, current_records)
+        copy_of_current_record = copy.deepcopy(current_record)
 
         if not current_record:
             confirm_or_fail(
@@ -597,7 +658,11 @@ def main():
             )
 
             # Perform the update
-            update_fulcrum_record(current_record_id, current_record)
+            have_changes_been_confirmed = are_changes_okay_confirm(
+                current_record, copy_of_current_record
+            )
+            if have_changes_been_confirmed:
+                update_fulcrum_record(current_record_id, current_record)
 
     progress_bar_legacy_records.close()
 
