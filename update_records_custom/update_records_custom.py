@@ -551,7 +551,7 @@ def main():
     legacy_records = get_records("Invasive Plants Management Records (LEGACY)")
 
     # Get all the current records
-    current_records = get_records("SITE VISIT RECORDS (TESTING)")
+    current_records = get_records("SITE VISIT RECORDS")
 
     # Find the matching data entries
     current_record, copy_of_current_record = None, None

@@ -27,6 +27,9 @@ parser.add_argument(
 # Debug argument
 parser.add_argument("--debug", help="Print debug statements", action="store_true")
 parser.add_argument("--postfix", help="The postfix to add to the new app name")
+parser.add_argument(
+    "--progressive", help="Progressively duplicate the app", action="store_true"
+)
 # Parse the arguments
 args = parser.parse_args()
 
@@ -40,6 +43,8 @@ APP_NAME = None
 NEW_APP_POSTFIX = args.postfix or " - COPY (DO NOT USE)"
 # If the user has confirmed all prompts
 CONFIRMED = args.yes
+# If the user wants to progressively duplicate the app
+PROGRESSIVE = args.progressive
 
 # Logging format of: [LEVEL]::[FUNCTION]::[HH:MM:SS] - [MESSAGE]
 # Where the level is colored based on the level and the rest except from the message is grey
@@ -113,10 +118,32 @@ def main():
         logger.info("Exiting")
         exit(0)
 
+    app_already_exists = False
+    if PROGRESSIVE:
+        app_already_exists = does_app_exist(app)
+
     # Duplicate the app
-    duplicate_app(app)
+    duplicate_app(app, app_already_exists=app_already_exists)
 
     logger.info("Done")
+
+
+def does_app_exist(app):
+    # Get the app name
+    app_name = app["name"]
+
+    # Add the new app name postfix
+    new_app_name = app_name + NEW_APP_POSTFIX
+
+    # Get the apps
+    apps = list_apps()
+
+    # Check if the app exists
+    for app in apps:
+        if app["name"] == new_app_name:
+            return True
+
+    return False
 
 
 def list_apps():
@@ -150,7 +177,7 @@ def get_app(name: str):
             return app
 
 
-def duplicate_app(app: dict):
+def duplicate_app(app: dict, app_already_exists: bool = False):
     # Get the app name
     app_name = app["name"]
 
@@ -172,23 +199,39 @@ def duplicate_app(app: dict):
     # Create the new app
     new_app_id = None
     if not args.dry_run:
-        new_app = FULCRUM.forms.create(
-            {
-                "form": {
-                    "name": new_app_name,
-                    "title_field_keys": app_title_field_keys,
-                    "description": app_description,
-                    "status_field": status_field,
-                    "elements": app_elements,
-                    "hidden_on_dashboard": True,
-                },
-            }
-        )
+        if not app_already_exists:
+            new_app = FULCRUM.forms.create(
+                {
+                    "form": {
+                        "name": new_app_name,
+                        "title_field_keys": app_title_field_keys,
+                        "description": app_description,
+                        "status_field": status_field,
+                        "elements": app_elements,
+                        "hidden_on_dashboard": True,
+                    },
+                }
+            )
 
-        # Get the new app id
-        new_app_id = new_app["form"]["id"]
+            # Get the new app id
+            new_app_id = new_app["form"]["id"]
 
-        logger.info(f"New app created: {new_app_name} ({new_app_id})")
+            logger.info(f"New app created: {new_app_name} ({new_app_id})")
+        else:
+            # Get the apps
+            existing_apps = list_apps()
+
+            # Check if the app exists
+            for existing_app in existing_apps:
+                if existing_app["name"] == new_app_name:
+                    new_app_id = existing_app["id"]
+                    break
+
+            if not new_app_id:
+                logger.error(f"Failed to find new app: {new_app_name}")
+                exit(1)
+
+            logger.info(f"New app already exists: {new_app_name} ({new_app_id})")
     else:
         new_app_id = "dry_run"
         logger.info(f"New app created: {new_app_name} (dry run)")
@@ -243,8 +286,18 @@ def duplicate_app(app: dict):
         desc="Records created",
     )
     for record in progress_records:
+        if PROGRESSIVE:
+            record_exists = does_record_exist(new_app_id, record["id"])
+
+            if record_exists:
+                progress_records.set_description(
+                    f"Record already exists: {record['id']}"
+                )
+                continue
+
         record = correct_record(app, record)
         progress_records.set_description(f"Creating record: {record['id']}")
+
         try:
             create_app_record(record, new_app_id)
         except Exception as e:
@@ -252,6 +305,21 @@ def duplicate_app(app: dict):
             logger.error(e)
             exit(1)
     progress_records.close()
+
+
+def does_record_exist(app_id: str, record_id: str):
+    # Open a file that maps the old record id to the new record id
+    try:
+        with open(".record_map.json", "r") as f:
+            record_map = json.load(f)
+    except FileNotFoundError:
+        record_map = {}
+
+    # Check if the record exists
+    if record_id in record_map:
+        return True
+
+    return False
 
 
 def correct_record(app: dict, record: dict):
@@ -343,6 +411,21 @@ def create_app_record(record: dict, app_id: str):
         logger.debug(f"New record created: {new_record_id}")
     else:
         logger.debug(f"New record created: {record_id} (dry run)")
+
+    # Open a file that maps the old record id to the new record id
+    if PROGRESSIVE:
+        try:
+            with open(".record_map.json", "r") as f:
+                record_map = json.load(f)
+        except FileNotFoundError:
+            record_map = {}
+
+        # Add the mapping to the file
+        record_map[record_id] = new_record_id
+
+        # Write the file
+        with open(".record_map.json", "w") as f:
+            json.dump(record_map, f, indent=2)
 
 
 if __name__ == "__main__":

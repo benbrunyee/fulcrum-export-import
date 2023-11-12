@@ -740,18 +740,7 @@
     },
 
     {
-      "name": "Update records (custom)",
-      "type": "python",
-      "request": "launch",
-      "program": "${workspaceFolder}/update_records_custom/update_records_custom.py",
-      "cwd": "${workspaceFolder}/update_records_custom",
-      "console": "integratedTerminal",
-      "justMyCode": true,
-      "args": ["-d"]
-    },
-
-    {
-      "name": "Update records (custom - LIVE)",
+      "name": "Update records custom",
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}/update_records_custom/update_records_custom.py",
