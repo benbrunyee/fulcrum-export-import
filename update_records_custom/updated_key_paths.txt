@@ -402,3 +402,6 @@ Visit 8 => Service visit entry notes
 Visit 8 => Service visit entry photos
 Visit 9 => Service visit entry photos
 
+Legacy record ID: 3a425e17-702c-42dd-8707-c54933fcb27b -> Current record ID: c7aee21b-49e1-4516-bb16-7209a1562099:
+Visit 2 => Service visit entry photos
+
