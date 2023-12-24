@@ -727,6 +727,36 @@
         "-n",
         "SITE VISIT RECORDS"
       ]
+    },
+
+    {
+      "name": "Update records",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/update_records.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["-n", "SITE VISIT RECORDS", "-d"]
+    },
+
+    {
+      "name": "Update records custom (dry run)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/update_records_custom/update_records_custom.py",
+      "args": ["-d"],
+      "cwd": "${workspaceFolder}/update_records_custom",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Update records custom",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/update_records_custom/update_records_custom.py",
+      "cwd": "${workspaceFolder}/update_records_custom",
+      "console": "integratedTerminal",
+      "justMyCode": true
     }
   ]
 }

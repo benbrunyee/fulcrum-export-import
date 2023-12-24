@@ -20,8 +20,8 @@ parser = argparse.ArgumentParser()
 # App name is referenced as a "Form" in the Fulcrum API
 parser.add_argument("--name", help="The name of the app to match on")
 parser.add_argument(
-    "--data-name",
-    help="The data name of the field you would like to check",
+    "--data-names",
+    help="The data names of the fields you would like to check",
     required=True,
 )
 # Debug argument
@@ -37,7 +37,7 @@ FULCRUM = Fulcrum(FULCRUM_API_KEY)
 # Store the name of the app to duplicate
 APP_NAME = None
 # The file containing the mappings
-TARGET_DATA_NAME = args.data_name
+TARGET_DATA_NAMES = args.data_names
 
 # The list of files created
 FILES_CREATED = []
@@ -185,6 +185,13 @@ def cleanup():
         os.remove(filename)
 
 
+def split_data_names(data_names: str):
+    """
+    Split the data names into a list
+    """
+    return data_names.split(",")
+
+
 def main():
     # If the app name is not passed, list all apps and get the user to select one
     app = None
@@ -199,9 +206,8 @@ def main():
             f.write(json.dumps(app, indent=4))
             logger.debug("Wrote app to app.json")
 
-    # Get the key of the field with the data name
-    field_key = get_data_name_field_key(app, TARGET_DATA_NAME)
-    logger.info(f"Data name field key: {field_key}")
+    data_names = split_data_names(TARGET_DATA_NAMES)
+    record_count_without_data_names = 0
 
     app_records = get_app_records(app)
     logger.info(f"Found {len(app_records)} records")
@@ -211,42 +217,26 @@ def main():
             f.write(json.dumps(app_records, indent=4))
             logger.debug("Wrote app records to app_records.json")
 
-    target_values_with_key = []
+    data_name_field_keys = dict(
+        {data_name: get_data_name_field_key(app, data_name) for data_name in data_names}
+    )
 
-    for target_value in app_records:
-        record_with_key = traverse_search_record_for_key(target_value, field_key)
-        if record_with_key:
-            target_values_with_key.append(target_value)
+    for app_record in app_records:
+        key_found = False
+        for data_name in data_names:
+            # Get the key of the field with the data name
+            field_key = data_name_field_keys[data_name]
 
-    logger.info(f"Found {len(target_values_with_key)} records with key: {field_key}")
+            record_with_key = traverse_search_record_for_key(app_record, field_key)
 
-    if args.debug:
-        with open("target_values_with_key.json", "w") as f:
-            f.write(json.dumps(target_values_with_key, indent=4))
-            logger.debug("Wrote target values with key to target_values_with_key.json")
+            if record_with_key:
+                key_found = True
 
-    # Count how many records have each value
-    # A value can a dict with at least 1 value in the "choice_values" key or "other_values" key
-    # or a direct value
-    value_counts = 0
-    for target_value in target_values_with_key:
-        has_choice_value_set = False
-        has_other_value_set = False
-
-        if isinstance(target_value, dict):
-            if "choice_values" in target_value:
-                if len(target_value["choice_values"]) > 0:
-                    has_choice_value_set = True
-
-            if "other_values" in target_value:
-                if len(target_value["other_values"]) > 0:
-                    has_other_value_set = True
-
-        if has_choice_value_set or has_other_value_set or target_value:
-            value_counts += 1
+        if not key_found:
+            record_count_without_data_names += 1
 
     logger.info(
-        f"Found {value_counts} records with a value for {field_key} ({TARGET_DATA_NAME})"
+        f"Found {record_count_without_data_names} records without data names: {TARGET_DATA_NAMES}"
     )
 
     # Clean up

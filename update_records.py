@@ -203,7 +203,7 @@ def update_survey_record_links(existing_record: dict):
 def update_repeatable_titles(existing_record: dict):
     """
     UPDATE: "{HIDE} Title" (key: "82f0")
-    Within repeatable "Stand Details" (key: "562d")
+    Within repeatable "Stand Details" key: "562d")
 
     Related fields:
         - "Plant Type" (key: "6a00")
@@ -259,6 +259,11 @@ def update_repeatable_titles(existing_record: dict):
     return updated, existing_record
 
 
+def get_app_records_by_app_name(app_name: str):
+    app = get_app(app_name)
+    return FULCRUM.records.search(url_params={"form_id": app["id"]})["records"]
+
+
 def get_updated_record(existing_record: dict):
     # =====================
     # This function is where you can update the record mappings
@@ -268,7 +273,7 @@ def get_updated_record(existing_record: dict):
 
     # updated, existing_record = update_name_mappings(existing_record)
     # updated, existing_record = update_survey_record_links(existing_record)
-    updated, existing_record = update_repeatable_titles(existing_record)
+    # updated, existing_record = update_repeatable_titles(existing_record)
 
     return updated, existing_record
 
