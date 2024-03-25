@@ -174,7 +174,7 @@ AddressValue = t.TypedDict(
 
 
 def traverse_search_record_for_key(
-    record: dict, key: str
+    record: t.Union[list, dict], key: str
 ) -> t.Union[DictValue, PhotoValue, AddressValue, str, None]:
     """
     Recursively search a record for a key
@@ -324,6 +324,15 @@ def flatten_field_choice_values(value: DictValue) -> str:
     return combined_values
 
 
+def filter_out_field_types(
+    fields: t.List[AppElement], field_types: t.List[str]
+) -> t.List[AppElement]:
+    """
+    Filter out fields with specific types
+    """
+    return [field for field in fields if field["type"] not in field_types]
+
+
 def main():
     """
     The main function of the script
@@ -345,6 +354,9 @@ def main():
 
     # Using the app structure, we find what fields have a conditional
     fields_with_conditionals = find_fields_with_conditionals(app)
+    fields_with_conditionals = filter_out_field_types(
+        fields_with_conditionals, ["CalculatedField"]
+    )
 
     if args.debug:
         with open("fields_with_conditionals.json", "w") as f:
@@ -370,6 +382,9 @@ def main():
             field_key = field["key"]
             data_name = field["data_name"]
             # Get the value of the field
+            # TODO: We need to find the relevant field
+            # E.g., A conditional field key may only be relevant to the repeatable element that the field is in
+            # E.g., Checking condition in repeatable element 2 against a value in repeatable element 1 is not correct
             value = traverse_search_record_for_key(record, field_key)
 
             # If the value is not empty, check if the visible conditions are met
