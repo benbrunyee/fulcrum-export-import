@@ -21,7 +21,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--name", help="The name of the app to match on")
 parser.add_argument(
     "--data-names",
-    help="The data names of the fields you would like to check",
+    help="The data names of the fields you would like to check, comma-separated list. E.g. 'field1,field2'",
     required=True,
 )
 # Debug argument
@@ -159,7 +159,7 @@ def get_data_name_field_key(app: dict, data_name: str):
 
     if args.debug:
         with open("elements.json", "w") as f:
-            f.write(json.dumps(elements, indent=4))
+            json.dump(elements, f, indent=4)
             logger.debug("Wrote elements to elements.json")
 
     for element in elements:
@@ -203,26 +203,30 @@ def main():
 
     if args.debug:
         with open("app.json", "w") as f:
-            f.write(json.dumps(app, indent=4))
+            json.dump(app, f, indent=4)
             logger.debug("Wrote app to app.json")
 
     data_names = split_data_names(TARGET_DATA_NAMES)
     record_count_without_data_names = 0
+    record_count_with_data_names = 0
 
     app_records = get_app_records(app)
     logger.info(f"Found {len(app_records)} records")
 
     if args.debug:
         with open("app_records.json", "w") as f:
-            f.write(json.dumps(app_records, indent=4))
+            json.dump(app_records, f, indent=4)
             logger.debug("Wrote app records to app_records.json")
 
     data_name_field_keys = dict(
         {data_name: get_data_name_field_key(app, data_name) for data_name in data_names}
     )
 
+    example_record = None
+
     for app_record in app_records:
-        key_found = False
+        any_key_found = False
+
         for data_name in data_names:
             # Get the key of the field with the data name
             field_key = data_name_field_keys[data_name]
@@ -230,17 +234,29 @@ def main():
             record_with_key = traverse_search_record_for_key(app_record, field_key)
 
             if record_with_key:
-                key_found = True
+                any_key_found = True
 
-        if not key_found:
+        if not any_key_found:
             record_count_without_data_names += 1
+        else:
+            record_count_with_data_names += 1
+            example_record = app_record
 
     logger.info(
-        f"Found {record_count_without_data_names} records without data names: {TARGET_DATA_NAMES}"
+        f"Found {record_count_without_data_names} records WITHOUT at least one of the specified data names: {TARGET_DATA_NAMES}"
+    )
+    logger.info(
+        f"Found {record_count_with_data_names} records WITH at least one of the specified data names: {TARGET_DATA_NAMES}"
     )
 
+    if example_record and args.debug:
+        logger.debug(
+            f"Example record with data names: {json.dumps(example_record, indent=2)}"
+        )
+        logger.debug(f"Example record ID: {example_record['id']}")
+
     # Clean up
-    cleanup()
+    # cleanup()
 
 
 if __name__ == "__main__":

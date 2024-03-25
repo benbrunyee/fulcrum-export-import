@@ -8,9 +8,7 @@ from fulcrum import Fulcrum
 load_dotenv()
 
 parser = argparse.ArgumentParser(description="Get a form from Fulcrum.")
-parser.add_argument(
-    "--form_name", "-n", help="The name of the form to import data into."
-)
+parser.add_argument("--form_name", "-n", help="The name of the form to get data from.")
 
 args = parser.parse_args()
 
