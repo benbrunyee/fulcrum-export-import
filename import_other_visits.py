@@ -131,6 +131,19 @@ def get_app_records(app: dict) -> t.List[Record]:
     return records
 
 
+def deep_convert_none_fields(hash: dict) -> dict:
+    """
+    Deep convert all the None values in a dictionary to an empty string
+    """
+    for key, value in hash.items():
+        if value is None:
+            hash[key] = ""
+        elif isinstance(value, dict):
+            hash[key] = deep_convert_none_fields(value)
+
+    return hash
+
+
 def find_matching_site_visit_record(
     jkmr_record: Record, site_visit_records: t.List[Record]
 ) -> t.Optional[Record]:
@@ -154,9 +167,15 @@ def find_matching_site_visit_record(
                 site_visit_job_id,
             ],
             [
-                jkmr_record["form_values"].get(KEY_NAMES["JKMR"]["site_address"], None),
-                site_visit_record["form_values"].get(
-                    KEY_NAMES["SITE_VISIT_RECORDS"]["site_address"], None
+                deep_convert_none_fields(
+                    jkmr_record["form_values"].get(
+                        KEY_NAMES["JKMR"]["site_address"], {}
+                    )
+                ),
+                deep_convert_none_fields(
+                    site_visit_record["form_values"].get(
+                        KEY_NAMES["SITE_VISIT_RECORDS"]["site_address"], {}
+                    )
                 ),
             ],
         ]
@@ -189,6 +208,10 @@ def find_matching_site_visit_record(
             # If the values are not the same, then it does not match
             if values[0] != values[1]:
                 matches = False
+                logger.debug(f"Comparisson: {values[0]} != {values[1]}")
+                break
+
+            logger.debug(f"Comparisson: {values[0]} == {values[1]}")
 
         if matches:
             return site_visit_record
