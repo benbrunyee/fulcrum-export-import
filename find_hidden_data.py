@@ -9,12 +9,12 @@ import builtins
 import json
 import logging
 import os
-import re
-import sys
 import typing as t
 
 from dotenv import load_dotenv
 from fulcrum import Fulcrum
+
+from fulcrum_types.types import AddressValue, AppElement, DictValue, PhotoValue
 
 load_dotenv()
 
@@ -24,7 +24,7 @@ parser = argparse.ArgumentParser(description="Find hidden data in an app")
 # App name is referenced as a "Form" in the Fulcrum API
 parser.add_argument("--app-name", help="The name of the app to find hidden data in")
 parser.add_argument(
-    "--debug", help="The name of the app to find hidden data in", action="store_true"
+    "--debug", help="Whether we should run in debug mode or not", action="store_true"
 )
 
 # Parse the arguments
@@ -148,30 +148,6 @@ RecordWithHiddenData = t.TypedDict(
     },
 )
 
-DictValue = t.TypedDict(
-    "DictValue", {"choice_values": t.List[str], "other_values": t.List[str]}
-)
-PhotoValue = t.TypedDict(
-    "PhotoValue",
-    {
-        "photo_id": str,
-        "caption": str,
-    },
-)
-AddressValue = t.TypedDict(
-    "AddressValue",
-    {
-        "sub_admin_area": str,
-        "locality": str,
-        "admin_area": str,
-        "postal_code": str,
-        "country": str,
-        "suite": str,
-        "sub_thoroughfare": str,
-        "thoroughfare": str,
-    },
-)
-
 
 def traverse_search_record_for_key(
     record: t.Union[list, dict], key: str
@@ -234,26 +210,6 @@ def cleanup():
     """
     for filename in FILES_CREATED:
         os.remove(filename)
-
-
-VisibleCondition = t.TypedDict(
-    "VisibleCondition",
-    {
-        "field_key": str,
-        "operator": t.Literal["equal_to", "not_equal_to", "is_not_empty"],
-        "value": str,
-    },
-)
-
-AppElement = t.TypedDict(
-    "AppElement",
-    {
-        "key": str,
-        "data_name": str,
-        "visible_conditions_type": t.Literal["all", "any"],
-        "visible_conditions": t.List[VisibleCondition],
-    },
-)
 
 
 def find_fields_with_conditionals(app: dict) -> t.List[AppElement]:
