@@ -715,6 +715,15 @@
     },
 
     {
+      "name": "Debug import_other_visits.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/import_other_visits.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["--debug"]
+    },
+    {
       "name": "Debug delete_records.py",
       "type": "python",
       "request": "launch",

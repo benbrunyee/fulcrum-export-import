@@ -11,7 +11,7 @@ import typing as t
 from dotenv import load_dotenv
 from fulcrum import Fulcrum
 
-from fulcrum_types.types import Record
+from fulcrum_types.types import FormValue, Record, RepeatableValue
 
 load_dotenv()
 
@@ -50,13 +50,18 @@ KEY_NAMES = {
         "other_visit_repeatable": "86df",
         "treatment_date": "4bed",
         "technicians_names": "16cd",
+        "other_site_visit_date": "4bed",
+        "other_site_visit_time": "d7ff",
     },
     "SITE_VISIT_RECORDS": {
         # Match records on values of these keys
         "job_id": "c4ee",
         "site_address": "48ca",
         # End of matching keys
-        "service_visit_records": "3bdb",
+        "site_visit_entries": "3bdb",
+        "site_visit_date": "8eaf",
+        "site_visit_time": "2a76",
+        "visit_category": "4010",
     },
 }
 
@@ -180,38 +185,7 @@ def find_matching_site_visit_record(
             ],
         ]
 
-        # If any of the values are emtpy, warn and skip
-        # This is because we cannot compare empty values as they most likely
-        # will match and cause issues
-        jkmr_values = [value[0] for value in comparissons]
-        are_all_jkmr_values_truthy = all(jkmr_values)
-
-        if not are_all_jkmr_values_truthy:
-            logger.error(f"Value from JKMR record is empty: {comparissons}")
-            # Return None here because we won't be able to find a match with empty values in the
-            # JKMR record
-            return None
-
-        site_visit_values = [value[1] for value in comparissons]
-        are_all_site_visit_values_truthy = all(site_visit_values)
-
-        if not are_all_site_visit_values_truthy:
-            logger.debug(
-                f"Skipping comparisson for this site visit record: {site_visit_job_id} as one of the values is empty: {comparissons}"
-            )
-            continue
-
-        matches = True
-
-        # Check if all the comparissons match
-        for values in comparissons:
-            # If the values are not the same, then it does not match
-            if values[0] != values[1]:
-                matches = False
-                logger.debug(f"Comparisson: {values[0]} != {values[1]}")
-                break
-
-            logger.debug(f"Comparisson: {values[0]} == {values[1]}")
+        matches = compare_comparissons(comparissons)
 
         if matches:
             return site_visit_record
@@ -222,7 +196,7 @@ def find_matching_site_visit_record(
     return None
 
 
-def get_jkmr_other_site_visits(jkmr_record: Record) -> t.List[Record]:
+def get_jkmr_other_site_visits(jkmr_record: Record) -> t.List[FormValue]:
     """
     Get all the "Other" site visit records from a JKMR record
     """
@@ -230,11 +204,12 @@ def get_jkmr_other_site_visits(jkmr_record: Record) -> t.List[Record]:
         KEY_NAMES["JKMR"]["other_visit_repeatable"], None
     )
 
+    # Not all records have an "Other" site visit repeatable
     if other_site_visits == None:
-        logger.error(
+        logger.warning(
             f"Could not find 'Other' site visits for JKMR record: {jkmr_record['id']}"
         )
-        exit(1)
+        return []
 
     logger.debug(f"Other site visits: {other_site_visits}")
     logger.info(
@@ -244,15 +219,158 @@ def get_jkmr_other_site_visits(jkmr_record: Record) -> t.List[Record]:
     return other_site_visits
 
 
-def process_site_visit_record_update(site_visit_record: Record, jkmr_record: Record):
+def get_site_visit_entries(site_visit_record: Record) -> t.List[FormValue]:
+    """
+    Get the site visit entries from a site visit record
+    """
+    site_visit_entries = site_visit_record["form_values"].get(
+        KEY_NAMES["SITE_VISIT_RECORDS"]["site_visit_entries"], None
+    )
+
+    if site_visit_entries == None:
+        logger.warning(
+            f"Could not find 'Other' site visits for site visit record: {site_visit_record['id']}"
+        )
+        return []
+
+    logger.debug(f"Site visit entries: {site_visit_entries}")
+
+    return site_visit_entries
+
+
+def compare_comparissons(
+    comparissons: t.List[t.List[t.Any]], none_matches=True
+) -> bool:
+    """
+    Compare a list of comparissons and return whether they are the same or not
+    """
+
+    matches = True
+
+    for values in comparissons:
+        # Check whether we should match None values or just return False
+        if not none_matches:
+            # If any of the values are None, then don't match
+            if values[0] == None or values[1] == None:
+                logger.debug(
+                    f"One of the values is None, not matching: {values[0]}, {values[1]}"
+                )
+                matches = False
+                break
+
+        # If the values are not the same, then it does not match
+        if not do_form_values_match(values[0], values[1]):
+            logger.debug(f"Comparisson: {values[0]} != {values[1]}")
+            matches = False
+            break
+
+        logger.debug(f"Comparisson: {values[0]} == {values[1]}")
+
+    return matches
+
+
+def do_form_values_match(value1: t.Any, value2: t.Any) -> bool:
+    """
+    Check if two form values match
+    """
+    converted_value1 = (
+        deep_convert_none_fields(value1) if isinstance(value1, dict) else value1
+    )
+    converted_value2 = (
+        deep_convert_none_fields(value2) if isinstance(value2, dict) else value2
+    )
+
+    return converted_value1 == converted_value2
+
+
+def get_matching_site_visits(
+    source_visit: RepeatableValue, visits: t.List[RepeatableValue]
+) -> t.List[RepeatableValue]:
+    """
+    Get the matching site visit from the list of site visits
+    """
+
+    matching_visits = []
+
+    for visit in visits:
+        """
+        ? This should be passed into the function rather than defined here
+        because otherwise this function isn't pure
+        """
+        comparissons = [
+            [
+                source_visit["form_values"].get(
+                    KEY_NAMES["JKMR"]["treatment_date"], None
+                ),
+                visit["form_values"].get(
+                    KEY_NAMES["SITE_VISIT_RECORDS"]["site_visit_date"], None
+                ),
+            ],
+            [
+                # Create the "Other" object that we want to match on
+                # Simulate what the "Other" object would look like in the site visit record
+                # We are essentially matching on site visit type here since we already know that the
+                # source_visit will be of type "Other"
+                {
+                    "other_values": [],
+                    "choice_values": ["Other"],
+                },
+                visit["form_values"].get(
+                    KEY_NAMES["SITE_VISIT_RECORDS"]["visit_category"], None
+                ),
+            ],
+        ]
+
+        # Check if all the comparissons match
+        matches = compare_comparissons(comparissons, False)
+
+        if matches:
+            matching_visits.append(visit)
+
+    return matching_visits
+
+
+def process_site_visit_record_update(
+    site_visit_record: Record, jkmr_other_visits: t.List[FormValue]
+):
     """
     Processes the update of a site visit record
     """
-    jkmr_other_site_visits = get_jkmr_other_site_visits(jkmr_record)
+    for jkmr_other_visit in jkmr_other_visits:
+        # Get the site visit entries
+        site_visit_other_vists = get_site_visit_entries(site_visit_record)
 
-    if len(jkmr_other_site_visits) == 0:
-        logger.info("JKMR record has no 'Other' site visits, not processing")
-        return
+        # Find a matching site visit if there is one
+        matching_site_visits = get_matching_site_visits(
+            jkmr_other_visit, site_visit_other_vists
+        )
+
+        potentially_applicable_for_further_processing = False
+
+        # Check if we found a matching site visit
+        if len(matching_site_visits) == 0:
+            logger.info(
+                f"Could not find a matching site visit for JKMR other visit entry: {jkmr_other_visit}"
+            )
+            potentially_applicable_for_further_processing = True
+
+        if len(matching_site_visits) > 1:
+            logger.error(
+                f"Found more than one matching site visit for JKMR record: {jkmr_other_visit}"
+            )
+            exit(1)
+
+        if len(matching_site_visits) == 1:
+            matching_site_visit = matching_site_visits[0]
+            logger.info(
+                f"Found matching site visit for JKMR other visit entry: {jkmr_other_visit}"
+            )
+            potentially_applicable_for_further_processing = True
+
+        if potentially_applicable_for_further_processing:
+            logger.debug(
+                f"Potentially applicable for further processing: {jkmr_other_visit}"
+            )
 
 
 def main():
@@ -274,6 +392,12 @@ def main():
     site_visit_records = get_app_records(site_visit_records_app)
 
     for jkmr_record in jkmr_records:
+        jkmr_other_site_visits = get_jkmr_other_site_visits(jkmr_record)
+
+        if len(jkmr_other_site_visits) == 0:
+            logger.info("JKMR record has no 'Other' site visits, skipping...")
+            continue
+
         matching_site_visit_record = find_matching_site_visit_record(
             jkmr_record, site_visit_records
         )
@@ -282,13 +406,18 @@ def main():
             logger.error(
                 f"Could not find matching site visit record for JKMR record: {jkmr_record['id']}"
             )
+            # TODO: Create a new site visit record
+            # This record hasn't been transferred because all site visit records are of type "Other"?
+            # TODO: Check if this is true ^
             exit(1)
 
         logger.info(
             f"Found matching site visit record for JKMR record: {jkmr_record['id']}"
         )
         logger.debug("Processing the site visit record update")
-        process_site_visit_record_update(matching_site_visit_record, jkmr_record)
+        process_site_visit_record_update(
+            matching_site_visit_record, jkmr_other_site_visits
+        )
 
 
 if __name__ == "__main__":
