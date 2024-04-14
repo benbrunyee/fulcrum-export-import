@@ -301,8 +301,7 @@ def duplicate_app(app: dict, app_already_exists: bool = False):
         try:
             create_app_record(record, new_app_id)
         except Exception as e:
-            logger.error(f"Failed to create record: {record['id']}")
-            logger.error(e)
+            logger.error(f"Failed to create record: {record['id']}", exc_info=e)
             exit(1)
     progress_records.close()
 

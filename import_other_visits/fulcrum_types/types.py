@@ -60,7 +60,7 @@ type FormValuesWithoutRepeatableValue = t.Union[
 
 class RepeatableValue(t.TypedDict):
     """
-    [{"id":"d67801a0-adc1-6f60-4b0d-ec3a7191b34b","geometry":{"type":"Point","coordinates":[-73.123456,42.123456]},"form_values": {"0129": "Hello world"}}]
+    {"id":"d67801a0-adc1-6f60-4b0d-ec3a7191b34b","geometry":{"type":"Point","coordinates":[-73.123456,42.123456]},"form_values": {"0129": "Hello world"}}
     """
 
     id: str
@@ -86,7 +86,7 @@ type FormValues = t.Union[
     SignatureValue,
     AudioValue,
     VideoValue,
-    RepeatableValue,
+    t.List[RepeatableValue],
 ]
 
 type FormValue = t.Union[t.Dict[str, FormValues], t.TypeAlias["FormValue"]]
@@ -140,3 +140,106 @@ class Record(t.TypedDict):
     horizontal_accuracy: float
     vertical_accuracy: float
     geometry: t.Any
+
+
+class AttachmentId(t.TypedDict):
+    attachment_id: str
+
+
+type AppElementTypes = t.Union[
+    t.Literal["Section"],
+    t.Literal["Repeatable"],
+    t.Literal["TextField"],
+    t.Literal["DateTimeField"],
+    t.Literal["TimeField"],
+    t.Literal["ChoiceField"],
+    t.Literal["AddressField"],
+    t.Literal["YesNoField"],
+    t.Literal["AudioField"],
+    t.Literal["PhotoField"],
+    t.Literal["VideoField"],
+]
+
+
+class ChoiceValues(t.TypedDict):
+    label: str
+    value: str
+
+
+class AppElement(t.TypedDict):
+    data_name: str
+    elements: t.Optional[t.List["AppElement"]]
+    key: str
+    label: str
+    type: AppElementTypes
+    allow_other: t.Optional[bool]
+    choices: t.Optional[t.List[ChoiceValues]]
+    multiple: t.Optional[bool]
+    required: t.Optional[bool]
+    required_conditions: t.Optional[t.List[t.Dict[str, t.Union[str, bool]]]]
+    required_conditions_type: t.Optional[str]
+    visible_conditions: t.Optional[t.List[t.Dict[str, t.Union[str, bool]]]]
+    visible_conditions_behavior: t.Optional[str]
+    visible_conditions_type: t.Optional[str]
+    hidden: t.Optional[bool]
+    max_length: t.Optional[int]
+    min_length: t.Optional[int]
+    numeric: t.Optional[bool]
+    pattern: t.Optional[str]
+    pattern_description: t.Optional[str]
+    annotations_enabled: t.Optional[bool]
+    deidentification_enabled: t.Optional[bool]
+    display: t.Optional[str]
+    geometry_required: t.Optional[bool]
+    geometry_types: t.Optional[t.List[str]]
+    timestamp_enabled: t.Optional[bool]
+    track_enabled: t.Optional[bool]
+    auto_populate: t.Optional[bool]
+    negative: t.Optional[ChoiceValues]
+    neutral: t.Optional[ChoiceValues]
+    neutral_enabled: t.Optional[bool]
+    positive: t.Optional[ChoiceValues]
+    title_field_key: t.Optional[str]
+    title_field_keys: t.Optional[t.List[str]]
+    audio_enabled: t.Optional[bool]
+    audio_notes: t.Optional[bool]
+
+
+class App(t.TypedDict):
+    """
+    A Fulcrum app structure
+    """
+
+    assignment_enabled: bool
+    attachment_ids: t.List[AttachmentId]
+    auto_assign: bool
+    bounding_box: t.List[float]
+    created_at: str
+    created_by: str
+    created_by_id: str
+    description: str
+    elements: t.List[AppElement]
+    field_effects: t.Optional[t.Any]
+    form_links: t.Dict[str, t.List[t.Dict[str, str]]]
+    geometry_required: bool
+    geometry_types: t.List[str]
+    hidden_on_dashboard: bool
+    id: str
+    image: str
+    image_large: str
+    image_small: str
+    image_thumbnail: str
+    name: str
+    projects_enabled: bool
+    record_changed_at: str
+    record_count: int
+    record_title_key: str
+    report_templates: t.List[t.Any]
+    script: str
+    status_field: t.Dict[str, t.Any]
+    system_type: t.Optional[str]
+    title_field_keys: t.List[str]
+    updated_at: str
+    updated_by: str
+    updated_by_id: str
+    version: int

@@ -718,7 +718,7 @@
       "name": "Debug import_other_visits.py",
       "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/import_other_visits.py",
+      "program": "${workspaceFolder}/import_other_visits/import_other_visits.py",
       "console": "integratedTerminal",
       "justMyCode": true,
       "args": ["--debug"]
