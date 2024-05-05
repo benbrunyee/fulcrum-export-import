@@ -4,12 +4,13 @@ This script imports all the "Other" visit types from the old JKMR app to the new
 """
 import argparse
 import builtins
+import copy
+import json
 import logging
 import os
+import time
 import typing as t
-from pprint import pprint
 
-from deepdiff import DeepDiff
 from dotenv import load_dotenv
 from fulcrum import Fulcrum
 from fulcrum_types.types import (App, AppElement, AppElementTypes, FormValue,
@@ -23,11 +24,15 @@ parser = argparse.ArgumentParser(
 parser.add_argument(
     "--debug", help="Whether we should run in debug mode or not", action="store_true"
 )
+parser.add_argument(
+    "--no-confirmation", help="Whether we should run without confirmation", action="store_true"
+)
 
 # Parse the arguments
 args = parser.parse_args()
 
 DEBUG = args.debug
+NO_CONFIRMATION = args.no_confirmation
 
 # Get the Fulcrum API key from the environment variables
 FULCRUM_API_KEY = os.getenv("FULCRUM_API_KEY")
@@ -36,7 +41,8 @@ FULCRUM = Fulcrum(FULCRUM_API_KEY)
 
 # The name of the old JKMR app and the new SITE VISIT RECORDS app
 JKMR_APP_NAME = "Japanese Knotweed Management Record (LEGACY)"
-SITE_VISIT_RECORDS_APP_NAME = "SITE VISIT RECORDS"
+# SITE_VISIT_RECORDS_APP_NAME = "SITE VISIT RECORDS"
+SITE_VISIT_RECORDS_APP_NAME = "SITE VISIT RECORDS - COPY (DO NOT USE)"
 
 # The list of files created
 FILES_CREATED = []
@@ -134,6 +140,7 @@ def get_app(name: str) -> App:
     """
     Get an app by name
     """
+    logger.info(f"Getting app: {name}")
     apps = list_apps()
     for app in apps:
         if app["name"] == name:
@@ -418,7 +425,83 @@ def update_site_visit_record_with_entry(
         logger.error("SITE VISIT RECORDS app is not defined")
         exit(1)
 
-    # TODO: Implement - Update the site visit record with the new entry
+    updated_parent_site_visit_record = copy.deepcopy(parent_site_visit_record)
+
+    # Find the insertion point within the parent site visit record
+    site_visit_entries = get_site_visit_entries(parent_site_visit_record)
+
+    updated_site_visit_entries = copy.deepcopy(site_visit_entries)
+
+    # Add the new entry to the site visit record
+    updated_site_visit_entries.append(new_entry)
+
+    # Sort the site visit entries by date and time on using SITE VISIT RECORDS keys
+    updated_site_visit_entries.sort(
+        key=lambda x: (
+            x["form_values"].get(KEY_NAMES["SITE_VISIT_RECORDS"]["site_visit_date"], ""),
+            x["form_values"].get(KEY_NAMES["SITE_VISIT_RECORDS"]["site_visit_time"], ""),
+        )
+    )
+
+    # Update the parent site visit record with the new entries
+    updated_parent_site_visit_record["form_values"][KEY_NAMES["SITE_VISIT_RECORDS"]["site_visit_entries"]] = updated_site_visit_entries
+
+    # Log the changes to a file with the ID as the filename in the "changes" directory
+    if not os.path.exists(os.path.join(os.path.dirname(__file__), "changes")):
+        os.mkdir(os.path.join(os.path.dirname(__file__), "changes"))
+
+    with open(f"changes/{parent_site_visit_record['id']}_before.txt", "w") as f:
+        json.dump(parent_site_visit_record, f, indent=4)
+
+    with open(f"changes/{parent_site_visit_record['id']}_after.txt", "w") as f:
+        json.dump(updated_parent_site_visit_record, f, indent=4)
+
+    if not NO_CONFIRMATION:
+        user_input = input(
+            f"Update site visit record {parent_site_visit_record['id']} with new entry? (y/n):"
+        )
+
+        if user_input.lower() != "y":
+            logger.error("User chose not to update the site visit record, exiting...")
+            exit(1)
+
+    # Update the site visit record
+    update_fulcrum_record(parent_site_visit_record["id"], updated_parent_site_visit_record)
+
+
+def rate_limited(max_per_second):
+    """
+    Decorator to limit the rate of function calls.
+    """
+    minimum_interval = 1.0 / float(max_per_second)
+
+    def decorate(func):
+        last_time_called = [0.0]
+
+        def rate_limited_function(*args, **kargs):
+            elapsed = time.perf_counter() - last_time_called[0]
+            left_to_wait = minimum_interval - elapsed
+            if left_to_wait > 0:
+                time.sleep(left_to_wait)
+            ret = func(*args, **kargs)
+            last_time_called[0] = time.perf_counter()
+            return ret
+
+        return rate_limited_function
+
+    return decorate
+
+
+# Rate limited for 4000 calls per hour (actual limit is 5000/h but we want to be safe)
+@rate_limited(4000 / 3600)
+def update_fulcrum_record(record_id: str, record: Record):
+    """
+    Update a record in Fulcrum
+    """
+    # Update the site visit record
+    FULCRUM.records.update(
+        record_id, record
+    )
 
 def process_new_site_visit_entry(
     parent_site_visit_record: Record, jkmr_other_visit: RepeatableValue
@@ -426,6 +509,8 @@ def process_new_site_visit_entry(
     """
     Process a new site visit entry
     Safely add the new site visit entry to the parent site visit record
+    This function is called when we have found a JKMR other site visit entrythat does not exist in
+    the SITE VISIT RECORDS app
     """
 
     # Field keys need to be obtained and translated from the JKMR app to the SITE VISIT RECORDS app
@@ -438,10 +523,6 @@ def process_new_site_visit_entry(
     #    can be populated from the parent JKMR record or determined using some other method.
     # 6. With a new entry created, we can update the existing SITE VISIT RECORD app record
     #    with the new entries.
-    # ! We need to ensure that other entries are not modified at all, only the new entry is
-    # ! added.
-    # ! We do this using a diff library to compare the all entries that aren't the one we
-    # ! are adding in.
 
     global JKMR_APP
     global SITE_VISIT_RECORDS_APP
@@ -501,24 +582,31 @@ def process_new_site_visit_entry(
         key_code_mappings[jkmr_data_name] = [jkmr_key_code, site_visit_key_code]
 
     # Now we have the key code mappings, we can start creating the new site visit entry
-    new_entry = {
-        **jkmr_other_visit
-    } # type: RepeatableValue
+    updated_jkmr_other_visit = copy.deepcopy(jkmr_other_visit)
 
-    # Translate the keys from JKMR to SITE VISIT RECORDS
+    # Translate the keys from JKMR to SITE VISIT RECORDS (if required)
     for data_name, keys in key_code_mappings.items():
         old_key = keys[0]
         new_key = keys[1]
 
-        if old_key not in new_entry["form_values"]:
+        if old_key not in updated_jkmr_other_visit["form_values"]:
             logger.warning(f"Skipping the translation of key: \"{old_key}\" since it was not found in JKMR other visit entry: {jkmr_other_visit}")
             continue
 
+        # Update the key
         logger.debug(f"Translating key: \"{old_key}\" -> \"{new_key}\" for data name: \"{data_name}\"")
-        new_entry["form_values"][new_key] = new_entry["form_values"].pop(old_key)
+        updated_jkmr_other_visit["form_values"][new_key] = updated_jkmr_other_visit["form_values"].pop(old_key)
+
+
+    # Log the changes to a file with the ID as the filename in the "changes" directory
+    if not os.path.exists(os.path.join(os.path.dirname(__file__), "changes")):
+        os.mkdir(os.path.join(os.path.dirname(__file__), "changes"))
+
+    with open(f"changes/{parent_site_visit_record['id']}.txt", "w") as f:
+        json.dump(jkmr_other_visit, f, indent=4)
 
     # Add the new entry to the site visit record
-    update_site_visit_record_with_entry(parent_site_visit_record, new_entry)
+    update_site_visit_record_with_entry(parent_site_visit_record, updated_jkmr_other_visit)
 
 
 def process_existing_site_visit_entry(

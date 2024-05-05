@@ -28,7 +28,9 @@ parser.add_argument(
 parser.add_argument("--debug", help="Print debug statements", action="store_true")
 parser.add_argument("--postfix", help="The postfix to add to the new app name")
 parser.add_argument(
-    "--progressive", help="Progressively duplicate the app", action="store_true"
+    "--progressive",
+    help="Progressively duplicate the app. Helpful when an existing duplication has failed.",
+    action="store_true",
 )
 # Parse the arguments
 args = parser.parse_args()
