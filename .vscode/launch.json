@@ -721,7 +721,7 @@
       "program": "${workspaceFolder}/import_other_visits/import_other_visits.py",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "args": ["--debug"]
+      "args": ["--debug", "--no-confirmation", "--skip-missing"]
     },
     {
       "name": "Debug delete_records.py",

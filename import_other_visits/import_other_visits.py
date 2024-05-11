@@ -27,12 +27,16 @@ parser.add_argument(
 parser.add_argument(
     "--no-confirmation", help="Whether we should run without confirmation", action="store_true"
 )
+parser.add_argument(
+    "--skip-missing", help="Whether we should skip records that don't have a matching record in the new app", action="store_true"
+)
 
 # Parse the arguments
 args = parser.parse_args()
 
 DEBUG = args.debug
 NO_CONFIRMATION = args.no_confirmation
+SKIP_MISSING = args.skip_missing
 
 # Get the Fulcrum API key from the environment variables
 FULCRUM_API_KEY = os.getenv("FULCRUM_API_KEY")
@@ -76,7 +80,9 @@ KEY_NAMES = {
         "site_visit_entries": "3bdb",
         "site_visit_date": "8eaf",
         "site_visit_time": "2a76",
+        "visit_category": "4010",
         "record_type_japanese_knotweed": "b0b0",
+        "visit_type_japanese_knotweed_other": "113b",
     },
 }
 
@@ -597,6 +603,13 @@ def process_new_site_visit_entry(
         logger.debug(f"Translating key: \"{old_key}\" -> \"{new_key}\" for data name: \"{data_name}\"")
         updated_jkmr_other_visit["form_values"][new_key] = updated_jkmr_other_visit["form_values"].pop(old_key)
 
+    # Make some other required changes for "Other" site visit entries
+    visit_category_value = "Japanese Knotweed Management Record"
+    logger.debug(f"Updating the visit_category to: {visit_category_value}")
+    updated_jkmr_other_visit["form_values"][KEY_NAMES["SITE_VISIT_RECORDS"]["visit_category"]] = visit_category_value
+    record_type_value = "Other Treatments Inc. Excavation"
+    logger.debug(f"Updating the record_type_japanese_knotweed to: {record_type_value}")
+    updated_jkmr_other_visit["form_values"][KEY_NAMES["SITE_VISIT_RECORDS"]["record_type_japanese_knotweed"]] = record_type_value
 
     # Log the changes to a file with the ID as the filename in the "changes" directory
     if not os.path.exists(os.path.join(os.path.dirname(__file__), "changes")):
@@ -720,6 +733,10 @@ def prompt_user_for_record_mapping(record_id: str) -> t.Union[t.Literal["skip"],
             )
             return "skip"
 
+    if SKIP_MISSING:
+        logger.info("Skipping record since --skip-missing was defined...")
+        return "skip"
+
     user_input = input(
         f"Could not find matching site visit record for JKMR record: {record_id}.\n"
         + "Do you want to skip this record or enter a record ID that we should match with? (y/n/record_id):\n"
@@ -808,7 +825,7 @@ def main():
 
             if not matching_site_visit_record:
                 logger.error(
-                    f"Could not find matching site visit record for user entered value {record_mapping} for JKMR record: {jkmr_record['id']}"
+                    f"Could not find matching site visit record for user defined (file/input) value {record_mapping} for JKMR record: {jkmr_record['id']}"
                 )
                 exit(1)
 
