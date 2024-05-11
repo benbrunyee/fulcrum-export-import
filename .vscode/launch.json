@@ -713,7 +713,24 @@
         "order": 7
       }
     },
-
+    {
+      "name": "Debug import_other_visits.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/import_other_visits/import_other_visits.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["--debug", "--no-confirmation", "--skip-missing"]
+    },
+    {
+      "name": "Run import_other_visits.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/import_other_visits/import_other_visits.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["--no-confirmation"]
+    },
     {
       "name": "Debug delete_records.py",
       "type": "python",

@@ -811,14 +811,9 @@ def transform_site_visits_jkmr():
     # Every child of each parent key is the now the key where the value of this key is the parent key
     inverted_mapping = {vv: k for k, v in fields_to_fill.items() for vv in v}
 
-    # TODO: Uncomment when the other sections are ready in the SITE VISITS APP
-    # visit_files = ["herbicide_application_monitoring_records",
-    #                "other_treatments_inc_excavation",
-    #                "site_monitoring_observations_and_recommendations"]
-    visit_files = [
-        "herbicide_application_monitoring_records",
-        "site_monitoring_observations_and_recommendations",
-    ]
+    visit_files = ["herbicide_application_monitoring_records",
+                   "other_treatments_inc_excavation",
+                   "site_monitoring_observations_and_recommendations"]
 
     file_to_value_mapping = {
         "herbicide_application_monitoring_records": "Herbicide Application & Monitoring Record",
