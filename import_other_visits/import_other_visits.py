@@ -425,6 +425,18 @@ def update_site_visit_record_with_entry(
     Update the site visit record with a new entry
     """
 
+    # Delete known keys that should not be set, Fulcrum will throw errors otherwise
+    delete_keys = [
+        "created_by_id",
+        "updated_by_id",
+        "version",
+        "updated_at",
+        "id",
+    ]
+    for key in delete_keys:
+        if key in new_entry:
+            del new_entry[key]
+
     global SITE_VISIT_RECORDS_APP
 
     if not SITE_VISIT_RECORDS_APP:
@@ -498,16 +510,37 @@ def rate_limited(max_per_second):
     return decorate
 
 
+def recursively_remove_none_values(object: dict):
+    """
+    Recursively remove all None values from a dictionary
+    """
+    if isinstance(object, (list, tuple, set)):
+        return type(object)(recursively_remove_none_values(x) for x in object if x is not None)
+    elif isinstance(object, dict):
+        return type(object)((recursively_remove_none_values(k), recursively_remove_none_values(v))
+        for k, v in object.items() if k is not None and v is not None)
+    else:
+        return object
+
 # Rate limited for 4000 calls per hour (actual limit is 5000/h but we want to be safe)
 @rate_limited(4000 / 3600)
 def update_fulcrum_record(record_id: str, record: Record):
     """
     Update a record in Fulcrum
     """
+
     # Update the site visit record
-    FULCRUM.records.update(
-        record_id, record
+    updated_record = FULCRUM.records.update(
+        record_id, {'record': record}
     )
+
+    if "errors" in updated_record["record"]:
+        logger.error(f"Error updating site visit record")
+        logger.error(updated_record)
+        exit(1)
+
+    logger.info(f"Updated site visit record: {updated_record['record']['id']} with new entry")
+
 
 def process_new_site_visit_entry(
     parent_site_visit_record: Record, jkmr_other_visit: RepeatableValue
@@ -604,10 +637,10 @@ def process_new_site_visit_entry(
         updated_jkmr_other_visit["form_values"][new_key] = updated_jkmr_other_visit["form_values"].pop(old_key)
 
     # Make some other required changes for "Other" site visit entries
-    visit_category_value = "Japanese Knotweed Management Record"
+    visit_category_value = {'choice_values': ["Japanese Knotweed Management Record"], 'other_values': []}
     logger.debug(f"Updating the visit_category to: {visit_category_value}")
     updated_jkmr_other_visit["form_values"][KEY_NAMES["SITE_VISIT_RECORDS"]["visit_category"]] = visit_category_value
-    record_type_value = "Other Treatments Inc. Excavation"
+    record_type_value = {'choice_values': ["Other Treatments Inc. Excavation"], 'other_values': []}
     logger.debug(f"Updating the record_type_japanese_knotweed to: {record_type_value}")
     updated_jkmr_other_visit["form_values"][KEY_NAMES["SITE_VISIT_RECORDS"]["record_type_japanese_knotweed"]] = record_type_value
 
