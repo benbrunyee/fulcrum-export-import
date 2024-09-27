@@ -4,10 +4,12 @@ import json
 import logging
 import os
 import shutil
+import typing as t
 
 from dotenv import load_dotenv
 
 from fulcrum_helpers.helpers import FulcrumApp, find_key_code
+from fulcrum_helpers.types import PhotoValue
 
 load_dotenv()
 
@@ -125,6 +127,7 @@ def main():
     trackers = {
         "record_not_found": [],
         "site_photo_not_found": [],
+        "site_photo_difference": [],
         "skipped_count": 0,
     }
 
@@ -184,6 +187,21 @@ def main():
             trackers["site_photo_not_found"].append(sv_record)
             continue
 
+        # Check if there are any differences in site photo IDs
+        jkmr_site_photo_ids = [
+            site_photo["photo_id"]
+            for site_photo in jkmr_records_with_site_photo_dict[ref]["site_photos"]
+        ]
+        sv_site_photo_ids = [
+            site_photo["photo_id"]
+            for site_photo in sv_record["form_values"][sv_site_photo_key]
+        ]
+
+        if set(jkmr_site_photo_ids) != set(sv_site_photo_ids):
+            logger.warning(f"Site photo IDs do not match for reference: {ref}")
+            trackers["site_photo_difference"].append(sv_record)
+            continue
+
     logger.info(
         "Summary: "
         + ", ".join(
@@ -195,18 +213,25 @@ def main():
     )
 
     # Delete the differences directory if it exists
-    if os.path.exists("differences"):
-        shutil.rmtree("differences")
+    diff_dirname = "photo-differences"
+    if os.path.exists(diff_dirname):
+        shutil.rmtree(diff_dirname)
 
     # Create the differences directory
-    os.mkdir("differences")
+    os.mkdir(diff_dirname)
+    os.mkdir(diff_dirname + "/before")
+    os.mkdir(diff_dirname + "/after")
+
+    records_to_update = {}
 
     # Update the SV records with the site photos
     for ref in jkmr_records_with_site_photo_dict:
         sv_record = next(
             (
                 sv_record
-                for sv_record in sv_records
+                for sv_record in (
+                    trackers["site_photo_not_found"] + trackers["site_photo_difference"]
+                )
                 if sv_record["form_values"].get(sv_reference_key, None) == ref
             ),
             None,
@@ -215,35 +240,61 @@ def main():
         if sv_record is None:
             continue
 
-        site_photos = jkmr_records_with_site_photo_dict[ref]["site_photos"]
+        site_photos = jkmr_records_with_site_photo_dict[ref][
+            "site_photos"
+        ]  # type: t.List[PhotoValue]
         new_sv_record = copy.deepcopy(sv_record)
-        new_sv_record["form_values"][sv_site_photo_key] = site_photos
+        new_sv_record_site_photos = (
+            new_sv_record["form_values"].get(sv_site_photo_key, [])
+        ).copy()  # type: t.List[PhotoValue]
+
+        change_made = False
+
+        for site_photo in site_photos:
+            site_photo_id = site_photo["photo_id"]
+
+            if not any(
+                [
+                    new_site_photo["photo_id"] == site_photo_id
+                    for new_site_photo in new_sv_record_site_photos
+                ]
+            ):
+                new_sv_record_site_photos.append(site_photo)
+                change_made = True
+
+        if change_made:
+            new_sv_record["form_values"][sv_site_photo_key] = new_sv_record_site_photos
+        else:
+            logger.warning(f"No changes made for reference: {ref}")
+            continue
 
         # Write the differences
         safe_ref = (
             ref.replace("/", "-").replace(" ", "_").replace(":", "-").replace("\\", "-")
         )
-        with open(f"differences/{safe_ref}-old.json", "w") as f:
+        with open(f"{diff_dirname}/before/{safe_ref}.json", "w") as f:
             f.write(json.dumps(sv_record, indent=2))
 
-        with open(f"differences/{safe_ref}-new.json", "w") as f:
+        with open(f"{diff_dirname}/after/{safe_ref}.json", "w") as f:
             f.write(json.dumps(new_sv_record, indent=2))
 
+        # Add to the record updaters
+        records_to_update[ref] = new_sv_record
+        logger.info(f"Marked record for update: {ref}")
+
+    for ref in records_to_update:
         # Ask for confirmation
         if not args.no_confirmation:
-            logger.info(f"Old: {sv_record}")
-            logger.info(f"New: {new_sv_record}")
             response = input("Update record? (y/n): ")
             if response.lower() != "y":
                 continue
 
-        # Update the record
-        FULCRUM.update_fulcrum_record(
-            sv_record["id"],
-            new_sv_record,
-        )
-
-        logger.info(f"Updated record for reference: {ref}")
+        record = records_to_update[ref]
+        # FULCRUM.update_fulcrum_record(
+        #     sv_record["id"],
+        #     record,
+        # )
+        logger.info(f"Record updated: {ref}")
 
 
 if __name__ == "__main__":

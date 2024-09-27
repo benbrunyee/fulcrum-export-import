@@ -1,0 +1,60 @@
+{
+  "status": "Cancelled",
+  "version": 3,
+  "id": "2705993b-06d4-4130-847a-02a293991b9f",
+  "created_at": "2023-07-23T13:37:16Z",
+  "updated_at": "2023-11-17T16:18:05Z",
+  "client_created_at": "2023-07-23T13:37:16Z",
+  "client_updated_at": "2023-11-17T16:18:02Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": 5,
+  "edited_duration": 5,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "f0815c69-0660-476c-b981-79871ab28c53"
+      }
+    ],
+    "c4ee": "Q10105",
+    "48ca": {
+      "sub_thoroughfare": "36",
+      "thoroughfare": "Birch Avenue ",
+      "suite": null,
+      "locality": "Beeston",
+      "sub_admin_area": "Nottinghamshire ",
+      "admin_area": null,
+      "postal_code": "NG9 1LL",
+      "country": null
+    },
+    "4a82": "Private Residential,House,Semi",
+    "19ac": "Client would like area of bamboo removed from within hardstanding garden and a root barrier install along the entire length of the rear garden from which the bamboo  is said to have spread.\n\nProject will involve:-\n\n- Lifting and cleaning of block paving and slabs, and keeping unbroken for reinstatement.\n\n- Excavation and removal of bamboo rhizome impacted soils from within the target property garden. Backfill and compact to spec sufficient for reinstatement of block paving and slabs.\n\n- Root barrier install along entire boundary with neighbouring garden. The fence will need to be removed and disposed of (if not suitable for reinstatement) and / or new fencing supplied and installed. Also gate which should be possible to save. Barrier will need to be installed right up to the foundation of the conservatory and garages (both of which belong to target property.\n\n- shared driveway will need to be left free for neighbours access overnight ideally \n\n- services 1 x power cable to garages from the house and drain run / soakaway in front of garages.\n\n- recommend tardis toilet hired for duration of works.\n\n- no talk of \u2018making good\u2019 neighbours garden which we would need to access to install barrier alongside building and to reinstall the fence.",
+    "7d46": "No other properties included",
+    "9c58": "No service visits have taken place"
+  },
+  "latitude": 52.917799,
+  "longitude": -1.205408,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -1.205408,
+      52.917799
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

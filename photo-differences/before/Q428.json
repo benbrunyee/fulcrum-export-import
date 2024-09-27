@@ -1,0 +1,144 @@
+{
+  "status": "Cancelled",
+  "version": 4,
+  "id": "b54676ee-25a0-4625-9558-5f05abe33a65",
+  "created_at": "2023-07-23T13:39:52Z",
+  "updated_at": "2024-02-19T16:01:12Z",
+  "client_created_at": "2023-07-23T13:39:52Z",
+  "client_updated_at": "2024-02-19T16:01:10Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": 7,
+  "edited_duration": 7,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "417c74d1-8e43-4db7-9321-2d8a7c804b26"
+      }
+    ],
+    "c4ee": "Q428",
+    "48ca": {
+      "sub_thoroughfare": "5 Moor House",
+      "thoroughfare": "Moor Lane",
+      "suite": null,
+      "locality": "Frodsham",
+      "sub_admin_area": null,
+      "admin_area": null,
+      "postal_code": "WA6",
+      "country": null
+    },
+    "19ac": "The area has undergone herbicide application by a third party (the gardiner Dave?) although previously advised to avoid knotweed.",
+    "3bdb": [
+      {
+        "latitude": 53.26422469508034,
+        "longitude": -2.790999412536621,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2015-08-19",
+          "2a76": "10:00",
+          "385f": {
+            "other_values": [
+              "Alan McCaughley"
+            ],
+            "choice_values": []
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Intermittent cloud"
+            ]
+          },
+          "2c03": {
+            "other_values": [
+              "No visible growth to treat"
+            ],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "6da0": "no",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "e77c": [
+            {
+              "photo_id": "e727415e-09fc-4444-eff7-b8e96c22f57b",
+              "caption": null
+            },
+            {
+              "photo_id": "3a994747-1aa1-8aca-e61f-8180e44fd792",
+              "caption": null
+            },
+            {
+              "photo_id": "cb8bb308-556f-40f3-71eb-46d8a0278e3f",
+              "caption": null
+            },
+            {
+              "photo_id": "85216150-d500-a0c5-2d3f-d74d9d881bab",
+              "caption": null
+            }
+          ]
+        },
+        "id": "2c98bd33-4ba8-439e-b9ae-da6647eb719b",
+        "created_at": "1680956276",
+        "updated_at": "1680956276",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -2.790999412536621,
+            53.26422469508034
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "b06a532d-caba-45a9-bc0e-847e169c3c17"
+      }
+    ],
+    "7d46": "No other properties included",
+    "9c58": "undefined:  19/08/2015, undefined"
+  },
+  "latitude": 53.2641476887,
+  "longitude": -2.79085993767,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -2.79085993766785,
+      53.2641476887056
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

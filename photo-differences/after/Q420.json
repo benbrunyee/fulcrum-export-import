@@ -1,0 +1,201 @@
+{
+  "status": "Cancelled",
+  "version": 4,
+  "id": "4d9b68e2-e06b-4977-97ba-3daf78ba58ab",
+  "created_at": "2023-07-23T13:31:28Z",
+  "updated_at": "2024-02-19T15:51:40Z",
+  "client_created_at": "2023-07-23T13:31:28Z",
+  "client_updated_at": "2024-02-19T15:51:39Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": 9,
+  "edited_duration": 9,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "60ded899-31b3-4390-9e22-b7fe87497ecb"
+      }
+    ],
+    "c4ee": "Q420",
+    "48ca": {
+      "sub_thoroughfare": null,
+      "thoroughfare": "Wesley Close",
+      "suite": null,
+      "locality": "Bournemouth",
+      "sub_admin_area": null,
+      "admin_area": null,
+      "postal_code": "BH8 8QU",
+      "country": null
+    },
+    "4a82": "Housing Association,House,terrace",
+    "19ac": "Root barrier used so knot weed should be blocked from growing",
+    "3bdb": [
+      {
+        "latitude": 50.7319221552934,
+        "longitude": -1.85328891501003,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2015-07-13",
+          "2a76": "10:18",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Moderate breeze",
+              "Overcast"
+            ]
+          },
+          "2c03": {
+            "other_values": [
+              "No knotweed present ",
+              " single shoot in council land teated by others"
+            ],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "6da0": "no",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable"
+        },
+        "id": "e7512db7-c179-49f2-94c5-ac23d6516441",
+        "created_at": "1680956106",
+        "updated_at": "1680956106",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.85328891501003,
+            50.7319221552934
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 3,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "18a61973-8b1b-4168-b2e5-448697863296"
+      },
+      {
+        "latitude": 50.7324890043225,
+        "longitude": -1.85334952553332,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2015-10-28",
+          "2a76": "08:31",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Ash"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "No wind",
+              "Hazy sun"
+            ]
+          },
+          "2c03": {
+            "other_values": [
+              "No visible knotweed"
+            ],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "6da0": "no",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable"
+        },
+        "id": "dcbe2cde-1de7-4fd9-82ad-4aebc8fa3541",
+        "created_at": "1680956106",
+        "updated_at": "1680956106",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.85334952553332,
+            50.7324890043225
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "18a61973-8b1b-4168-b2e5-448697863296"
+      }
+    ],
+    "7d46": "No other properties included",
+    "9c58": "undefined:  13/07/2015, undefined\nundefined:  28/10/2015, undefined",
+    "5b45": [
+      {
+        "photo_id": "318e7f86-6eef-4458-84ff-bb32808250d2",
+        "caption": null
+      }
+    ]
+  },
+  "latitude": 50.7325710069,
+  "longitude": -1.85245156288,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -1.85245156288147,
+      50.7325710069234
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

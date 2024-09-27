@@ -1,0 +1,320 @@
+{
+  "status": "Ongoing",
+  "version": 6,
+  "id": "24eaf043-2ab5-4805-a1d6-1993c6939844",
+  "created_at": "2023-07-23T13:20:31Z",
+  "updated_at": "2023-08-09T10:04:25Z",
+  "client_created_at": "2023-07-23T13:20:31Z",
+  "client_updated_at": "2023-08-09T10:04:25Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": {
+    "latitude": 51.518706302,
+    "longitude": -0.459046570204,
+    "altitude": 39.167603666,
+    "horizontal_accuracy": 4.76712430914
+  },
+  "created_duration": null,
+  "updated_duration": 19,
+  "edited_duration": 140,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "773d8883-6e28-4826-add2-f42d7a28ad0b"
+      }
+    ],
+    "c4ee": "Q11035",
+    "48ca": {
+      "sub_admin_area": "London",
+      "suite": null,
+      "locality": "Uxbridge",
+      "postal_code": "UB8 3LW",
+      "admin_area": "England",
+      "country": "GB",
+      "thoroughfare": "Pinewood Ave",
+      "sub_thoroughfare": "4"
+    },
+    "4a82": "Commercial,Residential,House,Semi",
+    "19ac": "Japanese knotweed was reported as growing in the rear garden of the subject property. None was seen on inspection but plenty of bindweed, bramble and ground elder; these are all weeds that will swamp a small garden if left unmanaged. Tenant has recently tried managing the weeds with off-the-shelf herbicide (Roundup) with little success.\nGiant hogweed reported last year is actually common hogweed. Tenant reported that the contractor brought in to deal with the Giant hogweed did not treat it, claiming that it was best to leave it to die back naturally. If this was what actually happened, it goes against all aspects of best practice.\nRecommend repeated blanket sprays are applied to the weeds present in the garden, late spring and late summer x 2 years. Clearance of the dead vegetation may also be required.\nFront garden was also inspected; no evidence of Japanese knotweed was seen. Bulk bags filled with waste from a previous clearance were inspected for signs of knotweed waste and none was found. The front garden would also benefit from management of the general weed growth.\n",
+    "3bdb": [
+      {
+        "latitude": 51.5188126500066,
+        "longitude": -0.45860907475626717,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2022-06-23",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Matthew Patrycy. PCAQT. NPTC 353281 (PA1 PA6A)"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Common Hogweed / overgrown vegetation "
+            ]
+          },
+          "2073": "Invasive weed control ",
+          "3bb5": "Not applicable",
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "8",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "yes"
+            ]
+          },
+          "2d29": "All vegetation was treated ( light rain when spraying)",
+          "e77c": [
+            {
+              "photo_id": "6d85297d-27e0-481d-afb6-2c322d46262f",
+              "caption": null
+            },
+            {
+              "photo_id": "49120ba1-f1ef-48a5-abd2-592e257cd958",
+              "caption": null
+            },
+            {
+              "photo_id": "05924f3b-72f8-4ade-be21-a47e237e934b",
+              "caption": null
+            }
+          ],
+          "ac6f": "1",
+          "4a2e": "300"
+        },
+        "id": "1a2a6bf8-c5bc-4155-a324-69bbd6dafba1",
+        "created_at": "1680957392",
+        "updated_at": "1680957392",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.45860907475626717,
+            51.5188126500066
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": 3,
+        "edited_duration": 3,
+        "version": 4,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "7b61885e-9f2e-498f-9d6e-bdc25617bcac",
+        "updated_location": {
+          "latitude": 51.521003378832866,
+          "longitude": -0.45617873586942215,
+          "altitude": 41.662588094361126,
+          "horizontal_accuracy": 5.073126919360266
+        }
+      },
+      {
+        "created_location": {
+          "latitude": 51.51869350177726,
+          "longitude": -0.4590554015414778,
+          "altitude": 37.907732158543794,
+          "horizontal_accuracy": 2.906445000840464
+        },
+        "id": "cc84576b-b4f9-406c-b4d9-ad68661d455f",
+        "created_at": "1691142447",
+        "form_values": {
+          "22b1": "37.5",
+          "2a76": "10:25",
+          "6da0": "yes",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Safety boots",
+              "Protective gloves"
+            ]
+          },
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "General weed cover"
+            ]
+          },
+          "5b61": "4.5",
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "No wind",
+              "Broken cloud",
+              "Between 5 and 15 degrees centigrade"
+            ]
+          },
+          "c4b3": "yes",
+          "e77c": [
+            {
+              "caption": null,
+              "photo_id": "2e5b2de4-9f4d-4094-b40e-6c2dc176886d"
+            },
+            {
+              "caption": null,
+              "photo_id": "973e3e81-1e44-4b5a-a1c7-ec22df7c5bc5"
+            },
+            {
+              "caption": null,
+              "photo_id": "d10899b8-8e6d-4465-844b-7c873d8642fb"
+            },
+            {
+              "caption": null,
+              "photo_id": "4663fe45-7e1b-4752-b990-2bcde7a47c2d"
+            },
+            {
+              "caption": null,
+              "photo_id": "8e8f18fe-fe1b-4ba3-9cbe-f4b96fb2296a"
+            },
+            {
+              "caption": null,
+              "photo_id": "059534e1-8770-45bf-b0f6-e99419abc8fb"
+            },
+            {
+              "caption": null,
+              "photo_id": "7f655583-bada-4036-a951-e65d762bbee7"
+            },
+            {
+              "caption": null,
+              "photo_id": "7617cec8-6002-46d4-8a35-dca516b6e1cc"
+            },
+            {
+              "caption": null,
+              "photo_id": "73626829-a5f0-4660-ac08-f1891b26c398"
+            }
+          ],
+          "2073": "Invasive weed control",
+          "8eaf": "2023-08-04",
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site only"
+            ]
+          },
+          "4a2e": "168.75",
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480, 15534, Glyphosate"
+            ]
+          },
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "None"
+            ]
+          },
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Phil Walker"
+            ]
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": [
+              "Scheduled Treatment"
+            ]
+          },
+          "eaeb": {
+            "other_values": [],
+            "choice_values": [
+              "Spray application (blanket spray)"
+            ]
+          },
+          "2d29": "No JK growth seen on date of visit, blanket sprayed whole of rear garden.",
+          "1128": "yes",
+          "ac6f": "2"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.4590554015414778,
+            51.51869350177726
+          ]
+        },
+        "updated_location": {
+          "latitude": 51.51870407983454,
+          "longitude": -0.4590565162628486,
+          "altitude": 39.3664625454694,
+          "horizontal_accuracy": 4.765577236480021
+        },
+        "updated_at": "1691142563",
+        "created_duration": 116,
+        "updated_duration": 116,
+        "edited_duration": 116,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "7b61885e-9f2e-498f-9d6e-bdc25617bcac"
+      }
+    ],
+    "7d46": "No other properties included",
+    "da65": "04/08/2023",
+    "793c": "No monitoring visits have taken place",
+    "9c58": "Visit 1, 23/06/2022, undefined\nVisit 2, 04/08/2023, Scheduled Treatment",
+    "5f19": "Visit 1, 23/06/2022, Monitoring\nVisit 2, 04/08/2023, Scheduled Treatment",
+    "9a30": "Visit 1, 23/06/2022, undefined\nVisit 2, 04/08/2023, Scheduled Treatment",
+    "cb20": "No service visits have taken place",
+    "fab0": "No service visits have taken place",
+    "4720": "No service visits have taken place",
+    "572a": "No service visits have taken place",
+    "3582": "No service visits have taken place",
+    "3800": "No service visits have taken place",
+    "2e97": "2"
+  },
+  "latitude": 51.5186919077,
+  "longitude": -0.458682125675,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -0.458682125675,
+      51.5186919077
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

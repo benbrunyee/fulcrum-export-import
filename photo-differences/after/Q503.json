@@ -1,0 +1,205 @@
+{
+  "status": "Completed",
+  "version": 5,
+  "id": "a31dd0ab-a89b-441f-b9b4-1e8260f80b70",
+  "created_at": "2023-07-23T13:37:26Z",
+  "updated_at": "2024-02-20T11:54:13Z",
+  "client_created_at": "2023-07-23T13:37:26Z",
+  "client_updated_at": "2024-02-20T11:54:13Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": 13,
+  "edited_duration": 13,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "f8924e68-3ec8-4c12-98e6-687b757da64a"
+      }
+    ],
+    "c4ee": "Q503",
+    "48ca": {
+      "sub_thoroughfare": "Waltham Substation",
+      "thoroughfare": "A40, Northern Bypass Road",
+      "suite": null,
+      "locality": "Gloucester",
+      "sub_admin_area": "Gloucestershire",
+      "admin_area": "England",
+      "postal_code": "GL2 9PF",
+      "country": "GB"
+    },
+    "4a82": "Industrial,Heavy Industry",
+    "19ac": "Arrange access with client including gate access",
+    "3bdb": [
+      {
+        "latitude": 51.8776847329474,
+        "longitude": -2.25171773694665,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2015-06-17",
+          "2a76": "07:55",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light breeze",
+              "Hazy sun"
+            ]
+          },
+          "2c03": {
+            "other_values": [],
+            "choice_values": [
+              "See weather conditions entry"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "no",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable"
+        },
+        "id": "a1e83c8f-cc7b-4f5f-a36e-436cf948a6cf",
+        "created_at": "1680955983",
+        "updated_at": "1680955983",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -2.25171773694665,
+            51.8776847329474
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 4,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "8eff10bd-3879-47f3-a33a-ff483b47cf21"
+      },
+      {
+        "latitude": 51.8776973477117,
+        "longitude": -2.25159410387487,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2015-11-03",
+          "2a76": "11:15",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Overcast"
+            ]
+          },
+          "2c03": {
+            "other_values": [
+              "No knotweed present"
+            ],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "6da0": "no",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "e77c": [
+            {
+              "photo_id": "36f5c4f2-5265-4ee3-bc71-6a31aa80e5e6",
+              "caption": "Area of former knotweed"
+            }
+          ]
+        },
+        "id": "e05b4555-6af6-440a-b84d-45365b48c47a",
+        "created_at": "1680955983",
+        "updated_at": "1680955983",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -2.25159410387487,
+            51.8776973477117
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 4,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "8eff10bd-3879-47f3-a33a-ff483b47cf21"
+      }
+    ],
+    "7d46": "No other properties included",
+    "9c58": "undefined:  17/06/2015, undefined\nundefined:  03/11/2015, undefined",
+    "5b45": [
+      {
+        "photo_id": "b8485caf-4564-47cf-9939-5073f95f176b",
+        "caption": null
+      }
+    ]
+  },
+  "latitude": 51.8777095434,
+  "longitude": -2.25171580911,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -2.25171580910892,
+      51.8777095433808
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

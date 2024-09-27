@@ -1,0 +1,227 @@
+{
+  "status": "Cancelled",
+  "version": 5,
+  "id": "aa006074-8c7f-4128-9f23-2a4799d5b569",
+  "created_at": "2023-07-23T13:04:28Z",
+  "updated_at": "2024-02-16T12:20:08Z",
+  "client_created_at": "2023-07-23T13:04:28Z",
+  "client_updated_at": "2024-02-16T12:20:07Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": 7,
+  "edited_duration": 7,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "8e769e8e-a3a7-4eed-b1e4-9838b69d2644"
+      }
+    ],
+    "c4ee": "Q385",
+    "48ca": {
+      "sub_thoroughfare": "1 Henfield Villas",
+      "thoroughfare": "Cranston Road",
+      "suite": null,
+      "locality": "East Grinstead",
+      "sub_admin_area": "West Sussex",
+      "admin_area": null,
+      "postal_code": "RH19 7HQ",
+      "country": null
+    },
+    "4a82": "Private Residential,House,Semi",
+    "3bdb": [
+      {
+        "latitude": 51.1288195197015,
+        "longitude": -0.00782601535321011,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2016-10-20",
+          "2a76": "12:17",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Tom Clarke. PCAQT. NPTC 107028, PA1 PA6AW"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Intermittent cloud",
+              "Light breeze"
+            ]
+          },
+          "2c03": {
+            "other_values": [],
+            "choice_values": [
+              "No visible knotweed growth to treat"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "no",
+          "3bb5": "Not applicable",
+          "e77c": [
+            {
+              "photo_id": "bf7c8dd9-718f-4dc3-9dba-739aee9ff3e6",
+              "caption": null
+            },
+            {
+              "photo_id": "a598cb9d-b0e7-4740-a5ed-0d0655064623",
+              "caption": null
+            },
+            {
+              "photo_id": "6c0c7b7e-f3b1-497d-a723-4c3c306b066c",
+              "caption": null
+            }
+          ]
+        },
+        "id": "d98e7262-0351-4ada-a70d-f2091c50547a",
+        "created_at": "1680956170",
+        "updated_at": "1680956170",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.00782601535321011,
+            51.1288195197015
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 3,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "99a395bf-e054-47c0-9ee2-1ff0e3af03a6"
+      },
+      {
+        "latitude": 51.1289475,
+        "longitude": -0.0078041,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2017-07-28",
+          "2a76": "09:08",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jan Aslanowicz"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Moderate breeze",
+              "Intermittent cloud"
+            ]
+          },
+          "2c03": {
+            "other_values": [],
+            "choice_values": [
+              "No visible knotweed growth to treat"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "no",
+          "3bb5": "Not applicable",
+          "e77c": [
+            {
+              "photo_id": "a13da5cd-8834-45f9-9bc6-8f03ad74f021",
+              "caption": null
+            },
+            {
+              "photo_id": "20789b6d-010b-4629-b0bf-603bf92cd0d1",
+              "caption": null
+            },
+            {
+              "photo_id": "8881b5c7-022a-4eef-9c69-dcf4b781cfbf",
+              "caption": null
+            },
+            {
+              "photo_id": "db3a06f1-66f7-4333-8241-464abd63bcab",
+              "caption": null
+            },
+            {
+              "photo_id": "990cc8e5-d4bf-4be7-8525-98172717bc71",
+              "caption": null
+            },
+            {
+              "photo_id": "114865d5-65ae-4b62-846e-15feb25a282d",
+              "caption": null
+            },
+            {
+              "photo_id": "9ccb6287-4799-414f-acef-29e105ea2e22",
+              "caption": null
+            },
+            {
+              "photo_id": "40b753e3-8473-48bf-b9ba-1f7f12427215",
+              "caption": null
+            }
+          ]
+        },
+        "id": "4b9474be-e3a6-4548-a4c9-70924ff73259",
+        "created_at": "1680956170",
+        "updated_at": "1680956170",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.0078041,
+            51.1289475
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "99a395bf-e054-47c0-9ee2-1ff0e3af03a6"
+      }
+    ],
+    "7d46": "No other properties included",
+    "9c58": "undefined:  20/10/2016, undefined\nundefined:  28/07/2017, undefined"
+  },
+  "latitude": 51.1291381578,
+  "longitude": -0.00780262984336,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -0.00780262984336,
+      51.1291381578
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

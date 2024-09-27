@@ -1,0 +1,146 @@
+{
+  "status": "Cancelled",
+  "version": 4,
+  "id": "44d788bc-e1f4-4c84-aac1-86165f1a32fb",
+  "created_at": "2023-07-23T13:52:12Z",
+  "updated_at": "2024-02-16T12:12:28Z",
+  "client_created_at": "2023-07-23T13:52:12Z",
+  "client_updated_at": "2024-02-16T12:12:26Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": 161,
+  "edited_duration": 161,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "1eebe9b2-5d53-484b-9ff6-2d2a0e817975"
+      }
+    ],
+    "c4ee": "Q3750",
+    "48ca": {
+      "sub_thoroughfare": "9",
+      "thoroughfare": "Warren Road",
+      "suite": null,
+      "locality": "Uxbridge",
+      "sub_admin_area": "London",
+      "admin_area": "England",
+      "postal_code": "UB10 8AA",
+      "country": "GB"
+    },
+    "4a82": "Private Residential,House,Detached",
+    "19ac": "In hedge, new drive dug near jk root, waste taken off site. Root barrier required to drive as a protective measure.",
+    "3bdb": [
+      {
+        "latitude": 50.75372042604792,
+        "longitude": -1.839217543603703,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2016-09-01",
+          "2a76": "17:28",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Sunny"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Eye protection",
+              "Protective gloves",
+              "Protective suit",
+              "Boots"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "1",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "no"
+            ]
+          }
+        },
+        "id": "bf4cf613-5a2e-4353-9dd0-86c0458a4c04",
+        "created_at": "1680956675",
+        "updated_at": "1680956675",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.839217543603703,
+            50.75372042604792
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 3,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "9391bfac-8c06-420e-9c40-21d6acf2b81d"
+      }
+    ],
+    "7d46": "No other properties included",
+    "9c58": "undefined:  01/09/2016, undefined"
+  },
+  "latitude": 51.5595477541,
+  "longitude": -0.466815512628,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -0.466815512627798,
+      51.5595477540526
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}
