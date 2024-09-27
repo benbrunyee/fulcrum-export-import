@@ -1,0 +1,283 @@
+{
+  "status": "Ongoing",
+  "version": 5,
+  "id": "ade3aacc-472e-4f0c-9e39-0589f112ddb8",
+  "created_at": "2023-07-23T13:32:41Z",
+  "updated_at": "2024-08-27T14:26:46Z",
+  "client_created_at": "2023-07-23T13:32:41Z",
+  "client_updated_at": "2024-08-27T14:26:41Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": 40,
+  "edited_duration": 49,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "c63f7979-7ae7-4a59-b259-dae526a8c36f"
+      }
+    ],
+    "c4ee": "Q11669",
+    "48ca": {
+      "sub_thoroughfare": "20",
+      "thoroughfare": "Tavistock Road",
+      "suite": null,
+      "locality": "London",
+      "sub_admin_area": "London",
+      "admin_area": "England",
+      "postal_code": "E15 4ER",
+      "country": "GB"
+    },
+    "4a82": "Private Residential,House,Terrace",
+    "19ac": "JK present within target property and small plants present in neighbouring no22",
+    "3bdb": [
+      {
+        "latitude": 51.54258153506267,
+        "longitude": 0.01158833779082603,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": [
+              "Scheduled Treatment"
+            ]
+          },
+          "8eaf": "2021-08-10",
+          "2a76": "12:26",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Phil Walker. CSJK. PCAQT.  NPTC 410111, PA1 PA6AW"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Sunny",
+              "Intermittent cloud",
+              "Between 15 and 20 degrees centigrade"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "48f0": {
+            "other_values": [],
+            "choice_values": [
+              "Fully developed leaves",
+              "Green leaves",
+              "Full height stems (min 1.5 metres)"
+            ]
+          },
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Protective gloves",
+              "Eye protection",
+              "Boots"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "1",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "yes"
+            ]
+          },
+          "2d29": "No access to property next door",
+          "e77c": [
+            {
+              "photo_id": "b4a6b9aa-b6f8-4679-bd35-97ee7192586f",
+              "caption": null
+            },
+            {
+              "photo_id": "73b157fc-48eb-4459-8040-4eee27fa6101",
+              "caption": null
+            },
+            {
+              "photo_id": "484b9747-f2ed-4736-83c8-ce2e0127bd55",
+              "caption": null
+            },
+            {
+              "photo_id": "1d010545-4988-4913-877a-28c9efba9c89",
+              "caption": null
+            }
+          ]
+        },
+        "id": "739ed4a9-e533-4dbc-a4b6-dce20356cd8d",
+        "created_at": "1680957524",
+        "updated_at": "1680957524",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            0.01158833779082603,
+            51.54258153506267
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 3,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "09309c27-268b-498a-9123-fc3a49079050"
+      },
+      {
+        "latitude": 51.54469740739138,
+        "longitude": 0.003889139081659187,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": [
+              "Scheduled Treatment"
+            ]
+          },
+          "8eaf": "2021-10-04",
+          "2a76": "13:08",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Phil Walker. CSJK. PCAQT.  NPTC 410111, PA1 PA6AW"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Overcast",
+              "No wind",
+              "Between 5 and 15 degrees centigrade"
+            ]
+          },
+          "2c03": {
+            "other_values": [
+              "JK has been cut down"
+            ],
+            "choice_values": [
+              "No visible knotweed growth to treat"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "no",
+          "3bb5": "Not applicable",
+          "2d29": "JK has been cut and cleared, no evidence of what has been done the the dead canes - nothing left to treat",
+          "e77c": [
+            {
+              "photo_id": "53a120e3-340c-44be-a623-e2058fa84381",
+              "caption": null
+            },
+            {
+              "photo_id": "d463ac5a-22a8-4bef-b5a2-dd3c122e7b7d",
+              "caption": null
+            },
+            {
+              "photo_id": "800503ff-7bca-4a22-8c0c-1c3d4863e2c5",
+              "caption": null
+            },
+            {
+              "photo_id": "7222678b-0c55-41ee-9fe9-94adedd45486",
+              "caption": null
+            },
+            {
+              "photo_id": "251f4ff2-f336-48a7-80ca-69a1651b14b9",
+              "caption": null
+            }
+          ]
+        },
+        "id": "13496e41-65db-42b9-8d40-aee952d4b156",
+        "created_at": "1680957524",
+        "updated_at": "1680957524",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            0.003889139081659187,
+            51.54469740739138
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 3,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "09309c27-268b-498a-9123-fc3a49079050"
+      }
+    ],
+    "7d46": "No other properties included",
+    "9c58": "undefined:  10/08/2021, Scheduled Treatment\nundefined:  04/10/2021, Scheduled Treatment",
+    "a7fe": [
+      {
+        "caption": null,
+        "photo_id": "9da8146d-d21a-4446-86e2-ded1308bb34f"
+      }
+    ],
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "d27c1665-df82-4ff2-91e1-671b759ee2ec"
+      }
+    ]
+  },
+  "latitude": 51.5426249829,
+  "longitude": 0.0116854812613,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      0.0116854812613,
+      51.5426249829
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

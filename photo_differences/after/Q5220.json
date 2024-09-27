@@ -1,0 +1,65 @@
+{
+  "status": "Cancelled",
+  "version": 3,
+  "id": "2f83cb65-77f3-4aa2-bea1-1bc968239ef4",
+  "created_at": "2023-07-23T13:12:08Z",
+  "updated_at": "2024-02-20T12:00:16Z",
+  "client_created_at": "2023-07-23T13:12:08Z",
+  "client_updated_at": "2024-02-20T12:00:15Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": 5,
+  "edited_duration": 5,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "2537d49d-5f02-47ac-b420-8543e0326e1d"
+      }
+    ],
+    "c4ee": "Q5220",
+    "48ca": {
+      "sub_thoroughfare": "27",
+      "thoroughfare": "Roman Bank",
+      "suite": null,
+      "locality": "Spalding",
+      "sub_admin_area": null,
+      "admin_area": null,
+      "postal_code": "PE11 2HN",
+      "country": null
+    },
+    "4a82": "Private Residential,House,Semi",
+    "7d46": "No other properties included",
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "3466f6d2-13cf-4af1-8c88-ad8bb7577cbf",
+        "caption": null
+      }
+    ]
+  },
+  "latitude": 52.7978922,
+  "longitude": -0.1353376,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -0.1353376,
+      52.7978922
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

@@ -1,0 +1,351 @@
+{
+  "status": "Ongoing",
+  "version": 7,
+  "id": "54a92ed5-e946-494e-bd67-17540dd74a07",
+  "created_at": "2023-07-23T13:50:25Z",
+  "updated_at": "2024-08-29T14:34:09Z",
+  "client_created_at": "2023-07-23T13:50:25Z",
+  "client_updated_at": "2024-08-29T14:34:06Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": {
+    "latitude": 51.2668673482,
+    "longitude": -1.00535138302,
+    "altitude": 79.9008069523,
+    "horizontal_accuracy": 4.75073458036
+  },
+  "created_duration": null,
+  "updated_duration": 44,
+  "edited_duration": 635,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "0c5859bc-789f-48bc-814f-a6e167ccbc8b"
+      }
+    ],
+    "c4ee": "Q12463",
+    "48ca": {
+      "sub_thoroughfare": "22",
+      "thoroughfare": "Beauclerk Green",
+      "suite": null,
+      "locality": "Hook",
+      "sub_admin_area": "Hampshire",
+      "admin_area": "England",
+      "postal_code": "RG27 8BF",
+      "country": "GB"
+    },
+    "4a82": "Private Residential,House,Semi",
+    "3bdb": [
+      {
+        "latitude": 51.28408617812694,
+        "longitude": -0.904579892025713,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": [
+              "Pay As You Go Treatment"
+            ]
+          },
+          "8eaf": "2022-10-03",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Matthew Patrycy. PCAQT. NPTC 353281 (PA1 PA6A)"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "No wind",
+              "Hazy sun"
+            ]
+          },
+          "2c03": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "48f0": {
+            "other_values": [],
+            "choice_values": [
+              "Full height stems (min 1.5 metres)",
+              "Fully developed leaves",
+              "In flower"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "1.3",
+          "2d29": "All jk was sprayed with herbicide ",
+          "e77c": [
+            {
+              "photo_id": "c99c896c-5d09-4cbc-b5e4-50997cbcb008",
+              "caption": null
+            },
+            {
+              "photo_id": "eafea571-4c39-45f8-9be2-2f5feff2f90b",
+              "caption": null
+            },
+            {
+              "photo_id": "59fe354c-3130-4d35-b95d-4c67dad4f37d",
+              "caption": null
+            }
+          ],
+          "5440": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "1de3": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "15a4": {
+            "other_values": [],
+            "choice_values": []
+          }
+        },
+        "id": "8f2156e4-e90d-44d5-a3b9-570066e5c8f3",
+        "created_at": "1680957595",
+        "updated_at": "1680957595",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.904579892025713,
+            51.28408617812694
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 4,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "6c2cbb01-da1d-4236-852c-8f4774fde8c5"
+      },
+      {
+        "created_location": {
+          "latitude": 51.284331318342126,
+          "longitude": -0.905099476108145,
+          "altitude": 79.1268466339792,
+          "horizontal_accuracy": 3.1135716622825944
+        },
+        "id": "b9ad0e8a-dcb3-4181-a0d8-03eeee1d4fc8",
+        "created_at": "1724766211",
+        "form_values": {
+          "22b1": "37",
+          "6da0": "yes",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Safety boots",
+              "Protective gloves"
+            ]
+          },
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed",
+              "General weed cover"
+            ]
+          },
+          "5b61": "2",
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light wind",
+              "Sunny"
+            ]
+          },
+          "c4b3": "yes",
+          "e77c": [
+            {
+              "caption": "Inside the circled area is the main stand on the left side of the slope. ",
+              "photo_id": "7008142e-4bb3-4fe2-b927-97a24c16950b"
+            },
+            {
+              "caption": "Circled here is the main stand which is located further to the right of the slope. ",
+              "photo_id": "f6bc41af-2124-4721-878a-2a13cf293386"
+            },
+            {
+              "caption": null,
+              "photo_id": "e8cf77e0-826b-4d80-91db-7c311dd73bdc"
+            },
+            {
+              "caption": null,
+              "photo_id": "9d07cde9-8640-4a30-980a-b25d139f75f6"
+            },
+            {
+              "caption": "access to the stands, need a drill to remove the fence bracket to gain access. ",
+              "photo_id": "b366304c-0528-41a0-ab7c-64c8f3d9b986"
+            },
+            {
+              "caption": "The fence at the rear garden that leads to the 2 visible stands",
+              "photo_id": "63dc7d9e-98dc-493e-8e0d-7decdac0ac21"
+            },
+            {
+              "caption": "Once herbicide application was complete ",
+              "photo_id": "26abd5d2-dec6-4762-ac39-9110b54be025"
+            },
+            {
+              "caption": "Visible herbicide film across the Japanese Knotweed Leaf ",
+              "photo_id": "b8d48fda-d846-4535-aab1-e6c032f45e33"
+            },
+            {
+              "caption": "Japanese Knotweed that is hard to spot due to the overgrown general weed cover. ",
+              "photo_id": "f6796e08-54cf-49a0-b578-0d0bfe5a3436"
+            }
+          ],
+          "2073": "Invasive weed control",
+          "8eaf": "2024-08-27",
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site only"
+            ]
+          },
+          "4a2e": "74",
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480, 15534, Glyphosate"
+            ]
+          },
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "None"
+            ]
+          },
+          "2890": {
+            "other_values": [],
+            "choice_values": [
+              "Healthy Growth"
+            ]
+          },
+          "48f0": {
+            "other_values": [],
+            "choice_values": [
+              "Stunted stems",
+              "Fully developed leaves",
+              "Developing leaves",
+              "New shoots developing on stems",
+              "Green leaves"
+            ]
+          },
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Luke Barton"
+            ]
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide treatment (spray)"
+            ]
+          },
+          "eaeb": {
+            "other_values": [],
+            "choice_values": [
+              "Spray application (blanket spray)"
+            ]
+          },
+          "ac6f": "2",
+          "2d29": "2 larger stands visible which are located 4m down the slope from the rear fence which is quite central in regards to the garden, General weed clearance optimal in hope to expose the Japanese Knotweed and any Knotweed potentially missed due to the weed cover. No visible growth on both neighbouring sides just heavy general weed/vegetation growth "
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.9050985015257367,
+            51.284329781929564
+          ]
+        },
+        "updated_location": {
+          "latitude": 51.284324868835085,
+          "longitude": -0.9051168811527724,
+          "altitude": 79.05299881193787,
+          "horizontal_accuracy": 4.758856584814199
+        },
+        "updated_at": "1724942044",
+        "created_duration": 518,
+        "updated_duration": 43,
+        "edited_duration": 561,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "0aa5c2e0-a47a-4f2a-ba54-bddb69ad13d4"
+      }
+    ],
+    "7d46": "No other properties included",
+    "7120": [
+      {
+        "name": "Site Plan basic 2022.pdf",
+        "attachment_id": "c9d128dd-0f01-4819-bd84-2380fe593deb"
+      }
+    ],
+    "9c58": "undefined:  03/10/2022, Pay As You Go Treatment\n2:  27/08/2024, Herbicide treatment (spray)"
+  },
+  "latitude": 51.2840845774,
+  "longitude": -0.904664557522,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -0.9046645575222967,
+      51.284084577436396
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

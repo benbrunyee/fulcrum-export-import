@@ -1,0 +1,226 @@
+{
+  "status": "Ongoing",
+  "version": 7,
+  "id": "90ef9bb5-7713-4223-9b52-dba858af2162",
+  "created_at": "2023-07-23T13:47:29Z",
+  "updated_at": "2024-08-21T07:24:49Z",
+  "client_created_at": "2023-07-23T13:47:29Z",
+  "client_updated_at": "2024-08-21T07:06:31Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": {
+    "latitude": 51.42008949911343,
+    "longitude": -0.18038530837526437,
+    "altitude": 12.79581838939339,
+    "horizontal_accuracy": 10.158296260156362
+  },
+  "created_duration": null,
+  "updated_duration": 14,
+  "edited_duration": 1210,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "477c7694-5bca-4555-836f-befd38a118c9"
+      }
+    ],
+    "c4ee": "Q583.80",
+    "48ca": {
+      "sub_thoroughfare": "100",
+      "thoroughfare": "Byegrove Road",
+      "suite": null,
+      "locality": "London",
+      "sub_admin_area": null,
+      "admin_area": null,
+      "postal_code": "SW19 2BJ",
+      "country": null
+    },
+    "4a82": "Housing Association,Flat / Apartment / Maisonette",
+    "19ac": "At the time of the survey, four stands of knotweed were identified growing close to the site boundary, with two stands being located on each side of the stream.\nThe stands presented as dead canes from the 2022 growth season and, with the central portion of the larger stands containing stems over two metres tall, it could be inferred that the plant was relatively healthy.\nStem growth at stands JK1 and JK3 was located directly next to the site boundary fence.",
+    "a7fe": [
+      {
+        "photo_id": "3860e59f-22a7-4b31-b549-0ab676c16703",
+        "caption": "Approximate location of knotweed stands"
+      },
+      {
+        "caption": null,
+        "photo_id": "f4ca32dd-d57c-4b36-9c1a-99f6e001f425"
+      },
+      {
+        "caption": null,
+        "photo_id": "a448c734-4870-4e45-90ca-2fd2d981966d"
+      }
+    ],
+    "7d46": "No other properties included",
+    "da65": "No service visits have taken place",
+    "793c": "No monitoring visits have taken place",
+    "9c58": "1:  21/08/2024, Herbicide treatment (spray)",
+    "5f19": "No service visits have taken place",
+    "9a30": "No service visits have taken place",
+    "cb20": "No service visits have taken place",
+    "fab0": "No service visits have taken place",
+    "4720": "No service visits have taken place",
+    "572a": "No service visits have taken place",
+    "3582": "No service visits have taken place",
+    "3800": "No service visits have taken place",
+    "3bdb": [
+      {
+        "created_location": {
+          "latitude": 51.420061141385766,
+          "longitude": -0.18027076753552063,
+          "altitude": 13.215615303255618,
+          "horizontal_accuracy": 6.088120202958507
+        },
+        "id": "1836470c-8744-44a4-a814-5323a631064e",
+        "created_at": "1724222754",
+        "draft": false,
+        "form_values": {
+          "22b1": "25",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "5b61": "4",
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light wind",
+              "Hazy sun"
+            ]
+          },
+          "c4b3": "yes",
+          "e77c": [
+            {
+              "caption": "Japanese knotweed behind the fence sprayed with herbicide.",
+              "photo_id": "293813a4-b002-411c-ad1b-7023db7903d1"
+            },
+            {
+              "caption": "Japanese knotweed stand treated.",
+              "photo_id": "8ee6c24a-931e-4fe0-9e2c-dcc12a53a331"
+            }
+          ],
+          "2073": "Invasive weed control",
+          "8eaf": "2024-08-21",
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site and one adjacent property"
+            ]
+          },
+          "4a2e": "100",
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480, 15534, Glyphosate"
+            ]
+          },
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "48f0": {
+            "other_values": [],
+            "choice_values": [
+              "Full height stems (min 1.5 metres)",
+              "Green leaves"
+            ]
+          },
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Matthew Patrycy"
+            ]
+          },
+          "2890": {
+            "other_values": [],
+            "choice_values": [
+              "Healthy Growth"
+            ]
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide treatment (spray)"
+            ]
+          },
+          "eaeb": {
+            "other_values": [],
+            "choice_values": [
+              "Spray application (spot-spray)"
+            ]
+          },
+          "2d29": "All knotweed behind the fence big stand with several spreading growths. Some knotweed on other side of the stream. All reachable Japanese knotweed was treated with herbicide.",
+          "ac6f": "1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.18028083679739715,
+            51.420059610377585
+          ]
+        },
+        "updated_location": {
+          "latitude": 51.42023827827531,
+          "longitude": -0.18097363391399832,
+          "altitude": 12.969447722658515,
+          "horizontal_accuracy": 4.867752733988796
+        },
+        "updated_at": "1724223804",
+        "created_duration": 54,
+        "updated_duration": 146,
+        "edited_duration": 209,
+        "version": 4,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "5bc5f6ab-1da5-4e9d-b27d-a33b1e00599c"
+      }
+    ],
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "e201bdbd-c82b-4526-8bc7-f1dafbd5a6bd"
+      },
+      {
+        "caption": null,
+        "photo_id": "c40573fc-6e75-428f-bc40-41fb886e1e71"
+      },
+      {
+        "caption": null,
+        "photo_id": "069651f7-9a9f-4f99-a707-a09190219ef7"
+      }
+    ]
+  },
+  "latitude": 51.4201136888,
+  "longitude": -0.180382499591,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -0.180382499591,
+      51.4201136888
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

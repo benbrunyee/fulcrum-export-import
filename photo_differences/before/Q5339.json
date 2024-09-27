@@ -1,0 +1,186 @@
+{
+  "status": "Ongoing",
+  "version": 4,
+  "id": "8757c8aa-9e66-42de-9f79-6ab1715e7be6",
+  "created_at": "2023-07-23T13:26:01Z",
+  "updated_at": "2024-02-20T12:15:35Z",
+  "client_created_at": "2023-07-23T13:26:01Z",
+  "client_updated_at": "2024-02-20T12:15:34Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": 7,
+  "edited_duration": 7,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "c35d367f-c025-4ed2-8551-a1793e33417c"
+      }
+    ],
+    "c4ee": "Q5339",
+    "48ca": {
+      "sub_thoroughfare": "59",
+      "thoroughfare": "Ash Road",
+      "suite": null,
+      "locality": "Luton",
+      "sub_admin_area": null,
+      "admin_area": null,
+      "postal_code": "LU4 8AG",
+      "country": null
+    },
+    "4a82": "Private Residential,House,Terrace",
+    "19ac": "Rear garden uneven with ground rubbish",
+    "3bdb": [
+      {
+        "latitude": 51.8854161,
+        "longitude": -0.4326936,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2017-10-16",
+          "2a76": "12:50",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jan Aslanowicz"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light breeze",
+              "Intermittent cloud",
+              "Between 5 and 15 degrees centigrade"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Face protection",
+              "Boots",
+              "Respiratory protection"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "10",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "yes"
+            ]
+          },
+          "2d29": "Clients rear garden has been cleared of all Knotweed due to a complete garden clearance with contents/rubble being moved over to neighbouring property of No 57.Knotweed has also been damaged with live canes being removed and cut down. Visible knotweed treated in garden however care is to be taken when walking on rubble mound.The neighbouring properties of 76 & 78 Oak Road have also had Knotweed treated today.",
+          "e77c": [
+            {
+              "photo_id": "6e2716d5-364e-404b-b731-39017ee3c1ad",
+              "caption": null
+            },
+            {
+              "photo_id": "b5fee0dd-4357-4f16-8a72-926afbf01342",
+              "caption": null
+            },
+            {
+              "photo_id": "269d7a81-4bc4-4350-b124-c7109272dc75",
+              "caption": null
+            },
+            {
+              "photo_id": "45a28b30-9a07-4785-95ee-072e144e0683",
+              "caption": null
+            },
+            {
+              "photo_id": "f9ea6f78-2da9-42ac-ad58-b90db0409d80",
+              "caption": null
+            },
+            {
+              "photo_id": "e8bbfae0-5e02-41c7-8005-5c23892d4b78",
+              "caption": null
+            },
+            {
+              "photo_id": "41554747-3709-428a-b3f6-7d61fe4cd418",
+              "caption": null
+            },
+            {
+              "photo_id": "786ab9c1-6c16-4676-946f-7f16bedb16ac",
+              "caption": null
+            },
+            {
+              "photo_id": "4dc9f21e-6b34-4fbc-b258-a80c5aa044df",
+              "caption": null
+            }
+          ]
+        },
+        "id": "64f15201-b6fc-4eba-a557-e25978120a1b",
+        "created_at": "1680956886",
+        "updated_at": "1680956886",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.4326936,
+            51.8854161
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "1f218eb7-65b7-474a-9676-0f6113803421"
+      }
+    ],
+    "7d46": "No other properties included",
+    "9c58": "undefined:  16/10/2017, undefined"
+  },
+  "latitude": 51.8853729,
+  "longitude": -0.4326067,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -0.4326067,
+      51.8853729
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

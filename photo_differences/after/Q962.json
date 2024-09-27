@@ -1,0 +1,1029 @@
+{
+  "status": "Ongoing",
+  "version": 4,
+  "id": "4eaaf8b7-482c-4705-9430-1077d2c3026a",
+  "created_at": "2023-07-23T13:07:29Z",
+  "updated_at": "2023-08-05T12:47:51Z",
+  "client_created_at": "2023-07-23T13:07:29Z",
+  "client_updated_at": "2023-07-23T13:07:29Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": null,
+  "edited_duration": null,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "c2cd5566-9d82-4a5d-93c6-cae4dc183b61"
+      }
+    ],
+    "c4ee": "Q962",
+    "48ca": {
+      "sub_thoroughfare": "2",
+      "thoroughfare": "Shipton Road",
+      "suite": "",
+      "locality": "Chipping Norton",
+      "sub_admin_area": "Oxfordshire",
+      "admin_area": "England",
+      "postal_code": "OX7 6JU",
+      "country": "GB"
+    },
+    "4a82": "Other",
+    "19ac": "June 2018 update: Two shoots of knotweed growing under tree canopy in the Paddocks.  Knotweed also growing in neighbouring 1a. Both treated. In the last couple of years knotweed was not that prolific with only weak growths evident. The growth rate this year is more energetic. In 1a there is evidence of deformed growth as a result of weak applications of Garden Center product. Neighbour appears to have treated knotweed themselves in the past, this may perhaps be counter productive. \n\nIt\u2019s important to allow knotweed to grow prior to treatment, very small deformed growth was left to grow in 1a. Knotweed around house in 1b was treated as a goodwill gesture, the tenants gardening is spreading the knotweed.\n\n\nKnotweed on left when facing care home. Knotweed behind barrier and in neighbouring gardens. Knotweed was potentially in site topsoil re spread on site. Check all landscaped areas for knotweed. Also in 2 Shipton Road, council treatment under way, 10 Pear Tree another council property no yet under treatment, 1 Shipton Road advised and needs to action treatment, complainant 1a Shipton Road no action taken to date\n\nWest Oxford Council needs a copy of management plan, they are likely to serve a warning notice to all land owners with Knotweed to make all take action. PBA will treat site and neighbouring properties when visiting as per our plan.\n\n\nOther property agreed to treat/inspect is 1 Shipton Road. Landlord Russell Hawtin   01993 8302302. R.hawtin@alfredgroves.co.uk\n",
+    "a7fe": [
+      {
+        "photo_id": "9fa2f875-735a-4d52-a1ec-a8b90bbe0d3c",
+        "caption": "Landlord to 1 Shipton Road"
+      }
+    ],
+    "3bdb": [
+      {
+        "latitude": 51.8628646480403,
+        "longitude": -1.61251447163672,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "1db0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "113b": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "9530": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "5c53": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "e29a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8eaf": "2015-09-03",
+          "2a76": "08:42",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Overcast"
+            ]
+          },
+          "2c03": {
+            "other_values": [
+              "No substantial knotweed to treat. Uncovered topsoil over emerging growths. On found growths at the behind barrier as expected. Small growths present in neighbouring garden."
+            ],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "6da0": "no",
+          "ebc0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "3fd4": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "3bb5": "Not applicable",
+          "48f0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "eaeb": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8f2a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "7644": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "e77c": [
+            {
+              "photo_id": "e8cd43a5-fc21-43d8-bd39-dca074fad6d4",
+              "caption": ""
+            },
+            {
+              "photo_id": "e3e4b66e-9e33-4143-a89e-ae2b6271cd3c",
+              "caption": "\"Before"
+            },
+            {
+              "photo_id": "cdeee4f6-ae2e-493f-9848-d238141491e4",
+              "caption": " mounded soil over knotweed\""
+            }
+          ],
+          "5440": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "1de3": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "15a4": {
+            "other_values": [],
+            "choice_values": []
+          }
+        },
+        "id": "f67e73e6-1782-480e-b6cd-414219637495",
+        "created_at": "1680956273",
+        "updated_at": "1680956273",
+        "geometry": null,
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": null
+      },
+      {
+        "latitude": 51.8628016999474,
+        "longitude": -1.61252050660701,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "1db0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "113b": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "9530": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "5c53": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "e29a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8eaf": "2015-11-03",
+          "2a76": "09:44",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "No wind",
+              "Overcast"
+            ]
+          },
+          "2c03": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "ebc0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "48f0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "eaeb": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Eye protection",
+              "Face protection",
+              "Protective suit",
+              "Protective gloves"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "40",
+          "5b61": "1",
+          "7644": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "2d29": "Knotweed present in neighbouring land only. ",
+          "e77c": [
+            {
+              "photo_id": "bf6653f1-5e3e-4fd8-b892-43561663d962",
+              "caption": "1a"
+            },
+            {
+              "photo_id": "9d4d60b4-e2e4-4968-9e9c-fd151153786e",
+              "caption": "1a"
+            },
+            {
+              "photo_id": "04892b95-3c3a-4653-b547-67320e3be6d5",
+              "caption": "Site no knotweed"
+            },
+            {
+              "photo_id": "eff5e983-e9da-43fe-8431-eaf66ed57914",
+              "caption": "Knotweed at number 1"
+            },
+            {
+              "photo_id": "51c4bcc2-913f-4b10-9549-f0ed046b2c8b",
+              "caption": "Note large leaf"
+            }
+          ],
+          "5440": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "1de3": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "15a4": {
+            "other_values": [],
+            "choice_values": []
+          }
+        },
+        "id": "3f4609ab-03b8-4afc-b93b-27e19fff1a13",
+        "created_at": "1680956273",
+        "updated_at": "1680956273",
+        "geometry": null,
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": null
+      },
+      {
+        "latitude": 51.8630964495725,
+        "longitude": -1.61201541312189,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "1db0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "113b": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "9530": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "5c53": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "e29a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8eaf": "2016-10-06",
+          "2a76": "10:49",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Sunny"
+            ]
+          },
+          "2c03": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "ebc0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "48f0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "eaeb": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Eye protection",
+              "Protective gloves",
+              "Boots"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "0.25",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "no"
+            ]
+          },
+          "2d29": "Inspected whole of paddocks no evidence of knotweed growth. Single dead stem found behind barrier in former location of knotweed impacted land, knotweed not visibly growing in 1a, two shoots treated near house of 1b, noted tall knotweed with evidence of treatment to 14. Access has not been provided to 14 or any other property other than 1a and 1b. Knotweed in 14 is 5-7. Metres from the paddocks. ",
+          "e77c": [
+            {
+              "photo_id": "ef2edb58-cfd9-4b90-816a-33cad5ea4e29",
+              "caption": "Front"
+            },
+            {
+              "photo_id": "361c3036-0fba-4961-aff6-daff72030b51",
+              "caption": "Side"
+            },
+            {
+              "photo_id": "779a4197-3c4f-448d-8aa6-81b825b03d34",
+              "caption": "Side"
+            },
+            {
+              "photo_id": "e185b5df-d97b-4c96-ad8f-07c0799d6134",
+              "caption": "Rear of paddocks"
+            },
+            {
+              "photo_id": "62f49497-e696-4f60-96db-83b6c602b1de",
+              "caption": "Side"
+            },
+            {
+              "photo_id": "2f70bc5a-6dc0-4b24-807b-3ed2f7849b34",
+              "caption": "Former location where knotweed had been growing "
+            },
+            {
+              "photo_id": "88dd944c-3e48-47da-b0f9-afee86043fc8",
+              "caption": "Dead stem at back of root barrier "
+            },
+            {
+              "photo_id": "884743a3-21e2-4d02-8039-10546c083f95",
+              "caption": "Knotweed against house 1b"
+            },
+            {
+              "photo_id": "cb12c3f2-645c-444d-ba0c-36965831cfc3",
+              "caption": "Knotweed against house 1b"
+            },
+            {
+              "photo_id": "e290dc6a-78f1-4058-b940-6ce563554fcf",
+              "caption": ""
+            },
+            {
+              "photo_id": "c0f7c665-e476-474f-a13e-640aaba6bd1c",
+              "caption": "\"Knotweed may be growing in  number 14"
+            },
+            {
+              "photo_id": "b5c3b476-c651-4edb-a8cd-4e281499e615",
+              "caption": " no permission to treat\""
+            }
+          ],
+          "5440": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "1de3": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "15a4": {
+            "other_values": [],
+            "choice_values": []
+          }
+        },
+        "id": "c2cab2a4-9739-4baf-b155-454249300ba8",
+        "created_at": "1680956273",
+        "updated_at": "1680956273",
+        "geometry": null,
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": null
+      },
+      {
+        "latitude": 51.8623909,
+        "longitude": -1.6127242,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "1db0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "113b": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "9530": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "5c53": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "e29a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8eaf": "2017-07-26",
+          "2a76": "09:33",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jan Aslanowicz"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Rain (persistent)",
+              "Between 5 and 15 degrees centigrade"
+            ]
+          },
+          "2c03": {
+            "other_values": [],
+            "choice_values": [
+              "See weather conditions entry"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "no",
+          "ebc0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "3fd4": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "3bb5": "Not applicable",
+          "48f0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "eaeb": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8f2a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "7644": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "2d29": "Property No 2- in rear garden, two JK plants along fence line and some peppered growth of small JK plants next to.Property No 1- two stems and one bonsai by neighbouring fence next to bin store in rear garden of clients plant bed. They have treated  bonsai themselves. Advised not to carry on with this. Property 1A -In rear bottom garden one small stem protruding and one tiny plant on waste ground by neighbouring fence. Appears that knotweed may have been treated previously. No other noted knotweed in garden of all properties. A further visit to spray these areas when weather is dry.",
+          "e77c": [
+            {
+              "photo_id": "a76d82db-5101-4f24-8cd8-90f6172b0bb5",
+              "caption": ""
+            },
+            {
+              "photo_id": "c95900a4-b251-43d3-9231-ca39fe6985a6",
+              "caption": ""
+            },
+            {
+              "photo_id": "6f46151b-8687-4b27-a5fb-ef372152e7cd",
+              "caption": ""
+            },
+            {
+              "photo_id": "6fa59da3-74d3-4bd3-b908-98190670d89f",
+              "caption": ""
+            },
+            {
+              "photo_id": "5036e682-d18d-4e5c-9ad0-fde92f16330d",
+              "caption": ""
+            },
+            {
+              "photo_id": "b30c4da3-8dd0-4a44-8cd3-def5c39a0391",
+              "caption": ""
+            },
+            {
+              "photo_id": "793c411e-dab8-4378-ab64-caecaf57790a",
+              "caption": ""
+            },
+            {
+              "photo_id": "b6dbff1b-071d-472e-bf4f-b9a72f4ce938",
+              "caption": ""
+            },
+            {
+              "photo_id": "31008a7c-4994-42f0-88b0-1a52286d36a4",
+              "caption": ""
+            },
+            {
+              "photo_id": "9e35664f-c09b-4c62-ac2a-afd7f2ebac0a",
+              "caption": ""
+            }
+          ],
+          "5440": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "1de3": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "15a4": {
+            "other_values": [],
+            "choice_values": []
+          }
+        },
+        "id": "6994e6c9-edd7-4170-9e1f-e874df5545ae",
+        "created_at": "1680956273",
+        "updated_at": "1680956273",
+        "geometry": null,
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 1,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": null
+      },
+      {
+        "latitude": 51.8628629374965,
+        "longitude": -1.61254911414529,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "1db0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "113b": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "9530": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "5c53": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "e29a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8eaf": "2018-06-20",
+          "2a76": "08:10",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Intermittent cloud"
+            ]
+          },
+          "2c03": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "ebc0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "48f0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "eaeb": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Eye protection",
+              "Protective gloves",
+              "Boots"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "1",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "no"
+            ]
+          },
+          "2d29": "All developed Japanese knotweed was treated within Paddocks and neighbouring properties. Knotweed was also evident in neighbouring property 1A. This was treated.",
+          "e77c": [
+            {
+              "photo_id": "1e61b251-ab41-40e1-bc98-db8a2fde1c3b",
+              "caption": "Knotweed in Paddocks"
+            },
+            {
+              "photo_id": "4f985e0d-0666-4a32-a06a-ecaa29be4a9c",
+              "caption": "Small shoots of knotweed back of root barrier"
+            },
+            {
+              "photo_id": "b725a444-2690-4b13-a1bf-555349dd23a2",
+              "caption": "Knotweed back of barrier on boundary"
+            },
+            {
+              "photo_id": "7be25eb8-ad2b-4d67-8eda-8507d39c84ed",
+              "caption": "Knotweed in 1a"
+            }
+          ],
+          "5440": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "1de3": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "15a4": {
+            "other_values": [],
+            "choice_values": []
+          }
+        },
+        "id": "b2f9122a-0256-41f7-90af-4a526a9b29df",
+        "created_at": "1680956273",
+        "updated_at": "1680956273",
+        "geometry": null,
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": null
+      },
+      {
+        "latitude": 51.8624302,
+        "longitude": -1.6127027,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "1db0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "113b": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "9530": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "5c53": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "e29a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8eaf": "2019-07-18",
+          "2a76": "10:39",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jan Aslanowicz"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light breeze",
+              "Sunny",
+              "Between 15 and 20 degrees centigrade"
+            ]
+          },
+          "2c03": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "ebc0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "48f0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "eaeb": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Eye protection",
+              "Face protection",
+              "Protective gloves",
+              "Boots"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "3",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "yes"
+            ]
+          },
+          "2d29": "Knotweed and bonsai treated in clients rear garden.Behind Leadbitters fence knotweed also treated ",
+          "e77c": [
+            {
+              "photo_id": "aa7f9dfa-c8a2-4cb5-ab7a-4eaead54520b",
+              "caption": "2 Shipton Rd"
+            },
+            {
+              "photo_id": "5c5b9fc0-4174-47b7-b9df-c1e6baff56f1",
+              "caption": "2 Shipton Rd"
+            },
+            {
+              "photo_id": "ddc6c3ca-0284-42d6-8054-547f7ffe6c45",
+              "caption": "2 Shipton Rd"
+            },
+            {
+              "photo_id": "b32760fb-dadb-4cef-8e41-c0bceb5608b1",
+              "caption": "2 Shipton Rd"
+            },
+            {
+              "photo_id": "d5d960e0-5e2b-4b4a-a060-94c93b93fc8e",
+              "caption": "2 Shipton Rd"
+            },
+            {
+              "photo_id": "84cf0c59-c839-4e17-aa3b-055a096cf6ae",
+              "caption": "Leadbitters - Knotweed treated by fence"
+            },
+            {
+              "photo_id": "e8c68b7b-e2ae-4840-b1a0-39104fdec9aa",
+              "caption": "Neighbouring property pic - client given leaflet to drop round in person"
+            }
+          ],
+          "5440": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "1de3": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "15a4": {
+            "other_values": [],
+            "choice_values": []
+          }
+        },
+        "id": "c6269570-7f4a-420b-8cdf-b8e022d08168",
+        "created_at": "1680956274",
+        "updated_at": "1680956274",
+        "geometry": null,
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 1,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": null
+      }
+    ],
+    "5b45": [
+      {
+        "photo_id": "6e1a6ea8-3b45-465e-84f6-f7694a91bdf1",
+        "caption": null
+      }
+    ]
+  },
+  "latitude": 51.8630221859,
+  "longitude": -1.61242369563,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -1.61242369563,
+      51.8630221859
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

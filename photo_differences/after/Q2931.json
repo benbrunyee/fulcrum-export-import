@@ -1,0 +1,152 @@
+{
+  "status": "Completed",
+  "version": 5,
+  "id": "0f86db90-a28c-43c9-9eef-0dcd08902f5b",
+  "created_at": "2023-07-23T13:23:13Z",
+  "updated_at": "2024-02-08T15:51:01Z",
+  "client_created_at": "2023-07-23T13:23:13Z",
+  "client_updated_at": "2024-02-08T15:51:00Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": 8,
+  "edited_duration": 8,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "5bcb277f-13ad-4ccd-ab3f-7564a336aab9"
+      }
+    ],
+    "c4ee": "Q2931",
+    "48ca": {
+      "sub_thoroughfare": "16",
+      "thoroughfare": "Nightingale Road",
+      "suite": null,
+      "locality": "Southsea",
+      "sub_admin_area": "Portsmouth",
+      "admin_area": "England",
+      "postal_code": "PO5 3JL",
+      "country": "GB"
+    },
+    "4a82": "Private Residential,House,Terrace",
+    "19ac": "Whole house of four flats owned by client",
+    "3bdb": [
+      {
+        "latitude": 50.7871073065799,
+        "longitude": -1.09329538419945,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2016-06-03",
+          "2a76": "13:54",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Overcast"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Eye protection",
+              "Protective gloves",
+              "Boots"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "0.5",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "no"
+            ]
+          },
+          "2d29": "Treated growth on the other side of the garden to number 18"
+        },
+        "id": "f92dd7ad-c993-4af1-af2d-beaf627ccc04",
+        "created_at": "1680956535",
+        "updated_at": "1680956535",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.09329538419945,
+            50.7871073065799
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 3,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "17ba85df-4654-4911-83f2-bba14ba13716"
+      }
+    ],
+    "7d46": "No other properties included",
+    "9c58": "undefined:  03/06/2016, undefined",
+    "5b45": [
+      {
+        "photo_id": "ae5f89bd-de7a-4ad6-82a4-7df8c6a8155e",
+        "caption": null
+      }
+    ]
+  },
+  "latitude": 50.7871677401,
+  "longitude": -1.09322925098,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -1.09322925098,
+      50.7871677401
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

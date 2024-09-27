@@ -1,0 +1,344 @@
+{
+  "status": "Completed",
+  "version": 4,
+  "id": "456ac108-a8ef-4ff7-8f9d-5332953015e2",
+  "created_at": "2023-07-23T13:37:58Z",
+  "updated_at": "2024-02-05T09:55:55Z",
+  "client_created_at": "2023-07-23T13:37:58Z",
+  "client_updated_at": "2024-02-05T09:55:54Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": 11,
+  "edited_duration": 11,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "1f7d1173-f108-4aca-bb03-1ec44716841c"
+      }
+    ],
+    "c4ee": "Q1449",
+    "48ca": {
+      "sub_thoroughfare": "26-28",
+      "thoroughfare": "Belvedere Road",
+      "suite": null,
+      "locality": "London",
+      "sub_admin_area": null,
+      "admin_area": null,
+      "postal_code": "SE19 2HW",
+      "country": null
+    },
+    "19ac": "Front and back.",
+    "3bdb": [
+      {
+        "latitude": 51.4164045872646,
+        "longitude": -0.0784770771861807,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2015-10-20",
+          "2a76": "09:35",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Steve Blackmore"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "No wind",
+              "Overcast"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Eye protection",
+              "Face protection",
+              "Protective suit",
+              "Protective gloves",
+              "Boots"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "Roundup Pro-Bio",
+              " 15539",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "35",
+          "5b61": "5",
+          "2d29": "Access through house only."
+        },
+        "id": "e5b73528-8043-40c6-8873-1bf0ac91822a",
+        "created_at": "1680956365",
+        "updated_at": "1680956365",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.0784770771861807,
+            51.4164045872646
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "fa7d3bbc-bb07-45c1-938d-1800ea3747d0"
+      },
+      {
+        "latitude": 51.4162595408522,
+        "longitude": -0.0776389443274256,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2016-05-25",
+          "2a76": "15:08",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Ash"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light breeze",
+              "Overcast",
+              "Between 5 and 15 degrees centigrade"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Boots",
+              "Protective gloves",
+              "Protective suit"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "3",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "yes"
+            ]
+          },
+          "2d29": "Dead canes broken down for access - gardener may burn dead canes. ",
+          "e77c": [
+            {
+              "photo_id": "cd690779-e941-426a-a8a1-e7fe8e49099b",
+              "caption": null
+            },
+            {
+              "photo_id": "d8af109b-382d-4345-96b9-a5701cd6cb9c",
+              "caption": null
+            },
+            {
+              "photo_id": "129bddbe-4b1b-4845-a67c-6cd3d0834120",
+              "caption": null
+            },
+            {
+              "photo_id": "3708b47b-6278-43ef-afef-02e9d019548e",
+              "caption": null
+            },
+            {
+              "photo_id": "a1743954-876c-41c8-a9cc-42129cf6b241",
+              "caption": null
+            },
+            {
+              "photo_id": "43713b93-8ff8-4222-afb4-f1d290854c4e",
+              "caption": null
+            }
+          ]
+        },
+        "id": "73e0c4ac-7a56-452a-a104-6cb807faa269",
+        "created_at": "1680956365",
+        "updated_at": "1680956365",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.0776389443274256,
+            51.4162595408522
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "fa7d3bbc-bb07-45c1-938d-1800ea3747d0"
+      },
+      {
+        "latitude": 50.69304139823717,
+        "longitude": -2.115157842638078,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2016-08-09",
+          "2a76": "04:00",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Paul Sweetman NPTC PA1 PA6"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Full sun",
+              "Moderate breeze"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Boots",
+              "Protective gloves"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "16",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "yes"
+            ]
+          },
+          "2d29": "Client wanted all weeds in garden sprayed. I started at the front left hand side and worked to the back spraying about 1 quarter of the garden."
+        },
+        "id": "eb7b0c9a-4e84-4d86-afad-43965432aee5",
+        "created_at": "1680956365",
+        "updated_at": "1680956365",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -2.115157842638078,
+            50.69304139823717
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 3,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "fa7d3bbc-bb07-45c1-938d-1800ea3747d0"
+      }
+    ],
+    "7d46": "No other properties included",
+    "9c58": "undefined:  20/10/2015, undefined\nundefined:  25/05/2016, undefined\nundefined:  09/08/2016, undefined",
+    "5b45": [
+      {
+        "photo_id": "d88a749d-2dd8-4aba-a637-f4dcd61c8d83",
+        "caption": null
+      }
+    ]
+  },
+  "latitude": 51.4163436089,
+  "longitude": -0.0785199087114,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -0.0785199087113873,
+      51.416343608919
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

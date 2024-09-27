@@ -1,0 +1,153 @@
+{
+  "status": "Completed",
+  "version": 3,
+  "id": "de7b1adc-a4c9-4497-af47-1c8c2af17b8c",
+  "created_at": "2023-07-23T13:51:10Z",
+  "updated_at": "2024-05-11T22:11:27Z",
+  "client_created_at": "2023-07-23T13:51:10Z",
+  "client_updated_at": "2023-07-23T13:51:10Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": null,
+  "edited_duration": null,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "0ef79518-4c7b-497b-881e-45e83b8beaa9"
+      }
+    ],
+    "c4ee": "Q10559",
+    "48ca": {
+      "sub_thoroughfare": "52",
+      "thoroughfare": "Uxbridge Road",
+      "suite": "",
+      "locality": "London",
+      "sub_admin_area": "",
+      "admin_area": "",
+      "postal_code": "W7 3SU",
+      "country": ""
+    },
+    "19ac": "Knotweed infestation on site boundary, previously scraped and bagged. Removal off site to licensed landfill (FCC Sutton Courtenay) by grab truck. \nKnotweed infestation situated on boundary line between garages (now removed) and fence. It is likely that a large volume of mature rhizome exists beneath the concrete hard-standing.\nWhether/when knotweed growth returns remains to be seen - monitoring of site should continue at least once per year until a minimum of two years pass where no new growth is seen.",
+    "3bdb": [
+      {
+        "created_at": "1573809307",
+        "form_values": {
+          "2c87": {
+            "sub_thoroughfare": "52",
+            "thoroughfare": "Uxbridge Road",
+            "suite": null,
+            "locality": "London",
+            "sub_admin_area": null,
+            "admin_area": null,
+            "postal_code": "W7 3SU",
+            "country": null
+          },
+          "8eaf": "2019-11-14",
+          "2a76": "12:35",
+          "385f": {
+            "choice_values": [
+              "Phil Cox"
+            ],
+            "other_values": []
+          },
+          "113b": {
+            "choice_values": [],
+            "other_values": [
+              "Removal off-site of previously scraped soil including knotweed crowns and rhizome"
+            ]
+          },
+          "c4b3": "yes",
+          "9090": "yes",
+          "2d29": "All knotweed impacted waste was removed off site by grab lorry, destination FCC Sutton Courtenay. Waste was from a knotweed stand that was previously treated by other contractor.",
+          "e77c": [
+            {
+              "photo_id": "857322cd-32fd-432b-9c67-57490886c8da",
+              "caption": "Soil in adjacent substation looks to be impacted by the same knotweed infestation."
+            },
+            {
+              "photo_id": "22acf0e4-e64f-4874-806b-41d2376f7e43",
+              "caption": "Space used to be occupied by garage block. Fencing relatively new. Exit point for jk stem growth is between the wooden and steel fences."
+            },
+            {
+              "photo_id": "017ff494-424e-4777-b32e-10f6851c62d8",
+              "caption": "Bagged waste (all intact)"
+            },
+            {
+              "caption": null,
+              "photo_id": "11e7575f-11d0-4c76-9f02-b34f8db46898"
+            },
+            {
+              "photo_id": "f9eff820-50db-4a90-acf6-768e3216c46b",
+              "caption": "Mature knotweed crowns"
+            },
+            {
+              "photo_id": "1aa4c70e-0a6c-4f52-a642-ceeeacff0534",
+              "caption": "Grab removal"
+            },
+            {
+              "caption": null,
+              "photo_id": "f3ef06c5-d72c-4bee-a9cc-e47e5ef6cb55"
+            },
+            {
+              "photo_id": "bedd9743-6c18-4565-b489-1869a67ce43f",
+              "caption": "Waste transfer note"
+            }
+          ],
+          "4010": {
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ],
+            "other_values": []
+          },
+          "b0b0": {
+            "choice_values": [
+              "Other Treatments Inc. Excavation"
+            ],
+            "other_values": []
+          }
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.334911,
+            51.508085
+          ]
+        },
+        "created_duration": 218,
+        "updated_duration": 17,
+        "edited_duration": 576,
+        "changeset_id": "d7c013a5-146f-4c8f-9cad-42e748132143",
+        "id": "adb819a6-24b5-4ec6-acd3-67149aac5621",
+        "updated_at": "1715465487",
+        "version": 1,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2"
+      }
+    ]
+  },
+  "latitude": 51.5080217645052,
+  "longitude": -0.334920482710316,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -0.334920482710316,
+      51.5080217645052
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}
