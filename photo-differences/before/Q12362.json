@@ -37,7 +37,13 @@
       "postal_code": "E17 5LN",
       "country": "GB"
     },
-    "4a82": "Private Residential,House,Terrace"
+    "4a82": "Private Residential,House,Terrace",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "ad1afcb4-7f27-4c31-9b88-fed3f566a57c"
+      }
+    ]
   },
   "latitude": 51.59087139866979,
   "longitude": -0.030794705672483907,

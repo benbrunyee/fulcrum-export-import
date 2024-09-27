@@ -38,7 +38,13 @@
       "country": ""
     },
     "4a82": "Private Residential,Flat / Apartment / Maisonette",
-    "19ac": "Communal garden(tbc)"
+    "19ac": "Communal garden(tbc)",
+    "5b45": [
+      {
+        "photo_id": "e6cfb4a9-c05f-4930-a459-a5d62da7d7b1",
+        "caption": null
+      }
+    ]
   },
   "latitude": 50.7255153,
   "longitude": -1.9530851,

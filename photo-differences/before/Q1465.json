@@ -37,7 +37,13 @@
       "postal_code": "BH14 8SP",
       "country": ""
     },
-    "4a82": "Private Residential,House,Detached"
+    "4a82": "Private Residential,House,Detached",
+    "5b45": [
+      {
+        "photo_id": "166d3caa-19f3-486c-8764-ec3d707d0550",
+        "caption": null
+      }
+    ]
   },
   "latitude": 50.7167219506061,
   "longitude": -1.9390980150884,

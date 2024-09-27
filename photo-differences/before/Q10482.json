@@ -37,7 +37,13 @@
       "postal_code": "DA121EN",
       "country": ""
     },
-    "4a82": "Commercial"
+    "4a82": "Commercial",
+    "5b45": [
+      {
+        "photo_id": "c69e18ca-6c12-419e-98cf-74e041ea75f1",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.4411248,
   "longitude": 0.3709903,

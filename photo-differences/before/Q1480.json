@@ -40,7 +40,13 @@
     "4a82": "Private Residential,Flat / Apartment / Maisonette",
     "19ac": "Japanese knotweed may be present in adjacent property but nothing visually evident.",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "959e8220-d2e9-79ea-9892-9c46740d9694",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.4026521054,
   "longitude": -0.0705706793816,

@@ -2300,7 +2300,13 @@
     "5f19": "Visit undefined, 05/07/2016, Monitoring\nVisit undefined, 17/10/2016, Monitoring\nVisit undefined, 26/10/2017, Monitoring\nVisit undefined, 13/06/2018, Monitoring\nVisit undefined, 15/10/2018, Monitoring\nVisit undefined, 31/05/2019, Monitoring\nVisit undefined, 11/09/2019, Monitoring\nVisit undefined, 05/10/2020, Scheduled Monitoring\nVisit undefined, 15/09/2021, Monitoring\nVisit undefined, 22/09/2022, Monitoring\nVisit 12, 12/09/2023, Herbicide treatment (spray)\nVisit 13, 27/10/2023, Excavation by hand of Japanese knotweed rhizome",
     "9a30": "Visit undefined, 05/07/2016, undefined\nVisit undefined, 17/10/2016, undefined\nVisit undefined, 26/10/2017, undefined\nVisit undefined, 13/06/2018, undefined\nVisit undefined, 15/10/2018, undefined\nVisit undefined, 31/05/2019, undefined\nVisit undefined, 11/09/2019, undefined\nVisit undefined, 05/10/2020, Scheduled Monitoring\nVisit undefined, 15/09/2021, undefined\nVisit undefined, 22/09/2022, undefined\nVisit 12, 12/09/2023, Herbicide treatment (spray)",
     "cb20": "Visit 13, 27/10/2023, Excavation by hand of Japanese knotweed rhizome",
-    "fab0": "No service visits have taken place"
+    "fab0": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "3e0490e4-dd2f-4ee1-b587-46eb4e394ee7",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.228342912273135,
   "longitude": -0.8366001863039998,

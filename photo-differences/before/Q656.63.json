@@ -872,7 +872,13 @@
     "7d46": "No other properties included",
     "da65": "26/09/2022",
     "793c": "No monitoring visits have taken place",
-    "9c58": "undefined:  19/07/2021, Pay As You Go Treatment\nundefined:  12/10/2021, Scheduled Treatment\nundefined:  07/06/2022, Scheduled Treatment\nundefined:  26/09/2022, Scheduled Treatment\nundefined:  26/09/2022, Scheduled Treatment\n6:  13/09/2024, Scheduled Treatment"
+    "9c58": "undefined:  19/07/2021, Pay As You Go Treatment\nundefined:  12/10/2021, Scheduled Treatment\nundefined:  07/06/2022, Scheduled Treatment\nundefined:  26/09/2022, Scheduled Treatment\nundefined:  26/09/2022, Scheduled Treatment\n6:  13/09/2024, Scheduled Treatment",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "514ad829-c79f-4081-87a8-1071a9a95fa1"
+      }
+    ]
   },
   "latitude": 51.5351793671,
   "longitude": -0.254297325376,

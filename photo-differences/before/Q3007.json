@@ -38,7 +38,13 @@
       "country": null
     },
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "8a008b03-5a8c-48c4-b0ee-e9879dc8df5f",
+        "caption": null
+      }
+    ]
   },
   "latitude": null,
   "longitude": null,

@@ -37,7 +37,13 @@
       "postal_code": "SW16 6EB",
       "country": ""
     },
-    "4a82": "Housing Association"
+    "4a82": "Housing Association",
+    "5b45": [
+      {
+        "photo_id": "f29de993-ba44-429b-a966-066f3e187e34",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.445427,
   "longitude": -0.115453,

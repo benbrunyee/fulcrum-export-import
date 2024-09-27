@@ -431,7 +431,13 @@
         "photo_id": "4eaa9f70-7670-44a0-805e-2fd14821f471"
       }
     ],
-    "9c58": "undefined:  03/11/2015, undefined\nundefined:  06/06/2016, undefined\nundefined:  19/06/2017, undefined\nundefined:  10/09/2018, undefined\nundefined:  11/10/2019, Scheduled Monitoring"
+    "9c58": "undefined:  03/11/2015, undefined\nundefined:  06/06/2016, undefined\nundefined:  19/06/2017, undefined\nundefined:  10/09/2018, undefined\nundefined:  11/10/2019, Scheduled Monitoring",
+    "5b45": [
+      {
+        "photo_id": "e3596d3e-8010-417c-a2da-2c69ecfbed7c",
+        "caption": null
+      }
+    ]
   },
   "latitude": 50.782604,
   "longitude": -2.280013,

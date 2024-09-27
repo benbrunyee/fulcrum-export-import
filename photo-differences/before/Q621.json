@@ -380,7 +380,13 @@
     "4720": "No service visits have taken place",
     "572a": "No service visits have taken place",
     "3582": "No service visits have taken place",
-    "3800": "No service visits have taken place"
+    "3800": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "ddfda6df-8741-4abe-af87-e8364f9948c5",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5071398123,
   "longitude": -0.279614925385,

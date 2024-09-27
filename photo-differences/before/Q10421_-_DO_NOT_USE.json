@@ -37,7 +37,13 @@
       "postal_code": "W39QG",
       "country": ""
     },
-    "4a82": "Private Residential,House,Semi"
+    "4a82": "Private Residential,House,Semi",
+    "5b45": [
+      {
+        "photo_id": "cd7cf854-2011-4266-b207-a5e12c96e2f0",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.513553,
   "longitude": -0.28259,

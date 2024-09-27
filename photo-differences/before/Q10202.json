@@ -40,7 +40,13 @@
     "4a82": "Private Residential,Flat / Apartment / Maisonette",
     "19ac": "Client has no Two stands within garden of Flat 1 (Lucinda  Wells) to side of property and one behind steep stone wall on bank.\nMain infestation is in neighbouring property, No 79, and further infestation in No 78 which Lucinda has confirmed by speaking with the homeowner.",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "a9ad4137-58e4-4a60-84ef-62301ffd93bf",
+        "caption": null
+      }
+    ]
   },
   "latitude": 50.8536365,
   "longitude": 0.5727017,

@@ -37,7 +37,13 @@
       "postal_code": "GU35 8PU",
       "country": "GB"
     },
-    "4a82": "Private Residential"
+    "4a82": "Private Residential",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "a1eab99c-3a10-4f86-a366-e2808c168cb9"
+      }
+    ]
   },
   "latitude": 51.1171645587,
   "longitude": -0.826537724997,

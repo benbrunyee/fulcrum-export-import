@@ -1472,7 +1472,13 @@
     "da65": "25/10/2023",
     "793c": "No monitoring visits have taken place",
     "9c58": "undefined:  15/10/2019, Vegetation Clearance (other than knotweed)\nundefined:  15/10/2019, undefined\nundefined:  28/05/2020, Scheduled Treatment\nundefined:  22/06/2020, Scheduled Treatment\nundefined:  21/09/2020, Scheduled Treatment\nundefined:  11/08/2021, Scheduled Treatment\nundefined:  07/06/2022, Scheduled Treatment\nundefined:  25/10/2022, Scheduled Treatment\n8:  05/06/2023, undefined\n9:  25/10/2023, Herbicide treatment (spray)\n11:  05/06/2024, Herbicide treatment (spray)\n12:  11/09/2024, Scheduled Monitoring",
-    "2e97": "9"
+    "2e97": "9",
+    "5b45": [
+      {
+        "photo_id": "56cf35a5-113a-441e-84e4-233a60d33b5b",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5459683,
   "longitude": -0.2606647,

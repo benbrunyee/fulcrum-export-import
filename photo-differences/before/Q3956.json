@@ -40,7 +40,13 @@
     "4a82": "Private Residential,Flat / Apartment / Maisonette",
     "19ac": "Growing in communal space under hedge",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "2b3c7d52-9a31-4247-9c91-55e064052eb2",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5888370155,
   "longitude": -0.549210458994,

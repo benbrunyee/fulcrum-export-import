@@ -37,7 +37,13 @@
       "postal_code": "E17 6PG",
       "country": "GB"
     },
-    "4a82": "Private Residential,Flat / Apartment / Maisonette"
+    "4a82": "Private Residential,Flat / Apartment / Maisonette",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "1ebd25b9-7651-4dc1-8880-b484b34c8ff8"
+      }
+    ]
   },
   "latitude": 51.58572547938169,
   "longitude": -0.02882277021388831,

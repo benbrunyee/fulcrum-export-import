@@ -556,7 +556,13 @@
       }
     ],
     "7d46": "No other properties included",
-    "9c58": "undefined:  03/10/2018, undefined\nundefined:  30/09/2019, undefined\nundefined:  04/06/2020, Scheduled Treatment\nundefined:  09/09/2020, Scheduled Treatment\nundefined:  06/10/2021, Scheduled Monitoring\nundefined:  31/08/2022, undefined"
+    "9c58": "undefined:  03/10/2018, undefined\nundefined:  30/09/2019, undefined\nundefined:  04/06/2020, Scheduled Treatment\nundefined:  09/09/2020, Scheduled Treatment\nundefined:  06/10/2021, Scheduled Monitoring\nundefined:  31/08/2022, undefined",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "f0d14832-8eea-48e3-b9bb-2d0c9a8ef97b"
+      }
+    ]
   },
   "latitude": 51.403531,
   "longitude": -0.26467,

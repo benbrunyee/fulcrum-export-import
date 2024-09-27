@@ -353,7 +353,13 @@
       }
     ],
     "7d46": "No other properties included",
-    "9c58": "undefined:  31/07/2018, undefined\nundefined:  22/07/2019, undefined\nundefined:  12/08/2020, Pay As You Go Treatment\nundefined:  27/11/2017, undefined"
+    "9c58": "undefined:  31/07/2018, undefined\nundefined:  22/07/2019, undefined\nundefined:  12/08/2020, Pay As You Go Treatment\nundefined:  27/11/2017, undefined",
+    "5b45": [
+      {
+        "photo_id": "8213eb09-229c-4699-84a8-021fd2338e38",
+        "caption": null
+      }
+    ]
   },
   "latitude": 50.9543323098,
   "longitude": -1.22230486013,

@@ -644,7 +644,13 @@
       }
     ],
     "7d46": "No other properties included",
-    "9c58": "undefined:  15/06/2017, Pay As You Go Treatment\nundefined:  12/10/2017, Pay As You Go Treatment\nundefined:  28/09/2020, Pay As You Go Treatment\nundefined:  14/07/2021, Scheduled Treatment\nundefined:  08/07/2022, Scheduled Treatment"
+    "9c58": "undefined:  15/06/2017, Pay As You Go Treatment\nundefined:  12/10/2017, Pay As You Go Treatment\nundefined:  28/09/2020, Pay As You Go Treatment\nundefined:  14/07/2021, Scheduled Treatment\nundefined:  08/07/2022, Scheduled Treatment",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "821f0640-694d-44e2-b18f-800a8f147723"
+      }
+    ]
   },
   "latitude": 51.5725586343,
   "longitude": -0.0126188270992,

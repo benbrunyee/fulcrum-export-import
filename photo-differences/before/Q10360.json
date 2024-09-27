@@ -37,7 +37,13 @@
       "postal_code": "E114EJ",
       "country": ""
     },
-    "4a82": "Housing Association,Flat / Apartment / Maisonette"
+    "4a82": "Housing Association,Flat / Apartment / Maisonette",
+    "5b45": [
+      {
+        "photo_id": "fc1012cd-e4e0-4046-997a-3692d240b21d",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5589899,
   "longitude": -0.004128,

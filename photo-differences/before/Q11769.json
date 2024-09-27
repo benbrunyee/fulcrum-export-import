@@ -37,7 +37,13 @@
       "postal_code": "SE4 2SD",
       "country": "GB"
     },
-    "4a82": "Private Residential,Flat / Apartment / Maisonette"
+    "4a82": "Private Residential,Flat / Apartment / Maisonette",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "9e4d8385-1666-4ccd-8c09-fcbb27de1e6f"
+      }
+    ]
   },
   "latitude": 51.4560657701,
   "longitude": -0.0365592888096,

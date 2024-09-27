@@ -40,7 +40,13 @@
     "4a82": "Private Residential,House,Semi",
     "19ac": "Knotweed infestation located behind retaining wall and either side of chain link fence.",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "4758e70b-d532-41d3-b045-dbf3083a30b6"
+      }
+    ]
   },
   "latitude": 51.6054671431,
   "longitude": -0.0914571041169,

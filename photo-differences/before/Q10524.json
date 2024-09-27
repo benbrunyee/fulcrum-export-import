@@ -1143,7 +1143,13 @@
     "da65": "11/10/2023",
     "793c": "No monitoring visits have taken place",
     "9c58": "undefined:  29/05/2020, Scheduled Treatment\nundefined:  22/10/2020, Scheduled Treatment\nundefined:  11/03/2021, Rhizome Fragmentation\nundefined:  22/06/2021, undefined\nundefined:  22/06/2021, undefined\nundefined:  06/09/2021, Scheduled Treatment\nundefined:  25/08/2022, undefined\n7:  11/10/2023, Herbicide treatment (spray)\n9:  28/08/2024, undefined",
-    "2e97": "7"
+    "2e97": "7",
+    "5b45": [
+      {
+        "photo_id": "4dfb267e-4da2-487b-a752-1dd5b926c1dd",
+        "caption": null
+      }
+    ]
   },
   "latitude": 50.9767423644,
   "longitude": -1.38681169599,

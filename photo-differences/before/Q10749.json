@@ -742,7 +742,13 @@
     "2e97": "7",
     "da65": "27/06/2023",
     "793c": "No monitoring visits have taken place",
-    "9c58": "Visit undefined, 09/06/2020, Scheduled Treatment\nVisit undefined, 22/09/2020, Scheduled Treatment\nVisit undefined, 25/06/2021, Scheduled Treatment\nVisit undefined, 29/09/2021, Pay As You Go Treatment\nVisit undefined, 09/06/2022, Scheduled Treatment\nVisit undefined, 19/09/2022, undefined\nVisit 7, 27/06/2023, undefined"
+    "9c58": "Visit undefined, 09/06/2020, Scheduled Treatment\nVisit undefined, 22/09/2020, Scheduled Treatment\nVisit undefined, 25/06/2021, Scheduled Treatment\nVisit undefined, 29/09/2021, Pay As You Go Treatment\nVisit undefined, 09/06/2022, Scheduled Treatment\nVisit undefined, 19/09/2022, undefined\nVisit 7, 27/06/2023, undefined",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "a269df4d-a92c-483b-bd39-840730af5e98"
+      }
+    ]
   },
   "latitude": 51.0040400499,
   "longitude": -2.2067839865,

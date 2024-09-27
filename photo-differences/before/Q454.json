@@ -40,7 +40,13 @@
     "4a82": "Private Residential,House,Semi",
     "19ac": "On today's visit at clients property and neighbouring ones no knotweed visable",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "4be28ad1-ea5c-43ad-a3a6-0f160704bb46",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.6518599,
   "longitude": -0.1766697,

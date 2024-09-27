@@ -38,7 +38,13 @@
       "country": ""
     },
     "4a82": "Private Residential,House,Terrace",
-    "19ac": "No Knotweed present in gardens including neighbouring ones. Access limited due to overgrown vegetation."
+    "19ac": "No Knotweed present in gardens including neighbouring ones. Access limited due to overgrown vegetation.",
+    "5b45": [
+      {
+        "photo_id": "26530e4a-219f-425a-ac5e-f6fc6f46a733",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.626882,
   "longitude": -0.0642431,

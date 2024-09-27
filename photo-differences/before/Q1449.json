@@ -318,7 +318,13 @@
       }
     ],
     "7d46": "No other properties included",
-    "9c58": "undefined:  20/10/2015, undefined\nundefined:  25/05/2016, undefined\nundefined:  09/08/2016, undefined"
+    "9c58": "undefined:  20/10/2015, undefined\nundefined:  25/05/2016, undefined\nundefined:  09/08/2016, undefined",
+    "5b45": [
+      {
+        "photo_id": "d88a749d-2dd8-4aba-a637-f4dcd61c8d83",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.4163436089,
   "longitude": -0.0785199087114,

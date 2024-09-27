@@ -721,7 +721,13 @@
     "da65": "25/09/2023",
     "793c": "No monitoring visits have taken place",
     "9c58": "1:  16/07/2021, Herbicide treatment (spray)\n2:  09/09/2021, Herbicide treatment (spray)\n3:  01/08/2022, Herbicide treatment (spray)\n4:  21/10/2022, Herbicide treatment (spray)\n5:  25/09/2023, Scheduled Monitoring\n6:  31/07/2024, Herbicide treatment (spray)",
-    "2e97": "5"
+    "2e97": "5",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "42113c22-f628-4a4a-9be5-0b3de9839d41"
+      }
+    ]
   },
   "latitude": 52.4152111424,
   "longitude": -1.9325959839,

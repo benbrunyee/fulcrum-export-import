@@ -1552,7 +1552,13 @@
     "da65": "28/09/2023",
     "793c": "No monitoring visits have taken place",
     "9c58": "undefined:  19/09/2018, undefined\nundefined:  01/10/2019, undefined\nundefined:  03/06/2020, Scheduled Treatment\nundefined:  23/09/2020, Scheduled Treatment\nundefined:  28/07/2021, undefined\nundefined:  04/10/2021, Scheduled Treatment\nundefined:  21/06/2022, Scheduled Treatment\nundefined:  28/09/2022, Scheduled Treatment\n9:  28/09/2022, Scheduled Treatment\n10:  09/06/2023, Pay As You Go Treatment\n11:  28/09/2023, Herbicide treatment (spray)",
-    "2e97": "11"
+    "2e97": "11",
+    "5b45": [
+      {
+        "photo_id": "477eb5d2-8546-4430-b15a-63832258f07d",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.57565,
   "longitude": -0.032959,
