@@ -40,7 +40,13 @@
     "4a82": "Private Residential,House,Detached",
     "19ac": "Overgrown garden knotweed in drive by wall. Rear garden not inspected ",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "5f5c9d6a-12ca-46f5-8d0a-8c4010855ea6",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.4315852197,
   "longitude": -0.204617260024,

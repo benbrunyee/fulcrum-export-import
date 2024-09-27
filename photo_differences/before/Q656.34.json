@@ -659,7 +659,13 @@
     "da65": "14/09/2023",
     "793c": "No monitoring visits have taken place",
     "9c58": "undefined:  17/09/2020, undefined\nundefined:  12/04/2022, Vegetation Clearance (other than knotweed)\nundefined:  21/03/2022, Vegetation spraying \nundefined:  26/09/2022, undefined\n3:  14/09/2023, Scheduled Treatment\n6:  21/08/2024, Scheduled Monitoring",
-    "2e97": "3"
+    "2e97": "3",
+    "5b45": [
+      {
+        "photo_id": "2fc9903b-c37f-4024-af1a-61e7ddaa9508",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5328168,
   "longitude": -0.2128647,

@@ -37,7 +37,13 @@
       "postal_code": "E107ES ",
       "country": ""
     },
-    "4a82": "Council,Flat(s) / Apartment / Maisonette"
+    "4a82": "Council,Flat(s) / Apartment / Maisonette",
+    "5b45": [
+      {
+        "photo_id": "cfd1e928-6791-4d6f-9a10-0e01554496d9",
+        "caption": null
+      }
+    ]
   },
   "latitude": 50.8513892,
   "longitude": 0.5589492,

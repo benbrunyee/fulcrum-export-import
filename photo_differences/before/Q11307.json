@@ -37,7 +37,13 @@
       "postal_code": "SP5 2BZ",
       "country": ""
     },
-    "4a82": "Private Residential,House,Detached"
+    "4a82": "Private Residential,House,Detached",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "f2728741-7fcb-4c8e-ad52-48f1931b6308"
+      }
+    ]
   },
   "latitude": 50.9545689642,
   "longitude": -1.6435890708,

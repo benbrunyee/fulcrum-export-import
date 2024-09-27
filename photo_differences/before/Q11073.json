@@ -512,7 +512,13 @@
     "da65": "14/09/2023",
     "793c": "No monitoring visits have taken place",
     "9c58": "undefined:  28/09/2020, Pay As You Go Treatment\nundefined:  28/07/2021, undefined\nundefined:  26/10/2021, undefined\nundefined:  08/07/2022, Scheduled Treatment\n5:  14/09/2023, Scheduled Monitoring",
-    "2e97": "5"
+    "2e97": "5",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "535f2a80-a5aa-4730-9e30-d28d6f8d9722"
+      }
+    ]
   },
   "latitude": 51.580625,
   "longitude": 0.024798,

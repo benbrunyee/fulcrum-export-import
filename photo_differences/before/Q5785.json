@@ -653,7 +653,13 @@
         "attachment_id": "fbb6f0dd-579e-49bf-a20a-e556a6fd1b6f"
       }
     ],
-    "9c58": "undefined:  24/09/2018, undefined\nundefined:  28/05/2019, undefined\nundefined:  30/09/2019, undefined\nundefined:  04/06/2020, Scheduled Treatment\nundefined:  16/09/2020, Scheduled Monitoring\nundefined:  13/07/2021, Scheduled Monitoring\nundefined:  18/07/2022, undefined"
+    "9c58": "undefined:  24/09/2018, undefined\nundefined:  28/05/2019, undefined\nundefined:  30/09/2019, undefined\nundefined:  04/06/2020, Scheduled Treatment\nundefined:  16/09/2020, Scheduled Monitoring\nundefined:  13/07/2021, Scheduled Monitoring\nundefined:  18/07/2022, undefined",
+    "5b45": [
+      {
+        "photo_id": "133acd68-d5d1-4511-a6bf-1b053fd8a1f6",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.403532,
   "longitude": -0.264747,

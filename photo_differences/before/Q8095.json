@@ -1346,7 +1346,13 @@
     "2e97": "8",
     "da65": "01/08/2023",
     "793c": "No monitoring visits have taken place",
-    "9c58": "Visit undefined, 26/10/2018, undefined\nVisit undefined, 04/06/2019, undefined\nVisit undefined, 18/09/2019, Scheduled Treatment\nVisit undefined, 25/09/2020, undefined\nVisit undefined, 31/10/2020, Scheduled Treatment\nVisit undefined, 12/08/2021, Scheduled Treatment\nVisit undefined, 15/08/2022, Scheduled Treatment\nVisit 8, 01/08/2023, undefined"
+    "9c58": "Visit undefined, 26/10/2018, undefined\nVisit undefined, 04/06/2019, undefined\nVisit undefined, 18/09/2019, Scheduled Treatment\nVisit undefined, 25/09/2020, undefined\nVisit undefined, 31/10/2020, Scheduled Treatment\nVisit undefined, 12/08/2021, Scheduled Treatment\nVisit undefined, 15/08/2022, Scheduled Treatment\nVisit 8, 01/08/2023, undefined",
+    "5b45": [
+      {
+        "photo_id": "1d4957a2-943d-450b-96f9-6d564d441878",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5920143,
   "longitude": -0.2300063,

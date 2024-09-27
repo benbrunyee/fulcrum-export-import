@@ -779,7 +779,13 @@
     "da65": "12/09/2023",
     "793c": "No monitoring visits have taken place",
     "9c58": "undefined:  10/08/2021, Scheduled Treatment\nundefined:  13/01/2022, Japanese Knotweed Stem Cut (retained)\nundefined:  18/07/2022, Scheduled Treatment\nundefined:  21/09/2022, Scheduled Treatment\n5:  12/09/2023, Scheduled Treatment\n6:  12/09/2023, Scheduled Treatment",
-    "2e97": "6"
+    "2e97": "6",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "51bdf68c-7357-419a-bdc5-74416bfe5b85"
+      }
+    ]
   },
   "latitude": 51.5754090694,
   "longitude": 0.187246087149,

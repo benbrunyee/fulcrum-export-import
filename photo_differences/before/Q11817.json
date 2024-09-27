@@ -36,7 +36,13 @@
       "admin_area": "England",
       "postal_code": "BR1 5RA",
       "country": "GB"
-    }
+    },
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "8c75bab3-0948-4533-8af8-98d2791deb99"
+      }
+    ]
   },
   "latitude": 51.4282340716,
   "longitude": -0.00723314170795,

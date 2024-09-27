@@ -1112,7 +1112,13 @@
     "7d46": "No other properties included",
     "da65": "28/10/2022",
     "793c": "No monitoring visits have taken place",
-    "9c58": "undefined:  18/09/2018, undefined\nundefined:  26/06/2019, undefined\nundefined:  03/10/2019, undefined\nundefined:  02/06/2020, Scheduled Treatment\nundefined:  23/09/2020, Scheduled Treatment\nundefined:  15/06/2021, undefined\nundefined:  13/10/2021, Scheduled Treatment\nundefined:  08/06/2022, Scheduled Treatment\nundefined:  28/10/2022, Scheduled Treatment"
+    "9c58": "undefined:  18/09/2018, undefined\nundefined:  26/06/2019, undefined\nundefined:  03/10/2019, undefined\nundefined:  02/06/2020, Scheduled Treatment\nundefined:  23/09/2020, Scheduled Treatment\nundefined:  15/06/2021, undefined\nundefined:  13/10/2021, Scheduled Treatment\nundefined:  08/06/2022, Scheduled Treatment\nundefined:  28/10/2022, Scheduled Treatment",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "16dfbe7a-31ca-430c-9a46-89e4805f6791"
+      }
+    ]
   },
   "latitude": 51.5985221981,
   "longitude": -0.0308400946644,

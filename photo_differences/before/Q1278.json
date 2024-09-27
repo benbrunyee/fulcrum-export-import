@@ -38,7 +38,13 @@
       "country": ""
     },
     "4a82": "Commercial,Development site",
-    "19ac": "Excavation and removal quote requested by client"
+    "19ac": "Excavation and removal quote requested by client",
+    "5b45": [
+      {
+        "photo_id": "c00fd29c-5bde-6755-bdcc-7215f73d0998",
+        "caption": null
+      }
+    ]
   },
   "latitude": 50.7887070148303,
   "longitude": -1.90213680267334,

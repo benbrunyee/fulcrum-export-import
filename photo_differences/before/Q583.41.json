@@ -586,7 +586,13 @@
       }
     ],
     "9c58": "1:  13/08/2015, Herbicide treatment (spray)\n2:  03/11/2015, Herbicide treatment (spray)\n3:  06/06/2017, Herbicide treatment (spray)\n4:  19/09/2017, Herbicide treatment (spray)\n5:  07/08/2024, Herbicide treatment (spray)",
-    "7d46": "No other properties included"
+    "7d46": "No other properties included",
+    "5b45": [
+      {
+        "photo_id": "aca61bf1-4df4-4515-acf9-f73c0736623c",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.4583333,
   "longitude": -0.1674914,

@@ -601,7 +601,13 @@
       }
     ],
     "7d46": "No other properties included",
-    "9c58": "undefined:  08/06/2015, undefined\nundefined:  02/09/2015, undefined\nundefined:  11/08/2016, undefined\nundefined:  22/08/2017, undefined\nundefined:  02/08/2018, undefined\nundefined:  14/08/2019, undefined\nundefined:  02/09/2015, undefined"
+    "9c58": "undefined:  08/06/2015, undefined\nundefined:  02/09/2015, undefined\nundefined:  11/08/2016, undefined\nundefined:  22/08/2017, undefined\nundefined:  02/08/2018, undefined\nundefined:  14/08/2019, undefined\nundefined:  02/09/2015, undefined",
+    "5b45": [
+      {
+        "photo_id": "62cc5899-02ec-e1c8-b4bd-95530d63fb9f",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5026723464,
   "longitude": -0.200599394739,

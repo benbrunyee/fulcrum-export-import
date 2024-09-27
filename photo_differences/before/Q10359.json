@@ -635,7 +635,13 @@
     "da65": "14/09/2023",
     "793c": "No monitoring visits have taken place",
     "9c58": "undefined:  17/07/2019, undefined\nundefined:  13/11/2019, Scheduled Treatment\nundefined:  10/06/2020, Scheduled Treatment\nundefined:  02/06/2021, undefined\nundefined:  08/09/2022, Scheduled Monitoring\n6:  14/09/2023, Scheduled Monitoring",
-    "2e97": "6"
+    "2e97": "6",
+    "5b45": [
+      {
+        "photo_id": "de54e443-483f-4a58-b83a-8228a8bd0a6c",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5784028,
   "longitude": -0.0888447,

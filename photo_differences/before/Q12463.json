@@ -331,7 +331,13 @@
         "attachment_id": "c9d128dd-0f01-4819-bd84-2380fe593deb"
       }
     ],
-    "9c58": "undefined:  03/10/2022, Pay As You Go Treatment\n2:  27/08/2024, Herbicide treatment (spray)"
+    "9c58": "undefined:  03/10/2022, Pay As You Go Treatment\n2:  27/08/2024, Herbicide treatment (spray)",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "29bfbcc5-e094-42b0-9e16-dbd890c750e0"
+      }
+    ]
   },
   "latitude": 51.2840845774,
   "longitude": -0.904664557522,

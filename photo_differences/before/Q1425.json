@@ -40,7 +40,13 @@
     "4a82": "Commercial,Development site",
     "19ac": "Knotweed located on NW boundary. Some on highway embankment.",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "6bcd0abd-7a6b-4576-887c-4f7bcdc93906",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.3754706,
   "longitude": -0.2797756,

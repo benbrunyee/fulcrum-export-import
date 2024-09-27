@@ -37,7 +37,13 @@
       "postal_code": "CV1 5PW",
       "country": "GB"
     },
-    "4a82": "Private Residential,House,Terrace"
+    "4a82": "Private Residential,House,Terrace",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "6614e44f-1c10-46bd-9509-acf7aff497ef"
+      }
+    ]
   },
   "latitude": 52.409865853102,
   "longitude": -1.50166783623798,

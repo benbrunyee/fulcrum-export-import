@@ -500,7 +500,13 @@
         "attachment_id": "c84d701e-a0b8-4e74-8e9c-e56d23536c4d"
       }
     ],
-    "9c58": "undefined:  07/07/2016, undefined\nundefined:  19/06/2017, undefined\nundefined:  16/10/2017, undefined\nundefined:  04/07/2019, undefined\nundefined:  27/07/2020, Scheduled Monitoring"
+    "9c58": "undefined:  07/07/2016, undefined\nundefined:  19/06/2017, undefined\nundefined:  16/10/2017, undefined\nundefined:  04/07/2019, undefined\nundefined:  27/07/2020, Scheduled Monitoring",
+    "5b45": [
+      {
+        "photo_id": "3bdd857f-0c53-41df-b0b6-98596eb10a58",
+        "caption": null
+      }
+    ]
   },
   "latitude": 52.488466,
   "longitude": -1.47178,

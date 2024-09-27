@@ -38,7 +38,13 @@
       "country": ""
     },
     "4a82": "Private Residential,House,Terrace",
-    "19ac": "To establish if property garden has any"
+    "19ac": "To establish if property garden has any",
+    "5b45": [
+      {
+        "photo_id": "e693077e-4033-4262-b494-3b34b329f2be",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.59956,
   "longitude": -0.143187,

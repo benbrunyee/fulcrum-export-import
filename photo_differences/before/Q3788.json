@@ -38,7 +38,13 @@
       "country": ""
     },
     "4a82": "Private Residential,House,Terrace",
-    "19ac": "No knotweed on site"
+    "19ac": "No knotweed on site",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "fb6848c5-fc79-4350-90cc-3194639752e4"
+      }
+    ]
   },
   "latitude": 51.4274729742216,
   "longitude": -0.115533387288559,

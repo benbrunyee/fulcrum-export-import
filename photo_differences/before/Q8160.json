@@ -38,7 +38,13 @@
       "country": ""
     },
     "4a82": "Housing Association,House,terrace",
-    "19ac": "Nothing visible on today's inspection including neighbouring properties."
+    "19ac": "Nothing visible on today's inspection including neighbouring properties.",
+    "5b45": [
+      {
+        "photo_id": "9bdacda0-764d-4bbb-9033-710ccb24efda",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.6009829,
   "longitude": -0.0308466,

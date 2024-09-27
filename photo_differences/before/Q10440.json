@@ -37,7 +37,13 @@
       "postal_code": "CR69AW",
       "country": ""
     },
-    "4a82": "Private Residential,House,Detached"
+    "4a82": "Private Residential,House,Detached",
+    "5b45": [
+      {
+        "photo_id": "a7d3eb62-8bee-49bd-827d-33fbb3445cb9",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.3186855,
   "longitude": -0.065789,

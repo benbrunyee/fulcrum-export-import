@@ -40,7 +40,13 @@
     "4a82": "Private Residential,Flat / Apartment / Maisonette",
     "19ac": "Open space to flats recently relandscaped with the native hedge planted to perimeter and area semi prepared for grass. The area is surrounded by pathways, carpark and other private gardens.",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "87b14a49-ecf1-4caf-9afd-a511ab562c77"
+      }
+    ]
   },
   "latitude": 51.4648413127,
   "longitude": 0.00192268475388,

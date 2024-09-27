@@ -38,7 +38,13 @@
       "country": "GB"
     },
     "4a82": "Private Residential,House,Detached",
-    "19ac": "Findings survey for the presence of Japanese  Knotweed"
+    "19ac": "Findings survey for the presence of Japanese  Knotweed",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "cc1ba0df-1097-4780-8aa0-0702bb098802"
+      }
+    ]
   },
   "latitude": 51.270840959752675,
   "longitude": -0.8364666854182643,

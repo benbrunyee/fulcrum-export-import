@@ -38,7 +38,13 @@
       "country": "GB"
     },
     "4a82": "Commercial,Retail outlet",
-    "19ac": "JK to rear of garages"
+    "19ac": "JK to rear of garages",
+    "5b45": [
+      {
+        "photo_id": "cd294e07-5504-4faa-9dee-dd821e147834",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.3138043089316,
   "longitude": -0.744584156200983,

@@ -40,7 +40,13 @@
     "4a82": "Private Residential,House,Detached",
     "19ac": "Jk growing along side garage between block paving",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "ac55963c-8fdb-475a-9116-3c2063c505c8"
+      }
+    ]
   },
   "latitude": 51.2497282215,
   "longitude": -0.54565393366,

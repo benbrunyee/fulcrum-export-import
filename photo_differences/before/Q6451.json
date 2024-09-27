@@ -38,7 +38,13 @@
       "country": ""
     },
     "4a82": "Private Residential,House,Terrace",
-    "19ac": "Please refer to supporting notes"
+    "19ac": "Please refer to supporting notes",
+    "5b45": [
+      {
+        "photo_id": "fcf59e9a-4ce4-45bd-9236-ee5f122d7af0",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5281632,
   "longitude": 0.0241507,

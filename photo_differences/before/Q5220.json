@@ -39,7 +39,13 @@
     },
     "4a82": "Private Residential,House,Semi",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "3466f6d2-13cf-4af1-8c88-ad8bb7577cbf",
+        "caption": null
+      }
+    ]
   },
   "latitude": 52.7978922,
   "longitude": -0.1353376,

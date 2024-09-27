@@ -37,7 +37,13 @@
       "postal_code": "KT5 8JL",
       "country": ""
     },
-    "4a82": "Private Residential,Flat / Apartment / Maisonette"
+    "4a82": "Private Residential,Flat / Apartment / Maisonette",
+    "5b45": [
+      {
+        "photo_id": "599810bf-4e9f-48c5-b887-4d7709c15de5",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.3896059979354,
   "longitude": -0.291363000869751,

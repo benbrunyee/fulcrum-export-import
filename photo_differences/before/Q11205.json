@@ -37,7 +37,13 @@
       "postal_code": "E11 1BX",
       "country": ""
     },
-    "4a82": "Commercial,Residential,Flat / Apartment / Maisonette"
+    "4a82": "Commercial,Residential,Flat / Apartment / Maisonette",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "9a8377ca-4a87-47b7-922b-ce00680afc5a"
+      }
+    ]
   },
   "latitude": 51.5686326396,
   "longitude": 0.00227128662389,

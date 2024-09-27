@@ -757,7 +757,13 @@
     "7d46": "No other properties included",
     "da65": "09/08/2021",
     "793c": "No monitoring visits have taken place",
-    "9c58": "Visit undefined, 18/06/2015, undefined\nVisit undefined, 19/10/2016, undefined\nVisit undefined, 09/11/2017, undefined\nVisit undefined, 13/09/2018, undefined\nVisit undefined, 12/09/2019, Scheduled Monitoring\nVisit undefined, 09/08/2021, Scheduled Treatment"
+    "9c58": "Visit undefined, 18/06/2015, undefined\nVisit undefined, 19/10/2016, undefined\nVisit undefined, 09/11/2017, undefined\nVisit undefined, 13/09/2018, undefined\nVisit undefined, 12/09/2019, Scheduled Monitoring\nVisit undefined, 09/08/2021, Scheduled Treatment",
+    "5b45": [
+      {
+        "photo_id": "28bd0cfb-6980-4f4f-94a2-0620e43406f0",
+        "caption": null
+      }
+    ]
   },
   "latitude": 53.7613750203,
   "longitude": -0.357421534136,
