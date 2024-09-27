@@ -116,8 +116,7 @@ def main():
 
     # Get a count of all the references
     jkmr_references = [
-        record["form_values"][jkmr_reference_key]
-        for record in jkmr_records_with_site_photo
+        record["form_values"][jkmr_reference_key] for record in jkmr_records
     ]
     jkmr_references.sort()
 
@@ -146,8 +145,7 @@ def main():
             trackers["skipped_count"] += 1
             continue
         elif (
-            first_index != -1
-            and len(jkmr_references) - 1 != first_index
+            len(jkmr_references) - 1 != first_index
             and jkmr_references[next_index] == ref
         ):
             logger.warning(f"Duplicate reference: {ref}")
@@ -213,7 +211,7 @@ def main():
     )
 
     # Delete the differences directory if it exists
-    diff_dirname = "photo-differences"
+    diff_dirname = "photo_differences"
     if os.path.exists(diff_dirname):
         shutil.rmtree(diff_dirname)
 
