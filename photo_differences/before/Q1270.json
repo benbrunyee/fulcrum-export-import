@@ -1,0 +1,216 @@
+{
+  "status": "Pending",
+  "version": 3,
+  "id": "4f495eaf-30b6-46ad-a33e-15e95e43cd72",
+  "created_at": "2023-07-23T13:25:58Z",
+  "updated_at": "2023-08-05T11:47:59Z",
+  "client_created_at": "2023-07-23T13:25:58Z",
+  "client_updated_at": "2023-07-23T13:25:58Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": null,
+  "edited_duration": null,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "925f8605-136c-43c8-86e3-9febacf40711"
+      }
+    ],
+    "c4ee": "Q1270",
+    "48ca": {
+      "sub_thoroughfare": "Compton Lodge",
+      "thoroughfare": "Moor Park Lane",
+      "suite": "",
+      "locality": "Farnham",
+      "sub_admin_area": "Surrey",
+      "admin_area": "England",
+      "postal_code": "GU9",
+      "country": "GB"
+    },
+    "4a82": "Private Residential",
+    "19ac": "Client re-instating sewage for Thames Water. Builder damaged sewer under house creating a weakness so Thames Water want to re-route service around house. The new route end point is near knotweed. There is also knotweed in front of the garage. Possible knotweed root present in location of excavation. Suggest working area fenced off near knotweed. Suggest pba treat with herbicide working area to ensure no knotweed is spread. Not potential knotweed in gravel drive on left, place ply board or similar over or park on right side only. Suggest pba complete tool box talk with site staff. ",
+    "3bdb": [
+      {
+        "latitude": 51.211683296585,
+        "longitude": -0.770789086818695,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "1db0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "113b": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "9530": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "5c53": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "e29a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8eaf": "2015-08-04",
+          "2a76": "09:25",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Phil Cox. CSJK. PCAQT. NPTC 723725, PA1 PA6AW"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light breeze",
+              "Intermittent cloud",
+              "Between 15 and 25 degrees centigrade"
+            ]
+          },
+          "2c03": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "ebc0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "48f0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "eaeb": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Eye protection",
+              "Protective suit",
+              "Protective gloves",
+              "Boots"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "Roundup Pro-Bio",
+              " 15539",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "35",
+          "5b61": "5",
+          "7644": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "e77c": [
+            {
+              "photo_id": "08c57399-7ca9-4255-b715-cf743a861984",
+              "caption": ""
+            },
+            {
+              "photo_id": "2942e55d-2ce0-4b2b-8b3d-2cdb3bf1e893",
+              "caption": ""
+            },
+            {
+              "photo_id": "eb30d8cd-6bb3-4727-97d6-e55b3c3c894d",
+              "caption": ""
+            },
+            {
+              "photo_id": "2dc7e5c3-a72c-48a4-bea8-166193a540ae",
+              "caption": ""
+            },
+            {
+              "photo_id": "2eacd1ff-4a4e-4533-ac30-37a574d58ae8",
+              "caption": ""
+            }
+          ],
+          "5440": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "1de3": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "15a4": {
+            "other_values": [],
+            "choice_values": []
+          }
+        },
+        "id": "63e39890-9763-4bd8-a144-01694086d970",
+        "created_at": "1680956075",
+        "updated_at": "1680956075",
+        "geometry": null,
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": null
+      }
+    ]
+  },
+  "latitude": 51.2116256822378,
+  "longitude": -0.770480465144637,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -0.770480465144637,
+      51.2116256822378
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

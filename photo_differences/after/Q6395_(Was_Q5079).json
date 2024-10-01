@@ -1,0 +1,2911 @@
+{
+  "status": "Ongoing",
+  "version": 32,
+  "id": "40e20445-5193-4d5d-a844-4d4a36968308",
+  "created_at": "2023-07-23T13:34:31Z",
+  "updated_at": "2024-10-01T13:43:27Z",
+  "client_created_at": "2023-07-23T13:34:31Z",
+  "client_updated_at": "2024-10-01T13:43:24Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": {
+    "latitude": 50.75484682453511,
+    "longitude": -1.9240962461756135,
+    "altitude": 60.6799086863175,
+    "horizontal_accuracy": 4.793425376137303
+  },
+  "created_duration": null,
+  "updated_duration": 87,
+  "edited_duration": 5038,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "11b2a22d-ce16-4cff-9714-dcf06cf2a209"
+      }
+    ],
+    "c4ee": "Q6395 (Was Q5079)",
+    "48ca": {
+      "sub_admin_area": null,
+      "suite": null,
+      "locality": "Bournemouth",
+      "postal_code": "BH11 8PL",
+      "admin_area": null,
+      "country": null,
+      "thoroughfare": "Walisdown Road",
+      "sub_thoroughfare": "Coty"
+    },
+    "4a82": "Commercial,Wholesale outlet",
+    "19ac": "See Field Maps for locations\n\nJapanese knotweed is present in two stands within a wasteland area proposed for development. Cotoneaster, another invasive weed, is also present. A proportion of the areas are overgrown by coppice and gorse.\n",
+    "3bdb": [
+      {
+        "latitude": null,
+        "longitude": null,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Site Monitoring Observations & Recommendations"
+            ]
+          },
+          "8eaf": "2018-06-14",
+          "385f": {
+            "other_values": [
+              "Jan Aslanowicz "
+            ],
+            "choice_values": []
+          },
+          "5468": "None\n",
+          "70b4": [
+            {
+              "photo_id": "cbff56f7-2502-47d2-bfb2-013d12a4de4f",
+              "caption": null
+            },
+            {
+              "photo_id": "cbb277f2-7529-4f92-b3e3-b9703b8b500e",
+              "caption": null
+            },
+            {
+              "photo_id": "651c8ed0-acc8-4abc-bcaf-efbb785a0158",
+              "caption": null
+            },
+            {
+              "photo_id": "edc63bf3-d759-4786-9bfd-94377cb0ff02",
+              "caption": null
+            },
+            {
+              "photo_id": "2f9423f0-1211-4f44-8995-e94358b54dbf",
+              "caption": null
+            },
+            {
+              "photo_id": "d7c2cac7-5e94-4d81-b858-232982350a39",
+              "caption": null
+            },
+            {
+              "photo_id": "7dc57a56-feca-4b3d-93e4-7f567c5345ed",
+              "caption": null
+            },
+            {
+              "photo_id": "26814ad5-0ed2-41c4-8c04-9796162d0e5c",
+              "caption": null
+            },
+            {
+              "photo_id": "c454ac8a-1253-42d9-a102-b38c9689beb3",
+              "caption": null
+            },
+            {
+              "photo_id": "9565de41-f6d4-4db9-ae26-f61dafa95a0a",
+              "caption": null
+            },
+            {
+              "photo_id": "a15b5506-7412-4b1b-9738-4baaa013544b",
+              "caption": null
+            },
+            {
+              "photo_id": "6f319d16-86e4-4c5d-8fd9-8cee73fe9f39",
+              "caption": null
+            },
+            {
+              "photo_id": "72463059-5bd0-4338-8812-1373a868ca80",
+              "caption": null
+            },
+            {
+              "photo_id": "dee2f9a9-b83c-40ad-91b2-fc44d6038f1e",
+              "caption": null
+            },
+            {
+              "photo_id": "a422e96c-0707-439a-8411-48f9319f48cf",
+              "caption": null
+            },
+            {
+              "photo_id": "715bb2e9-6faf-4484-9343-bd06f2e2b69b",
+              "caption": null
+            },
+            {
+              "photo_id": "8a4239ec-88b7-4fa7-9329-fb8bd9137313",
+              "caption": null
+            },
+            {
+              "photo_id": "5d96b22b-8b62-4eb5-85a5-2f15cc36625f",
+              "caption": null
+            },
+            {
+              "photo_id": "0af0d039-bdf1-4232-867d-bd788aa932e1",
+              "caption": null
+            },
+            {
+              "photo_id": "a6c213eb-5325-47eb-8f7e-0477f40249db",
+              "caption": null
+            },
+            {
+              "photo_id": "479271f4-6a76-46e3-b7d3-c8f65cd0f50a",
+              "caption": null
+            }
+          ]
+        },
+        "id": "54343964-62c0-4561-ba7a-9ff15727497c",
+        "created_at": "1680956828",
+        "updated_at": "1680956828",
+        "geometry": null,
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 13,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "draft": false
+      },
+      {
+        "updated_location": {
+          "latitude": 50.755605,
+          "longitude": -1.9257687,
+          "altitude": 117.707578396973,
+          "horizontal_accuracy": 10.0
+        },
+        "created_at": "1522062134",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9248982,
+            50.754615
+          ]
+        },
+        "form_values": {
+          "2c87": {
+            "country": "United Kingdom",
+            "sub_admin_area": "Bournemouth",
+            "suite": null,
+            "admin_area": "England",
+            "locality": "Bournemouth",
+            "postal_code": "BH11",
+            "thoroughfare": "Elliott Road",
+            "sub_thoroughfare": "25"
+          },
+          "8eaf": "2018-03-26",
+          "2a76": "12:08",
+          "385f": {
+            "choice_values": [
+              "Jan Aslanowicz"
+            ],
+            "other_values": []
+          },
+          "113b": {
+            "choice_values": [
+              "Watching Brief"
+            ],
+            "other_values": []
+          },
+          "c4b3": "yes",
+          "9090": "yes",
+          "2d29": "Contractors on site for vegetation cut back.",
+          "e77c": [
+            {
+              "photo_id": "f49dbef5-f053-45e2-aa35-62db7feececb",
+              "caption": null
+            },
+            {
+              "photo_id": "af1f953f-4f1b-49f4-9936-cf5bac9f5bb4",
+              "caption": null
+            },
+            {
+              "photo_id": "050bde45-ecb8-4ca6-b3a2-736c93370ee7",
+              "caption": null
+            },
+            {
+              "photo_id": "a4cbb236-6e40-45f9-b85a-ebca0efaafe2",
+              "caption": null
+            },
+            {
+              "photo_id": "7314f9eb-9104-440a-bb54-1da2c750ee08",
+              "caption": null
+            },
+            {
+              "photo_id": "0e7d1a33-5426-4fab-a571-fef2f1617a14",
+              "caption": null
+            },
+            {
+              "photo_id": "6e1a1902-655b-489b-a58a-110161c4e592",
+              "caption": null
+            }
+          ],
+          "4010": {
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ],
+            "other_values": []
+          },
+          "b0b0": {
+            "choice_values": [
+              "Other Treatments Inc. Excavation"
+            ],
+            "other_values": []
+          }
+        },
+        "created_duration": 1661,
+        "updated_duration": 6,
+        "created_location": {
+          "latitude": 50.7546204,
+          "longitude": -1.9249041,
+          "altitude": 112.618418709799,
+          "horizontal_accuracy": 10
+        },
+        "edited_duration": 2195,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "id": "b14f87ae-4164-437e-ac27-6ae96c09449d",
+        "updated_at": "1715465896",
+        "version": 18,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "draft": false
+      },
+      {
+        "updated_location": {
+          "latitude": 50.843336675363446,
+          "longitude": -1.8649448733794176,
+          "altitude": 20.33059310913086,
+          "horizontal_accuracy": 10
+        },
+        "created_at": "1522057520",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9237318,
+            50.7546725
+          ]
+        },
+        "form_values": {
+          "8eaf": "2018-03-26",
+          "2a76": "08:30",
+          "385f": {
+            "choice_values": [
+              "Jan Aslanowicz"
+            ],
+            "other_values": []
+          },
+          "113b": {
+            "choice_values": [
+              "Japanese Knotweed Stem Cut (retained)",
+              "Vegetation Clearance (other than knotweed)"
+            ],
+            "other_values": []
+          },
+          "c4b3": "yes",
+          "9090": "yes",
+          "2d29": "Stand 1 & 2 all works completed today",
+          "e77c": [
+            {
+              "photo_id": "7a50ae9e-968c-4ac6-a8db-c12aae0bd7fc",
+              "caption": null
+            },
+            {
+              "photo_id": "3b640cfd-4b88-4c7e-a24f-bfa06e40b271",
+              "caption": null
+            },
+            {
+              "photo_id": "c352cdaf-f634-4d55-9aa5-c011676c6126",
+              "caption": null
+            },
+            {
+              "photo_id": "2aa36c53-781e-4263-8c7f-217b562604b0",
+              "caption": null
+            }
+          ],
+          "4010": {
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ],
+            "other_values": []
+          },
+          "b0b0": {
+            "choice_values": [
+              "Other Treatments Inc. Excavation"
+            ],
+            "other_values": []
+          }
+        },
+        "created_duration": 2245,
+        "updated_duration": 68,
+        "created_location": {
+          "latitude": 50.7546725,
+          "longitude": -1.923754,
+          "altitude": 117.320330426596,
+          "horizontal_accuracy": 10
+        },
+        "edited_duration": 2313,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "id": "d59b280b-d214-4022-aa84-ffcfd9dbb9b0",
+        "updated_at": "1715465893",
+        "version": 19,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "draft": false
+      },
+      {
+        "updated_location": {
+          "latitude": 50.7545778,
+          "longitude": -1.9247772,
+          "altitude": 115.524250157806,
+          "horizontal_accuracy": 10.0
+        },
+        "created_at": "1521628917",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9253284,
+            50.7559331
+          ]
+        },
+        "form_values": {
+          "2c87": {
+            "country": "United Kingdom",
+            "sub_admin_area": "Bournemouth",
+            "suite": null,
+            "admin_area": "England",
+            "locality": "Bournemouth",
+            "postal_code": "BH11",
+            "thoroughfare": "Elliott Road",
+            "sub_thoroughfare": "25-26"
+          },
+          "8eaf": "2018-03-21",
+          "2a76": "10:48",
+          "385f": {
+            "choice_values": [
+              "Jan Aslanowicz"
+            ],
+            "other_values": []
+          },
+          "113b": {
+            "choice_values": [],
+            "other_values": [
+              "iveredi contractors photos of site clearance"
+            ]
+          },
+          "c4b3": "yes",
+          "9090": "yes",
+          "2d29": "Idverdi contractors site clearance photos on site commencing on - 20/3/18",
+          "e77c": [
+            {
+              "photo_id": "a45b2cfa-9014-434a-80aa-6e1dcf332602",
+              "caption": null
+            },
+            {
+              "photo_id": "3ab79e65-1182-4b43-b7af-1931701e0568",
+              "caption": null
+            },
+            {
+              "photo_id": "82dffbb6-23ee-4de2-887c-33c56c5e1d70",
+              "caption": null
+            },
+            {
+              "photo_id": "ab0aaa96-b26c-446c-8588-1287eb5233a3",
+              "caption": null
+            },
+            {
+              "photo_id": "77732edd-a494-4bf4-ab5f-f18634d69bef",
+              "caption": null
+            },
+            {
+              "photo_id": "dca25458-ad26-4e62-bbad-4599a4604276",
+              "caption": null
+            },
+            {
+              "photo_id": "a87db3b5-57e9-41f1-9433-f11912f55f62",
+              "caption": null
+            },
+            {
+              "photo_id": "277e92ce-58ee-4c07-9621-4dcfd9566eaf",
+              "caption": null
+            },
+            {
+              "photo_id": "cbecea4b-eeb8-4d5f-b426-f2921a7a20da",
+              "caption": null
+            }
+          ],
+          "4010": {
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ],
+            "other_values": []
+          },
+          "b0b0": {
+            "choice_values": [
+              "Other Treatments Inc. Excavation"
+            ],
+            "other_values": []
+          }
+        },
+        "created_duration": 796,
+        "updated_duration": 14,
+        "created_location": {
+          "latitude": 50.7559363,
+          "longitude": -1.9253373,
+          "altitude": 122.297614384599,
+          "horizontal_accuracy": 10
+        },
+        "edited_duration": 869,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "id": "b0680f90-28fd-47aa-800d-4b76bc9db9fb",
+        "updated_at": "1715465891",
+        "version": 20,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "draft": false
+      },
+      {
+        "updated_location": {
+          "latitude": 50.7196335,
+          "longitude": -1.8804785,
+          "altitude": 62.4000015258789,
+          "horizontal_accuracy": 14.608
+        },
+        "created_at": "1536221713",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9257245,
+            50.7555406
+          ]
+        },
+        "form_values": {
+          "2c87": {
+            "country": "United Kingdom",
+            "sub_admin_area": "Bournemouth",
+            "suite": null,
+            "admin_area": "England",
+            "locality": "Bournemouth",
+            "postal_code": "BH11 8LQ",
+            "thoroughfare": "Elliott Road",
+            "sub_thoroughfare": "25C"
+          },
+          "8eaf": "2018-09-06",
+          "2a76": "09:15",
+          "385f": {
+            "choice_values": [
+              "Jan Aslanowicz",
+              "Jon Barton"
+            ],
+            "other_values": []
+          },
+          "113b": {
+            "choice_values": [
+              "Watching Brief"
+            ],
+            "other_values": []
+          },
+          "c4b3": "yes",
+          "9090": "yes",
+          "e77c": [
+            {
+              "photo_id": "b81891af-4516-4e66-b3c8-fd745adcab16",
+              "caption": null
+            },
+            {
+              "photo_id": "b0d337fd-fddc-40d6-83c3-d4ad762d5de3",
+              "caption": null
+            },
+            {
+              "photo_id": "8bb47fec-eb52-4903-ba23-dafd2d68d879",
+              "caption": null
+            },
+            {
+              "photo_id": "1b986e72-2cfc-4517-bb5b-cf39a641b299",
+              "caption": null
+            },
+            {
+              "photo_id": "2e0fb354-292d-4188-8b27-cbddef814764",
+              "caption": null
+            },
+            {
+              "photo_id": "e2615bfd-d1a7-4f07-aae6-b16969c7f160",
+              "caption": null
+            }
+          ],
+          "4010": {
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ],
+            "other_values": []
+          },
+          "b0b0": {
+            "choice_values": [
+              "Other Treatments Inc. Excavation"
+            ],
+            "other_values": []
+          }
+        },
+        "created_duration": 586,
+        "updated_duration": 1103,
+        "created_location": {
+          "latitude": 50.7555539,
+          "longitude": -1.9257323,
+          "altitude": 117.904739929494,
+          "horizontal_accuracy": 10.0
+        },
+        "edited_duration": 1689,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "id": "5ba32763-daec-49aa-9def-2a64075aefbe",
+        "updated_at": "1715465905",
+        "version": 15,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "draft": false
+      },
+      {
+        "updated_location": {
+          "latitude": 50.755733,
+          "longitude": -1.9255054,
+          "altitude": 117.10330986669547,
+          "horizontal_accuracy": 3.0
+        },
+        "created_at": "1540986093",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9258674,
+            50.755584
+          ]
+        },
+        "form_values": {
+          "2c87": {
+            "country": "United Kingdom",
+            "sub_admin_area": null,
+            "suite": null,
+            "admin_area": null,
+            "locality": "Poole",
+            "postal_code": "BH11 8LL",
+            "thoroughfare": "Ringwood Road",
+            "sub_thoroughfare": null
+          },
+          "8eaf": "2018-10-31",
+          "2a76": "11:41",
+          "385f": {
+            "choice_values": [
+              "Jan Aslanowicz"
+            ],
+            "other_values": []
+          },
+          "113b": {
+            "choice_values": [],
+            "other_values": [
+              "Inspect woody area after last treatment "
+            ]
+          },
+          "c4b3": "yes",
+          "9090": "yes",
+          "e77c": [
+            {
+              "photo_id": "576ada11-d96d-4346-95ac-ed7019220a6a",
+              "caption": null
+            },
+            {
+              "photo_id": "a7eb1b2a-b2c7-425a-b5b2-5ae14ea7189b",
+              "caption": null
+            },
+            {
+              "photo_id": "b541b298-250b-4435-95a6-2be9387a222c",
+              "caption": null
+            },
+            {
+              "photo_id": "6d04fc35-39ab-4553-a1d9-faa220f98b12",
+              "caption": null
+            },
+            {
+              "photo_id": "ddac9514-42c6-403b-9a2e-837b34af4e33",
+              "caption": null
+            },
+            {
+              "photo_id": "ce982834-4684-4182-ad12-6736678cd4ab",
+              "caption": null
+            },
+            {
+              "photo_id": "3382e6f9-9708-4b3b-9981-9b70e5b05b43",
+              "caption": null
+            },
+            {
+              "photo_id": "a16a53cd-e69e-4e98-a482-9b9a37ca50ab",
+              "caption": null
+            },
+            {
+              "photo_id": "2fa9ce34-aabc-4027-a80b-3534d52fbf92",
+              "caption": null
+            },
+            {
+              "photo_id": "f0c282e3-57a5-49ee-a97f-e115df669e65",
+              "caption": null
+            },
+            {
+              "photo_id": "2322c7ea-f833-4e3d-8311-cc70af8c466a",
+              "caption": null
+            },
+            {
+              "photo_id": "2fa4e306-27ea-4e0b-a6b7-1a2a12aaf876",
+              "caption": null
+            }
+          ],
+          "4010": {
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ],
+            "other_values": []
+          },
+          "b0b0": {
+            "choice_values": [
+              "Other Treatments Inc. Excavation"
+            ],
+            "other_values": []
+          }
+        },
+        "created_duration": 453,
+        "updated_duration": 453,
+        "created_location": {
+          "latitude": 50.755582,
+          "longitude": -1.9258693,
+          "altitude": 114.99000249986373,
+          "horizontal_accuracy": 3.0
+        },
+        "edited_duration": 453,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "id": "d3f4ce5d-c9fc-40d1-941b-4781ccf0111a",
+        "updated_at": "1715465910",
+        "version": 13,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "draft": false
+      },
+      {
+        "updated_location": {
+          "latitude": 50.8566236,
+          "longitude": 0.5549541,
+          "altitude": 102.900001525879,
+          "horizontal_accuracy": 10.0
+        },
+        "created_at": "1538045592",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9239999,
+            50.7548626
+          ]
+        },
+        "form_values": {
+          "2c87": {
+            "country": "United Kingdom",
+            "sub_admin_area": null,
+            "suite": null,
+            "admin_area": null,
+            "locality": null,
+            "postal_code": "BH11 8JJ",
+            "thoroughfare": null,
+            "sub_thoroughfare": null
+          },
+          "8eaf": "2018-09-27",
+          "2a76": "08:45",
+          "385f": {
+            "choice_values": [
+              "Jan Aslanowicz",
+              "Phil Walker"
+            ],
+            "other_values": []
+          },
+          "113b": {
+            "choice_values": [],
+            "other_values": [
+              "waste area sprayed today to rear of building as per clients schedule of vists for 2018"
+            ]
+          },
+          "c4b3": "yes",
+          "9090": "yes",
+          "e77c": [
+            {
+              "photo_id": "6e93eec2-5a5e-4e53-bbda-ee9f87f5066a",
+              "caption": null
+            },
+            {
+              "photo_id": "dc9586c4-1114-4df2-b40e-cb09118e21f1",
+              "caption": null
+            },
+            {
+              "photo_id": "67c29fae-3933-4681-9b5a-fed0706f5a36",
+              "caption": null
+            },
+            {
+              "photo_id": "5b4a4663-77a9-47b3-97a4-5f3886de7219",
+              "caption": null
+            },
+            {
+              "photo_id": "ff0f580c-8235-4038-b25c-32a6d82d05cd",
+              "caption": null
+            },
+            {
+              "photo_id": "68b2d190-2e8f-4754-9eab-940d65271713",
+              "caption": null
+            },
+            {
+              "photo_id": "2c586683-491d-45ba-8eba-f475cdc2008f",
+              "caption": null
+            },
+            {
+              "photo_id": "ea94fc19-486d-49a4-bce5-da218768cf8c",
+              "caption": null
+            },
+            {
+              "photo_id": "75631cbf-027b-4364-a63e-cd3ae58a59a2",
+              "caption": null
+            },
+            {
+              "photo_id": "5019d97a-b343-4c8a-936e-a44518cb818c",
+              "caption": null
+            },
+            {
+              "photo_id": "a5f89f77-9d85-4345-880f-0e184d6fc8f4",
+              "caption": null
+            },
+            {
+              "photo_id": "e56c8aeb-d1eb-4408-bafe-3e9bfe5e8f57",
+              "caption": null
+            }
+          ],
+          "4010": {
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ],
+            "other_values": []
+          },
+          "b0b0": {
+            "choice_values": [
+              "Other Treatments Inc. Excavation"
+            ],
+            "other_values": []
+          }
+        },
+        "created_duration": 752,
+        "updated_duration": 83,
+        "created_location": {
+          "latitude": 50.7548626,
+          "longitude": -1.9239999,
+          "altitude": 113.987468807799,
+          "horizontal_accuracy": 10.0
+        },
+        "edited_duration": 849,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "id": "0e469ce3-70f3-4465-ba72-607293346cf8",
+        "updated_at": "1715465907",
+        "version": 14,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "draft": false
+      },
+      {
+        "updated_location": {
+          "latitude": 50.7557386,
+          "longitude": -1.9255918,
+          "altitude": 115.687063399912,
+          "horizontal_accuracy": 10.0
+        },
+        "created_at": "1532437025",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9245495,
+            50.7547681
+          ]
+        },
+        "form_values": {
+          "2c87": {
+            "country": "United Kingdom",
+            "sub_admin_area": "Bournemouth",
+            "suite": null,
+            "admin_area": "England",
+            "locality": "Bournemouth",
+            "postal_code": "BH11",
+            "thoroughfare": "Elliott Road",
+            "sub_thoroughfare": "25"
+          },
+          "8eaf": "2018-07-24",
+          "2a76": "09:15",
+          "385f": {
+            "choice_values": [
+              "Jan Aslanowicz",
+              "Jon Barton"
+            ],
+            "other_values": []
+          },
+          "113b": {
+            "choice_values": [],
+            "other_values": [
+              "spraying vegetation on waste land"
+            ]
+          },
+          "c4b3": "yes",
+          "9090": "yes",
+          "e77c": [
+            {
+              "photo_id": "85a14faf-1a23-4a67-83a6-453d48bf8faf",
+              "caption": null
+            },
+            {
+              "photo_id": "f0a1db10-34bd-46fe-b19c-7bcf1be98804",
+              "caption": null
+            },
+            {
+              "photo_id": "fbdc0a94-54a8-46e4-986f-b79d55959356",
+              "caption": null
+            },
+            {
+              "photo_id": "c6c89994-11b2-4855-b6f5-3c49f346c273",
+              "caption": null
+            },
+            {
+              "photo_id": "da1ec80e-13b2-45a1-a850-4f2fc2f4b04d",
+              "caption": null
+            },
+            {
+              "photo_id": "79aae70a-dde7-4278-83a4-01ad8f2aea35",
+              "caption": null
+            }
+          ],
+          "4010": {
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ],
+            "other_values": []
+          },
+          "b0b0": {
+            "choice_values": [
+              "Other Treatments Inc. Excavation"
+            ],
+            "other_values": []
+          }
+        },
+        "created_duration": 239,
+        "updated_duration": 239,
+        "created_location": {
+          "latitude": 50.7547682,
+          "longitude": -1.9245498,
+          "altitude": 46.4167760670793,
+          "horizontal_accuracy": 10.0
+        },
+        "edited_duration": 239,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "id": "ad7244bf-1eb0-404a-808e-a7228400ffb4",
+        "updated_at": "1715465902",
+        "version": 16,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "draft": false
+      },
+      {
+        "updated_location": {
+          "latitude": 51.4489228,
+          "longitude": -0.9853122,
+          "altitude": 108.906976584521,
+          "horizontal_accuracy": 10
+        },
+        "created_at": "1521623615",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9260045,
+            50.7555216
+          ]
+        },
+        "form_values": {
+          "2c87": {
+            "country": "United Kingdom",
+            "sub_admin_area": "Bournemouth",
+            "suite": null,
+            "admin_area": "England",
+            "locality": "Bournemouth",
+            "postal_code": "BH11 8LL",
+            "thoroughfare": "Ringwood Road",
+            "sub_thoroughfare": "869"
+          },
+          "8eaf": "2018-03-21",
+          "2a76": "09:13",
+          "385f": {
+            "choice_values": [
+              "Jan Aslanowicz"
+            ],
+            "other_values": []
+          },
+          "113b": {
+            "choice_values": [
+              "Japanese Knotweed Stem Cut (retained)",
+              "Vegetation Clearance (other than knotweed)"
+            ],
+            "other_values": []
+          },
+          "c4b3": "yes",
+          "9090": "yes",
+          "2d29": "Two Japanese knotweed stands re- tapped and instructions left to remove beech trees near stand 2.",
+          "e77c": [
+            {
+              "photo_id": "5c7c00e9-e9b6-4b29-8a05-b314bbcbe53d",
+              "caption": null
+            },
+            {
+              "photo_id": "ebf66bb1-6b62-4433-9cb2-ea35fae7c06e",
+              "caption": null
+            },
+            {
+              "photo_id": "42b133c6-1a5d-4c93-8fe8-94fb2189d175",
+              "caption": null
+            },
+            {
+              "photo_id": "fd2d385b-d328-4e69-a036-b1a2f550562c",
+              "caption": null
+            }
+          ],
+          "8fb1": [
+            {
+              "caption": null,
+              "video_id": "3af19f11-52d9-4fba-aabd-6645e4b1e572"
+            },
+            {
+              "caption": null,
+              "video_id": "ac8568f7-43fa-4483-8810-5e47662ef1a5"
+            }
+          ],
+          "4010": {
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ],
+            "other_values": []
+          },
+          "b0b0": {
+            "choice_values": [
+              "Other Treatments Inc. Excavation"
+            ],
+            "other_values": []
+          }
+        },
+        "created_duration": 1871,
+        "updated_duration": 42,
+        "created_location": {
+          "latitude": 50.7555302,
+          "longitude": -1.9259957,
+          "altitude": 119.567587963381,
+          "horizontal_accuracy": 10
+        },
+        "edited_duration": 1918,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "id": "dbb8ebc2-548b-4175-9cce-d5a59a0488c3",
+        "updated_at": "1715465888",
+        "version": 21,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "draft": false
+      },
+      {
+        "updated_location": {
+          "latitude": 50.8566836,
+          "longitude": 0.5551293,
+          "altitude": 121.408431472255,
+          "horizontal_accuracy": 10.0
+        },
+        "created_at": "1531750249",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9248451,
+            50.7545407
+          ]
+        },
+        "form_values": {
+          "2c87": {
+            "country": "United Kingdom",
+            "sub_admin_area": "Bournemouth",
+            "suite": null,
+            "admin_area": "England",
+            "locality": "Bournemouth",
+            "postal_code": "BH11",
+            "thoroughfare": "Elliott Road",
+            "sub_thoroughfare": "25"
+          },
+          "8eaf": "2018-07-16",
+          "2a76": "09:00",
+          "385f": {
+            "choice_values": [
+              "Jan Aslanowicz",
+              "Tom Clarke"
+            ],
+            "other_values": []
+          },
+          "113b": {
+            "choice_values": [],
+            "other_values": [
+              "herbicide treatment of waste land"
+            ]
+          },
+          "c4b3": "yes",
+          "9090": "yes",
+          "e77c": [
+            {
+              "photo_id": "f96f38d2-f7c1-45c1-b9e2-e33c3287a627",
+              "caption": null
+            },
+            {
+              "photo_id": "86f5ff14-a224-4791-9e1f-c09007de54a2",
+              "caption": null
+            },
+            {
+              "photo_id": "83c42a72-c12a-4375-bc25-4470b7d09ee1",
+              "caption": null
+            },
+            {
+              "photo_id": "4b19d25e-a72f-445d-bd45-1d7acddf2050",
+              "caption": null
+            },
+            {
+              "photo_id": "fba4bffb-01ee-4432-a6e8-8b55374a00c2",
+              "caption": null
+            },
+            {
+              "photo_id": "32a9599f-2e17-4d0a-b242-3243d88404df",
+              "caption": null
+            },
+            {
+              "photo_id": "193dd23c-b4c8-4e92-9179-e9573fbff3f8",
+              "caption": null
+            },
+            {
+              "photo_id": "9f60aa44-07c3-4bdc-9083-20319dd2fdce",
+              "caption": null
+            },
+            {
+              "photo_id": "1aa86a07-cd95-4b64-9861-6d1dcfac0688",
+              "caption": null
+            },
+            {
+              "photo_id": "b4fa540c-92e8-4a25-946e-a5914a59fb4f",
+              "caption": null
+            },
+            {
+              "photo_id": "88e1afac-4ddc-404a-ac20-10600c0e26c6",
+              "caption": null
+            },
+            {
+              "photo_id": "d00b990a-0ac3-44ec-84cf-36d2450658b3",
+              "caption": null
+            },
+            {
+              "photo_id": "e2de8902-f74e-4d8d-a1d2-13b3f4b19f16",
+              "caption": null
+            },
+            {
+              "photo_id": "7e20dcd8-10cd-4440-ae67-482d3477fec4",
+              "caption": null
+            }
+          ],
+          "4010": {
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ],
+            "other_values": []
+          },
+          "b0b0": {
+            "choice_values": [
+              "Other Treatments Inc. Excavation"
+            ],
+            "other_values": []
+          }
+        },
+        "created_duration": 344,
+        "updated_duration": 17,
+        "created_location": {
+          "latitude": 50.7545437,
+          "longitude": -1.9248431,
+          "altitude": 110.200815864513,
+          "horizontal_accuracy": 10.0
+        },
+        "edited_duration": 361,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "id": "65b547f6-5c51-4e1e-94e4-84678453f681",
+        "updated_at": "1715465899",
+        "version": 17,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "draft": false
+      },
+      {
+        "created_location": {
+          "latitude": 50.7553888464158,
+          "longitude": -1.9261464657179,
+          "altitude": 59.6281433105469,
+          "horizontal_accuracy": 8
+        },
+        "created_at": "1522329268",
+        "form_values": {
+          "2c87": {
+            "sub_admin_area": "Bournemouth",
+            "suite": null,
+            "locality": "Bournemouth",
+            "postal_code": "BH11",
+            "admin_area": "England",
+            "country": "GB",
+            "thoroughfare": null,
+            "sub_thoroughfare": null
+          },
+          "8eaf": "2018-03-29",
+          "2a76": "13:20",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Barton"
+            ]
+          },
+          "113b": {
+            "other_values": [
+              "Supervisor inspection"
+            ],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "9090": "yes",
+          "2d29": "Vegetation cutting underway by Idverdi. Purpose of visit to inspect site for progress and compliance. Work complete, contractor was cutting along fence line at time of inspection.",
+          "e77c": [
+            {
+              "caption": null,
+              "photo_id": "100d2846-ba37-4579-a56f-0eadc0e9b641"
+            },
+            {
+              "caption": null,
+              "photo_id": "fcafed38-5ba6-481b-9209-810280da5c8a"
+            },
+            {
+              "caption": null,
+              "photo_id": "006e47c4-79fa-4e97-b243-1cbb616ae4ee"
+            }
+          ],
+          "4010": {
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ],
+            "other_values": []
+          },
+          "b0b0": {
+            "choice_values": [
+              "Other Treatments Inc. Excavation"
+            ],
+            "other_values": []
+          }
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.92579870208195,
+            50.7555859394489
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.7537794536386,
+          "longitude": -1.83944096217438,
+          "altitude": 6.47286748886108,
+          "horizontal_accuracy": 65
+        },
+        "created_duration": 2413,
+        "updated_duration": 2413,
+        "edited_duration": 2413,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "id": "dc74c12d-fdd2-4401-b100-e638b7c5a7c3",
+        "updated_at": "1715465886",
+        "version": 22,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "draft": false
+      },
+      {
+        "created_location": {
+          "latitude": 50.7554981900352,
+          "longitude": -1.92591739648404,
+          "altitude": 58.9300429297349,
+          "horizontal_accuracy": 8
+        },
+        "created_at": "1521811443",
+        "form_values": {
+          "2c87": {
+            "sub_admin_area": "Bournemouth",
+            "suite": null,
+            "locality": "Bournemouth",
+            "postal_code": "BH11",
+            "admin_area": "England",
+            "country": "GB",
+            "thoroughfare": null,
+            "sub_thoroughfare": null
+          },
+          "8eaf": "2018-03-23",
+          "2a76": "13:20",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Barton"
+            ]
+          },
+          "113b": {
+            "other_values": [
+              "Supervisor inspection"
+            ],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "9090": "yes",
+          "2d29": "Vegetation cutting underway by diversity. Purpose of visit to inspect site for progress and compliance. Approx 45-50% done. Contractor started working on gorse clearance. Asked contractors to leave reptile mats in situ/alone.",
+          "e77c": [
+            {
+              "caption": null,
+              "photo_id": "19b383ed-d307-45a9-aa2b-bc46c41967fa"
+            }
+          ],
+          "4010": {
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ],
+            "other_values": []
+          },
+          "b0b0": {
+            "choice_values": [
+              "Other Treatments Inc. Excavation"
+            ],
+            "other_values": []
+          }
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.92579870208195,
+            50.7555859394489
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.7555791956004,
+          "longitude": -1.92605585608896,
+          "altitude": 59.3784065566403,
+          "horizontal_accuracy": 12
+        },
+        "created_duration": 483,
+        "updated_duration": 483,
+        "edited_duration": 483,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "id": "d2721a40-463c-4832-95cc-fcacc85bbfd6",
+        "updated_at": "1715465884",
+        "version": 23,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "draft": false
+      },
+      {
+        "created_location": {
+          "latitude": 50.7555859394489,
+          "longitude": -1.92579870208195,
+          "altitude": 58.6284446716394,
+          "horizontal_accuracy": 12
+        },
+        "created_at": "1521736277",
+        "form_values": {
+          "2c87": {
+            "sub_admin_area": "Bournemouth",
+            "suite": null,
+            "locality": "Bournemouth",
+            "postal_code": "BH11",
+            "admin_area": "England",
+            "country": "GB",
+            "thoroughfare": null,
+            "sub_thoroughfare": null
+          },
+          "8eaf": "2018-03-22",
+          "2a76": "16:31",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Barton"
+            ]
+          },
+          "113b": {
+            "other_values": [
+              "Supervisor inspection"
+            ],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "9090": "yes",
+          "2d29": "Vegetation cutting underway by diversity. Purpose of visit to inspect site for progress and compliance. Approx 40-50% done.",
+          "e77c": [
+            {
+              "caption": null,
+              "photo_id": "233dba48-9220-4a9e-b900-b365539d2c57"
+            },
+            {
+              "caption": null,
+              "photo_id": "df135dd3-187e-4352-b79a-a68956e12f0a"
+            }
+          ],
+          "4010": {
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ],
+            "other_values": []
+          },
+          "b0b0": {
+            "choice_values": [
+              "Other Treatments Inc. Excavation"
+            ],
+            "other_values": []
+          }
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.92579870208195,
+            50.7555859394489
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.7556056441787,
+          "longitude": -1.92553513767267,
+          "altitude": 58.6150223489116,
+          "horizontal_accuracy": 6
+        },
+        "created_duration": 165,
+        "updated_duration": 68,
+        "edited_duration": 233,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "id": "caf62191-43f6-45fe-9e96-b3ca1784c9b1",
+        "updated_at": "1715465880",
+        "version": 24,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "draft": false
+      },
+      {
+        "latitude": 50.7558821581544,
+        "longitude": -1.92586100379557,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2018-05-08",
+          "2a76": "09:00",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jan Aslanowicz",
+              "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Sunny",
+              "Light breeze"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed",
+              " willow",
+              " cotoneaster",
+              " broom",
+              " bramble"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed) Garlon Ultra, 16211,aminopyralid",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Eye protection",
+              "Protective suit",
+              "Protective gloves",
+              "Boots"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "13.4",
+          "5b61": "255",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "no"
+            ]
+          },
+          "2d29": "Whole area treated as a blanket spray. Trees at back of site were not treated, areas around the outdoor seating were not treated. Some of the gorse and broom and species are still very dead and therefore chemical will not have a fact every growth will occur. Some of the more established woody growths will require further treatment to control effectively"
+        },
+        "id": "7c80c438-2bf1-406e-94b2-c3f68e531847",
+        "created_at": "1680956828",
+        "updated_at": "1680956828",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.92586100379557,
+            50.7558821581544
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 15,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "draft": false
+      },
+      {
+        "latitude": 50.7558821581544,
+        "longitude": -1.92586100379557,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2018-05-09",
+          "2a76": "08:00",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jan Aslanowicz",
+              "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Sunny",
+              "Light breeze"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed",
+              " willow",
+              " cotoneaster",
+              " broom",
+              " bramble"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed) Garlon Ultra, 16211,aminopyralid",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Eye protection",
+              "Protective suit",
+              "Protective gloves",
+              "Boots"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "13.4",
+          "5b61": "220",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "no"
+            ]
+          },
+          "2d29": "Whole area treated as a blanket spray. Trees at back of site were not treated, areas around the outdoor seating were not treated. Some of the gorse and broom species are still very dead and therefore chemical will not have effect. Some of the more established woody growths will require further treatment to control effectively"
+        },
+        "id": "d749d5f8-5675-4d9c-902e-ac948094ccca",
+        "created_at": "1680956828",
+        "updated_at": "1680956828",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.92586100379557,
+            50.7558821581544
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 15,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "draft": false
+      },
+      {
+        "latitude": 50.7557252191131,
+        "longitude": -1.92562123376773,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2018-05-23",
+          "2a76": "11:42",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jon Barton. CSJK. PCAQT. NPTC 499877, PA1 PA6AW",
+              "Jan Aslanowicz"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light breeze"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed",
+              " mop up on vegetation spray"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed), mop up on vegetation spray",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Eye protection",
+              "Face protection",
+              "Protective suit",
+              "Protective gloves",
+              "Boots"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "10",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "yes"
+            ]
+          },
+          "2d29": "Treated knotweed and areas of vegitaton that had not responded to the original vegetation spray. The overall effect of the last spray is still not known, majority of weed is dying off and where there where obvious gaps in treatment these have now been picked up. However it is important that another mop up inspection is done to ensure that the treatments are effective. There is further growths of weeds and regrowth on woody plants which will will need to be treated again later in the summer",
+          "e77c": [
+            {
+              "photo_id": "8b929b2b-7a6a-4f59-9933-ab0a1087851d",
+              "caption": "Effect of herbicide evident "
+            },
+            {
+              "photo_id": "ca05dd90-c9e3-4f03-af37-12b4d87c7419",
+              "caption": "Effect of herbicide evident "
+            }
+          ]
+        },
+        "id": "8fe7605e-e16f-489a-98f0-0719d496aa7d",
+        "created_at": "1680956828",
+        "updated_at": "1680956828",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.92562123376773,
+            50.7557252191131
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 15,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "draft": false
+      },
+      {
+        "latitude": 50.7546799,
+        "longitude": -1.9237925,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2018-09-27",
+          "2a76": "08:45",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jan Aslanowicz"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light breeze",
+              "Sunny",
+              "Between 15 and 20 degrees centigrade"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Face protection",
+              "Protective suit",
+              "Protective gloves",
+              "Boots"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "21",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "yes"
+            ]
+          },
+          "2d29": "Blanket sprayed stands -1 & 2 of brambles. Treated remaining leaves on canes in stand 1- no live knotweed in stand 2.\nTreated all green vegetation today on this site as agreed by the client.",
+          "e77c": [
+            {
+              "photo_id": "5913e409-1a2f-49b9-be79-c0abeaecc6a9",
+              "caption": null
+            },
+            {
+              "photo_id": "7aca00ed-7eba-4f02-8e7d-2b7c00df9850",
+              "caption": " knotweed canes/ leafs treated and area blanket sprayed"
+            },
+            {
+              "photo_id": "4dd673ff-e3d0-49e5-81ff-58dd735580aa",
+              "caption": null
+            },
+            {
+              "photo_id": "6a4826c9-45ac-4d46-a473-82c86577aa1d",
+              "caption": null
+            },
+            {
+              "photo_id": "cb79270d-e922-406f-9c49-756b6ab49425",
+              "caption": null
+            },
+            {
+              "photo_id": "48a55519-4758-4e33-9204-780db74953d9",
+              "caption": null
+            },
+            {
+              "photo_id": "581cd830-debb-45b7-a8e0-9d655c68be8a",
+              "caption": null
+            }
+          ]
+        },
+        "id": "1a3904ee-ee70-4e11-b692-2f12f029c072",
+        "created_at": "1680956828",
+        "updated_at": "1680956828",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9237925,
+            50.7546799
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 14,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "draft": false
+      },
+      {
+        "created_location": {
+          "latitude": 50.75502716718641,
+          "longitude": -1.925640629559499,
+          "altitude": 61.35178492590785,
+          "horizontal_accuracy": 4.741712103175853
+        },
+        "id": "74a9a9ae-e4e4-4427-82dd-b79f816cc024",
+        "created_at": "1720612346",
+        "form_values": {
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light wind"
+            ]
+          },
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Other"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site only"
+            ]
+          },
+          "e29a": {
+            "other_values": [],
+            "choice_values": [
+              "Clearance (vegetation)"
+            ]
+          },
+          "7006": {
+            "other_values": [],
+            "choice_values": [
+              "Cut / Clearance / Excavation / Barrier"
+            ]
+          },
+          "c4b3": "yes",
+          "ac6f": "18",
+          "2d29": "Cut vegetation at Coty",
+          "2a76": "08:00",
+          "8eaf": "2024-07-08"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.925640629559499,
+            50.75502716718641
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.75501087202714,
+          "longitude": -1.9256226096776417,
+          "altitude": 61.10046264342964,
+          "horizontal_accuracy": 4.770308804760994
+        },
+        "updated_at": "1720612413",
+        "created_duration": 67,
+        "updated_duration": 67,
+        "edited_duration": 67,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "version": 12,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "draft": false
+      },
+      {
+        "created_location": {
+          "latitude": 50.75500851913117,
+          "longitude": -1.9256281791175343,
+          "altitude": 61.074453982524574,
+          "horizontal_accuracy": 4.770212853347772
+        },
+        "id": "ec5192b7-4e5b-4e93-9d54-7514ff88104d",
+        "created_at": "1720612414",
+        "form_values": {
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light rain",
+              "Moderate wind"
+            ]
+          },
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Other"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site only"
+            ]
+          },
+          "e29a": {
+            "other_values": [],
+            "choice_values": [
+              "Clearance (vegetation)"
+            ]
+          },
+          "7006": {
+            "other_values": [],
+            "choice_values": [
+              "Cut / Clearance / Excavation / Barrier"
+            ]
+          },
+          "c4b3": "yes",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Luke Barton"
+            ]
+          },
+          "ac6f": "19",
+          "2d29": "Cut all vegetation except cotoneaster ",
+          "2a76": "08:00",
+          "8eaf": "2024-07-09"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9256281791175343,
+            50.75500851913117
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.755029065313074,
+          "longitude": -1.9256299269187926,
+          "altitude": 60.423210285604,
+          "horizontal_accuracy": 4.76218658781188
+        },
+        "updated_at": "1720612485",
+        "created_duration": 70,
+        "updated_duration": 70,
+        "edited_duration": 70,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "version": 12,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "draft": false
+      },
+      {
+        "created_location": {
+          "latitude": 50.75503077769033,
+          "longitude": -1.9256341853947778,
+          "altitude": 60.408635871484876,
+          "horizontal_accuracy": 4.7666615028912895
+        },
+        "id": "6021e534-f6f8-428d-ad53-49e3fb2c219c",
+        "created_at": "1720612487",
+        "form_values": {
+          "8eaf": "2024-07-10",
+          "2d29": "clearance of vegetation ",
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Other"
+            ]
+          },
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Luke Barton"
+            ]
+          },
+          "2a76": "08:00",
+          "e77c": [
+            {
+              "caption": null,
+              "photo_id": "937c2916-5f64-4703-ac2a-c9d3556900ce"
+            },
+            {
+              "caption": null,
+              "photo_id": "ad77530b-b3ec-4d70-9d56-c1144836ca09"
+            }
+          ],
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site only"
+            ]
+          },
+          "7006": {
+            "other_values": [],
+            "choice_values": [
+              "Cut / Clearance / Excavation / Barrier"
+            ]
+          },
+          "e29a": {
+            "other_values": [],
+            "choice_values": [
+              "Clearance (vegetation)"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Moderate wind",
+              "Broken cloud"
+            ]
+          },
+          "ac6f": "20",
+          "c4b3": "yes"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9256341853947778,
+            50.75503077769033
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.75501834753662,
+          "longitude": -1.9256343514951213,
+          "altitude": 61.37216914165765,
+          "horizontal_accuracy": 4.757825593808484
+        },
+        "updated_at": "1720612533",
+        "created_duration": 46,
+        "updated_duration": 46,
+        "edited_duration": 46,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "version": 12,
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "draft": false
+      },
+      {
+        "created_location": {
+          "latitude": 50.76349453687108,
+          "longitude": -1.8475918842428944,
+          "altitude": 16.06552738044411,
+          "horizontal_accuracy": 4.890987575806898
+        },
+        "id": "92133f0f-edc5-4179-822f-bf0d1d867553",
+        "created_at": "1722966527",
+        "form_values": {
+          "8eaf": "2024-08-06",
+          "1db0": {
+            "other_values": [],
+            "choice_values": [
+              "Cut / Clearance / Excavation / Barrier"
+            ]
+          },
+          "2d29": "Vegetation has been cleared down to ground level, whilst avoiding cotoneaster. all areas previously cut has been cut down further as shown on photos and videos",
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Invasive Plants Management Record"
+            ]
+          },
+          "385f": {
+            "choice_values": [
+              "Luke Barton"
+            ],
+            "other_values": [
+              "Benn/ Eliot & Joe"
+            ]
+          },
+          "e77c": [
+            {
+              "caption": null,
+              "photo_id": "e5e63b13-963c-4ad9-9a3c-8b5642261795"
+            },
+            {
+              "caption": null,
+              "photo_id": "f0f82dfb-cefd-47b9-8b23-977460f28f08"
+            },
+            {
+              "caption": null,
+              "photo_id": "fbacf770-ee92-4dde-8286-33f7c9d1b23b"
+            },
+            {
+              "caption": null,
+              "photo_id": "834f1427-84eb-4cad-9331-aab579952d6b"
+            },
+            {
+              "caption": null,
+              "photo_id": "e34973d3-8303-4419-a9b0-f8399d9eaa3e"
+            }
+          ],
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site only"
+            ]
+          },
+          "8fb1": [
+            {
+              "caption": null,
+              "video_id": "cc231373-a5b5-45c0-a665-2d1a3a1ea017"
+            },
+            {
+              "caption": null,
+              "video_id": "8e649656-76c9-4305-9b99-473f11f43056"
+            }
+          ],
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light rain"
+            ]
+          },
+          "5c53": {
+            "other_values": [],
+            "choice_values": [
+              "Vegetation cut/clear"
+            ]
+          },
+          "ac6f": "21",
+          "c4b3": "yes"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.8475918842428944,
+            50.76349453687108
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.763589474205254,
+          "longitude": -1.847671456617453,
+          "altitude": 16.994520627893507,
+          "horizontal_accuracy": 4.755385059558716
+        },
+        "updated_at": "1723626953",
+        "created_duration": 154,
+        "updated_duration": 43,
+        "edited_duration": 222,
+        "version": 11,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "draft": false
+      },
+      {
+        "created_location": {
+          "latitude": 50.75491451197374,
+          "longitude": -1.9252842664736558,
+          "altitude": 64.05755615234375,
+          "horizontal_accuracy": 4.910635992398874
+        },
+        "id": "2f7aaadb-0f5a-4248-bf0a-f96905fba9b5",
+        "created_at": "1725546935",
+        "form_values": {
+          "8eaf": "2024-09-05",
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Other"
+            ]
+          },
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Benn Kitchiner"
+            ]
+          },
+          "2a76": "08:35",
+          "e77c": [
+            {
+              "caption": null,
+              "photo_id": "7f2e4010-055d-4fc0-86ce-1bfea23b26b9"
+            },
+            {
+              "caption": null,
+              "photo_id": "a104e36f-fe0f-4ff2-bede-12831391848e"
+            },
+            {
+              "caption": "Before ",
+              "photo_id": "05758bce-b6c0-48fa-b95b-2f81a2bbd1fd"
+            },
+            {
+              "caption": "After ",
+              "photo_id": "724f7a28-3ce2-4a8f-95f0-91611ffab91b"
+            }
+          ],
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site only"
+            ]
+          },
+          "7006": {
+            "other_values": [],
+            "choice_values": [
+              "Cut / Clearance / Excavation / Barrier"
+            ]
+          },
+          "e29a": {
+            "other_values": [],
+            "choice_values": [
+              "Clearance (vegetation)"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Strong wind",
+              "Heavy rain",
+              "Heavy showers",
+              "Broken cloud"
+            ]
+          },
+          "ac6f": "22",
+          "8fb1": [
+            {
+              "caption": "New area cleared ",
+              "video_id": "70193809-3255-4bc7-9d42-aead8b80c6d4"
+            },
+            {
+              "caption": "New area cleared ",
+              "video_id": "47357ddb-f196-4903-8031-0158e86b8e3f"
+            }
+          ],
+          "c4b3": "yes"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9252842664736558,
+            50.75491451197374
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.751674157804985,
+          "longitude": -1.9251541784028596,
+          "altitude": 59.744238869287074,
+          "horizontal_accuracy": 4.783215112238765
+        },
+        "updated_at": "1725605940",
+        "created_duration": 502,
+        "updated_duration": 53,
+        "edited_duration": 555,
+        "version": 9,
+        "created_by_id": "0181c4b5-662b-474a-bba8-1a1c1af8374d",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "draft": false
+      },
+      {
+        "created_location": {
+          "latitude": 50.75503164907088,
+          "longitude": -1.9255345501023577,
+          "altitude": 64.03784186206758,
+          "horizontal_accuracy": 4.60743368158009
+        },
+        "id": "2930656f-c88c-4aec-9b7f-eb18cfd086e6",
+        "created_at": "1725607075",
+        "form_values": {
+          "8eaf": "2024-09-06",
+          "1db0": {
+            "other_values": [],
+            "choice_values": [
+              "Cut / Clearance / Excavation / Barrier"
+            ]
+          },
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Invasive Plants Management Record"
+            ]
+          },
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Benn Kitchiner"
+            ]
+          },
+          "2a76": "08:01",
+          "e77c": [
+            {
+              "caption": "Willows and brambles cleared ",
+              "photo_id": "4ad5fbf9-3ac7-406b-ad0e-c91dbe44377d"
+            },
+            {
+              "caption": null,
+              "photo_id": "ce4ee1c9-7725-4055-a2df-c92e9883af5e"
+            }
+          ],
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site only"
+            ]
+          },
+          "8fb1": [
+            {
+              "caption": "Clearing willows ",
+              "video_id": "3004febb-ba58-4fef-87ae-e77ff1fa0b59"
+            }
+          ],
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Moderate wind",
+              "Heavy showers",
+              "Heavy rain"
+            ]
+          },
+          "5c53": {
+            "other_values": [],
+            "choice_values": [
+              "Vegetation cut/clear"
+            ]
+          },
+          "f890": "Delayed due to weather and tools-another day x2 operatives needed to complete ",
+          "ac6f": "23",
+          "c4b3": "yes"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9255332089978507,
+            50.755027919123975
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.7549674603238,
+          "longitude": -1.9254335804629303,
+          "altitude": 62.01145188137889,
+          "horizontal_accuracy": 4.7665734857179105
+        },
+        "updated_at": "1725631531",
+        "created_duration": 24,
+        "updated_duration": 1177,
+        "edited_duration": 1201,
+        "version": 7,
+        "created_by_id": "0181c4b5-662b-474a-bba8-1a1c1af8374d",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "draft": false
+      },
+      {
+        "created_location": {
+          "latitude": 50.75457018339145,
+          "longitude": -1.924815801905398,
+          "altitude": 61.28472900390625,
+          "horizontal_accuracy": 3.5355339059327373
+        },
+        "id": "cfd863d3-028c-4e1f-a05c-e152ce253dab",
+        "created_at": "1725954149",
+        "form_values": {
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light wind",
+              "Moderate wind",
+              "Light rain"
+            ]
+          },
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Invasive Plants Management Record"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site only"
+            ]
+          },
+          "c4b3": "yes",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Benn Kitchiner"
+            ]
+          },
+          "ac6f": "24",
+          "9530": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide treatment (spray)"
+            ]
+          },
+          "2a76": "08:02",
+          "1db0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application"
+            ]
+          },
+          "e77c": [
+            {
+              "photo_id": "1fbf53c3-e528-49fc-a980-21915cc4bbcd",
+              "caption": "Cleared area "
+            },
+            {
+              "caption": "Blue dye applied ",
+              "photo_id": "6982f951-b91e-4694-a230-3d8159272676"
+            }
+          ],
+          "8eaf": "2024-09-10",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [
+              "Cotoneaster"
+            ],
+            "choice_values": []
+          },
+          "2890": {
+            "other_values": [],
+            "choice_values": [
+              "Healthy Growth"
+            ]
+          },
+          "2073": "Invasive weed control",
+          "48f0": {
+            "other_values": [],
+            "choice_values": [
+              "Fully developed leaves",
+              "New shoots developing on stems",
+              "Green leaves"
+            ]
+          },
+          "eaeb": {
+            "other_values": [],
+            "choice_values": [
+              "Spray application (blanket spray)",
+              "Spray application (spot-spray)"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480, 15534, Glyphosate"
+            ]
+          },
+          "22b1": "0.3",
+          "5b61": "210",
+          "4a2e": "63",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Safety boots",
+              "Eye protection",
+              "Protective gloves"
+            ]
+          },
+          "8fb1": [
+            {
+              "caption": "Visible dye applied ",
+              "video_id": "074b5d91-9941-423e-94e3-f5d9508a9639"
+            },
+            {
+              "caption": null,
+              "video_id": "7abbc836-c6f5-4954-a06c-a4b4ba12c76e"
+            }
+          ]
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9248150475341126,
+            50.754559706012486
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.75489937859282,
+          "longitude": -1.9256373188032265,
+          "altitude": 61.48147378861904,
+          "horizontal_accuracy": 4.751438495292423
+        },
+        "updated_at": "1725978611",
+        "created_duration": 921,
+        "updated_duration": 411,
+        "edited_duration": 1332,
+        "version": 6,
+        "created_by_id": "0181c4b5-662b-474a-bba8-1a1c1af8374d",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "draft": false
+      },
+      {
+        "created_location": {
+          "latitude": 50.75458606709796,
+          "longitude": -1.924883276225929,
+          "altitude": 61.35595703125,
+          "horizontal_accuracy": 7.297705036537673
+        },
+        "id": "f6ecd8b5-e33f-4a0a-8834-4ba4895569dc",
+        "created_at": "1726056056",
+        "form_values": {
+          "22b1": "0.3",
+          "6da0": "yes",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Safety boots",
+              "Protective suit",
+              "Eye protection"
+            ]
+          },
+          "3fd4": {
+            "other_values": [
+              "Other"
+            ],
+            "choice_values": []
+          },
+          "5b61": "100",
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Moderate wind",
+              "Hazy sun"
+            ]
+          },
+          "c4b3": "yes",
+          "1db0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application"
+            ]
+          },
+          "e77c": [
+            {
+              "photo_id": "ff3e3e14-cc79-4e09-b654-1e47307c58bf",
+              "caption": "Spray completed "
+            },
+            {
+              "photo_id": "94e41745-31bd-4639-861e-b0316edeaad7",
+              "caption": "Treatment complete "
+            },
+            {
+              "caption": "Willows dropped ",
+              "photo_id": "07df9cb6-7cff-41a2-809a-1709a0e5d788"
+            },
+            {
+              "caption": "Willows dropped ",
+              "photo_id": "2cee6a04-f0da-4e7f-86cf-6b19279565c0"
+            }
+          ],
+          "2073": "Invasive weed control",
+          "8eaf": "2024-09-11",
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site only"
+            ]
+          },
+          "4a2e": "30",
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480, 15534, Glyphosate"
+            ]
+          },
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Invasive Plants Management Record"
+            ]
+          },
+          "48f0": {
+            "other_values": [],
+            "choice_values": [
+              "Green leaves",
+              "Developing leaves",
+              "Flower buds emerging"
+            ]
+          },
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Benn Kitchiner"
+            ]
+          },
+          "eaeb": {
+            "other_values": [],
+            "choice_values": [
+              "Spray application (blanket spray)"
+            ]
+          },
+          "9530": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide treatment (spray)"
+            ]
+          },
+          "ac6f": "25",
+          "2a76": "08:12",
+          "8fb1": [
+            {
+              "caption": "Willows cleared ",
+              "video_id": "18ec5ef0-cd3b-43a0-9020-b6763691baee"
+            }
+          ]
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.924883276225929,
+            50.75458606709796
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.755082775572916,
+          "longitude": -1.9244027373626762,
+          "altitude": 61.772371348924935,
+          "horizontal_accuracy": 4.785505007465784
+        },
+        "updated_at": "1726062270",
+        "created_duration": 718,
+        "updated_duration": 71,
+        "edited_duration": 789,
+        "version": 4,
+        "created_by_id": "0181c4b5-662b-474a-bba8-1a1c1af8374d",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57",
+        "draft": false
+      },
+      {
+        "created_location": {
+          "latitude": 50.754600584500004,
+          "longitude": -1.924781517166667,
+          "altitude": 59.2,
+          "horizontal_accuracy": 10
+        },
+        "id": "963f19d5-0d6d-4c9c-b8ce-a9e654145bb0",
+        "created_at": "1726842047",
+        "draft": false,
+        "form_values": {
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light wind",
+              "Sunny"
+            ]
+          },
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Invasive Plants Management Record"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site only"
+            ]
+          },
+          "5c53": {
+            "other_values": [
+              "Survey"
+            ],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "ac6f": "26",
+          "385f": {
+            "other_values": [
+              "Elliot"
+            ],
+            "choice_values": [
+              "Jon Barton"
+            ]
+          },
+          "2d29": "Installed marker posts, gps mapped area to circa <1m accuracy. Taller trees and difficult ground conditions do limit accessablity. Brush cutting is now of limited value and some tree work may be needed. 40% complete.",
+          "e77c": [
+            {
+              "caption": null,
+              "photo_id": "3214f1d3-6661-41f7-b7ea-3ab4c760fd43"
+            },
+            {
+              "caption": null,
+              "photo_id": "21729c75-fafc-4a6e-8219-d6c7840a8e32"
+            }
+          ],
+          "1db0": {
+            "other_values": [],
+            "choice_values": [
+              "Site Monitoring"
+            ]
+          },
+          "8eaf": "2024-09-19"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9247814788333335,
+            50.75460044599999
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.75462154633333,
+          "longitude": -1.9247896133333333,
+          "altitude": 59,
+          "horizontal_accuracy": 10
+        },
+        "updated_at": "1726842304",
+        "created_duration": 257,
+        "updated_duration": 257,
+        "edited_duration": 257,
+        "version": 3,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57"
+      },
+      {
+        "created_location": {
+          "latitude": 50.754622793333326,
+          "longitude": -1.924789954333333,
+          "altitude": 58.9,
+          "horizontal_accuracy": 10
+        },
+        "id": "9b8795d1-1ca2-462b-8909-7f1ebc2ac715",
+        "created_at": "1726842322",
+        "draft": false,
+        "form_values": {
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light wind",
+              "Sunny"
+            ]
+          },
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Invasive Plants Management Record"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site only"
+            ]
+          },
+          "5c53": {
+            "other_values": [
+              "Survey"
+            ],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "ac6f": "27",
+          "385f": {
+            "other_values": [
+              "Elliot"
+            ],
+            "choice_values": [
+              "Jon Barton"
+            ]
+          },
+          "2d29": "Installed marker posts, gps mapped area to circa <1m accuracy. Taller trees and difficult ground conditions do limit accessablity. Brush cutting is now of limited value (one more team day needed) and some tree work may be needed. 80% complete.",
+          "e77c": [
+            {
+              "caption": null,
+              "photo_id": "568ab81e-f6d5-403f-b277-a9c420f3ec52"
+            },
+            {
+              "caption": null,
+              "photo_id": "5d168a04-2f0c-493b-8d64-23dd5429a3f8"
+            }
+          ],
+          "1db0": {
+            "other_values": [],
+            "choice_values": [
+              "Site Monitoring"
+            ]
+          },
+          "8eaf": "2024-09-20"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9247814788333335,
+            50.75460044599999
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.754852937,
+          "longitude": -1.9245320108333333,
+          "altitude": 60.3,
+          "horizontal_accuracy": 10
+        },
+        "updated_at": "1726842460",
+        "created_duration": 137,
+        "updated_duration": 137,
+        "edited_duration": 137,
+        "version": 3,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57"
+      },
+      {
+        "created_location": {
+          "latitude": 50.75484355916339,
+          "longitude": -1.9240639451909103,
+          "altitude": 59.12567138671875,
+          "horizontal_accuracy": 3.5355339059327373
+        },
+        "id": "9c232bd0-b1f1-4066-bf45-c5cbd5caaad8",
+        "created_at": "1727790119",
+        "draft": false,
+        "form_values": {
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light wind",
+              "Hazy sun"
+            ]
+          },
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Invasive Plants Management Record"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": [
+              "Site only"
+            ]
+          },
+          "5c53": {
+            "other_values": [],
+            "choice_values": [
+              "Cut/clear (retained)"
+            ]
+          },
+          "70b4": [
+            {
+              "caption": null,
+              "photo_id": "3cdebcab-dfd5-4b31-b854-e84dfbeb035b"
+            },
+            {
+              "caption": null,
+              "photo_id": "cbad0b86-f4ea-439a-b7f8-488a3f21c5bd"
+            },
+            {
+              "caption": null,
+              "photo_id": "bf8c8f3e-e8fd-4a8f-826d-df4b4b131a1b"
+            }
+          ],
+          "c4b3": "yes",
+          "ac6f": "28",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Benn Kitchiner"
+            ]
+          },
+          "2a76": "07:58",
+          "1db0": {
+            "other_values": [],
+            "choice_values": [
+              "Cut / Clearance / Excavation / Barrier"
+            ]
+          },
+          "8eaf": "2024-10-01"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.9240639451909105,
+            50.75484360107323
+          ]
+        },
+        "updated_location": {
+          "latitude": 50.754848914227324,
+          "longitude": -1.9240967095647787,
+          "altitude": 60.33626282308251,
+          "horizontal_accuracy": 4.795238161910535
+        },
+        "updated_at": "1727790202",
+        "created_duration": 82,
+        "updated_duration": 82,
+        "edited_duration": 82,
+        "version": 1,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "d17c6855-8bff-45b7-ae6e-301bc350fb57"
+      }
+    ],
+    "7d46": "No other properties included",
+    "9c58": "undefined:  14/06/2018, undefined\nundefined:  26/03/2018, Watching Brief\nundefined:  26/03/2018, Japanese Knotweed Stem Cut (retained)\nundefined:  21/03/2018, iveredi contractors photos of site clearance\nundefined:  06/09/2018, Watching Brief\nundefined:  31/10/2018, Inspect woody area after last treatment \nundefined:  27/09/2018, waste area sprayed today to rear of building as per clients schedule of vists for 2018\nundefined:  24/07/2018, spraying vegetation on waste land\nundefined:  21/03/2018, Japanese Knotweed Stem Cut (retained)\nundefined:  16/07/2018, herbicide treatment of waste land\nundefined:  29/03/2018, Supervisor inspection\nundefined:  23/03/2018, Supervisor inspection\nundefined:  22/03/2018, Supervisor inspection\nundefined:  08/05/2018, undefined\nundefined:  09/05/2018, undefined\nundefined:  23/05/2018, undefined\nundefined:  27/09/2018, undefined\n18:  08/07/2024, undefined\n19:  09/07/2024, undefined\n20:  10/07/2024, undefined\n21:  06/08/2024, Vegetation cut/clear\n22:  05/09/2024, undefined\n23:  06/09/2024, Vegetation cut/clear\n24:  10/09/2024, Herbicide treatment (spray)\n25:  11/09/2024, Herbicide treatment (spray)\n26:  19/09/2024, Survey\n27:  20/09/2024, Survey\n28:  01/10/2024, Cut/clear (retained)",
+    "7120": [
+      {
+        "name": "Cotoneaster JK site plan.pdf",
+        "attachment_id": "0cb98f31-9f29-4d67-80fb-d48c32a6ed31"
+      }
+    ],
+    "a7fe": [
+      {
+        "caption": null,
+        "photo_id": "8f2d6939-b8fa-49bd-b716-5c8dc75fe272"
+      }
+    ],
+    "5b45": [
+      {
+        "photo_id": "b9b2285a-2e07-4d9d-9307-bed9611e33e2",
+        "caption": "Heather and low level grass in foreground. Rocky raised area in middle of site"
+      }
+    ]
+  },
+  "latitude": 50.7551441003,
+  "longitude": -1.92572299713,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -1.92572299713,
+      50.7551441003
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

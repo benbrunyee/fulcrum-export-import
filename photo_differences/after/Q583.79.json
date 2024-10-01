@@ -1,0 +1,175 @@
+{
+  "status": "Ongoing",
+  "version": 4,
+  "id": "bb826a90-8886-4d80-a773-2141ec6292c5",
+  "created_at": "2023-07-23T13:44:26Z",
+  "updated_at": "2024-09-19T11:44:21Z",
+  "client_created_at": "2023-07-23T13:44:26Z",
+  "client_updated_at": "2024-09-19T11:44:20Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": 18,
+  "edited_duration": 18,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "10e63ac8-fd56-48ed-958c-77d331089f77"
+      }
+    ],
+    "c4ee": "Q583.79",
+    "48ca": {
+      "sub_thoroughfare": "41",
+      "thoroughfare": "Rossiter Road",
+      "suite": null,
+      "locality": "London",
+      "sub_admin_area": "London",
+      "admin_area": "England",
+      "postal_code": "SW12 9RY",
+      "country": "GB"
+    },
+    "4a82": "Housing Association,Flat / Apartment / Maisonette",
+    "3bdb": [
+      {
+        "latitude": 51.44346902127281,
+        "longitude": -0.14507895825096548,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": [
+              "Pay As You Go Treatment"
+            ]
+          },
+          "8eaf": "2022-08-19",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Matthew Patrycy. PCAQT. NPTC 353281 (PA1 PA6A)"
+            ]
+          },
+          "2c03": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "0.6",
+          "e77c": [
+            {
+              "photo_id": "f689ffec-14a9-4634-b165-5b0a9ad84ba8",
+              "caption": null
+            },
+            {
+              "photo_id": "b0028924-6887-4802-9362-c273b855ec9e",
+              "caption": null
+            },
+            {
+              "photo_id": "4789459a-131f-4cb6-9ed5-eee63d662ac6",
+              "caption": null
+            },
+            {
+              "photo_id": "bcae0496-f13a-47c4-ad57-bea7e1ad8747",
+              "caption": null
+            }
+          ],
+          "5440": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "1de3": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "15a4": {
+            "other_values": [],
+            "choice_values": []
+          }
+        },
+        "id": "58862f48-af04-4bc1-b6c4-4f199b1301b3",
+        "created_at": "1680957590",
+        "updated_at": "1680957590",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.14507895825096548,
+            51.44346902127281
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 3,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "c098ab87-d487-4abe-bd38-2b72dd657240"
+      }
+    ],
+    "7d46": "No other properties included",
+    "a7fe": [
+      {
+        "caption": null,
+        "photo_id": "0500693c-3344-49a1-bf91-e847d85c3a4a"
+      }
+    ],
+    "9c58": "undefined:  19/08/2022, Pay As You Go Treatment",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "5589d7f6-6af9-4e65-96d3-a74ac7bfe549"
+      }
+    ]
+  },
+  "latitude": 51.4430991199,
+  "longitude": -0.145187529074,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -0.1451875290742313,
+      51.44309911990566
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

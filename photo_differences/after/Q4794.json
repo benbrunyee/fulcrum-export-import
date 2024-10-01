@@ -1,0 +1,514 @@
+{
+  "status": "Completed",
+  "version": 4,
+  "id": "4ff99b57-628c-438c-921e-847ddd55607d",
+  "created_at": "2023-07-23T13:26:12Z",
+  "updated_at": "2024-02-19T16:35:57Z",
+  "client_created_at": "2023-07-23T13:26:12Z",
+  "client_updated_at": "2024-02-19T16:35:55Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": 9,
+  "edited_duration": 9,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "0dee1609-3c87-4cf0-8e05-6c72b23ba1de"
+      }
+    ],
+    "c4ee": "Q4794",
+    "48ca": {
+      "sub_thoroughfare": "50",
+      "thoroughfare": "Edwin Street",
+      "suite": null,
+      "locality": "Gravesend",
+      "sub_admin_area": null,
+      "admin_area": null,
+      "postal_code": "DA12 1EL",
+      "country": null
+    },
+    "4a82": "Private Residential,House,Terrace",
+    "19ac": "JK in rear garden on all sides but mainly by boundary wall and on hard surfaces. Previous attempts by the tenant's husband to control the spread of knotweed by cutting it down and digging a channel to prevent spread onto the patio. Nothing done for more than a year now. Neighbouring property No 49 has already a knotweed management plan set in place.",
+    "3bdb": [
+      {
+        "latitude": 51.3209454,
+        "longitude": -0.2123482,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2017-07-19",
+          "2a76": "01:30",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jan Aslanowicz"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light breeze",
+              "Overcast",
+              "Between 15 and 20 degrees centigrade"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Eye protection",
+              "Face protection",
+              "Protective gloves",
+              "Boots",
+              "Respiratory protection"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "8",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "yes"
+            ]
+          },
+          "2d29": "JK activity treated in rear garden and on patio hardsurface.Neighbouring property 49 has someone already dealing with their JK other neighbour 51 no signs of knotweed noted including rear back property",
+          "e77c": [
+            {
+              "photo_id": "0ae91cc3-3349-405b-9ed5-e720bf0c59a3",
+              "caption": null
+            },
+            {
+              "photo_id": "a403d223-2eef-4446-81bd-e6603382a5cf",
+              "caption": null
+            },
+            {
+              "photo_id": "d4ef1e0b-65b2-4311-ac15-f90dd5aca2b2",
+              "caption": null
+            },
+            {
+              "photo_id": "3ce001da-eac8-470e-b84e-7beefed5ebc4",
+              "caption": null
+            },
+            {
+              "photo_id": "9e5496e3-7808-4dbb-acfb-5fb70efd5734",
+              "caption": null
+            },
+            {
+              "photo_id": "51682031-b15f-49d8-b6f6-c402227a9df9",
+              "caption": "No 49"
+            },
+            {
+              "photo_id": "269832ec-66e1-4652-9154-85a349e0a0f2",
+              "caption": "No 49"
+            },
+            {
+              "photo_id": "c794465e-3393-4cc2-afbd-acd9bd5a7bc6",
+              "caption": "No 51"
+            },
+            {
+              "photo_id": "5a639a2f-b43f-4b96-8116-1d6233f74116",
+              "caption": "No 51"
+            },
+            {
+              "photo_id": "0f94e83e-faaf-4cf4-b3ca-8fd55c067783",
+              "caption": "rear back property"
+            },
+            {
+              "photo_id": "a7dd5ad1-9bcc-4ecb-91d4-7413b2ec8c6d",
+              "caption": "Rear back property"
+            }
+          ]
+        },
+        "id": "2a478eaf-34af-4512-b3cd-a06e5dbaa9b0",
+        "created_at": "1680956872",
+        "updated_at": "1680956872",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.2123482,
+            51.3209454
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "ec6be846-50ad-4788-a65b-77adbc670c68"
+      },
+      {
+        "latitude": 51.4393626,
+        "longitude": 0.3717574,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2017-10-05",
+          "2a76": "09:07",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jan Aslanowicz"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Moderate breeze",
+              "Overcast",
+              "Between 5 and 15 degrees centigrade"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Face protection",
+              "Protective gloves",
+              "Boots",
+              "Respiratory protection"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "2",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "yes"
+            ]
+          },
+          "2d29": "Knotweed treated in rear garden ",
+          "e77c": [
+            {
+              "photo_id": "7d558054-0054-4bed-97bf-c06f0fcf21e8",
+              "caption": null
+            },
+            {
+              "photo_id": "10a5b0a7-00af-4b0b-8bb7-cbf891a54021",
+              "caption": null
+            },
+            {
+              "photo_id": "f91719be-c811-44fa-8d90-5d019e804762",
+              "caption": null
+            },
+            {
+              "photo_id": "d61996eb-3249-4350-b525-c5e37de6bbc7",
+              "caption": null
+            }
+          ]
+        },
+        "id": "b855d3bf-f660-4c6b-b946-9ce6ad37a9ac",
+        "created_at": "1680956872",
+        "updated_at": "1680956872",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            0.3717574,
+            51.4393626
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "ec6be846-50ad-4788-a65b-77adbc670c68"
+      },
+      {
+        "latitude": 51.4395306,
+        "longitude": 0.3715486,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2018-07-12",
+          "2a76": "15:44",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jan Aslanowicz"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light breeze",
+              "Sunny",
+              "Higher than 25 degrees centigrade"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Face protection",
+              "Protective suit",
+              "Protective gloves",
+              "Boots"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "yes"
+            ]
+          },
+          "2d29": "Knotweed and Bonsai treated in rear garden at back of property and on patio hard surface. Blanket sprayed around the Knotweed as well.",
+          "e77c": [
+            {
+              "photo_id": "79a6cc08-7ba9-4cee-9728-1107b8e384c3",
+              "caption": null
+            },
+            {
+              "photo_id": "e15e25ab-58a3-4946-bf42-576ed2962c57",
+              "caption": null
+            },
+            {
+              "photo_id": "eccf2e3d-f989-4647-bf01-4425da453e24",
+              "caption": null
+            },
+            {
+              "photo_id": "89b0a789-2d38-4baa-ba55-4bd1e38783b0",
+              "caption": null
+            },
+            {
+              "photo_id": "f9fa5f80-5287-446b-a6e2-e2c4e6d3d75b",
+              "caption": null
+            },
+            {
+              "photo_id": "114b737e-2c33-4878-bd89-7f95bebde9ea",
+              "caption": null
+            },
+            {
+              "photo_id": "6a23efa6-64f4-4d9a-8497-0459b9d5a97f",
+              "caption": null
+            },
+            {
+              "photo_id": "09340261-3953-47c7-9cb3-8e703ca20ab7",
+              "caption": null
+            }
+          ]
+        },
+        "id": "e27d0695-2c8d-4d8b-8481-efe4015e1119",
+        "created_at": "1680956872",
+        "updated_at": "1680956872",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            0.3715486,
+            51.4395306
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "ec6be846-50ad-4788-a65b-77adbc670c68"
+      },
+      {
+        "latitude": 51.4395845,
+        "longitude": 0.3712447,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Herbicide Application & Monitoring Record"
+            ]
+          },
+          "8eaf": "2018-10-10",
+          "2a76": "12:35",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Jan Aslanowicz"
+            ]
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": [
+              "Light breeze",
+              "Sunny",
+              "Between 15 and 20 degrees centigrade"
+            ]
+          },
+          "c4b3": "yes",
+          "6da0": "yes",
+          "3fd4": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese knotweed"
+            ]
+          },
+          "2073": "Invasive weed control (Japanese knotweed)",
+          "3bb5": "Not applicable",
+          "8f2a": {
+            "other_values": [],
+            "choice_values": [
+              "Eye protection",
+              "Face protection",
+              "Protective suit",
+              "Protective gloves"
+            ]
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": [
+              "RoundUp Pro-Vantage 480",
+              " 15534",
+              " Glyphosate"
+            ]
+          },
+          "22b1": "37.5",
+          "5b61": "0.2",
+          "7644": {
+            "other_values": [],
+            "choice_values": [
+              "yes"
+            ]
+          },
+          "2d29": "One Bonsai cluster treated in rear on patio"
+        },
+        "id": "99cc2254-a292-4dc7-b223-f8f331a0dc3a",
+        "created_at": "1680956872",
+        "updated_at": "1680956872",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            0.3712447,
+            51.4395845
+          ]
+        },
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": "ec6be846-50ad-4788-a65b-77adbc670c68"
+      }
+    ],
+    "7d46": "No other properties included",
+    "9c58": "undefined:  19/07/2017, undefined\nundefined:  05/10/2017, undefined\nundefined:  12/07/2018, undefined\nundefined:  10/10/2018, undefined",
+    "5b45": [
+      {
+        "photo_id": "7afcbc78-10e4-4436-bde8-8f15be1ccf32",
+        "caption": null
+      }
+    ]
+  },
+  "latitude": 51.43942,
+  "longitude": 0.371538,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      0.371538,
+      51.43942
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}

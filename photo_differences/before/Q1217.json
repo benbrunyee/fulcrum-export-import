@@ -1,0 +1,173 @@
+{
+  "status": "Ongoing",
+  "version": 4,
+  "id": "e623fd10-e630-4e20-9805-70377cc65bda",
+  "created_at": "2023-07-23T13:15:25Z",
+  "updated_at": "2023-08-05T12:53:47Z",
+  "client_created_at": "2023-07-23T13:15:25Z",
+  "client_updated_at": "2023-07-23T13:15:25Z",
+  "created_by": "Jon Barton",
+  "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "updated_by": "Jon Barton",
+  "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+  "created_location": null,
+  "updated_location": null,
+  "created_duration": null,
+  "updated_duration": null,
+  "edited_duration": null,
+  "form_id": "8b47f113-c60f-4016-af20-1a4367887eba",
+  "project_id": null,
+  "record_series_id": null,
+  "assigned_to": null,
+  "assigned_to_id": null,
+  "form_values": {
+    "96e4": [
+      {
+        "record_id": "92ae98fe-538a-449f-a04d-9ed5b5253ec1"
+      }
+    ],
+    "c4ee": "Q1217",
+    "48ca": {
+      "sub_thoroughfare": "6",
+      "thoroughfare": "Camden Square",
+      "suite": "",
+      "locality": "London",
+      "sub_admin_area": "",
+      "admin_area": "NW1 9UY",
+      "postal_code": "",
+      "country": ""
+    },
+    "4a82": "Private Residential,House,Terrace",
+    "19ac": "1 stem noted on no.5 side of boundary. Owner (of no. 5) does not wish us to treat. Informed owner of no. 5 that we need to treat cohesively and would be very sensitive to plants etc. She was nervous that her property would be highlighted as having Japanese knotweed.",
+    "3bdb": [
+      {
+        "latitude": null,
+        "longitude": null,
+        "form_values": {
+          "4010": {
+            "other_values": [],
+            "choice_values": [
+              "Japanese Knotweed Management Record"
+            ]
+          },
+          "b0b0": {
+            "other_values": [],
+            "choice_values": [
+              "Site Monitoring Observations & Recommendations"
+            ]
+          },
+          "1db0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "45b7": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "113b": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "9530": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "5c53": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "e29a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8eaf": "2015-07-06",
+          "385f": {
+            "other_values": [],
+            "choice_values": [
+              "Phil Cox. CSJK. PCAQT. NPTC 723725, PA1 PA6AW"
+            ]
+          },
+          "8885": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "84ea": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "2c03": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "ebc0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "3fd4": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "48f0": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "eaeb": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "8f2a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "b65a": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "7644": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "5440": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "1de3": {
+            "other_values": [],
+            "choice_values": []
+          },
+          "2338": "Treatments will ideally include growth at Number 5 Camden Square, but the owner of Number 5 must give permission for this to happen and must discontinue their own treatment of the knotweed during the treatment and monitoring program. The success of the treatment program will be degraded if these recommendations are not followed.",
+          "15a4": {
+            "other_values": [],
+            "choice_values": []
+          }
+        },
+        "id": "67864c67-b9d0-45d6-8f23-0607a7bb9124",
+        "created_at": "1680956004",
+        "updated_at": "1680956004",
+        "geometry": null,
+        "created_duration": null,
+        "updated_duration": null,
+        "edited_duration": null,
+        "version": 2,
+        "created_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "updated_by_id": "c74ae54d-e0e3-475f-956f-6b6a23e88ce2",
+        "changeset_id": null
+      }
+    ]
+  },
+  "latitude": 51.5449677467987,
+  "longitude": -0.133616924285889,
+  "altitude": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -0.133616924285889,
+      51.5449677467987
+    ]
+  },
+  "speed": null,
+  "course": null,
+  "horizontal_accuracy": null,
+  "vertical_accuracy": null,
+  "system_status": null
+}
