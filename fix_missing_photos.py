@@ -288,10 +288,10 @@ def main():
                 continue
 
         record = records_to_update[ref]
-        # FULCRUM.update_fulcrum_record(
-        #     sv_record["id"],
-        #     record,
-        # )
+        FULCRUM.update_fulcrum_record(
+            record["id"],
+            record,
+        )
         logger.info(f"Record updated: {ref}")
 
 
