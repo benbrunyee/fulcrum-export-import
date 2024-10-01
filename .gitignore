@@ -18,3 +18,7 @@
 !fulcrum_types/**
 !import_other_visits
 !import_other_visits/**
+!fulcrum_helpers
+!fulcrum_helpers/**
+!photo_differences
+!photo_differences/**
