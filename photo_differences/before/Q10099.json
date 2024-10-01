@@ -40,7 +40,13 @@
     "4a82": "Commercial,Development",
     "19ac": "Site is up for re-development. Client looking to excavate knotweed and remove off site to enable development to proceed unhindered.\nDecent access and (as things stand at the moment) there is hardstanding space on site useful for stockpiling if needed.",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "eb964c6b-2d86-4a30-b6cf-5060c4e9d30c"
+      }
+    ]
   },
   "latitude": 51.389119,
   "longitude": -0.296211,

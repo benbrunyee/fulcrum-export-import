@@ -37,7 +37,13 @@
       "postal_code": "HA2 7NW",
       "country": ""
     },
-    "4a82": "Private Residential,House,Semi"
+    "4a82": "Private Residential,House,Semi",
+    "5b45": [
+      {
+        "photo_id": "b07c71ca-8fb2-49e8-a79b-720904fe6750",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5831292,
   "longitude": -0.3641307,

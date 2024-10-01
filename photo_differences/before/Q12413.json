@@ -37,7 +37,13 @@
       "postal_code": "CM6 2NQ",
       "country": "GB"
     },
-    "4a82": "Commercial,Development"
+    "4a82": "Commercial,Development",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "84de31d5-ef94-40e6-b28e-d5ffc6c6609b"
+      }
+    ]
   },
   "latitude": 51.942317915349705,
   "longitude": 0.33602776705898807,

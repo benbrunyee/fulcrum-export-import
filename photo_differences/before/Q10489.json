@@ -37,7 +37,13 @@
       "postal_code": "NW34SL",
       "country": ""
     },
-    "4a82": "Private Residential,Flat / Apartment / Maisonette"
+    "4a82": "Private Residential,Flat / Apartment / Maisonette",
+    "5b45": [
+      {
+        "photo_id": "06496dc5-944c-4a02-a25c-56b52f3a6ab9",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5488353,
   "longitude": -0.1408921,

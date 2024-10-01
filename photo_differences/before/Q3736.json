@@ -38,7 +38,13 @@
       "country": "GB"
     },
     "4a82": "Private Residential",
-    "19ac": "Previous treatments not known."
+    "19ac": "Previous treatments not known.",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "5c3d5992-a7bd-47ff-a239-8abf4f3f2838"
+      }
+    ]
   },
   "latitude": 51.4602292422684,
   "longitude": -0.957630844787655,

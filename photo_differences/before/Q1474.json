@@ -39,7 +39,13 @@
     },
     "19ac": "Knotweed infestation located around and under pedestrian access ramp",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "88b73048-3d9c-4b47-ae9e-b2b479b55125",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.4301166188,
   "longitude": 0.108790397644,

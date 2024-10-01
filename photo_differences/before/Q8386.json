@@ -38,7 +38,13 @@
       "country": ""
     },
     "4a82": "Private Residential,House,Semi",
-    "19ac": "No knotweed visible in subjects property nor in neighbouring properties."
+    "19ac": "No knotweed visible in subjects property nor in neighbouring properties.",
+    "5b45": [
+      {
+        "photo_id": "6c3a93e9-9748-4a94-88b2-73cb8fa8f28d",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.544006,
   "longitude": -0.1945664,

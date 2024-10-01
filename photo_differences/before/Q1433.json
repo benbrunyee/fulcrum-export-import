@@ -38,7 +38,13 @@
       "country": ""
     },
     "4a82": "Private Residential,House,Semi",
-    "19ac": "Residential, maintained. New paving currently being put in."
+    "19ac": "Residential, maintained. New paving currently being put in.",
+    "5b45": [
+      {
+        "photo_id": "3d3f8412-b72b-4756-a92a-f47c8dec3a10",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.4464402152704,
   "longitude": 0.152265988290452,

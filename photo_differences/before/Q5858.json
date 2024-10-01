@@ -1087,7 +1087,13 @@
     "2e97": "9",
     "da65": "13/10/2023",
     "793c": "No monitoring visits have taken place",
-    "9c58": "undefined:  29/05/2018, undefined\nundefined:  30/08/2018, undefined\nundefined:  10/06/2019, undefined\nundefined:  16/09/2019, undefined\nundefined:  01/06/2020, Scheduled Treatment\nundefined:  30/09/2020, Scheduled Monitoring\nundefined:  12/07/2021, Scheduled Monitoring\nundefined:  04/08/2022, undefined\n9:  13/10/2023, Herbicide treatment (spray)\n10:  06/09/2024, Herbicide treatment (spray)"
+    "9c58": "undefined:  29/05/2018, undefined\nundefined:  30/08/2018, undefined\nundefined:  10/06/2019, undefined\nundefined:  16/09/2019, undefined\nundefined:  01/06/2020, Scheduled Treatment\nundefined:  30/09/2020, Scheduled Monitoring\nundefined:  12/07/2021, Scheduled Monitoring\nundefined:  04/08/2022, undefined\n9:  13/10/2023, Herbicide treatment (spray)\n10:  06/09/2024, Herbicide treatment (spray)",
+    "5b45": [
+      {
+        "photo_id": "1e3d63f5-7da5-4989-9b04-cfd09061f16d",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.1389054,
   "longitude": 0.8942325,

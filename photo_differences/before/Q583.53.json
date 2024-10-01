@@ -1183,7 +1183,13 @@
     "2e97": "9",
     "da65": "29/08/2023",
     "793c": "No monitoring visits have taken place",
-    "9c58": "undefined:  01/06/2017, undefined\nundefined:  01/08/2018, undefined\nundefined:  09/07/2019, undefined\nundefined:  21/07/2020, Pay As You Go Treatment\nundefined:  03/06/2021, undefined\nundefined:  28/09/2021, Scheduled Treatment\nundefined:  06/05/2022, Vegetation Clearance (other than knotweed)\nundefined:  19/08/2022, undefined\nundefined:  11/10/2022, undefined\n9:  29/08/2023, Scheduled Treatment\n11:  04/09/2024, Scheduled Monitoring"
+    "9c58": "undefined:  01/06/2017, undefined\nundefined:  01/08/2018, undefined\nundefined:  09/07/2019, undefined\nundefined:  21/07/2020, Pay As You Go Treatment\nundefined:  03/06/2021, undefined\nundefined:  28/09/2021, Scheduled Treatment\nundefined:  06/05/2022, Vegetation Clearance (other than knotweed)\nundefined:  19/08/2022, undefined\nundefined:  11/10/2022, undefined\n9:  29/08/2023, Scheduled Treatment\n11:  04/09/2024, Scheduled Monitoring",
+    "5b45": [
+      {
+        "photo_id": "44d7cbce-70b5-4210-a2d6-ee3c7619bb58",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.4173344437,
   "longitude": -0.192725099623,

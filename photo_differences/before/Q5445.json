@@ -842,7 +842,13 @@
       }
     ],
     "7d46": "No other properties included",
-    "9c58": "undefined:  03/08/2017, undefined\nundefined:  24/05/2018, undefined\nundefined:  31/05/2019, undefined\nundefined:  11/09/2019, undefined\nundefined:  10/06/2020, Scheduled Treatment\nundefined:  15/09/2020, Pay As You Go Treatment\nundefined:  19/07/2021, Scheduled Treatment"
+    "9c58": "undefined:  03/08/2017, undefined\nundefined:  24/05/2018, undefined\nundefined:  31/05/2019, undefined\nundefined:  11/09/2019, undefined\nundefined:  10/06/2020, Scheduled Treatment\nundefined:  15/09/2020, Pay As You Go Treatment\nundefined:  19/07/2021, Scheduled Treatment",
+    "5b45": [
+      {
+        "photo_id": "0ef2ddd8-ea43-4c06-9dd6-9c494af3d313",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.3052146,
   "longitude": -0.9123687,

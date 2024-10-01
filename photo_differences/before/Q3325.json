@@ -969,7 +969,13 @@
         "attachment_id": "f11f4c31-e18d-4ff2-982d-23f651f205d1"
       }
     ],
-    "9c58": "undefined:  27/07/2016, undefined\nundefined:  05/06/2017, undefined\nundefined:  22/06/2017, undefined\nundefined:  04/10/2017, undefined\nundefined:  07/06/2018, undefined\nundefined:  18/09/2018, undefined\nundefined:  27/06/2019, undefined\nundefined:  07/07/2020, Scheduled Monitoring\nundefined:  16/07/2021, Scheduled Monitoring"
+    "9c58": "undefined:  27/07/2016, undefined\nundefined:  05/06/2017, undefined\nundefined:  22/06/2017, undefined\nundefined:  04/10/2017, undefined\nundefined:  07/06/2018, undefined\nundefined:  18/09/2018, undefined\nundefined:  27/06/2019, undefined\nundefined:  07/07/2020, Scheduled Monitoring\nundefined:  16/07/2021, Scheduled Monitoring",
+    "5b45": [
+      {
+        "photo_id": "fd173685-4f49-4cb6-bc63-c63f7e3a554c",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.43828,
   "longitude": 0.00143,

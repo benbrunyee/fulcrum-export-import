@@ -1328,7 +1328,13 @@
     "da65": "12/10/2023",
     "793c": "No monitoring visits have taken place",
     "9c58": "undefined:  01/07/2015, undefined\nundefined:  01/09/2015, undefined\nundefined:  16/02/2016, Japanese Knotweed Stem Cut\nundefined:  25/05/2016, undefined\nundefined:  27/10/2016, undefined\nundefined:  06/06/2017, undefined\nundefined:  19/09/2017, undefined\nundefined:  29/10/2018, undefined\nundefined:  25/07/2019, undefined\nundefined:  09/07/2020, Scheduled Treatment\nundefined:  05/08/2021, undefined\nundefined:  19/08/2022, undefined\n12:  12/10/2023, Herbicide treatment (spray)\n14:  17/09/2024, Herbicide treatment (spray)",
-    "2e97": "12"
+    "2e97": "12",
+    "5b45": [
+      {
+        "photo_id": "74c935f5-5273-48a5-adb6-11ea3e10d837",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.4806478099,
   "longitude": -0.148981120438,

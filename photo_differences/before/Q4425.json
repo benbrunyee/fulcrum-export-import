@@ -40,7 +40,13 @@
     "4a82": "Private Residential,Flat / Apartment / Maisonette",
     "19ac": "PBA have been treating through Wandle Housing who own the neighbouring property",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "2d438e8e-1d81-4e05-83e4-a3ab9990366e"
+      }
+    ]
   },
   "latitude": 51.4224710147,
   "longitude": -0.0871885558578,

@@ -37,7 +37,13 @@
       "postal_code": "NW10 8BA",
       "country": ""
     },
-    "4a82": "Housing Association,House,semi-detached"
+    "4a82": "Housing Association,House,semi-detached",
+    "5b45": [
+      {
+        "photo_id": "693e7ee8-5c8f-4999-9b4e-b1711a6b8965",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5454009,
   "longitude": -0.2036355,

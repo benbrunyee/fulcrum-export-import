@@ -1131,7 +1131,13 @@
         "photo_id": "8f73095d-9b0c-40f1-acd0-438f51022cf6"
       }
     ],
-    "2e97": "9"
+    "2e97": "9",
+    "5b45": [
+      {
+        "photo_id": "027089C5-E0BC-4CEE-AA03-31A7DA280EA6",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.2088198821,
   "longitude": -1.5034030471,

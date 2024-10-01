@@ -37,7 +37,13 @@
       "postal_code": "E4 9AA",
       "country": "United Kingdom"
     },
-    "4a82": "Housing Association,House,terrace"
+    "4a82": "Housing Association,House,terrace",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "bf42db10-c212-417b-bae7-212da85a023f"
+      }
+    ]
   },
   "latitude": null,
   "longitude": null,

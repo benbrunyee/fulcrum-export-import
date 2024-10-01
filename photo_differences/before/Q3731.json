@@ -37,7 +37,13 @@
       "postal_code": "KT22 0EZ",
       "country": "GB"
     },
-    "4a82": "Private Residential,House,Semi"
+    "4a82": "Private Residential,House,Semi",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "ab0e104d-b4ed-4d94-b32e-4c622cf9be19"
+      }
+    ]
   },
   "latitude": 51.3254861305645,
   "longitude": -0.353179474671358,

@@ -38,7 +38,13 @@
       "country": ""
     },
     "4a82": "Private Residential,Flat / Apartment / Maisonette",
-    "19ac": "Small mostly paved rear garden with some planted boarders and shrubs."
+    "19ac": "Small mostly paved rear garden with some planted boarders and shrubs.",
+    "5b45": [
+      {
+        "photo_id": "9357c715-2b3e-403a-a396-e8158d6ea230",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.4545608545,
   "longitude": -0.186324175447,

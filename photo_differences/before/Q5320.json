@@ -341,7 +341,13 @@
       }
     ],
     "7d46": "No other properties included",
-    "9c58": "undefined:  20/07/2017, undefined\nundefined:  27/06/2019, undefined\nundefined:  13/08/2019, undefined"
+    "9c58": "undefined:  20/07/2017, undefined\nundefined:  27/06/2019, undefined\nundefined:  13/08/2019, undefined",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "d254c328-dd97-4d3f-8957-d7109da4d883"
+      }
+    ]
   },
   "latitude": 51.4405040676,
   "longitude": -0.0462605617941,

@@ -37,7 +37,13 @@
       "postal_code": "E17 5HY",
       "country": ""
     },
-    "4a82": "Council,House,Terrace"
+    "4a82": "Council,House,Terrace",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "6f5c1b86-227f-43e0-b18f-590bfcd3c22a"
+      }
+    ]
   },
   "latitude": 51.597818397,
   "longitude": -0.0272789698891,

@@ -1018,7 +1018,13 @@
     "da65": "13/09/2023",
     "793c": "No monitoring visits have taken place",
     "9c58": "undefined:  25/10/2016, undefined\nundefined:  07/06/2017, undefined\nundefined:  29/09/2017, undefined\nundefined:  24/05/2018, undefined\nundefined:  17/09/2018, undefined\nundefined:  04/07/2019, undefined\nundefined:  12/08/2020, Scheduled Monitoring\nundefined:  30/07/2021, undefined\nundefined:  28/10/2021, undefined\nundefined:  01/08/2022, undefined\n11:  13/09/2023, undefined",
-    "2e97": "11"
+    "2e97": "11",
+    "5b45": [
+      {
+        "photo_id": "96c00b40-0606-4da1-a5d0-7a179e44abcc",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.601626,
   "longitude": -0.978903,

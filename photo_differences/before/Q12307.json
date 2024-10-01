@@ -36,7 +36,13 @@
       "admin_area": "England",
       "postal_code": "AL10 8LE",
       "country": "GB"
-    }
+    },
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "5eb22250-6981-4f15-8a33-6bb33976cfa6"
+      }
+    ]
   },
   "latitude": 51.74479879443696,
   "longitude": -0.22972390987000402,

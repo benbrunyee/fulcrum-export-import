@@ -37,7 +37,13 @@
       "postal_code": "GU32 2JJ",
       "country": ""
     },
-    "4a82": "Private Residential,House,Detached"
+    "4a82": "Private Residential,House,Detached",
+    "5b45": [
+      {
+        "photo_id": "2f5397ff-0285-420b-a889-45452b782231",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.013773,
   "longitude": -0.935178,

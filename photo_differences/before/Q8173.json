@@ -37,7 +37,13 @@
       "postal_code": "HA5 4HQ",
       "country": "GB"
     },
-    "4a82": "Private Residential,Flat / Apartment / Maisonette"
+    "4a82": "Private Residential,Flat / Apartment / Maisonette",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "f3780139-297c-44a8-97df-5d62ad3cd854"
+      }
+    ]
   },
   "latitude": 51.6104709323,
   "longitude": -0.368324378008,

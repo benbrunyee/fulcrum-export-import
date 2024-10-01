@@ -37,7 +37,13 @@
       "postal_code": "SE22 9JT",
       "country": "GB"
     },
-    "4a82": "Housing Association,House,terrace"
+    "4a82": "Housing Association,House,terrace",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "766887d1-2a2a-426d-820c-2d40a722616e"
+      }
+    ]
   },
   "latitude": 51.452490242,
   "longitude": -0.0758834339361,

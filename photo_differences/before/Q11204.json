@@ -37,7 +37,13 @@
       "postal_code": "NW6 7NN",
       "country": ""
     },
-    "4a82": "Private Residential,House,Detached"
+    "4a82": "Private Residential,House,Detached",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "d66603d3-5e2c-4cc1-8674-778ea080dad4"
+      }
+    ]
   },
   "latitude": 52.0408315981,
   "longitude": 0.48622424124,

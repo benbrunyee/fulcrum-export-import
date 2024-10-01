@@ -981,7 +981,13 @@
         "photo_id": "40192b68-5784-45c5-aec7-d2057510bbea"
       }
     ],
-    "9c58": "undefined:  14/02/2020, Crown Severing\nundefined:  20/03/2019, Japanese Knotweed Stem Cut (retained)\nundefined:  25/09/2020, Scheduled Treatment\nundefined:  15/07/2021, Scheduled Treatment\nundefined:  12/10/2021, Scheduled Treatment\nundefined:  19/07/2022, Scheduled Treatment\n7:  26/07/2024, Herbicide treatment (spray)"
+    "9c58": "undefined:  14/02/2020, Crown Severing\nundefined:  20/03/2019, Japanese Knotweed Stem Cut (retained)\nundefined:  25/09/2020, Scheduled Treatment\nundefined:  15/07/2021, Scheduled Treatment\nundefined:  12/10/2021, Scheduled Treatment\nundefined:  19/07/2022, Scheduled Treatment\n7:  26/07/2024, Herbicide treatment (spray)",
+    "5b45": [
+      {
+        "photo_id": "1d6217ec-f1a7-4706-80f3-6658d1840052",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.547474,
   "longitude": -0.2384223,

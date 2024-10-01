@@ -37,7 +37,13 @@
       "postal_code": "SW195PA",
       "country": ""
     },
-    "4a82": "Private Residential,House,Detached"
+    "4a82": "Private Residential,House,Detached",
+    "5b45": [
+      {
+        "photo_id": "e9ced614-e5a0-46c4-aa2f-8acf36d5b111",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.4387364,
   "longitude": -0.2227841,

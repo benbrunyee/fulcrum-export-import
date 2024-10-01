@@ -39,7 +39,13 @@
     },
     "4a82": "Private Residential",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "ae9530a6-4fec-443a-a17e-c0754bdf2659",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.4819498128,
   "longitude": -0.356422327459,

@@ -37,7 +37,13 @@
       "postal_code": "CR7 7RN",
       "country": ""
     },
-    "4a82": "Private Residential,Flat / Apartment / Maisonette"
+    "4a82": "Private Residential,Flat / Apartment / Maisonette",
+    "5b45": [
+      {
+        "photo_id": "8f00b4c1-8b8b-4e49-9cca-480fc23f9030",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.400377,
   "longitude": -0.103378,

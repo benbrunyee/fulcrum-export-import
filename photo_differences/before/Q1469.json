@@ -40,7 +40,13 @@
     "4a82": "Private Residential,House,Terrace",
     "19ac": "Round back of houses through a side gate.",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "685db04f-be92-48ad-ba63-78ce44ee248a",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5854964918,
   "longitude": -0.00104228965938,

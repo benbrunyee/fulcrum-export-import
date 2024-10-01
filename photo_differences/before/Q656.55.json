@@ -1514,7 +1514,13 @@
     "da65": "26/09/2023",
     "793c": "No monitoring visits have taken place",
     "9c58": "undefined:  28/05/2020, Scheduled Treatment\nundefined:  07/09/2020, Scheduled Treatment\nundefined:  16/06/2021, Scheduled Treatment\nundefined:  05/10/2021, Scheduled Treatment\n5:  07/06/2022, Scheduled Treatment\nundefined:  19/09/2022, Scheduled Treatment\n7:  19/09/2022, Scheduled Treatment\n8:  21/06/2023, Pay As You Go Treatment\n9:  26/09/2023, Pay As You Go Treatment",
-    "2e97": "9"
+    "2e97": "9",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "f6ee38f5-e848-4098-85bd-6510397f2c62"
+      }
+    ]
   },
   "latitude": 51.5508766719,
   "longitude": -0.219081722006,

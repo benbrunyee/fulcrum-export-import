@@ -40,7 +40,13 @@
     "4a82": "Private Residential,Flat / Apartment / Maisonette",
     "19ac": "No drive.",
     "7d46": "No other properties included",
-    "9c58": "No service visits have taken place"
+    "9c58": "No service visits have taken place",
+    "5b45": [
+      {
+        "photo_id": "54b8694a-1d3a-4c5f-a49d-b38e0cc0cfce",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.4459572081,
   "longitude": -0.104915946722,

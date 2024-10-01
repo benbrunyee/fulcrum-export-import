@@ -159,7 +159,13 @@
         "photo_id": "dd558fb6-5161-4833-805f-eeffe6a99464"
       }
     ],
-    "9c58": "undefined:  28/10/2022, Scheduled Treatment"
+    "9c58": "undefined:  28/10/2022, Scheduled Treatment",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "204e5b44-3d97-4eb1-9a37-64305341c4e5"
+      }
+    ]
   },
   "latitude": 51.5540579694,
   "longitude": -0.00272046462843,

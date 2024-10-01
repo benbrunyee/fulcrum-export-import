@@ -38,7 +38,13 @@
       "country": ""
     },
     "4a82": "Housing Association,House,terrace",
-    "19ac": "Nothing visible upon today's inspection in property rear garden"
+    "19ac": "Nothing visible upon today's inspection in property rear garden",
+    "5b45": [
+      {
+        "photo_id": "e9375aa5-d4ff-41e4-9570-fa26d2f1b3e7",
+        "caption": null
+      }
+    ]
   },
   "latitude": 51.5971314,
   "longitude": -0.0138137,

@@ -38,7 +38,13 @@
       "country": "GB"
     },
     "4a82": "Private Residential,House,Semi",
-    "19ac": "Within hard surface on boundary of property and next to manhole."
+    "19ac": "Within hard surface on boundary of property and next to manhole.",
+    "5b45": [
+      {
+        "caption": null,
+        "photo_id": "c57e1dd4-cedf-488f-a66f-b05094aecbca"
+      }
+    ]
   },
   "latitude": 50.7311924323,
   "longitude": -1.91670448353,
