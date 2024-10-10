@@ -80,8 +80,6 @@ FULCRUM_API_KEY = os.getenv("FULCRUM_API_KEY")
 FULCRUM = FulcrumApp(FULCRUM_API_KEY)
 
 # MARK: Main
-
-
 def main():
     # Get the apps
     jkmr_app = FULCRUM.get_app("Japanese Knotweed Management Record (LEGACY)")
