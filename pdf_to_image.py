@@ -73,10 +73,8 @@ if DRY_RUN:
 
 
 def main():
-    attachment_count = 0
-    sv_app = FULCRUM.get_app("SITE VISIT RECORDS")
-
     # Get the key for the site plan attachments
+    sv_app = FULCRUM.get_app("SITE VISIT RECORDS")
     site_plan_key = find_key_code(sv_app["elements"], "site_plans_attachments")
     logger.info(f"Site plan key: {site_plan_key}")
 
@@ -84,6 +82,8 @@ def main():
     sv_records = FULCRUM.get_app_records(sv_app)
 
     logger.info(f"Found {len(sv_records)} records")
+
+    attachment_count = 0
 
     for record in sv_records:
         # Get the site plan attachments
@@ -113,8 +113,28 @@ def main():
         attachment_count += attachments_json["total_count"]
 
     logger.info(f"Found {attachment_count} attachments")
+    debug_attachments()
+
+
+def debug_attachments():
+    attachment_count = 0
+    attachments = FULCRUM.list_attachments()
+    attachments_json = attachments.json()
+
+    logger.info(f"Found {len(attachments_json)} attachments")
+
+    attachment_count = 0
+
+    for attachment in attachments_json.values():
+        attachment_count += attachment["count"]
+
+    attachments_flattened = [
+        y for y in (x["attachments"] for x in attachments_json.values())
+    ]
+
+    logger.debug(f"Flattened attachments count: {len(attachments_flattened)}")
+    logger.debug(f"Attachment count: {attachment_count}")
 
 
 if __name__ == "__main__":
-
     main()

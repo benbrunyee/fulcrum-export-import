@@ -135,7 +135,16 @@ class FulcrumApp:
             f"https://api.fulcrumapp.com/api/v2/attachments/{attachment_id}",
             headers={"X-ApiToken": self.api_key, "Accept": "application/json"},
         )
+        return resp
 
+    def list_attachments(self):
+        """
+        List all the attachments in the Fulcrum account
+        """
+        resp = requests.get(
+            "https://api.fulcrumapp.com/api/v2/attachments",
+            headers={"X-ApiToken": self.api_key, "Accept": "application/json"},
+        )
         return resp
 
 
