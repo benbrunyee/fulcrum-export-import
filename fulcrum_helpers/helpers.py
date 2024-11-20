@@ -124,7 +124,14 @@ class FulcrumApp:
             headers={"X-ApiToken": self.api_key, "Accept": "application/json"},
         )
 
-        return resp
+        if resp.status_code != 200:
+            logger.error(f"Failed to get attachments for record {record_id}")
+            logger.error(resp)
+            return []
+
+        resp_json = resp.json()
+
+        return resp_json
 
     @rate_limited(4000 / 3600)
     def get_attachment(self, attachment_id: str):
@@ -135,7 +142,15 @@ class FulcrumApp:
             f"https://api.fulcrumapp.com/api/v2/attachments/{attachment_id}",
             headers={"X-ApiToken": self.api_key, "Accept": "application/json"},
         )
-        return resp
+
+        if resp.status_code != 200:
+            logger.error(f"Failed to get attachment {attachment_id}")
+            logger.error(resp)
+            return []
+
+        resp_json = resp.json()
+
+        return resp_json
 
     def list_attachments(self):
         """
@@ -145,7 +160,15 @@ class FulcrumApp:
             "https://api.fulcrumapp.com/api/v2/attachments",
             headers={"X-ApiToken": self.api_key, "Accept": "application/json"},
         )
-        return resp
+
+        if resp.status_code != 200:
+            logger.error(f"Failed to get attachments")
+            logger.error(resp)
+            return []
+
+        resp_json = resp.json()
+
+        return resp_json
 
 
 def find_key_code(elements: t.List[AppElement], data_name: str) -> str | None:

@@ -98,19 +98,13 @@ def main():
 
         # Get the site plan attachments
         attachments = FULCRUM.get_record_attachments(record["id"])
+        logger.info(attachments)
 
-        if attachments.status_code != 200:
-            logger.error(f"Failed to get attachment {attachments}")
-            continue
-
-        attachments_json = attachments.json()
-        logger.info(attachments_json)
-
-        if attachments_json["total_count"] == 0:
+        if attachments["total_count"] == 0:
             logger.warning(f"No attachments for record {record['id']}")
             continue
 
-        attachment_count += attachments_json["total_count"]
+        attachment_count += attachments["total_count"]
 
     logger.info(f"Found {attachment_count} attachments")
     debug_attachments()
