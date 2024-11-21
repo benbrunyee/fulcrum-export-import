@@ -125,9 +125,8 @@ class FulcrumApp:
         )
 
         if resp.status_code != 200:
-            logger.error(f"Failed to get attachments for record {record_id}")
             logger.error(resp)
-            return []
+            raise Exception(f"Failed to get attachments for record {record_id}")
 
         resp_json = resp.json()
 
@@ -144,9 +143,8 @@ class FulcrumApp:
         )
 
         if resp.status_code != 200:
-            logger.error(f"Failed to get attachment {attachment_id}")
             logger.error(resp)
-            return []
+            raise Exception(f"Failed to get attachment {attachment_id}")
 
         resp_json = resp.json()
 
@@ -157,14 +155,13 @@ class FulcrumApp:
         List all the attachments in the Fulcrum account
         """
         resp = requests.get(
-            "https://api.fulcrumapp.com/api/v2/attachments",
+            "https://api.fulcrumapp.com/api/v2/attachments?form_id=8b47f113-c60f-4016-af20-1a4367887eba",
             headers={"X-ApiToken": self.api_key, "Accept": "application/json"},
         )
 
         if resp.status_code != 200:
-            logger.error(f"Failed to get attachments")
             logger.error(resp)
-            return []
+            raise Exception("Failed to get attachments")
 
         resp_json = resp.json()
 
