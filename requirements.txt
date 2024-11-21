@@ -3,3 +3,4 @@ fulcrum==1.12.0
 python-dotenv==1.0.1
 tqdm==4.65.0
 deepdiff==8.0.1
+pymupdf==1.24.14

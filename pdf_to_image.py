@@ -1,18 +1,14 @@
 import argparse
-import copy
-import json
 import logging
 import os
-import re
-import time
+import shutil
+import typing as t
 
-from deepdiff import DeepDiff
+import pymupdf
+import requests
 from dotenv import load_dotenv
-from fulcrum import Fulcrum
-from tqdm import tqdm
 
 from fulcrum_helpers.helpers import FulcrumApp, find_key_code
-from fulcrum_helpers.types import PhotoValue
 
 load_dotenv()
 
@@ -117,6 +113,34 @@ def main():
     logger.info(f"Found {len(attachment_urls)} attachments")
     logger.warning(f"Found {attachment_error_count} errors")
     logger.debug(f"Attachment URLs: {attachment_urls}")
+
+    convert_pdfs_to_images(attachment_urls)
+
+
+def convert_pdfs_to_images(entries: t.Dict[str, str]):
+    """
+    Convert the PDFs to images
+    """
+
+    # Recreate the pdf_image directory
+    if os.path.exists("pdf_images"):
+        shutil.rmtree("pdf_images")
+    os.makedirs("pdf_images/original")
+    os.makedirs("pdf_images/processed")
+
+    for job_id, download_url in entries.items():
+        logger.info(f"Downloading attachment for job ID {job_id}")
+        response = requests.get(download_url)
+        with open(f"pdf_images/original/{job_id}.pdf", "wb") as f:
+            f.write(response.content)
+
+        # Convert the PDF to an image
+        pdf = pymupdf.open(f"pdf_images/original/{job_id}.pdf")
+        for page in pdf:
+            pix = page.get_pixmap()
+            pix.save(f"pdf_images/processed/{job_id}_{page.number}.png")
+
+    logger.info("Finished downloading attachments")
 
 
 if __name__ == "__main__":
