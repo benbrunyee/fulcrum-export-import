@@ -3,6 +3,7 @@ Converts site plan PDF attachments in the SITE VISIT RECORDS app into images
 """
 
 import argparse
+import json
 import logging
 import os
 import shutil
@@ -102,6 +103,18 @@ def main():
 
         logger.debug(f"Record ID: {record["id"]}")
         logger.debug(f"Found site plan attachments: {site_plan_attachments}")
+
+        # Create a directory for the record ID
+        if not os.path.exists(f"pdf_images/{record['id']}"):
+            os.makedirs(f"pdf_images/{record['id']}")
+
+        # Create an info.json file with the job ID
+        with open(f"pdf_images/{record['id']}/info.json", "w") as f:
+            info = {
+                "job_id": job_id,
+                "record_id": record["id"],
+            }
+            f.write(json.dumps(info))
 
         for sp_attachment in site_plan_attachments:
             try:
