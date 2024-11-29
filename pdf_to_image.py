@@ -1,3 +1,7 @@
+"""
+Converts site plan PDF attachments in the SITE VISIT RECORDS app into images
+"""
+
 import argparse
 import logging
 import os

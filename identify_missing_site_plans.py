@@ -1,14 +1,15 @@
+"""
+Identifies missing site plans (photos & attachments) in various Fulcrum apps:
+- Site Visit Records
+- Japanese Knotweed Management Records
+- Survey Records
+"""
+
 import argparse
-import csv
-import difflib
-import json
 import logging
 import os
-import re
-import shutil
 import typing as t
 
-import requests
 from dotenv import load_dotenv
 
 from fulcrum_helpers.helpers import FulcrumApp, find_key_code
