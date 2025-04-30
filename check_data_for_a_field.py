@@ -213,10 +213,10 @@ def main():
 
     target_values_with_key = []
 
-    for target_value in app_records:
-        record_with_key = traverse_search_record_for_key(target_value, field_key)
+    for record in app_records:
+        record_with_key = traverse_search_record_for_key(record, field_key)
         if record_with_key:
-            target_values_with_key.append(target_value)
+            target_values_with_key.append(record_with_key)
 
     logger.info(f"Found {len(target_values_with_key)} records with key: {field_key}")
 
@@ -228,26 +228,41 @@ def main():
     # Count how many records have each value
     # A value can a dict with at least 1 value in the "choice_values" key or "other_values" key
     # or a direct value
+    all_values = []
     value_counts = 0
-    for target_value in target_values_with_key:
+    for record in target_values_with_key:
         has_choice_value_set = False
         has_other_value_set = False
 
-        if isinstance(target_value, dict):
-            if "choice_values" in target_value:
-                if len(target_value["choice_values"]) > 0:
+        if isinstance(record, dict):
+            if "choice_values" in record:
+                if len(record["choice_values"]) > 0:
                     has_choice_value_set = True
+                    all_values.extend(record["choice_values"])
 
-            if "other_values" in target_value:
-                if len(target_value["other_values"]) > 0:
+            if "other_values" in record:
+                if len(record["other_values"]) > 0:
                     has_other_value_set = True
+                    all_values.extend(record["other_values"])
 
-        if has_choice_value_set or has_other_value_set or target_value:
+        if has_choice_value_set or has_other_value_set or record:
             value_counts += 1
 
     logger.info(
         f"Found {value_counts} records with a value for {field_key} ({TARGET_DATA_NAME})"
     )
+
+    # Convert the values to a set counting the number of times each value appears
+    value_counts = {}
+    for value in all_values:
+        if value in value_counts:
+            value_counts[value] += 1
+        else:
+            value_counts[value] = 1
+
+    # Print the value counts
+    for value, count in value_counts.items():
+        logger.info(f"{value}: {count}")
 
     # Clean up
     cleanup()
