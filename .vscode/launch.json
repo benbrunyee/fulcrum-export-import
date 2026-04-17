@@ -774,6 +774,16 @@
       "cwd": "${workspaceFolder}/update_records_custom",
       "console": "integratedTerminal",
       "justMyCode": true
+    },
+    {
+      "name": "Check data for a field",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/check_data_for_a_field.py",
+      "cwd": "${workspaceFolder}/check_data_for_a_field",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["--debug", "--data-name", "plant_type"]
     }
   ]
 }

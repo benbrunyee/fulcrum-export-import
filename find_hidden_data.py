@@ -14,7 +14,7 @@ import typing as t
 from dotenv import load_dotenv
 from fulcrum import Fulcrum
 
-from fulcrum_types.types import AddressValue, AppElement, DictValue, PhotoValue
+from fulcrum_helpers.types import AddressValue, AppElement, DictValue, PhotoValue
 
 load_dotenv()
 

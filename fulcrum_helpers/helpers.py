@@ -2,6 +2,7 @@ import logging
 import time
 import typing as t
 
+import requests
 from fulcrum import Fulcrum
 
 from .types import App, AppElement, AppElementTypes, Record
@@ -63,8 +64,12 @@ def rate_limited(max_per_second):
 
 
 class FulcrumApp:
+    fulcrum: Fulcrum
+    api_key: str
+
     def __init__(self, api_key: str):
         self.fulcrum = Fulcrum(api_key)
+        self.api_key = api_key
 
     def list_apps(self) -> t.List[App]:
         """
@@ -107,6 +112,60 @@ class FulcrumApp:
             exit(1)
 
         logger.info(f"Updated record: {updated_record['record']['id']} with new entry")
+
+    @rate_limited(4000 / 3600)
+    def get_record_attachments(self, record_id: str):
+        """
+        Get the attachments of a record in Fulcrum
+        """
+        resp = requests.get(
+            "https://api.fulcrumapp.com/api/v2/attachments",
+            params={"record_id": record_id},
+            headers={"X-ApiToken": self.api_key, "Accept": "application/json"},
+        )
+
+        if resp.status_code != 200:
+            logger.error(resp)
+            raise Exception(f"Failed to get attachments for record {record_id}")
+
+        resp_json = resp.json()
+
+        return resp_json
+
+    @rate_limited(4000 / 3600)
+    def get_attachment(self, attachment_id: str):
+        """
+        Get an attachment from Fulcrum
+        """
+        resp = requests.get(
+            f"https://api.fulcrumapp.com/api/v2/attachments/{attachment_id}",
+            headers={"X-ApiToken": self.api_key, "Accept": "application/json"},
+        )
+
+        if resp.status_code != 200:
+            logger.error(resp)
+            raise Exception(f"Failed to get attachment {attachment_id}")
+
+        resp_json = resp.json()
+
+        return resp_json
+
+    def list_attachments(self):
+        """
+        List all the attachments in the Fulcrum account
+        """
+        resp = requests.get(
+            "https://api.fulcrumapp.com/api/v2/attachments?form_id=8b47f113-c60f-4016-af20-1a4367887eba",
+            headers={"X-ApiToken": self.api_key, "Accept": "application/json"},
+        )
+
+        if resp.status_code != 200:
+            logger.error(resp)
+            raise Exception("Failed to get attachments")
+
+        resp_json = resp.json()
+
+        return resp_json
 
 
 def find_key_code(elements: t.List[AppElement], data_name: str) -> str | None:
