@@ -15,10 +15,10 @@ parser.add_argument(
     "--app_id", "-a", required=True, help="The ID of the app to update records for."
 )
 parser.add_argument(
-    "--user_id", "-uid", required=True, help="The user ID to assign records to."
-)
-parser.add_argument(
-    "--user_name", "-un", required=True, help="The user name to assign records to."
+    "--email",
+    "-e",
+    required=True,
+    help="Email address of the user to assign records to.",
 )
 parser.add_argument(
     "--dry_run",
@@ -33,9 +33,26 @@ FULCRUM_API_KEY = os.getenv("FULCRUM_API_KEY")
 FULCRUM = Fulcrum(FULCRUM_API_KEY)
 
 APP_ID = args.app_id
-USER_ID = args.user_id
-USER_NAME = args.user_name
+EMAIL = args.email.strip().lower()
 DRY_RUN = args.dry_run
+
+
+def get_user_by_email(email: str) -> tuple[str, str]:
+    memberships = FULCRUM.memberships.search()["memberships"]
+
+    for membership in memberships:
+        if membership.get("email", "").strip().lower() == email:
+            first_name = membership.get("first_name", "").strip()
+            last_name = membership.get("last_name", "").strip()
+            user_name = " ".join(part for part in (first_name, last_name) if part)
+            return membership["user_id"], user_name
+
+    print(f"Could not find user with email: {email}")
+    exit(1)
+
+
+USER_ID, USER_NAME = get_user_by_email(EMAIL)
+print(f"Assigning records to {USER_NAME} ({USER_ID}, {EMAIL})\n")
 
 
 def rate_limited(max_per_second):
@@ -76,7 +93,6 @@ def main():
         print("[DRY RUN] No changes will be made.\n")
 
     records = FULCRUM.records.search(url_params={"form_id": APP_ID})["records"]
-    assigned_records = [r for r in records if r.get("assigned_to_id") != None]
     print(f"Found {len(records)} records in app {APP_ID}")
 
     records_to_update = [r for r in records if r.get("assigned_to_id") != USER_ID]
