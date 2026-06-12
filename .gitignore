@@ -5,6 +5,8 @@
 !.gitignore
 !/*.py
 !README.md
+!.vscode
+!.vscode/*
 !saved_mappings
 !saved_mappings/**
 !requirements.txt
@@ -20,6 +22,3 @@
 !fulcrum_helpers/**
 !photo_differences
 !photo_differences/**
-branch_structure.json
-temp_auto_push.bat
-temp_interactive_push.bat
